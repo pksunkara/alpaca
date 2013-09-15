@@ -1,0 +1,17 @@
+{
+  "name": "Balanced Payments",
+  "module_name": "balanced-alpaca",
+  "verison": "0.1.0",
+  "official": false,
+  "author": {
+    "name": "Balanced Payments",
+    "email": "support@balancedpayments.com",
+    "url": "http://balancedpayments.com",
+  },
+  "git": {
+    "site": "github.com",
+    "username": "pksunkara",
+    "name": "balanced"
+  },
+  "license": "MIT"
+}
