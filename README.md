@@ -12,7 +12,7 @@ You have an API for your website but no API libraries for whatever reason? This 
 
 You are planning to build an API for your website and develop API libraries? This is for you.
 
-You define your API, **alpaca** builds the API libraries. Push them to their respective package managers.
+You define your API, **alpaca** builds the API libraries along with the documentation. Push them to their respective package managers.
 
 ## Installation
 
@@ -57,7 +57,6 @@ Here is a list of [Contributors](http://github.com/pksunkara/alpaca/contributors
 ### TODO
 
 - Support Java, Perl, Clojure & Go
-- Build docs along with libraries
 - Build cli tool for APIs (bash? python? go?)
 
 __I accept pull requests and guarantee a reply back within a day__

@@ -1,0 +1,20 @@
+{
+  "endpoint": "https://api.stripe.com",
+  "version_prefix": "v1",
+  "resources": {
+    "charge": {
+      "properties": {
+        "id": "string",
+        "object": "identity",
+        "livemode": "boolean",
+        "amount": "integer",
+        "captured": "boolean",
+        "card": "hash",
+        "currency": "string",
+        "paid": "boolean",
+        "refunded": "boolean",
+        "refunds": ""
+      }
+    }
+  }
+}

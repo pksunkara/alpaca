@@ -1,0 +1,22 @@
+{
+  "endpoint": "https://api.balancedpayments.com",
+  "version_prefix": "v1",
+  "resources": {
+    "bank_account": {
+      "properties": {
+        "id": "string",
+        "name": "string",
+        "account_number": "string",
+        "bank_name": "string",
+        "routing_number": "string",
+        "can_debit": "boolean",
+        "fingerprint": "string",
+        "type": "string",
+        "meta": "hash"
+      }
+    },
+    "card": {
+
+    }
+  }
+}

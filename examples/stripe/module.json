@@ -1,6 +1,6 @@
 {
-  "name": "Balanced Payments",
-  "module_name": "balanced-alpaca",
+  "name": "Stripe",
+  "module_name": "stripe-alpaca",
   "verison": "0.1.0",
   "official": false,
   "author": {
@@ -11,7 +11,7 @@
   "git": {
     "site": "github.com",
     "username": "alpaca-api",
-    "name": "balanced"
+    "name": "stripe"
   },
   "license": "MIT"
 }

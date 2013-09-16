@@ -9,7 +9,7 @@ except ImportError:
 extra = {}
 
 requires = [
-	'pystache==0.5.3'
+	'pystache==0.5.3',
 	'simplejson==3.3.0'
 ]
 
