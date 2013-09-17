@@ -7,5 +7,5 @@ def main():
 
 
 # TODO: Custom inflections should be used
-# TODO: A good validator is needed
 # TODO: Building docs should be in first version
+# TODO: Decide on showcase example. (twilio?)

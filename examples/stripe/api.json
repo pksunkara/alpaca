@@ -1,20 +1,191 @@
 {
   "endpoint": "https://api.stripe.com",
   "version_prefix": "v1",
+  "pagination": {
+    "count": {
+      "param": "count",
+      "default": 10
+    },
+    "offset": {
+      "param": "offset",
+      "default": 0
+    },
+    "data": "data"
+  },
   "resources": {
+    "plan": {
+      "properties": {
+        "id": "string",
+        "amount": "integer",
+        "currency": "string",
+        "interval": "enum",
+        "interval_count": "integer",
+        "name": "string",
+        "trial_period_days": "integer"
+      },
+      "actions": [
+        {
+          "name": "Create a plan",
+          "method": "POST",
+          "url": "/plans",
+          "required": ["id", "amount", "currency", "interval", "name"],
+          "optional": ["interval_count", "trial_period_days"],
+          "return": "plan"
+        },
+        {
+          "name": "Retrieve a plan",
+          "method": "GET",
+          "url": "/plans/:plan-id",
+          "return": "plan"
+        },
+        {
+          "name": "Update a plan",
+          "method": "POST",
+          "url": "/plans/:plan-id",
+          "optional": ["name"],
+          "return": "plan"
+        },
+        {
+          "name": "Delete a plan",
+          "method": "DELETE",
+          "url": "/plans/:plan-id",
+          "return": "hash"
+        },
+        {
+          "name": "List all plans",
+          "method": "GET",
+          "url": "/plans",
+          "paging": true,
+          "return": "paging"
+        }
+      ]
+    },
+    "coupon": {
+      "properties": {
+        "id": "string",
+        "duration": "enum",
+        "amount_off": "integer",
+        "currency": "string",
+        "duration_in_months": "integer",
+        "max_redemptions": "integer",
+        "percent_off": "integer",
+        "redeem_by": "timestamp"
+      },
+      "actions": [
+        {
+          "name": "Create a coupon",
+          "method": "POST",
+          "url": "/coupons",
+          "required": ["duration"],
+          "either": ["amount_off", "percent_off"],
+          "optional": ["currency", "duration_in_months", "max_redemptions", "redeem_by"],
+          "return": "coupon"
+        },
+        {
+          "name": "Retrieve a coupon",
+          "method": "GET",
+          "url": "/coupons/:coupon-id",
+          "return": "coupon"
+        },
+        {
+          "name": "Delete a coupon",
+          "method": "DELETE",
+          "url": "/coupons/:coupon-id",
+          "return": "hash"
+        },
+        {
+          "name": "List all coupons",
+          "method": "GET",
+          "url": "/coupons",
+          "paging": true,
+          "return": "paging"
+        }
+      ]
+    },
+    "customer": {
+      "properties": {
+        "id": "string",
+        "account_balance": "integer",
+        "description": "string",
+        "email": "string",
+        "default_card": "resource-card",
+        "discount": "resource-discount",
+        "subscription": "resource-subscription"
+      },
+      "actions": [
+        {
+          "name": "Create a new customer",
+          "method": "POST",
+          "url": "/customers",
+          "optional": ["account_balance", "email", "description"],
+          "return": "customer"
+        },
+        {
+          "name": "Retrieve a customer",
+          "method": "GET",
+          "url": "/customers/:customer-id",
+          "return": "customer"
+        },
+        {
+          "name": "Update a customer",
+          "method": "POST",
+          "url": "/customers/:customer-id",
+          "optional": ["account_balance", "default_card", "description", "email"],
+          "return": "customer"
+        },
+        {
+          "name": "Delete a customer",
+          "method": "DELETE",
+          "url": "/customers/:customer-id",
+          "return": "hash"
+        },
+        {
+          "name": "List all customers",
+          "method": "GET",
+          "url": "/customers",
+          "paging": true,
+          "return": "paging"
+        }
+      ],
+      "resources": {
+        "__url__": "/customers/:customer-id",
+        "discount": {
+          "properties": {
+            "coupon": "resource-coupon",
+            "customer": "resource-customer"
+          },
+          "actions": [
+            {
+              "name": "Delete a discount",
+              "method": "DELETE",
+              "url": "/discount",
+              "return": "hash"
+            }
+          ]
+        }
+      }
+    },
     "charge": {
       "properties": {
         "id": "string",
-        "object": "identity",
-        "livemode": "boolean",
         "amount": "integer",
-        "captured": "boolean",
-        "card": "hash",
+        "card": "resource-card",
         "currency": "string",
-        "paid": "boolean",
-        "refunded": "boolean",
-        "refunds": ""
-      }
+        "customer": "resource-customer",
+        "description": "string",
+        "captured": "boolean"
+      },
+      "actions": [
+        {
+          "name": "Create a new charge",
+          "method": "POST",
+          "url": "/charges",
+          "required": ["amount", "currency"],
+          "either": ["customer", "card"],
+          "optional": ["description"],
+          "return": ""
+        }
+      ]
     }
   }
 }

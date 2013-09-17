@@ -1,0 +1,37 @@
+{
+  "endpoint": "https://api.twilio.com",
+  "version_prefix": "2010-04-01",
+  "authorization": "basic",
+  "resources": {
+    "account": {
+      "id": "sid",
+      "properties": {
+        "sid": {
+          "type": "string",
+          "maxLength": 34,
+          "minLength": 34
+        },
+        "friendly_name": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "type": {
+          "type": "string",
+          "enum": ["Full", "Trial"]
+        },
+        "status": {
+          "type": "string",
+          "enum": ["active", "closed", "suspended"]
+        }
+      },
+      "functions": {
+        "get": {
+          "name": "Get an account",
+          "description": "Returns a representation of an account, including the properties above.",
+          "method": "GET",
+          "url": "/accounts/:account-id"
+        }
+      }
+    }
+  }
+}

@@ -10,6 +10,7 @@ extra = {}
 
 requires = [
 	'pystache==0.5.3',
+	'jsonschema==2.0.0',
 	'simplejson==3.3.0'
 ]
 
