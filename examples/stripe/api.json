@@ -1,6 +1,5 @@
 {
-  "endpoint": "https://api.stripe.com",
-  "version_prefix": "v1",
+  "endpoint": "https://api.stripe.com/v1",
   "pagination": {
     "count": {
       "param": "count",

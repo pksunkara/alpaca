@@ -1,35 +1,57 @@
 {
-  "endpoint": "https://api.twilio.com",
-  "version_prefix": "2010-04-01",
+  "endpoint": "https://api.twilio.com/2010-04-01",
   "authorization": "basic",
   "resources": {
     "account": {
       "id": "sid",
       "properties": {
         "sid": {
-          "type": "string",
-          "maxLength": 34,
-          "minLength": 34
+          "type": "string"
+        },
+        "date_created": {
+          "type": "string"
+        },
+        "date_updated": {
+          "type": "string"
         },
         "friendly_name": {
           "type": "string",
           "maxLength": 64
         },
         "type": {
-          "type": "string",
-          "enum": ["Full", "Trial"]
+          "type": "string"
         },
         "status": {
           "type": "string",
           "enum": ["active", "closed", "suspended"]
+        },
+        "uri": {
+          "type": "string"
+        },
+        "subresource_uris": {
+          "type": "object"
+        },
+        "owner_account_sid": {
+          "type": "string"
         }
       },
       "functions": {
         "get": {
           "name": "Get an account",
-          "description": "Returns a representation of an account, including the properties above.",
           "method": "GET",
-          "url": "/accounts/:account-id"
+          "url": "/accounts/:account-id",
+          "return": "account"
+        },
+        "update": {
+          "name": "Update an account",
+          "method": "POST",
+          "url": "/accounts/:account-id",
+          "return": "account"
+        },
+        "list": {
+          "name": "Retrieve list of accounts",
+          "method": "GET",
+          "url": "/accounts"
         }
       }
     }

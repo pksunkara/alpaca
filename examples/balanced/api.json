@@ -1,6 +1,5 @@
 {
-  "endpoint": "https://api.balancedpayments.com",
-  "version_prefix": "v1",
+  "endpoint": "https://api.balancedpayments.com/v1",
   "resources": {
     "bank_account": {
       "properties": {
