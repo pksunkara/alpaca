@@ -1,3 +1,63 @@
 {
-  "endpoint": "https://api.github.com"
+  "endpoint": "https://api.github.com",
+  "resources": {
+    "users": {
+      "id": "login",
+      "functions": {
+        "get": {
+          "name": "Get a single user",
+          "method": "GET",
+          "url": "/users/:user",
+          "return": "user"
+        },
+        "list": {
+          "name": "Get all users",
+          "method": "GET",
+          "url": "/users",
+          "return": "__page__"
+        },
+        "keys": {
+          "name": "List public keys of a user",
+          "method": "GET",
+          "url": "/users/:user/keys",
+          "return": ""
+        }
+      }
+    },
+    "me": {
+      "id": "login",
+      "functions": {
+        "get": {
+          "name": "Get the authenticated user",
+          "method": "GET",
+          "url": "/user",
+          "return": "user"
+        },
+        "update": {
+          "name": "Update the authenticated user",
+          "method": "PATCH",
+          "url": "/user",
+          "return": "user"
+        }
+      },
+      "resources": {
+        "keys": {
+          "functions": {
+            "list": {
+              "name": "List the authenticated user's keys",
+              "method": "GET",
+              "url": "/user/keys",
+              "return": ""
+            },
+            "get": {
+              "name": "Get a single public key",
+              "method": "GET",
+              "url": "/user/keys/:key",
+              "return": ""
+            }
+          }
+        }
+      }
+    }
+  }
 }

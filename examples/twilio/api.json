@@ -39,19 +39,27 @@
         "get": {
           "name": "Get an account",
           "method": "GET",
-          "url": "/accounts/:account-id",
+          "url": "/accounts/:account",
           "return": "account"
         },
         "update": {
           "name": "Update an account",
           "method": "POST",
-          "url": "/accounts/:account-id",
+          "url": "/accounts/:account",
           "return": "account"
         },
         "list": {
           "name": "Retrieve list of accounts",
           "method": "GET",
-          "url": "/accounts"
+          "url": "/accounts",
+          "return": "__page__"
+        },
+        "create": {
+          "name": "Create a subaccount",
+          "method": "POST",
+          "url": "/accounts",
+          "single_param": "friendly_name",
+          "return": "account"
         }
       }
     }

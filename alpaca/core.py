@@ -6,6 +6,5 @@ def main():
 	print "Usage: alpaca [filename]"
 
 
-# TODO: Custom inflections should be used
-# TODO: Building docs should be in first version
-# TODO: Decide on showcase example. (twilio?)
+# TODO: Custom inflections should be used. github.com/jpvanhal/inflection
+# TODO: Decide on showcase example. (twilio? github?)

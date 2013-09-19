@@ -57,6 +57,7 @@ Here is a list of [Contributors](http://github.com/pksunkara/alpaca/contributors
 ### TODO
 
 - Support Java, Perl, Clojure & Go
+- Build API docs (Resulting in bloated definitions?)
 - Build cli tool for APIs (bash? python? go?)
 
 __I accept pull requests and guarantee a reply back within a day__
