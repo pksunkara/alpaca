@@ -1,35 +1,157 @@
 {
   "endpoint": "https://api.github.com",
-  "resources": {
+  "pagination": {},
+  "class": {
+    "gists": {
+      "functions": {
+        "public": {
+          "name": "List all public gists",
+          "url": "/gists/public",
+          "return": "[gist]",
+          "pagination": true
+        },
+        "list": {
+          "name": "List all authenticated user's gists",
+          "url": "/gists",
+          "return": "[gist]",
+          "pagination": true
+        },
+        "starred": {
+          "name": "List authenticated user's starred gists",
+          "url": "/gists/starred",
+          "return": "[gist]",
+          "pagination": true
+        },
+        "get": {
+          "name": "Get a single gist",
+          "url": "/gists/:gist",
+          "return": "gist"
+        },
+        "create": {
+          "name": "Create a gist",
+          "method": "POST",
+          "url": "/gists",
+          "return": "gist",
+          "status": 201
+        },
+        "update": {
+          "name": "Edit a gist",
+          "method": "PATCH",
+          "url": "/gists/:gist",
+          "return": "gist"
+        },
+        "star": {
+          "name": "Star a gist",
+          "method": "PUT",
+          "url": "/gists/:gist/star",
+          "status": 204
+        },
+        "unstar": {
+          "name": "Unstar a gist",
+          "method": "DELETE",
+          "url": "/gists/:gist/star",
+          "status": 204
+        },
+        "check": {
+          // TODO: What abt not starred returning 404?
+          "name": "Check if a gist is starred",
+          "url": "/gists/:gist/star",
+          "status": 204
+        },
+        "fork": {
+          "name": "Fork a gist",
+          "method": "POST",
+          "url": "/gists/:gist/forks",
+          "return": "gist",
+          "status": 201
+        },
+        "destroy": {
+          "name": "Delete a gist",
+          "method": "DELETE",
+          "url": "/gists/:gist",
+          "status": 204
+        }
+      }
+    },
     "users": {
       "id": "login",
       "functions": {
         "get": {
           "name": "Get a single user",
-          "method": "GET",
           "url": "/users/:user",
           "return": "user"
         },
         "list": {
           "name": "Get all users",
-          "method": "GET",
           "url": "/users",
-          "return": "__page__"
+          "return": "[user]",
+          "pagination": true
         },
         "keys": {
           "name": "List public keys of a user",
-          "method": "GET",
           "url": "/users/:user/keys",
-          "return": ""
+          "return": "[key]"
+        },
+        "followers": {
+          "name": "List followers of a user",
+          "url": "/users/:user/followers",
+          "return": "[user]",
+          "pagination": true
+        },
+        "following": {
+          "name": "List who a user is following",
+          "url": "/users/:user/following",
+          "return": "[user]",
+          "pagination": true
+        },
+        "check": {
+          // TODO: What abt not following returning 404?
+          "name": "Check if one user follows another",
+          "url": "/users/:user/following/:p:target",
+          "status": 204
+        }
+      },
+      "class": {
+        "comments": {
+          "functions": {
+            "list": {
+              "name": "List comments on gist",
+              "url": "/gists/:gist/comments",
+              "return": "[comment]"
+            },
+            "get": {
+              "name": "Get a single gist comment",
+              "url": "/gists/:gist/comments/:comment",
+              "return": "comment"
+            },
+            "create": {
+              "name": "Create a comment on gist",
+              "method": "POST",
+              "url": "/gists/:gist/comments",
+              "return": "comment",
+              "status": 201
+            },
+            "update": {
+              "name": "Edit a comment on gist",
+              "method": "PATCH",
+              "url": "/gists/:gist/comments/:comment",
+              "return": "comment"
+            },
+            "destroy": {
+              "name": "Delete a comment on gist",
+              "method": "DELETE",
+              "url": "/gists/:gist/comments/:comment",
+              "status": 204
+            }
+          }
         }
       }
     },
-    "me": {
+    "mine": {
       "id": "login",
       "functions": {
         "get": {
           "name": "Get the authenticated user",
-          "method": "GET",
           "url": "/user",
           "return": "user"
         },
@@ -38,22 +160,75 @@
           "method": "PATCH",
           "url": "/user",
           "return": "user"
+        },
+        "follow": {
+          "name": "Follow a user",
+          "method": "PUT",
+          "url": "/user/following/:p:target",
+          "status": 204
+        },
+        "unfollow": {
+          "name": "Unfollow a user",
+          "method": "DELETE",
+          "url": "/user/following/:p:target",
+          "status": 204
         }
       },
-      "resources": {
+      "class": {
         "keys": {
           "functions": {
             "list": {
-              "name": "List the authenticated user's keys",
-              "method": "GET",
+              "name": "List your public keys",
               "url": "/user/keys",
-              "return": ""
+              "return": "[key]"
             },
             "get": {
               "name": "Get a single public key",
-              "method": "GET",
               "url": "/user/keys/:key",
-              "return": ""
+              "return": "key"
+            },
+            "create": {
+              "name": "Create a public key",
+              "method": "POST",
+              "url": "/user/keys",
+              "return": "key",
+              "status": 201
+            },
+            "update": {
+              "name": "Update a public key",
+              "method": "PATCH",
+              "url": "/user/keys/:key",
+              "return": "key"
+            },
+            "destroy": {
+              "name": "Delete a public key",
+              "method": "DELETE",
+              "url": "/user/keys/:key",
+              "status": 204
+            }
+          }
+        },
+        "emails": {
+          "functions": {
+            "get": {
+              "name": "List email addresses for a user",
+              "url": "/user/emails",
+              "return": "[email]"
+            },
+            "add": {
+              // TODO: Decide on data sent
+              "name": "Add email address(es)",
+              "method": "POST",
+              "url": "/user/emails",
+              "return": "email",
+              "status": 201
+            },
+            "remove": {
+              // TODO: Decide on data sent
+              "name": "Delete email address(es)",
+              "method": "DELETE",
+              "url": "/user/emails",
+              "status": 204
             }
           }
         }
