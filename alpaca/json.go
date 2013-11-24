@@ -5,16 +5,12 @@ import (
 	"os"
 )
 
-func ReadFile(name string) interface{} {
-	var v interface{}
-
+func ReadFile(name string, v interface{}) {
 	file, err := os.Open(name)
 	defer file.Close()
 	HandleError(err)
 
-	HandleError(json.NewDecoder(file).Decode(&v))
-
-	return v.(map[string]interface{})
+	HandleError(json.NewDecoder(file).Decode(v))
 }
 
 func WriteFile(name string, v interface{}) {

@@ -31,7 +31,11 @@ func main() {
 		os.Exit(0)
 	}
 
-	fmt.Println(alpaca.ReadFile("config.json"))
+	var v interface{}
+
+	alpaca.ReadFile("examples/twilio/module.json", &v)
+
+	fmt.Println(v)
 
 	fmt.Println(args)
 }
