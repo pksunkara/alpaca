@@ -1,7 +1,7 @@
 {
   "name": "Stripe",
-  "module_name": "stripe-alpaca",
-  "verison": "0.1.0",
+  "module": "stripe-alpaca",
+  "version": "0.1.0",
   "official": false,
   "author": {
     "name": "Pavan Kumar Sunkara",
@@ -10,7 +10,7 @@
   },
   "git": {
     "site": "github.com",
-    "username": "alpaca-api",
+    "user": "alpaca-api",
     "name": "stripe"
   },
   "license": "MIT"

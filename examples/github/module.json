@@ -1,7 +1,7 @@
 {
   "name": "Github",
-  "module_name": "github-alpaca",
-  "verison": "0.1.0",
+  "module": "github-alpaca",
+  "version": "0.1.0",
   "official": false,
   "author": {
     "name": "Pavan Kumar Sunkara",
@@ -10,7 +10,7 @@
   },
   "git": {
     "site": "github.com",
-    "username": "alpaca-api",
+    "user": "alpaca-api",
     "name": "github"
   },
   "license": "MIT"

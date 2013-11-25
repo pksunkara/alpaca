@@ -31,7 +31,7 @@ func main() {
 		os.Exit(0)
 	}
 
-	var v interface{}
+	var v alpaca.Module
 
 	alpaca.ReadFile("examples/twilio/module.json", &v)
 
