@@ -39,13 +39,13 @@ func main() {
 
 	directory := args[0]
 
-	var module, api, doc map[string]interface{}
+	var pkg, api, doc map[string]interface{}
 
-	alpaca.ReadJSON(directory+"/module.json", &module)
+	alpaca.ReadJSON(directory+"/pkg.json", &pkg)
 	alpaca.ReadJSON(directory+"/api.json", &api)
 	alpaca.ReadJSON(directory+"/doc.json", &doc)
 
-	data := alpaca.Data{module, api, doc}
+	data := alpaca.Data{pkg, api, doc}
 
 	alpaca.RunTemplate("alpaca/templates/node/package.json", &data)
 }

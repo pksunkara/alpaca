@@ -1,21 +1,21 @@
 {
-  "name": "{{.Module.package}}",
-  "version": "{{.Module.version}}",
-  "description": "{{if .Module.official}}Official {{end}}{{.Module.name}} API client for node.js",
-  "author": "{{.Module.author.name}} <{{.Module.author.email}}> ({{.Module.author.url}})",
-  "homepage": "{{.Module.url}}",
+  "name": "{{.Pkg.package}}",
+  "version": "{{.Pkg.version}}",
+  "description": "{{if .Pkg.official}}Official {{end}}{{.Pkg.name}} API client for node.js",
+  "author": "{{.Pkg.author.name}} <{{.Pkg.author.email}}> ({{.Pkg.author.url}})",
+  "homepage": "{{.Pkg.url}}",
   "repository": {
     "type": "git",
-    "url": "https://{{.Module.git.site}}/{{.Module.git.user}}/{{.Module.git.name}}-node"
+    "url": "https://{{.Pkg.git.site}}/{{.Pkg.git.user}}/{{.Pkg.git.name}}-node"
   },
   "main": "./lib/index.js",
   "dependencies": {
     "request": "2.27.x"
   },
   "bugs": {
-    "url": "https://{{.Module.git.site}}/{{.Module.git.user}}/{{.Module.git.name}}-node/issues"
+    "url": "https://{{.Pkg.git.site}}/{{.Pkg.git.user}}/{{.Pkg.git.name}}-node/issues"
   },
-  "license": "{{.Module.license}}",
+  "license": "{{.Pkg.license}}",
   "engines": {
     "node": ">= 0.8.0"
   }
