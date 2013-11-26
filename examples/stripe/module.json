@@ -1,7 +1,8 @@
 {
   "name": "Stripe",
-  "module": "stripe-alpaca",
+  "package": "stripe-alpaca",
   "version": "0.1.0",
+  "url": "https://stripe.com",
   "official": false,
   "author": {
     "name": "Pavan Kumar Sunkara",

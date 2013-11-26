@@ -31,11 +31,14 @@ func main() {
 		os.Exit(0)
 	}
 
-	var v alpaca.Module
+	directory := args[0]
 
-	alpaca.ReadFile("examples/twilio/module.json", &v)
+	var module, api map[string]interface{}
 
-	fmt.Println(v)
+	alpaca.ReadJSON(directory+"/module.json", &module)
+	alpaca.ReadJSON(directory+"/api.json", &api)
 
-	fmt.Println(args)
+	data := alpaca.Data{api, module}
+
+	alpaca.RunTemplate("alpaca/templates/node/package.json", &data)
 }

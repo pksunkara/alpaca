@@ -1,0 +1,35 @@
+{
+	"base": "https://api.bufferapp.com/1",
+	"request": {
+		"formats": ["form"]
+	},
+	"response": {
+		"formats": ["json"],
+		"suffix": true
+	},
+	"files": {
+		"user": {
+			"info": {
+				"path": "/user"
+			}
+		},
+		"link": {
+			"shares": {
+				"path": "/link/shares"
+			}
+		},
+		"profile": {
+			"list": {
+				"path": "/profiles",
+				"return": "array"
+			},
+			"info": {
+				"path": "/profiles/:1"
+			},
+			"schedules": {
+				"path": "/profiles/:1/schedules",
+				"return": "array"
+			}
+		}
+	}
+}

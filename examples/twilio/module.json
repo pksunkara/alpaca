@@ -1,7 +1,8 @@
 {
   "name": "Twilio",
-  "module": "twilio-alpaca",
+  "package": "twilio-alpaca",
   "version": "0.1.0",
+  "url": "https://twilio.com",
   "official": false,
   "author": {
     "name": "Pavan Kumar Sunkara",

@@ -56,6 +56,8 @@ Here is a list of [Contributors](http://github.com/pksunkara/alpaca/contributors
 
 ### TODO
 
+- HTTP Method Overloading
+
 - Support Java, Perl, Clojure & Go
 - Build API docs (Resulting in bloated definitions?)
 - Build cli tool for APIs (bash? python? go?)

@@ -1,7 +1,8 @@
 {
   "name": "Balanced Payments",
-  "module": "balanced-alpaca",
+  "package": "balanced-alpaca",
   "version": "0.1.0",
+  "url": "https://balancedpayments.com",
   "official": false,
   "author": {
     "name": "Pavan Kumar Sunkara",

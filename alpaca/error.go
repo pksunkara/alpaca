@@ -10,7 +10,7 @@ func HandleError(e error) {
 		fmt.Println("Encountered an error while running!\n")
 		fmt.Println(e)
 		fmt.Println("\nIf you are unable to solve it, please report at")
-		fmt.Println("https://github.com/pksunkara/hub/issues")
+		fmt.Println("https://github.com/pksunkara/alpaca/issues")
 		os.Exit(0)
 	}
 }
