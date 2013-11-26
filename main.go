@@ -31,14 +31,21 @@ func main() {
 		os.Exit(0)
 	}
 
+	// If no argument is given
+	if len(args) == 0 {
+		fmt.Println("Usage: alpaca <dir>")
+		os.Exit(0)
+	}
+
 	directory := args[0]
 
-	var module, api map[string]interface{}
+	var module, api, doc map[string]interface{}
 
 	alpaca.ReadJSON(directory+"/module.json", &module)
 	alpaca.ReadJSON(directory+"/api.json", &api)
+	alpaca.ReadJSON(directory+"/doc.json", &doc)
 
-	data := alpaca.Data{api, module}
+	data := alpaca.Data{module, api, doc}
 
 	alpaca.RunTemplate("alpaca/templates/node/package.json", &data)
 }

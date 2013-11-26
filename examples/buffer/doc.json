@@ -1,0 +1,32 @@
+{
+	"info": {
+		"info": "Returns an object with the current configuration that Buffer is using, including supported services, their icons and the varying limits of character and schedules."
+	},
+	"user": {
+		"info": ""
+	},
+	"link": {
+		"shares": "Returns an object with a the numbers of shares a link has had using Buffer."
+	},
+	"profile": {
+		"list": "Returns an array of social media profiles connected to a users account.",
+		"get": "Returns details of the single specified social media profile."
+	},
+	"schedule": {
+		"list": "Returns details of the posting schedules associated with a social media profile.",
+		"update": "Set the posting schedules for the specified social media profile."
+	},
+	"update": {
+		"get": "Returns a single social media update.",
+		"pending": "Returns an array of updates that are currently in the buffer for an individual social media profile.",
+		"sent": "Returns an array of updates that have been sent from the buffer for an individual social media profile.",
+		"interactions": "Returns the detailed information on individual interactions with the social media update such as favorites, retweets and likes.",
+		"reorder": "Edit the order at which statuses for the specified social media profile will be sent out of the buffer.",
+		"shuffle": "Randomize the order at which statuses for the specified social media profile will be sent out of the buffer.",
+		"create": "Create one or more new status updates.",
+		"update": "Edit an existing, individual status update.",
+		"share": "Immediately shares a single pending update and recalculates times for updates remaining in the queue.",
+		"destroy": "Permanently delete an existing status update.",
+		"top": "Move an existing status update to the top of the queue and recalculate times for all updates in the queue. Returns the update with its new posting time."
+	}
+}

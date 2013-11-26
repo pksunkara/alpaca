@@ -7,7 +7,12 @@
 		"formats": ["json"],
 		"suffix": true
 	},
-	"files": {
+	"class": {
+		"info": {
+			"info": {
+				"path": "/info/configuration"
+			}
+		},
 		"user": {
 			"info": {
 				"path": "/user"
@@ -15,20 +20,74 @@
 		},
 		"link": {
 			"shares": {
-				"path": "/link/shares"
+				"path": "/link/shares",
+				"params": ["url"]
 			}
 		},
 		"profile": {
 			"list": {
-				"path": "/profiles",
-				"return": "array"
+				"path": "/profiles"
 			},
-			"info": {
-				"path": "/profiles/:1"
+			"get": {
+				"path": "/profiles/:id"
+			}
+		},
+		"schedule": {
+			"list": {
+				"path": "/profiles/:id/schedules"
 			},
-			"schedules": {
-				"path": "/profiles/:1/schedules",
-				"return": "array"
+			"update": {
+				"path": "/profiles/:id/schedules/update",
+				"method": "post",
+				"body": ["schedules"]
+			}
+		},
+		"update": {
+			"get": {
+				"path": "/updates/:id"
+			},
+			"pending": {
+				"path": "/profiles/:id/updates/pending",
+				"paginate": true
+			},
+			"sent": {
+				"path": "/profiles/:id/updates/sent",
+				"paginate": true
+			},
+			"interactions": {
+				"path": "/updates/:id/interactions",
+				"paginate": true
+			},
+			"reorder": {
+				"path": "/profiles/:id/updates/reorder",
+				"method": "post",
+				"body": ["order"]
+			},
+			"shuffle": {
+				"path": "/profiles/:id/updates/shuffle",
+				"method": "post"
+			},
+			"create": {
+				"path": "/updates/create",
+				"method": "post",
+				"body": ["text", "profile_ids"]
+			},
+			"update": {
+				"path": "/updates/:id/update",
+				"method": "post",
+				"body": ["text"]
+			},
+			"share": {
+				"path": "/updates/:id/share",
+				"method": "post"
+			},
+			"destroy": {
+				"path": "/updates/:id/destroy",
+				"method": "post"
+			},
+			"top": {
+				"path": "/updates/:id/move_to_top",
+				"method": "post"
 			}
 		}
 	}
