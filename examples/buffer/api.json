@@ -1,5 +1,6 @@
 {
 	"base": "https://api.bufferapp.com/1",
+	"authorization": ["oauth"],
 	"request": {
 		"formats": ["form"]
 	},

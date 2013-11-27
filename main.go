@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/jessevdk/go-flags"
 	"os"
+	"path/filepath"
 )
 
 const (
@@ -37,15 +38,9 @@ func main() {
 		os.Exit(0)
 	}
 
-	directory := args[0]
+	directory := filepath.Abs(args[0])
 
-	var pkg, api, doc map[string]interface{}
+	data := alpaca.ReadData(directory)
 
-	alpaca.ReadJSON(directory+"/pkg.json", &pkg)
-	alpaca.ReadJSON(directory+"/api.json", &api)
-	alpaca.ReadJSON(directory+"/doc.json", &doc)
-
-	data := alpaca.Data{pkg, api, doc}
-
-	alpaca.RunTemplate("alpaca/templates/node/package.json", &data)
+	alpaca.RunTemplate("alpaca/templates/node/package.json", data)
 }
