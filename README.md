@@ -43,7 +43,7 @@ alpaca
 ### PHP
 
 - **Package Manager:** composer
-- **Dependencies**: nategood/httpful, bninja/restful
+- **Dependencies**: guzzle/guzzle
 
 ### Node.js
 

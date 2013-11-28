@@ -4,6 +4,7 @@
   "description": "{{if .Pkg.official}}Official {{end}}{{.Pkg.name}} API client for node.js",
   "author": "{{.Pkg.author.name}} <{{.Pkg.author.email}}> ({{.Pkg.author.url}})",
   "homepage": "{{.Pkg.url}}",
+  "keywords": ["{{call .Fnc.join .Pkg.keywords "\", \""}}"],
   "repository": {
     "type": "git",
     "url": "https://{{.Pkg.git.site}}/{{.Pkg.git.user}}/{{.Pkg.git.name}}-node"

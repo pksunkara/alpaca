@@ -3,6 +3,7 @@
   "package": "buffer-alpaca",
   "version": "0.1.0",
   "url": "https://bufferapp.com",
+  "keywords": ["alpaca", "buffer", "api"],
   "official": false,
   "author": {
     "name": "Pavan Kumar Sunkara",
@@ -14,5 +15,8 @@
     "user": "alpaca-api",
     "name": "buffer"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "php": {
+    "vendor": "pksunkara"
+  }
 }

@@ -1,0 +1,27 @@
+{
+	"name": "{{.Pkg.php.vendor}}/{{.Pkg.package}}",
+	"version": "{{.Pkg.version}}"
+	"description": "{{if .Pkg.official}}Official {{end}}{{.Pkg.name}} API client for PHP"
+	"homepage": "{{.Pkg.url}}",
+	"authors": [
+		{
+			"name": "{{.Pkg.author.name}}",
+			"email": "{{.Pkg.author.email}}",
+			"homepage": "{{.Pkg.author.url}}"
+		}
+	],
+	"keywords": ["{{call .Fnc.join .Pkg.keywords "\", \""}}"],
+	"autoload": {
+		"psr-0": {
+			"{{.Pkg.name}}\\": "lib/"
+		}
+	},
+	"require": {
+		"ext-json": "*",
+		"guzzle/guzzle": "3.7.*"
+	},
+	"support": {
+		"issues": "https://{{.Pkg.git.site}}/{{.Pkg.git.user}}/{{.Pkg.git.name}}-php/issues"
+	},
+	"license": "{{.Pkg.license}}"
+}
