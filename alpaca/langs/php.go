@@ -21,7 +21,7 @@ func WritePhp(data *Data) {
 
 	MakeDir("HttpClient")
 	RunTemplate("lib/HttpClient/HttpClient.php", "HttpClient.php", data)
-	RunTemplate("lib/HttpClient/Reponse.php", "Reponse.php", data)
+	RunTemplate("lib/HttpClient/Response.php", "Response.php", data)
 	RunTemplate("lib/HttpClient/ErrorHandler.php", "ErrorHandler.php", data)
 	RunTemplate("lib/HttpClient/AuthHandler.php", "AuthHandler.php", data)
 	MoveDir("..")
