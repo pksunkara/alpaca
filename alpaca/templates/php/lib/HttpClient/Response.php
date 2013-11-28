@@ -6,6 +6,7 @@ use Guzzle\Http\Message\Response;
 
 class Response {
 
+    //TODO: Use response header?
     public static function getContent(Response $response)
     {
         $body    = $response->getBody(true);

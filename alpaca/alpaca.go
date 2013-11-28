@@ -2,6 +2,9 @@ package alpaca
 
 import (
 	"./langs"
+	"encoding/json"
+	"os"
+	"path"
 	"strings"
 )
 
@@ -37,4 +40,12 @@ func ModifyData(data *langs.Data) {
 	data.Pkg["keywords"] = keywords
 
 	data.Fnc["join"] = strings.Join
+}
+
+func ReadJSON(name string, v interface{}) {
+	file, err := os.Open(path.Clean(name))
+	defer file.Close()
+	HandleError(err)
+
+	HandleError(json.NewDecoder(file).Decode(v))
 }
