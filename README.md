@@ -56,8 +56,15 @@ Here is a list of [Contributors](http://github.com/pksunkara/alpaca/contributors
 
 ### TODO
 
-- HTTP Method Overloading
+#### Responses
+- Add support for XML
+- Add support for CSV
 
+#### General
+- HTTP Method Overloading
+- Allow customization of errors
+
+#### Languages
 - Support Java, Perl, Clojure & Go
 - Build API docs (Resulting in bloated definitions?)
 - Build cli tool for APIs (bash? python? go?)

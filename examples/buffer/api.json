@@ -1,12 +1,18 @@
 {
-	"base": "https://api.bufferapp.com/1",
-	"authorization": ["oauth"],
+	"base": "https://api.bufferapp.com",
+	"version": "1",
+	"authorization": {
+		"oauth" : true
+	},
 	"request": {
 		"formats": ["form"]
 	},
 	"response": {
 		"formats": ["json"],
 		"suffix": true
+	},
+	"error": {
+		"message": "error"
 	},
 	"class": {
 		"info": {

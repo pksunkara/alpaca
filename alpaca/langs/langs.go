@@ -13,6 +13,13 @@ var (
 	LibraryRoot string
 )
 
+type Data struct {
+	Pkg map[string]interface{}
+	Api map[string]interface{}
+	Doc map[string]interface{}
+	Fnc map[string]interface{}
+}
+
 //TODO: Remove 3rd argument
 func Init(fun func(error), lib string, tmp string) {
 	var err error
@@ -38,9 +45,13 @@ func WriteTemplate(temp *template.Template, out string, data interface{}) {
 	HandleError(temp.Execute(file, data))
 }
 
-func RunTemplate(name string, out string, data interface{}) {
-	temp := ReadTemplate(path.Join(TemplateDir, name))
-	WriteTemplate(temp, out, data)
+func ChooseTemplate(name string) func(string, string, interface{}) {
+	tmp := path.Join(TemplateDir, name)
+
+	return func(name string, out string, data interface{}) {
+		temp := ReadTemplate(path.Join(tmp, name))
+		WriteTemplate(temp, out, data)
+	}
 }
 
 func MakeLibraryDir(name string) {
@@ -48,6 +59,14 @@ func MakeLibraryDir(name string) {
 
 	//TODO: Should we delete previous code?
 	HandleError(os.RemoveAll(name))
+	MakeDir(name)
+}
+
+func MakeDir(name string) {
 	HandleError(os.Mkdir(name, 0755))
+	HandleError(os.Chdir(name))
+}
+
+func MoveDir(name string) {
 	HandleError(os.Chdir(name))
 }

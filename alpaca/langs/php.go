@@ -1,7 +1,28 @@
 package langs
 
-func WritePhp(data interface{}) {
-	MakeLibraryDir("php")
+import (
+//"bitbucket.org/pkg/inflect"
+)
 
-	RunTemplate("php/composer.json", "composer.json", data)
+func WritePhp(data *Data) {
+	MakeLibraryDir("php")
+	RunTemplate := ChooseTemplate("php")
+
+	name := data.Pkg["name"].(string)
+
+	RunTemplate("composer.json", "composer.json", data)
+	MakeDir(name)
+
+	MakeDir("Exception")
+	RunTemplate("lib/Exception/ExceptionInterface.php", "ExceptionInterface.php", data)
+	RunTemplate("lib/Exception/ErrorException.php", "ErrorException.php", data)
+	RunTemplate("lib/Exception/RuntimeException.php", "RuntimeException.php", data)
+	MoveDir("..")
+
+	MakeDir("HttpClient")
+	RunTemplate("lib/HttpClient/HttpClient.php", "HttpClient.php", data)
+	RunTemplate("lib/HttpClient/Reponse.php", "Reponse.php", data)
+	RunTemplate("lib/HttpClient/ErrorHandler.php", "ErrorHandler.php", data)
+	RunTemplate("lib/HttpClient/AuthHandler.php", "AuthHandler.php", data)
+	MoveDir("..")
 }

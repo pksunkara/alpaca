@@ -1,7 +1,19 @@
 package langs
 
-func WriteNode(data interface{}) {
-	MakeLibraryDir("node")
+import (
+	"bitbucket.org/pkg/inflect"
+)
 
-	RunTemplate("node/package.json", "package.json", data)
+func WriteNode(data *Data) {
+	MakeLibraryDir("node")
+	RunTemplate := ChooseTemplate("node")
+
+	name := data.Pkg["name"].(string)
+
+	RunTemplate("package.json", "package.json", data)
+
+	MakeDir("lib")
+	RunTemplate("lib/index.js", "index.js", data)
+
+	MakeDir(inflect.CamelizeDownFirst(name))
 }

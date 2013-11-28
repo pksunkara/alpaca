@@ -5,21 +5,14 @@ import (
 	"strings"
 )
 
-type Data struct {
-	Pkg map[string]interface{}
-	Api map[string]interface{}
-	Doc map[string]interface{}
-	Fnc map[string]interface{}
-}
-
-func ReadData(directory string) *Data {
+func ReadData(directory string) *langs.Data {
 	var pkg, api, doc map[string]interface{}
 
 	ReadJSON(directory+"/pkg.json", &pkg)
 	ReadJSON(directory+"/api.json", &api)
 	ReadJSON(directory+"/doc.json", &doc)
 
-	return &Data{pkg, api, doc, make(map[string]interface{})}
+	return &langs.Data{pkg, api, doc, make(map[string]interface{})}
 }
 
 func WriteLibraries(directory string) {
@@ -34,7 +27,7 @@ func WriteLibraries(directory string) {
 	langs.WriteRuby(data)
 }
 
-func ModifyData(data *Data) {
+func ModifyData(data *langs.Data) {
 	oldwords := data.Pkg["keywords"].([]interface{})
 	keywords := make([]string, len(oldwords))
 
