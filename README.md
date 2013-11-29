@@ -38,6 +38,10 @@ __I accept pull requests and guarantee a reply back within a day__
 - Add support for XML
 - Add support for CSV
 
+#### Requests
+- Support raw post data
+- What about file uploads?
+
 #### General
 - Pagination support
 - Classes inside classes

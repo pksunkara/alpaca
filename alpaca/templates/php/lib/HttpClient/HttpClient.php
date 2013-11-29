@@ -47,6 +47,11 @@ class HttpClient
         $this->clearHeaders();
     }
 
+    public function getOption($name)
+    {
+        return $this->options[$name];
+    }
+
     public function setOption($name, $value)
     {
         $this->options[$name] = $value;
@@ -64,33 +69,34 @@ class HttpClient
         );
     }
 
-    public function get($path, array $parameters = array(), array $headers = array())
+    public function get($path, array $parameters = array(), array $headers = array(), array $options = array())
     {
-        return $this->request($path, null, 'GET', $headers, array('query' => $parameters));
+        return $this->request($path, null, 'GET', $headers, array_merge($options, array('query' => $parameters)));
     }
 
-    public function post($path, $body = null, array $headers = array())
+    public function post($path, $body, array $headers = array(), array $options = array())
     {
-        return $this->request($path, $body, 'POST', $headers);
+        return $this->request($path, $body, 'POST', $headers, $options);
     }
 
-    public function patch($path, $body = null, array $headers = array())
+    public function patch($path, $body, array $headers = array(), array $options = array())
     {
-        return $this->request($path, $body, 'PATCH', $headers);
+        return $this->request($path, $body, 'PATCH', $headers, $options);
     }
 
-    public function delete($path, $body = null, array $headers = array())
+    public function delete($path, $body, array $headers = array(), array $options = array())
     {
-        return $this->request($path, $body, 'DELETE', $headers);
+        return $this->request($path, $body, 'DELETE', $headers, $options);
     }
 
-    public function put($path, $body, array $headers = array())
+    public function put($path, $body, array $headers = array(), array $options = array())
     {
-        return $this->request($path, $body, 'PUT', $headers);
+        return $this->request($path, $body, 'PUT', $headers, $options);
     }
 
     public function request($path, $body = null, $httpMethod = 'GET', array $headers = array(), array $options = array())
     {
+        $body = $this->createBody($body, $options);
         $request = $this->createRequest($httpMethod, $path, $body, $headers, $options);
 
         try {
@@ -104,7 +110,7 @@ class HttpClient
         $this->lastRequest  = $request;
         $this->lastResponse = $response;
 
-        return $response;
+        return $this->getBody($response);
     }
 
     public function getLastRequest()
@@ -120,9 +126,33 @@ class HttpClient
     public function createRequest($httpMethod, $path, $body = null, array $headers = array(), array $options = array())
     {
         $version = (isset($this->options['api_version']) ? "/".$this->options['api_version'] : "");
+{{if .Api.response.suffix}}
+        $suffix = (isset($options['response_type']) ? $options['response_type'] : "{{.Api.response.formats.default}}");
+        $path = $path.".".$suffix;
+{{end}}
         $path    = $version.$path;
         $headers = array_merge($this->headers, $headers);
 
         return $this->client->createRequest($httpMethod, $path, $headers, $body, $options);
+    }
+
+    public function status($code)
+    {
+        return ($this->lastResponse->getStatusCode() == $code);
+    }
+
+    public function headers()
+    {
+        return $this->lastResponse->getHeaders();
+    }
+
+    public function getBody(Response $response)
+    {
+        return ResponseHandler::getBody($response);
+    }
+
+    public function createBody($body, $options)
+    {
+        return RequestHandler::createBody($body, $options);
     }
 }

@@ -5,7 +5,6 @@ import (
 )
 
 func WriteNode(data *Data) {
-	InflectionsNode(data)
 	MakeLibraryDir("node")
 	RunTemplate := ChooseTemplate("node")
 
@@ -17,8 +16,4 @@ func WriteNode(data *Data) {
 	RunTemplate("lib/index.js", "index.js", data)
 
 	MakeDir(inflect.CamelizeDownFirst(name))
-}
-
-func InflectionsNode(data *Data) {
-	data.Fnc["classify"] = inflect.CamelizeDownFirst
 }

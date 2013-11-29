@@ -15,8 +15,8 @@ class Client
         $this->httpClient = new HttpClient($auth, $options);
     }
 {{with $data := .}}{{range .Api.classes}}
-    public function {{call $data.Fnc.classify .}} {
-        return new Api\{{call $data.Fnc.classify .}}($this->httpClient);
+    public function {{call $data.Fnc.camelizeDownFirst .}} {
+        return new Api\{{call $data.Fnc.camelize .}}($this->httpClient);
     }
 {{end}}{{end}}
 }

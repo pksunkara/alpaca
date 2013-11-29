@@ -2,6 +2,7 @@ package alpaca
 
 import (
 	"./langs"
+	"bitbucket.org/pkg/inflect"
 	"encoding/json"
 	"os"
 	"path"
@@ -48,6 +49,11 @@ func ModifyData(data *langs.Data) {
 	data.Api["classes"] = classes
 
 	data.Fnc["join"] = strings.Join
+	data.Fnc["equal"] = strings.EqualFold
+
+	data.Fnc["camelize"] = inflect.Camelize
+	data.Fnc["camelizeDownFirst"] = inflect.CamelizeDownFirst
+	data.Fnc["underscore"] = inflect.Underscore
 }
 
 func ReadJSON(name string, v interface{}) {

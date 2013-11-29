@@ -5,10 +5,16 @@
 		"oauth" : true
 	},
 	"request": {
-		"formats": ["form"]
+		"formats": {
+			"default": "form",
+			"json": false
+		}
 	},
 	"response": {
-		"formats": ["json"],
+		"formats": {
+			"default": "json",
+			"json": true
+		},
 		"suffix": true
 	},
 	"error": {

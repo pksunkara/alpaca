@@ -1,11 +1,6 @@
 package langs
 
-import (
-	"bitbucket.org/pkg/inflect"
-)
-
 func WritePhp(data *Data) {
-	InflectionsPhp(data)
 	MakeLibraryDir("php")
 	RunTemplate := ChooseTemplate("php")
 
@@ -13,6 +8,8 @@ func WritePhp(data *Data) {
 
 	RunTemplate("composer.json", "composer.json", data)
 	MakeDir(name)
+
+	RunTemplate("lib/Client.php", "Client.php", data)
 
 	MakeDir("Exception")
 	RunTemplate("lib/Exception/ExceptionInterface.php", "ExceptionInterface.php", data)
@@ -22,14 +19,12 @@ func WritePhp(data *Data) {
 
 	MakeDir("HttpClient")
 	RunTemplate("lib/HttpClient/HttpClient.php", "HttpClient.php", data)
-	RunTemplate("lib/HttpClient/Response.php", "Response.php", data)
+	RunTemplate("lib/HttpClient/ResponseHandler.php", "ResponseHandler.php", data)
+	RunTemplate("lib/HttpClient/RequestHandler.php", "RequestHandler.php", data)
 	RunTemplate("lib/HttpClient/ErrorHandler.php", "ErrorHandler.php", data)
 	RunTemplate("lib/HttpClient/AuthHandler.php", "AuthHandler.php", data)
 	MoveDir("..")
 
-	RunTemplate("lib/Client.php", "Client.php", data)
-}
-
-func InflectionsPhp(data *Data) {
-	data.Fnc["classify"] = inflect.Camelize
+	MakeDir("Api")
+	MoveDir("..")
 }
