@@ -33,10 +33,11 @@ func WriteLibraries(directory string) {
 
 func ModifyData(data *langs.Data) {
 	data.Pkg["keywords"] = langs.ArrayInterfaceToString(data.Pkg["keywords"])
-	data.Api["classes"] = langs.MapKeysToStringArray(data.Api["class"])
+	data.Api["classes"] = langs.MapKeysToStringArray(data.Api["class"], []string{})
 
 	data.Fnc["join"] = strings.Join
 	data.Fnc["equal"] = strings.EqualFold
+	data.Fnc["upper"] = strings.ToUpper
 
 	data.Fnc["camelize"] = inflect.Camelize
 	data.Fnc["camelizeDownFirst"] = inflect.CamelizeDownFirst

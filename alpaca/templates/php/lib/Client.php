@@ -20,8 +20,9 @@ class Client
      *{{with $class := .}}{{call $data.Fnc.counter.start}}{{range (index $data.Doc . "args")}}
      * @param ${{index $data.Api.class $class "args" (call $data.Fnc.counter.value)}} {{.}}{{end}}{{end}}
      */
-    public function {{call $data.Fnc.camelizeDownFirst .}}({{call $data.Fnc.args.php (index $data.Api.class .) true}}) {
-        return new Api\{{call $data.Fnc.camelize .}}({{call $data.Fnc.args.php (index $data.Api.class .) false}}$this->httpClient);
+    public function {{call $data.Fnc.camelizeDownFirst .}}({{call $data.Fnc.args.php (index $data.Api.class .) "args" true}})
+    {
+        return new Api\{{call $data.Fnc.camelize .}}({{call $data.Fnc.args.php (index $data.Api.class .) "args" false}}$this->httpClient);
     }
 {{end}}{{end}}
 }

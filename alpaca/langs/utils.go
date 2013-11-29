@@ -11,20 +11,40 @@ func ArrayInterfaceToString(inter interface{}) []string {
 	return new
 }
 
-func MapKeysToStringArray(inter interface{}) []string {
+func MapKeysToStringArray(inter interface{}, exclude []string) []string {
 	old := inter.(map[string]interface{})
 	new := make([]string, 0, len(old))
 
 	for v, _ := range old {
-		new = append(new, v)
+		flag := true
+
+		for _, e := range exclude {
+			if e == v {
+				flag = false
+			}
+		}
+
+		if flag {
+			new = append(new, v)
+		}
 	}
 
 	return new
 }
 
-func ArgsTemplate(before string, after string) interface{} {
-	return func(class interface{}, last bool) string {
-		str, args := "", class.(map[string]interface{})["args"]
+func ActiveClassInfo(name string, class interface{}) map[string]interface{} {
+	data := make(map[string]interface{})
+
+	data["name"] = name
+	data["methods"] = MapKeysToStringArray(class, []string{"args"})
+	data["args"] = class.(map[string]interface{})["args"]
+
+	return data
+}
+
+func ArgsFunctionMaker(before string, after string) interface{} {
+	return func(class interface{}, key string, last bool) string {
+		str, args := "", class.(map[string]interface{})[key]
 
 		if args != nil {
 			for _, v := range ArrayInterfaceToString(args) {

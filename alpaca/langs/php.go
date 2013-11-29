@@ -1,6 +1,8 @@
 package langs
 
-//"bitbucket.org/pkg/inflect"
+import (
+	"bitbucket.org/pkg/inflect"
+)
 
 func WritePhp(data *Data) {
 	MakeLibraryDir("php")
@@ -29,12 +31,15 @@ func WritePhp(data *Data) {
 
 	MakeDir("Api")
 
-	//for k, v := range data.Pkg["class"].([]interface{}) {
-	//}
+	for k, v := range data.Api["class"].(map[string]interface{}) {
+		data.Api["active"] = ActiveClassInfo(k, v)
+		RunTemplate("lib/Api.php", inflect.Camelize(k)+".php", data)
+		delete(data.Api, "active")
+	}
 }
 
 func FunctionsPhp(fnc map[string]interface{}) {
 	args := fnc["args"].(map[string]interface{})
 
-	args["php"] = ArgsTemplate("$", ", ")
+	args["php"] = ArgsFunctionMaker("$", ", ")
 }
