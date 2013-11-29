@@ -39,6 +39,14 @@ func ModifyData(data *langs.Data) {
 	}
 	data.Pkg["keywords"] = keywords
 
+	arclass := data.Api["class"].(map[string]interface{})
+	classes := make([]string, 0, len(arclass))
+
+	for v, _ := range arclass {
+		classes = append(classes, v)
+	}
+	data.Api["classes"] = classes
+
 	data.Fnc["join"] = strings.Join
 }
 

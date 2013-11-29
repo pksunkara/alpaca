@@ -39,6 +39,8 @@ __I accept pull requests and guarantee a reply back within a day__
 - Add support for CSV
 
 #### General
+- Pagination support
+- Classes inside classes
 - HTTP Method Overloading
 - Allow customization of errors
 

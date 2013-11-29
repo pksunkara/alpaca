@@ -1,10 +1,11 @@
 package langs
 
 import (
-//"bitbucket.org/pkg/inflect"
+	"bitbucket.org/pkg/inflect"
 )
 
 func WritePhp(data *Data) {
+	InflectionsPhp(data)
 	MakeLibraryDir("php")
 	RunTemplate := ChooseTemplate("php")
 
@@ -25,4 +26,10 @@ func WritePhp(data *Data) {
 	RunTemplate("lib/HttpClient/ErrorHandler.php", "ErrorHandler.php", data)
 	RunTemplate("lib/HttpClient/AuthHandler.php", "AuthHandler.php", data)
 	MoveDir("..")
+
+	RunTemplate("lib/Client.php", "Client.php", data)
+}
+
+func InflectionsPhp(data *Data) {
+	data.Fnc["classify"] = inflect.Camelize
 }
