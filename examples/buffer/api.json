@@ -22,13 +22,16 @@
 	},
 	"class": {
 		"info": {
-			"info": {
+			"show": {
 				"path": "/info/configuration"
 			}
 		},
 		"user": {
-			"info": {
+			"show": {
 				"path": "/user"
+			},
+			"profiles": {
+				"path": "/profiles"
 			}
 		},
 		"link": {
@@ -38,26 +41,9 @@
 			}
 		},
 		"profile": {
-			"list": {
-				"path": "/profiles"
-			},
+			"args": ["id"],
 			"get": {
 				"path": "/profiles/:id"
-			}
-		},
-		"schedule": {
-			"list": {
-				"path": "/profiles/:id/schedules"
-			},
-			"update": {
-				"path": "/profiles/:id/schedules/update",
-				"method": "post",
-				"body": ["schedules"]
-			}
-		},
-		"update": {
-			"get": {
-				"path": "/updates/:id"
 			},
 			"pending": {
 				"path": "/profiles/:id/updates/pending",
@@ -65,10 +51,6 @@
 			},
 			"sent": {
 				"path": "/profiles/:id/updates/sent",
-				"paginate": true
-			},
-			"interactions": {
-				"path": "/updates/:id/interactions",
 				"paginate": true
 			},
 			"reorder": {
@@ -79,6 +61,27 @@
 			"shuffle": {
 				"path": "/profiles/:id/updates/shuffle",
 				"method": "post"
+			}
+		},
+		"schedule": {
+			"args": ["id"],
+			"list": {
+				"path": "/profiles/:id/schedules"
+			},
+			"update": {
+				"path": "/profiles/:id/schedules/update",
+				"method": "post",
+				"body": ["schedules"]
+			}
+		},
+		"update": {
+			"args": ["id"],
+			"get": {
+				"path": "/updates/:id"
+			},
+			"interactions": {
+				"path": "/updates/:id/interactions",
+				"paginate": true
 			},
 			"create": {
 				"path": "/updates/create",

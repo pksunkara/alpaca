@@ -1,28 +1,47 @@
 {
 	"info": {
-		"info": {
+		"desc": "Returns api instance to get auxilary information about Buffer useful when creating your app.",
+		"show": {
 			"desc": "Returns an object with the current configuration that Buffer is using, including supported services, their icons and the varying limits of character and schedules."
 		}
 	},
 	"user": {
-		"info": {
-			"desc": "Returns a single user."
+		"desc": "Returns authenticated user api instance.",
+		"show": {
+			"desc": "Returns information about the authenticated user."
+		},
+		"profiles": {
+			"desc": "Returns an array of social media profiles connected to the authenticated users account."
 		}
 	},
 	"link": {
+		"desc": "Returns api instance to get information about links shared through Buffer.",
 		"shares": {
 			"desc": "Returns an object with a the numbers of shares a link has had using Buffer."
 		}
 	},
 	"profile": {
-		"list": {
-			"desc": "Returns an array of social media profiles connected to a users account."
-		},
+		"desc": "Returns a social media profile api instance.",
+		"args": ["Identifier of a social media profile"],
 		"get": {
 			"desc": "Returns details of the single specified social media profile."
+		},
+		"pending": {
+			"desc": "Returns an array of updates that are currently in the buffer for an individual social media profile."
+		},
+		"sent": {
+			"desc": "Returns an array of updates that have been sent from the buffer for an individual social media profile."
+		},
+		"reorder": {
+			"desc": "Edit the order at which statuses for the specified social media profile will be sent out of the buffer."
+		},
+		"shuffle": {
+			"desc": "Randomize the order at which statuses for the specified social media profile will be sent out of the buffer."
 		}
 	},
 	"schedule": {
+		"desc": "Returns scheduling api instance for social media profile.",
+		"args": ["Identifier of a social media profile"],
 		"list": {
 			"desc": "Returns details of the posting schedules associated with a social media profile."
 		},
@@ -31,23 +50,13 @@
 		}
 	},
 	"update": {
+		"desc": "Returns a social media update api instance.",
+		"args": ["Identifier of a social media update"],
 		"get": {
 			"desc": "Returns a single social media update."
 		},
-		"pending": {
-			"desc": "Returns an array of updates that are currently in the buffer for an individual social media profile."
-		},
-		"sent": {
-			"desc": "Returns an array of updates that have been sent from the buffer for an individual social media profile."
-		},
 		"interactions": {
 			"desc": "Returns the detailed information on individual interactions with the social media update such as favorites, retweets and likes."
-		},
-		"reorder": {
-			"desc": "Edit the order at which statuses for the specified social media profile will be sent out of the buffer."
-		},
-		"shuffle": {
-			"desc": "Randomize the order at which statuses for the specified social media profile will be sent out of the buffer."
 		},
 		"create": {
 			"desc": "Create one or more new status updates."

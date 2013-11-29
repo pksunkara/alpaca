@@ -32,21 +32,8 @@ func WriteLibraries(directory string) {
 }
 
 func ModifyData(data *langs.Data) {
-	oldwords := data.Pkg["keywords"].([]interface{})
-	keywords := make([]string, len(oldwords))
-
-	for i, v := range oldwords {
-		keywords[i] = v.(string)
-	}
-	data.Pkg["keywords"] = keywords
-
-	arclass := data.Api["class"].(map[string]interface{})
-	classes := make([]string, 0, len(arclass))
-
-	for v, _ := range arclass {
-		classes = append(classes, v)
-	}
-	data.Api["classes"] = classes
+	data.Pkg["keywords"] = langs.ArrayInterfaceToString(data.Pkg["keywords"])
+	data.Api["classes"] = langs.MapKeysToStringArray(data.Api["class"])
 
 	data.Fnc["join"] = strings.Join
 	data.Fnc["equal"] = strings.EqualFold
@@ -54,6 +41,15 @@ func ModifyData(data *langs.Data) {
 	data.Fnc["camelize"] = inflect.Camelize
 	data.Fnc["camelizeDownFirst"] = inflect.CamelizeDownFirst
 	data.Fnc["underscore"] = inflect.Underscore
+
+	data.Fnc["counter"] = langs.CounterTracker()
+
+	data.Fnc["args"] = make(map[string]interface{})
+
+	langs.FunctionsNode(data.Fnc)
+	langs.FunctionsPhp(data.Fnc)
+	langs.FunctionsPython(data.Fnc)
+	langs.FunctionsRuby(data.Fnc)
 }
 
 func ReadJSON(name string, v interface{}) {

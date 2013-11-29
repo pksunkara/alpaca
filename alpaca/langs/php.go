@@ -1,5 +1,7 @@
 package langs
 
+//"bitbucket.org/pkg/inflect"
+
 func WritePhp(data *Data) {
 	MakeLibraryDir("php")
 	RunTemplate := ChooseTemplate("php")
@@ -26,5 +28,13 @@ func WritePhp(data *Data) {
 	MoveDir("..")
 
 	MakeDir("Api")
-	MoveDir("..")
+
+	//for k, v := range data.Pkg["class"].([]interface{}) {
+	//}
+}
+
+func FunctionsPhp(fnc map[string]interface{}) {
+	args := fnc["args"].(map[string]interface{})
+
+	args["php"] = ArgsTemplate("$", ", ")
 }

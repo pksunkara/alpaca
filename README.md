@@ -39,13 +39,12 @@ __I accept pull requests and guarantee a reply back within a day__
 - Add support for CSV
 
 #### Requests
-- Support raw post data
+- HTTP Method Overloading
 - What about file uploads?
 
 #### General
 - Pagination support
-- Classes inside classes
-- HTTP Method Overloading
+- Classes inside classes (so on..)
 - Allow customization of errors
 
 #### Languages

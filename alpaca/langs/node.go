@@ -17,3 +17,9 @@ func WriteNode(data *Data) {
 
 	MakeDir(inflect.CamelizeDownFirst(name))
 }
+
+func FunctionsNode(fnc map[string]interface{}) {
+	args := fnc["args"].(map[string]interface{})
+
+	args["node"] = ArgsTemplate("", ", ")
+}
