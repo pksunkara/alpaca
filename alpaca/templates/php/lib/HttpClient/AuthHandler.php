@@ -6,6 +6,9 @@ use Guzzle\Common\Event;
 
 use {{.Pkg.name}}\Exception\RuntimeException;
 
+/*
+ * AuthHandler takes care of devising the auth type and using it
+ */
 class AuthHandler
 {
     private $auth;
@@ -21,6 +24,9 @@ class AuthHandler
         $this->auth = $auth;
     }
 
+    /*
+     * Calculating the Authentication Type
+     */
     public function getAuthType()
     {
         if (isset($auth['username']) && isset($auth['password'])) {
@@ -63,16 +69,25 @@ class AuthHandler
         }
     }
 
+    /*
+     * Basic Authorization with username and password
+     */
     public function http_password(Event $event)
     {
         $event['request']->setHeader('Authorization', sprintf('Basic %s', base64_encode($this->auth['username'] . ':' . $this->auth['password'])));
     }
 
+    /*
+     * Authorization with HTTP token
+     */
     public function http_token(Event $event)
     {
         $event['request']->setHeader('Authorization', sprintf('token %s', $this->auth['http_token']));
     }
 {{if .Api.authorization.oauth}}
+    /*
+     * OAUTH2 Authorization with client secret
+     */
     public function url_secret(Event $event)
     {
         $url = $event['request']->getUrl();
@@ -88,6 +103,9 @@ class AuthHandler
         $event['request']->setUrl($url);
     }
 
+    /*
+     * OAUTH2 Authorization with access token
+     */
     public function url_token(Event $event)
     {
         $url = $event['request']->getUrl();

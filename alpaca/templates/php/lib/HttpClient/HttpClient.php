@@ -12,6 +12,9 @@ use {{.Pkg.name}}\Exception\RuntimeException;
 use {{.Pkg.name}}\HttpClient\AuthHandler;
 use {{.Pkg.name}}\HttpClient\ErrorHandler;
 
+/*
+ * Main HttpClient which is used by Api classes
+ */
 class HttpClient
 {
     protected $options = array(
@@ -31,6 +34,15 @@ class HttpClient
             $auth = array('access_token' => $auth);
         }
 {{end}}
+        $this->headers = array(
+            sprintf('User-Agent: %s', $this->options['user_agent']),
+        );
+
+        if (isset($options['headers'])) {
+            $this->headers = array_merge($this->headers, $options['headers']);
+            unset($options['headers']);
+        }
+
         $this->options = array_merge($this->options, $options);
 
         $client = new GuzzleClient($this->options['base'], $this->options);
@@ -43,30 +55,6 @@ class HttpClient
             $listener = array(new AuthHandler($auth), 'onRequestBeforeSend');
             $this->client->getEventDispatcher()->addListener('request.before_send', $listener);
         }
-
-        $this->clearHeaders();
-    }
-
-    public function getOption($name)
-    {
-        return $this->options[$name];
-    }
-
-    public function setOption($name, $value)
-    {
-        $this->options[$name] = $value;
-    }
-
-    public function setHeaders(array $headers)
-    {
-        $this->headers = array_merge($this->headers, $headers);
-    }
-
-    public function clearHeaders()
-    {
-        $this->headers = array(
-            sprintf('User-Agent: %s', $this->options['user_agent']),
-        );
     }
 
     public function get($path, array $parameters = array(), array $headers = array(), array $options = array())
@@ -94,6 +82,13 @@ class HttpClient
         return $this->request($path, $body, 'PUT', $headers, $options);
     }
 
+    /*
+     * Intermediate function which does three main things
+     *
+     * - Transforms the body of request into correct format
+     * - Creates the requests with give parameters
+     * - Returns response body after parsing it into correct format
+     */
     public function request($path, $body = null, $httpMethod = 'GET', array $headers = array(), array $options = array())
     {
         $body = $this->createBody($body, $options);
@@ -123,10 +118,16 @@ class HttpClient
         return $this->lastResponse;
     }
 
+    /*
+     * Creating a request with the given arguments
+     *
+     * If api_version is set, appends it immediately after host
+     */
     public function createRequest($httpMethod, $path, $body = null, array $headers = array(), array $options = array())
     {
         $version = (isset($this->options['api_version']) ? "/".$this->options['api_version'] : "");
 {{if .Api.response.suffix}}
+        // Adds a suffix (".html", ".json") to url
         $suffix = (isset($options['response_type']) ? $options['response_type'] : "{{.Api.response.formats.default}}");
         $path = $path.".".$suffix;
 {{end}}
@@ -136,21 +137,33 @@ class HttpClient
         return $this->client->createRequest($httpMethod, $path, $headers, $body, $options);
     }
 
+    /*
+     * Get the status code for the latest response
+     */
     public function status($code)
     {
         return ($this->lastResponse->getStatusCode() == $code);
     }
 
+    /*
+     * Get headers for the latest response
+     */
     public function headers()
     {
         return $this->lastResponse->getHeaders();
     }
 
+    /*
+     * Get response body in correct format
+     */
     public function getBody(Response $response)
     {
         return ResponseHandler::getBody($response);
     }
 
+    /*
+     * Create request body in correct format
+     */
     public function createBody($body, $options)
     {
         return RequestHandler::createBody($body, $options);

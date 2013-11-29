@@ -4,12 +4,16 @@ namespace {{.Pkg.name}}\HttpClient;
 
 use Guzzle\Http\Message\Response;
 
+/*
+ * ResponseHandler takes care of decoding the response body into suitable type
+ */
 class ResponseHandler {
 
     public static function getBody(Response $response)
     {
         $body = $response->getBody(true);
 {{if .Api.response.formats.json}}
+        // Response body is in JSON
         if ($response->isContentType('json')) {
             $content = json_decode($body, true);
 
