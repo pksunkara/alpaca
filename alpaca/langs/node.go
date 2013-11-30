@@ -20,6 +20,8 @@ func WriteNode(data *Data) {
 
 func FunctionsNode(fnc map[string]interface{}) {
 	args := fnc["args"].(map[string]interface{})
+	urlr := fnc["urlr"].(map[string]interface{})
 
 	args["node"] = ArgsFunctionMaker("", ", ")
+	urlr["node"] = UrlReplaceFunctionMaker("", "")
 }

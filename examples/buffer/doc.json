@@ -17,7 +17,8 @@
 	"link": {
 		"desc": "Returns api instance to get information about links shared through Buffer.",
 		"shares": {
-			"desc": "Returns an object with a the numbers of shares a link has had using Buffer."
+			"desc": "Returns an object with a the numbers of shares a link has had using Buffer.",
+			"params": ["URL of the page for which the number of shares is requested."]
 		}
 	},
 	"profile": {
@@ -33,7 +34,8 @@
 			"desc": "Returns an array of updates that have been sent from the buffer for an individual social media profile."
 		},
 		"reorder": {
-			"desc": "Edit the order at which statuses for the specified social media profile will be sent out of the buffer."
+			"desc": "Edit the order at which statuses for the specified social media profile will be sent out of the buffer.",
+			"body": [""]
 		},
 		"shuffle": {
 			"desc": "Randomize the order at which statuses for the specified social media profile will be sent out of the buffer."
@@ -46,7 +48,8 @@
 			"desc": "Returns details of the posting schedules associated with a social media profile."
 		},
 		"update": {
-			"desc": "Set the posting schedules for the specified social media profile."
+			"desc": "Set the posting schedules for the specified social media profile.",
+			"body": [""]
 		}
 	},
 	"update": {
@@ -59,10 +62,12 @@
 			"desc": "Returns the detailed information on individual interactions with the social media update such as favorites, retweets and likes."
 		},
 		"create": {
-			"desc": "Create one or more new status updates."
+			"desc": "Create one or more new status updates.",
+			"body": ["", ""]
 		},
 		"update": {
-			"desc": "Edit an existing, individual status update."
+			"desc": "Edit an existing, individual status update.",
+			"body": [""]
 		},
 		"share": {
 			"desc": "Immediately shares a single pending update and recalculates times for updates remaining in the queue."

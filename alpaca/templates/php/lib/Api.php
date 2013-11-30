@@ -18,22 +18,29 @@ class {{call .Fnc.camelize .Api.active.name}}
 {{range .Api.active.args}}        $this->{{.}} = ${{.}};
 {{end}}        $this->client = $client;
     }
-{{with $data := .}}{{range .Api.active.methods}}{{if (index $data.Api.class $data.Api.active.name . "method")}}
+{{with $data := .}}{{range .Api.active.methods}}
     /*
-     *
+     * {{index $data.Doc $data.Api.active.name . "desc"}}{{if (index $data.Api.class $data.Api.active.name . "method")}}
      * '{{index $data.Api.class $data.Api.active.name . "path"}}' {{call $data.Fnc.upper (index $data.Api.class $data.Api.active.name . "method")}}
+     *{{with $method := .}}{{call $data.Fnc.counter.start}}{{range (index $data.Api.class $data.Api.active.name $method "body")}}
+     * @params ${{.}} {{index $data.Doc $data.Api.active.name $method "body" (call $data.Fnc.counter.value)}}{{end}}{{end}}
      */
-    public function {{call $data.Fnc.camelizeDownFirst .}}({{call $data.Fnc.args.php (index $data.Api.class $data.Api.active.name .) "body" true}})
+    public function {{call $data.Fnc.camelizeDownFirst .}}({{call $data.Fnc.args.php (index $data.Api.class $data.Api.active.name .) "body" false}}array $options = array())
     {
+        $body = array();{{range (index $data.Api.class $data.Api.active.name . "body")}}
+        $body['{{.}}'] = ${{.}};{{end}}
 
-    }{{else}}
-    /*
-     *
+        return $this->client->{{index $data.Api.class $data.Api.active.name . "method"}}{{else}}
      * '{{index $data.Api.class $data.Api.active.name . "path"}}' GET
+     *{{with $method := .}}{{call $data.Fnc.counter.start}}{{range (index $data.Api.class $data.Api.active.name $method "params")}}
+     * @params ${{.}} {{index $data.Doc $data.Api.active.name $method "params" (call $data.Fnc.counter.value)}}{{end}}{{end}}
      */
-    public function {{call $data.Fnc.camelizeDownFirst .}}({{call $data.Fnc.args.php (index $data.Api.class $data.Api.active.name .) "params" true}})
+    public function {{call $data.Fnc.camelizeDownFirst .}}({{call $data.Fnc.args.php (index $data.Api.class $data.Api.active.name .) "params" false}}array $options = array())
     {
+        $body = array();{{range (index $data.Api.class $data.Api.active.name . "params")}}
+        $body['{{.}}'] = ${{.}};{{end}}
 
+        return $this->client->get{{end}}("{{call $data.Fnc.urlr.php (index $data.Api.class $data.Api.active.name . "path") $data.Api.active.args}}", $body, $options);
     }
-{{end}}{{end}}{{end}}
+{{end}}{{end}}
 }

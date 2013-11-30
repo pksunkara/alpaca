@@ -1,5 +1,9 @@
 package langs
 
+import (
+	"regexp"
+)
+
 func ArrayInterfaceToString(inter interface{}) []string {
 	old := inter.([]interface{})
 	new := make([]string, len(old))
@@ -42,7 +46,7 @@ func ActiveClassInfo(name string, class interface{}) map[string]interface{} {
 	return data
 }
 
-func ArgsFunctionMaker(before string, after string) interface{} {
+func ArgsFunctionMaker(before, after string) interface{} {
 	return func(class interface{}, key string, last bool) string {
 		str, args := "", class.(map[string]interface{})[key]
 
@@ -56,6 +60,19 @@ func ArgsFunctionMaker(before string, after string) interface{} {
 		}
 
 		return str
+	}
+}
+
+func UrlReplaceFunctionMaker(before, after string) interface{} {
+	return func(path string, args interface{}) string {
+		if args != nil {
+			for _, v := range ArrayInterfaceToString(args) {
+				reg := regexp.MustCompile(":(" + v + ")")
+				path = reg.ReplaceAllString(path, before+"$1"+after)
+			}
+		}
+
+		return path
 	}
 }
 

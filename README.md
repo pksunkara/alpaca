@@ -26,6 +26,35 @@ alpaca </path/to/dir>
 
 The path here should be a directory with `api.json`, `pkg.json`, `doc.json`
 
+#### pkg.json
+
+All the following fields are required unless mentioned.
+
+```js
+{
+  "name": "Buffer", // Name of the api
+  "package": "buffer-alpaca", // Name of the package
+  "version": "0.1.0", // Version of the package
+  "url": "https://bufferapp.com", // URL of the api
+  "keywords": ["alpaca", "buffer", "api"], // Keywords for the package
+  "official": false, // Is the api official?
+  "author": {
+    "name": "Pavan Kumar Sunkara", // Name of the package author
+    "email": "pavan.sss1991@gmail.com", // Email of the package author
+    "url": "http://github.com/pksunkara" // URL of the package author
+  },
+  "git": {
+    "site": "github.com", // Name of the git website
+    "user": "alpaca-api", // Username of the git website
+    "name": "buffer" // Namespace of the git repositories
+  },
+  "license": "MIT", // License of the package
+  "php": { // Required only if creating php api lib
+    "vendor": "pksunkara" // Packagist vendor name for the package
+  }
+}
+```
+
 ## Contributors
 
 Here is a list of [Contributors](http://github.com/pksunkara/alpaca/contributors)
@@ -46,6 +75,10 @@ __I accept pull requests and guarantee a reply back within a day__
 - Pagination support
 - Classes inside classes (so on..)
 - Allow customization of errors
+
+#### Comments
+- The descriptions should be wrapped
+- Align @param descriptions
 
 #### Languages
 - Support Java, Perl, Clojure & Go

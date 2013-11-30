@@ -57,29 +57,29 @@ class HttpClient
         }
     }
 
-    public function get($path, array $parameters = array(), array $headers = array(), array $options = array())
+    public function get($path, array $parameters = array(), array $options = array())
     {
-        return $this->request($path, null, 'GET', $headers, array_merge($options, array('query' => $parameters)));
+        return $this->request($path, null, 'GET', array_merge($options, array('query' => $parameters)));
     }
 
-    public function post($path, $body, array $headers = array(), array $options = array())
+    public function post($path, $body, array $options = array())
     {
-        return $this->request($path, $body, 'POST', $headers, $options);
+        return $this->request($path, $body, 'POST', $options);
     }
 
-    public function patch($path, $body, array $headers = array(), array $options = array())
+    public function patch($path, $body, array $options = array())
     {
-        return $this->request($path, $body, 'PATCH', $headers, $options);
+        return $this->request($path, $body, 'PATCH', $options);
     }
 
-    public function delete($path, $body, array $headers = array(), array $options = array())
+    public function delete($path, $body, array $options = array())
     {
-        return $this->request($path, $body, 'DELETE', $headers, $options);
+        return $this->request($path, $body, 'DELETE', $options);
     }
 
-    public function put($path, $body, array $headers = array(), array $options = array())
+    public function put($path, $body, array $options = array())
     {
-        return $this->request($path, $body, 'PUT', $headers, $options);
+        return $this->request($path, $body, 'PUT', $options);
     }
 
     /*
@@ -89,8 +89,15 @@ class HttpClient
      * - Creates the requests with give parameters
      * - Returns response body after parsing it into correct format
      */
-    public function request($path, $body = null, $httpMethod = 'GET', array $headers = array(), array $options = array())
+    public function request($path, $body = null, $httpMethod = 'GET', array $options = array())
     {
+        $headers = array();
+
+        if (isset($options['headers']) {
+            $headers = $options['headers'];
+            unset($options['headers']);
+        }
+
         $body = $this->createBody($body, $options);
         $request = $this->createRequest($httpMethod, $path, $body, $headers, $options);
 
