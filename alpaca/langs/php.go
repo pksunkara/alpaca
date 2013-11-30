@@ -43,5 +43,5 @@ func FunctionsPhp(fnc map[string]interface{}) {
 	urlr := fnc["urlr"].(map[string]interface{})
 
 	args["php"] = ArgsFunctionMaker("$", ", ")
-	urlr["php"] = UrlReplaceFunctionMaker("\".$$this->", ".\"")
+	urlr["php"] = UrlReplaceFunctionMaker("\".rawurlencode($$this->", ").\"")
 }

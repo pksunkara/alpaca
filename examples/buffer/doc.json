@@ -35,7 +35,7 @@
 		},
 		"reorder": {
 			"desc": "Edit the order at which statuses for the specified social media profile will be sent out of the buffer.",
-			"body": [""]
+			"body": ["An ordered array of status update id's. This can be a partial array in combination with the offset parameter or a full array of every update in the profiles Buffer."]
 		},
 		"shuffle": {
 			"desc": "Randomize the order at which statuses for the specified social media profile will be sent out of the buffer."
@@ -49,7 +49,7 @@
 		},
 		"update": {
 			"desc": "Set the posting schedules for the specified social media profile.",
-			"body": [""]
+			"body": ["Each item in the array is an individual posting schedule which consists of days and times to match the format return by the above method."]
 		}
 	},
 	"update": {
@@ -63,11 +63,11 @@
 		},
 		"create": {
 			"desc": "Create one or more new status updates.",
-			"body": ["", ""]
+			"body": ["The status update text.", "An array of profile id’s that the status update should be sent to. Invalid profile_id’s will be silently ignored."]
 		},
 		"update": {
 			"desc": "Edit an existing, individual status update.",
-			"body": [""]
+			"body": ["The status update text."]
 		},
 		"share": {
 			"desc": "Immediately shares a single pending update and recalculates times for updates remaining in the queue."
