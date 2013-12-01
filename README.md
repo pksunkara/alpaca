@@ -74,6 +74,7 @@ __I accept pull requests and guarantee a reply back within a day__
 #### General
 - Pagination support
 - Classes inside classes (so on..)
+- Validations for params/body in api methods
 - Allow customization of errors
 
 #### Comments

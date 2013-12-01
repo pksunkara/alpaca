@@ -18,10 +18,8 @@ use {{.Pkg.name}}\HttpClient\ErrorHandler;
 class HttpClient
 {
     protected $options = array(
-        'base'    => '{{.Api.base}}',
-{{with .Api.version}}
-        'api_version' => '{{.}}',
-{{end}}
+        'base'    => '{{.Api.base}}',{{with .Api.version}}
+        'api_version' => '{{.}}',{{end}}
         'user_agent' => 'alpaca/0.1.0 (https://github.com/pksunkara/alpaca)'
     );
 
@@ -34,16 +32,16 @@ class HttpClient
             $auth = array('access_token' => $auth);
         }
 {{end}}
+        $this->options = array_merge($this->options, $options);
+
         $this->headers = array(
             sprintf('User-Agent: %s', $this->options['user_agent']),
         );
 
-        if (isset($options['headers'])) {
-            $this->headers = array_merge($this->headers, $options['headers']);
-            unset($options['headers']);
+        if (isset($this->options['headers'])) {
+            $this->headers = array_merge($this->headers, $this->options['headers']);
+            unset($this->options['headers']);
         }
-
-        $this->options = array_merge($this->options, $options);
 
         $client = new GuzzleClient($this->options['base'], $this->options);
         $this->client  = $client;
@@ -98,8 +96,9 @@ class HttpClient
             unset($options['headers']);
         }
 
-        $body = $this->createBody($body, $options);
-        $request = $this->createRequest($httpMethod, $path, $body, $headers, $options);
+        $request = $this->createRequest($httpMethod, $path, null, $headers, $options);
+
+        $request = $this->setBody($request, $body, $options);
 
         try {
             $response = $this->client->send($request);
@@ -169,10 +168,10 @@ class HttpClient
     }
 
     /*
-     * Create request body in correct format
+     * Set request body in correct format
      */
-    public function createBody($body, $options)
+    public function setBody(Request $request, $body, $options)
     {
-        return RequestHandler::createBody($body, $options);
+        return RequestHandler::setBody($request);
     }
 }

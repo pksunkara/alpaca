@@ -40,8 +40,8 @@ func WritePhp(data *Data) {
 
 func FunctionsPhp(fnc map[string]interface{}) {
 	args := fnc["args"].(map[string]interface{})
-	urlr := fnc["urlr"].(map[string]interface{})
+	path := fnc["path"].(map[string]interface{})
 
 	args["php"] = ArgsFunctionMaker("$", ", ")
-	urlr["php"] = UrlReplaceFunctionMaker("\".rawurlencode($$this->", ").\"")
+	path["php"] = PathFunctionMaker("\".rawurlencode($$this->", ").\"")
 }

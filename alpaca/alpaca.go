@@ -46,7 +46,7 @@ func ModifyData(data *langs.Data) {
 	data.Fnc["counter"] = langs.CounterTracker()
 
 	data.Fnc["args"] = make(map[string]interface{})
-	data.Fnc["urlr"] = make(map[string]interface{})
+	data.Fnc["path"] = make(map[string]interface{})
 
 	langs.FunctionsNode(data.Fnc)
 	langs.FunctionsPhp(data.Fnc)

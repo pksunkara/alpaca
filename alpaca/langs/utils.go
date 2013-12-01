@@ -63,7 +63,7 @@ func ArgsFunctionMaker(before, after string) interface{} {
 	}
 }
 
-func UrlReplaceFunctionMaker(before, after string) interface{} {
+func PathFunctionMaker(before, after string) interface{} {
 	return func(path string, args interface{}) string {
 		if args != nil {
 			for _, v := range ArrayInterfaceToString(args) {

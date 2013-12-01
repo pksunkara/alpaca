@@ -30,7 +30,7 @@ class {{call .Fnc.camelize .Api.active.name}}
      */
     public function {{call $data.Fnc.camelizeDownFirst .}}({{call $data.Fnc.args.php (index $data.Api.class $data.Api.active.name .) "body" false}}array $options = array())
     {
-        $body = array();{{range (index $data.Api.class $data.Api.active.name . "body")}}
+        $body = (isset($options['body']) ? $options['body'] : array();{{range (index $data.Api.class $data.Api.active.name . "body")}}
         $body['{{.}}'] = ${{.}};{{end}}
 
         return $this->client->{{index $data.Api.class $data.Api.active.name . "method"}}{{else}}
@@ -40,10 +40,10 @@ class {{call .Fnc.camelize .Api.active.name}}
      */
     public function {{call $data.Fnc.camelizeDownFirst .}}({{call $data.Fnc.args.php (index $data.Api.class $data.Api.active.name .) "params" false}}array $options = array())
     {
-        $body = array();{{range (index $data.Api.class $data.Api.active.name . "params")}}
+        $body = (isset($options['query']) ? $options['query'] : array();{{range (index $data.Api.class $data.Api.active.name . "params")}}
         $body['{{.}}'] = ${{.}};{{end}}
 
-        return $this->client->get{{end}}("{{call $data.Fnc.urlr.php (index $data.Api.class $data.Api.active.name . "path") $data.Api.active.args}}", $body, $options);
+        return $this->client->get{{end}}("{{call $data.Fnc.path.php (index $data.Api.class $data.Api.active.name . "path") $data.Api.active.args}}", $body, $options);
     }
 {{end}}{{end}}
 }
