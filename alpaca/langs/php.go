@@ -11,14 +11,14 @@ func WritePhp(data *Data) {
 	name := data.Pkg["name"].(string)
 
 	RunTemplate("composer.json", "composer.json", data)
-	MakeDir(name)
+	MakeDir("lib")
 
+	MakeDir(name)
 	RunTemplate("lib/Client.php", "Client.php", data)
 
 	MakeDir("Exception")
 	RunTemplate("lib/Exception/ExceptionInterface.php", "ExceptionInterface.php", data)
-	RunTemplate("lib/Exception/ErrorException.php", "ErrorException.php", data)
-	RunTemplate("lib/Exception/RuntimeException.php", "RuntimeException.php", data)
+	RunTemplate("lib/Exception/ClientException.php", "ClientException.php", data)
 	MoveDir("..")
 
 	MakeDir("HttpClient")

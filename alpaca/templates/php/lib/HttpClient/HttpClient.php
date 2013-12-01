@@ -7,8 +7,6 @@ use Guzzle\Http\ClientInterface;
 use Guzzle\Http\Message\Request;
 use Guzzle\Http\Message\Response;
 
-use {{.Pkg.name}}\Exception\ErrorException;
-use {{.Pkg.name}}\Exception\RuntimeException;
 use {{.Pkg.name}}\HttpClient\AuthHandler;
 use {{.Pkg.name}}\HttpClient\ErrorHandler;
 
@@ -103,9 +101,9 @@ class HttpClient
         try {
             $response = $this->client->send($request);
         } catch (\LogicException $e) {
-            throw new ErrorException($e->getMessage());
+            throw new \ErrorException($e->getMessage());
         } catch (\RuntimeException $e) {
-            throw new RuntimeException($e->getMessage());
+            throw new \RuntimeException($e->getMessage());
         }
 
         $this->lastRequest  = $request;

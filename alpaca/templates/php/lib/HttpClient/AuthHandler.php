@@ -4,8 +4,6 @@ namespace {{.Pkg.name}}\HttpClient;
 
 use Guzzle\Common\Event;
 
-use {{.Pkg.name}}\Exception\RuntimeException;
-
 /*
  * AuthHandler takes care of devising the auth type and using it
  */
@@ -64,7 +62,7 @@ class AuthHandler
                 break;
 {{end}}
             default:
-                throw new RuntimeException('Unable to calculate authorization method. Please check.');
+                throw new \ErrorException('Unable to calculate authorization method. Please check.');
                 break;
         }
     }

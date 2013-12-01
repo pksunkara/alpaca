@@ -22,7 +22,6 @@ func WriteNode(data *Data) {
 	MakeDir("error")
 	RunTemplate("lib/error/index.js", "index.js", data)
 	RunTemplate("lib/error/client.js", "client.js", data)
-	RunTemplate("lib/error/server.js", "server.js", data)
 	MoveDir("..")
 
 	MakeDir("client")
