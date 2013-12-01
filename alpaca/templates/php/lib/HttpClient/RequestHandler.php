@@ -4,7 +4,7 @@ namespace {{.Pkg.name}}\HttpClient;
 
 use Guzzle\Http\Message\Request;
 
-/*
+/**
  * RequestHandler takes care of encoding the request body into format given by options
  */
 class RequestHandler {

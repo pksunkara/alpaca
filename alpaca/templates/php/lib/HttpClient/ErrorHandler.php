@@ -8,7 +8,7 @@ use Guzzle\Http\Message\Response;
 use {{.Pkg.name}}\HttpClient\ResponseHandler;
 use {{.Pkg.name}}\Exception\ClientException;
 
-/*
+/**
  * ErrorHanlder takes care of selecting the error message from response body
  */
 class ErrorHandler

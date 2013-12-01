@@ -10,7 +10,7 @@ use Guzzle\Http\Message\Response;
 use {{.Pkg.name}}\HttpClient\AuthHandler;
 use {{.Pkg.name}}\HttpClient\ErrorHandler;
 
-/*
+/**
  * Main HttpClient which is used by Api classes
  */
 class HttpClient
@@ -78,7 +78,7 @@ class HttpClient
         return $this->request($path, $body, 'PUT', $options);
     }
 
-    /*
+    /**
      * Intermediate function which does three main things
      *
      * - Transforms the body of request into correct format
@@ -93,6 +93,8 @@ class HttpClient
             $headers = $options['headers'];
             unset($options['headers']);
         }
+
+        unset($options['body']);
 
         $request = $this->createRequest($httpMethod, $path, null, $headers, $options);
 
@@ -122,7 +124,7 @@ class HttpClient
         return $this->lastResponse;
     }
 
-    /*
+    /**
      * Creating a request with the given arguments
      *
      * If api_version is set, appends it immediately after host
@@ -141,7 +143,7 @@ class HttpClient
         return $this->client->createRequest($httpMethod, $path, $headers, $body, $options);
     }
 
-    /*
+    /**
      * Get the status code for the latest response
      */
     public function status($code)
@@ -149,7 +151,7 @@ class HttpClient
         return ($this->lastResponse->getStatusCode() == $code);
     }
 
-    /*
+    /**
      * Get headers for the latest response
      */
     public function headers()
@@ -157,7 +159,7 @@ class HttpClient
         return $this->lastResponse->getHeaders();
     }
 
-    /*
+    /**
      * Get response body in correct format
      */
     public function getBody(Response $response)
@@ -165,7 +167,7 @@ class HttpClient
         return ResponseHandler::getBody($response);
     }
 
-    /*
+    /**
      * Set request body in correct format
      */
     public function setBody(Request $request, $body, $options)

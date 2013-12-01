@@ -1,6 +1,6 @@
 var errors = require('../error');
 
-/*
+/**
  * ErrorHanlder takes care of selecting the error message from response body
  */
 module.exports = function(response, body, callback) {

@@ -33,6 +33,12 @@ func WriteNode(data *Data) {
 	MoveDir("..")
 
 	MakeDir("api")
+
+	for k, v := range data.Api["class"].(map[string]interface{}) {
+		data.Api["active"] = ActiveClassInfo(k, v)
+		RunTemplate("lib/api.js", inflect.CamelizeDownFirst(k)+".js", data)
+		delete(data.Api, "active")
+	}
 }
 
 func FunctionsNode(fnc map[string]interface{}) {

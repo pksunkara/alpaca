@@ -8,7 +8,7 @@ client.ErrorHandler = require("./error.js")
 client.RequestHandler = require("./request.js")
 client.ResponseHandler = require("./response.js")
 
-/*
+/**
  * Main HttpClient which is used by Api classes
  */
 client.HttpClient = function (auth, options) {
@@ -39,44 +39,26 @@ client.HttpClient = function (auth, options) {
     delete this.options['headers'];
   }
 
+  this.auth = new AuthHandler(auth);
+
   return this;
 }
 
 client.HttpClient.prototype.get = function (path, params, options, callback) {
-  if (typeof options == "function") {
-    callback = options;
-    options = {};
-  }
-
   options['query'] = params;
 
   this.request(path, {}, 'GET', options, callback);
 };
 
 client.HttpClient.prototype.post = function (path, body, options, callback) {
-  if (typeof options == "function") {
-    callback = options;
-    options = {};
-  }
-
   this.request(path, body, 'POST', options, callback);
 };
 
 client.HttpClient.prototype.patch = function (path, body, options, callback) {
-  if (typeof options == "function") {
-    callback = options;
-    options = {};
-  }
-
   this.request(path, body, 'PATCH', options, callback);
 };
 
 client.HttpClient.prototype.delete = function (path, body, options, callback) {
-  if (typeof options == "function") {
-    callback = options;
-    options = {};
-  }
-
   this.request(path, body, 'DELETE', options, callback);
 };
 
@@ -89,7 +71,7 @@ client.HttpClient.prototype.put = function (path, body, options, callback) {
   this.request(path, body, 'PUT', options, callback);
 };
 
-/*
+/**
  * Intermediate function which does three main things
  *
  * - Transforms the body of request into correct format
@@ -104,14 +86,17 @@ client.HttpClient.prototype.request = function (path, body, method, options, cal
     delete options['headers'];
   }
 
+  delete options['body'];
+
   var reqobj = {
     'url': path,
-    'qs': options['query'],
+    'qs': options['query'] || {},
     'method': method,
     'headers': headers
   };
 
   reqobj = this.setBody(reqobj, body, options);
+  reqobj = this.auth.set(reqobj);
 
   reqobj = this.createRequest(reqobj, function(err, response, body) {
     if (err) {
@@ -134,7 +119,7 @@ client.HttpClient.prototype.request = function (path, body, method, options, cal
   });
 };
 
-/*
+/**
  * Creating a request with the given arguments
  *
  * If api_version is set, appends it immediately after host
@@ -157,14 +142,14 @@ client.HttpClient.prototype.createRequest = function (reqobj, callback) {
   request(reqobj, callback);
 };
 
-/*
+/**
  * Get response body in correct format
  */
 client.HttpClient.prototype.getBody = function (response, body, callback) {
   client.ResponseHandler.getBody(response, body, callback);
 };
 
-/*
+/**
  * Set request body in correct format
  */
 client.HttpClient.prototype.setBody = function (request, body, options) {

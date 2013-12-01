@@ -56,7 +56,7 @@
 			"reorder": {
 				"path": "/profiles/:id/updates/reorder",
 				"method": "post",
-				"body": ["order"]
+				"params": ["order"]
 			},
 			"shuffle": {
 				"path": "/profiles/:id/updates/shuffle",
@@ -71,7 +71,7 @@
 			"update": {
 				"path": "/profiles/:id/schedules/update",
 				"method": "post",
-				"body": ["schedules"]
+				"params": ["schedules"]
 			}
 		},
 		"update": {
@@ -86,12 +86,12 @@
 			"create": {
 				"path": "/updates/create",
 				"method": "post",
-				"body": ["text", "profile_ids"]
+				"params": ["text", "profile_ids"]
 			},
 			"update": {
 				"path": "/updates/:id/update",
 				"method": "post",
-				"body": ["text"]
+				"params": ["text"]
 			},
 			"share": {
 				"path": "/updates/:id/share",

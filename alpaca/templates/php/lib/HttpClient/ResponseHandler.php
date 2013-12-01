@@ -4,7 +4,7 @@ namespace {{.Pkg.name}}\HttpClient;
 
 use Guzzle\Http\Message\Response;
 
-/*
+/**
  * ResponseHandler takes care of decoding the response body into suitable type
  */
 class ResponseHandler {

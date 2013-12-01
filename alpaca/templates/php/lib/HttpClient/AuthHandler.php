@@ -4,7 +4,7 @@ namespace {{.Pkg.name}}\HttpClient;
 
 use Guzzle\Common\Event;
 
-/*
+/**
  * AuthHandler takes care of devising the auth type and using it
  */
 class AuthHandler
@@ -22,7 +22,7 @@ class AuthHandler
         $this->auth = $auth;
     }
 
-    /*
+    /**
      * Calculating the Authentication Type
      */
     public function getAuthType()
@@ -31,7 +31,7 @@ class AuthHandler
             return HTTP_PASSWORD;
         } else if (isset($auth['http_token'])) {
             return HTTP_TOKEN;
-        }{{if .Api.authorization.oauth}} else if (isset($auth['id']) && isset($auth['secret'])) {
+        }{{if .Api.authorization.oauth}} else if (isset($auth['client_id']) && isset($auth['client_secret'])) {
             return URL_SECRET;
         } else if (isset($auth['access_token'])) {
             return URL_TOKEN;
@@ -67,7 +67,7 @@ class AuthHandler
         }
     }
 
-    /*
+    /**
      * Basic Authorization with username and password
      */
     public function http_password(Event $event)
@@ -75,7 +75,7 @@ class AuthHandler
         $event['request']->setHeader('Authorization', sprintf('Basic %s', base64_encode($this->auth['username'] . ':' . $this->auth['password'])));
     }
 
-    /*
+    /**
      * Authorization with HTTP token
      */
     public function http_token(Event $event)
@@ -83,7 +83,7 @@ class AuthHandler
         $event['request']->setHeader('Authorization', sprintf('token %s', $this->auth['http_token']));
     }
 {{if .Api.authorization.oauth}}
-    /*
+    /**
      * OAUTH2 Authorization with client secret
      */
     public function url_secret(Event $event)
@@ -91,8 +91,8 @@ class AuthHandler
         $url = $event['request']->getUrl();
 
         $parameters = array(
-            'client_id'     => $this->auth['id'],
-            'client_secret' => $this->auth['secret'],
+            'client_id'     => $this->auth['client_id'],
+            'client_secret' => $this->auth['client_secret'],
         );
 
         $url .= (false === strpos($url, '?') ? '?' : '&');
@@ -101,7 +101,7 @@ class AuthHandler
         $event['request']->setUrl($url);
     }
 
-    /*
+    /**
      * OAUTH2 Authorization with access token
      */
     public function url_token(Event $event)

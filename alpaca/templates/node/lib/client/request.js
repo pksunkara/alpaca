@@ -1,6 +1,6 @@
 var request = module.exports;
 
-/*
+/**
  * This module takes care of encoding the request body into format given by options
  */
 request.setBody = function(reqobj, body, options) {

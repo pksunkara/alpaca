@@ -71,6 +71,11 @@ __I accept pull requests and guarantee a reply back within a day__
 - HTTP Method Overloading
 - What about file uploads?
 
+#### Api
+- Check returned status code
+- Output the headers too (somehow)
+- Special case for 204:true and 404:false
+
 #### General
 - Pagination support
 - Classes inside classes (so on..)
