@@ -46,5 +46,5 @@ func FunctionsNode(fnc map[string]interface{}) {
 	path := fnc["path"].(map[string]interface{})
 
 	args["node"] = ArgsFunctionMaker("", ", ")
-	path["node"] = PathFunctionMaker("\" + ", " + \"")
+	path["node"] = PathFunctionMaker("\" + this.", " + \"")
 }

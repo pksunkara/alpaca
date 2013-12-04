@@ -18,13 +18,13 @@ var Auth = function(auth) {
  */
 Auth.prototype.getAuthType = function () {
   if (this.auth['username'] && this.auth['password']) {
-    return HTTP_PASSWORD;
+    return this.HTTP_PASSWORD;
   } else if (this.auth['http_token']) {
-    return HTTP_TOKEN;
+    return this.HTTP_TOKEN;
   }{{if .Api.authorization.oauth}} else if (this.auth['client_id'] && this.auth['client_secret']) {
-    return URL_SECRET;
+    return this.URL_SECRET;
   } else if (this.auth['access_token']) {
-    return URL_TOKEN;
+    return this.URL_TOKEN;
   }{{end}}
 };
 

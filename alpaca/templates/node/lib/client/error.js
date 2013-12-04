@@ -7,7 +7,7 @@ module.exports = function(response, body, callback) {
   var code = response.statusCode, message = '';
 
   if (Math.floor(code/100) == 5) {
-    return callback(new errors.ClientError('Error ' + code, code)));
+    return callback(new errors.ClientError('Error ' + code, code));
   }
 
   // If HTML, whole body is taken

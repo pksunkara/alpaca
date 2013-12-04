@@ -6,6 +6,8 @@
 var {{call .Fnc.camelize .Api.active.name}} = function({{call .Fnc.args.node (index .Api.class .Api.active.name) "args" false}}client) {
 {{range .Api.active.args}}  this.{{.}} = {{.}};
 {{end}}  this.client = client;
+
+  return this;
 };
 {{with $data := .}}{{range .Api.active.methods}}
 /**

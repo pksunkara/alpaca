@@ -2,11 +2,11 @@ var request = require("request");
 
 var client = module.exports;
 
-client.AuthHandler = require("./auth.js");
-client.ErrorHandler = require("./error.js")
+client.AuthHandler = require("./auth");
+client.ErrorHandler = require("./error");
 
-client.RequestHandler = require("./request.js")
-client.ResponseHandler = require("./response.js")
+client.RequestHandler = require("./request");
+client.ResponseHandler = require("./response");
 
 /**
  * Main HttpClient which is used by Api classes
@@ -39,7 +39,7 @@ client.HttpClient = function (auth, options) {
     delete this.options['headers'];
   }
 
-  this.auth = new AuthHandler(auth);
+  this.auth = new client.AuthHandler(auth);
 
   return this;
 }
@@ -128,10 +128,10 @@ client.HttpClient.prototype.createRequest = function (reqobj, callback) {
   var version = (this.options['api_version'] ? '/' + this.options['api_version'] : '');
 {{if .Api.response.suffix}}
   // Adds a suffix (".html", ".json") to url
-  var suffix = (isset($options['response_type']) ? $options['response_type'] : "{{.Api.response.formats.default}}");
+  var suffix = (this.options['response_type'] ? this.options['response_type'] : "{{.Api.response.formats.default}}");
   reqobj['url'] = reqobj['url'] + '.' + suffix;
 {{end}}
-  reqobj['url'] = this.options['base'] + version + path;
+  reqobj['url'] = this.options['base'] + version + reqobj['url'];
 
   for (var key in this.headers) {
     if (!reqobj['headers'][key]) {
@@ -153,5 +153,5 @@ client.HttpClient.prototype.getBody = function (response, body, callback) {
  * Set request body in correct format
  */
 client.HttpClient.prototype.setBody = function (request, body, options) {
-  client.RequestHandler.setBody(request, body, options);
+  return client.RequestHandler.setBody(request, body, options);
 };
