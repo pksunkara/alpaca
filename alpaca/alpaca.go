@@ -36,7 +36,6 @@ func ModifyData(data *langs.Data) {
 	data.Api["classes"] = langs.MapKeysToStringArray(data.Api["class"], []string{})
 
 	data.Fnc["join"] = strings.Join
-	data.Fnc["equal"] = strings.EqualFold
 	data.Fnc["upper"] = strings.ToUpper
 
 	data.Fnc["camelize"] = inflect.Camelize
