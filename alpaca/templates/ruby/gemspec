@@ -1,0 +1,16 @@
+# -*- encoding: utf-8 -*-
+
+Gem::Specification.new do |gem|
+	gem.name        = "{{.Pkg.package}}"
+	gem.version     = "{{.Pkg.version}}"
+	gem.description = "{{if .Pkg.official}}Official {{end}}{{.Pkg.name}} API library client for ruby"
+
+	gem.author   = "{{.Pkg.author.name}}"
+	gem.email    = "{{.Pkg.author.email}}"
+	gem.homepage = "{{.Pkg.url}}"
+	gem.license  = "{{.Pkg.license}}"
+
+	gem.require_paths = ['lib']
+
+	gem.files = `git ls-files`.split($\)
+end

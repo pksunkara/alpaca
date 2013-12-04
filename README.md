@@ -51,6 +51,9 @@ All the following fields are required unless mentioned.
   "license": "MIT", // License of the package
   "php": { // Required only if creating php api lib
     "vendor": "pksunkara" // Packagist vendor name for the package
+  },
+  "python": { // Optional when creating python api lib
+    "license": "MIT License" // Classifier of the license used for the module
   }
 }
 ```

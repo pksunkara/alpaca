@@ -1,7 +1,7 @@
 {
   "name": "{{.Pkg.package}}",
   "version": "{{.Pkg.version}}",
-  "description": "{{if .Pkg.official}}Official {{end}}{{.Pkg.name}} API client for node.js",
+  "description": "{{if .Pkg.official}}Official {{end}}{{.Pkg.name}} API library client for node.js",
   "author": "{{.Pkg.author.name}} <{{.Pkg.author.email}}> ({{.Pkg.author.url}})",
   "homepage": "{{.Pkg.url}}",
   "keywords": ["{{call .Fnc.join .Pkg.keywords "\", \""}}"],
