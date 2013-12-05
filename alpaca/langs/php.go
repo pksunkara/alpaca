@@ -11,6 +11,7 @@ func WritePhp(data *Data) {
 	name := data.Pkg["name"].(string)
 
 	RunTemplate("composer.json", "composer.json", data)
+
 	MakeDir("lib")
 
 	MakeDir(name)

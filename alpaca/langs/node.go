@@ -14,7 +14,6 @@ func WriteNode(data *Data) {
 	RunTemplate("package.json", "package.json", data)
 
 	MakeDir("lib")
-
 	RunTemplate("lib/index.js", "index.js", data)
 
 	MakeDir(inflect.CamelizeDownFirst(name))

@@ -32,7 +32,7 @@ All the following fields are required unless mentioned.
 
 ```js
 {
-  "name": "Buffer", // Name of the api
+  "name": "Buffer", // Name of the api (also used as class name for the library)
   "package": "buffer-alpaca", // Name of the package
   "version": "0.1.0", // Version of the package
   "url": "https://bufferapp.com", // URL of the api
