@@ -1,15 +1,7 @@
 import os
 import sys
 
-try:
-	from setuptools import setup
-except ImportError:
-	from distuitls.core import setup
-
-try:
-	from distuitls.command.build_py import build_py_2to3 as build_py
-except ImportError:
-	from distuitls.command.build_py import build_py
+from setuptools import setup
 
 setup(
 	name='{{.Pkg.package}}',
@@ -29,5 +21,5 @@ setup(
 		'Operating System :: OS Independent',
 		'Topic :: Software Development :: Libraries :: Python Modules',
 	],
-	cmdclass = { 'build_py': build_py }
+	use_2to3 = True
 )

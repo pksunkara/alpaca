@@ -1,7 +1,7 @@
 {
 	"name": "{{.Pkg.php.vendor}}/{{.Pkg.package}}",
-	"version": "{{.Pkg.version}}"
-	"description": "{{if .Pkg.official}}Official {{end}}{{.Pkg.name}} API library client for PHP"
+	"version": "{{.Pkg.version}}",
+	"description": "{{if .Pkg.official}}Official {{end}}{{.Pkg.name}} API library client for PHP",
 	"homepage": "{{.Pkg.url}}",
 	"authors": [
 		{

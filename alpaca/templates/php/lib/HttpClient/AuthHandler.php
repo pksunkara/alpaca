@@ -27,14 +27,14 @@ class AuthHandler
      */
     public function getAuthType()
     {
-        if (isset($auth['username']) && isset($auth['password'])) {
-            return HTTP_PASSWORD;
-        } else if (isset($auth['http_token'])) {
-            return HTTP_TOKEN;
-        }{{if .Api.authorization.oauth}} else if (isset($auth['client_id']) && isset($auth['client_secret'])) {
-            return URL_SECRET;
-        } else if (isset($auth['access_token'])) {
-            return URL_TOKEN;
+        if (isset($this->auth['username']) && isset($this->auth['password'])) {
+            return self::HTTP_PASSWORD;
+        } else if (isset($this->auth['http_token'])) {
+            return self::HTTP_TOKEN;
+        }{{if .Api.authorization.oauth}} else if (isset($this->auth['client_id']) && isset($this->auth['client_secret'])) {
+            return self::URL_SECRET;
+        } else if (isset($this->auth['access_token'])) {
+            return self::URL_TOKEN;
         }{{end}}
     }
 
@@ -45,19 +45,19 @@ class AuthHandler
         }
 
         switch ($this->getAuthType()) {
-            case HTTP_PASSWORD:
+            case self::HTTP_PASSWORD:
                 $this->http_password($event);
                 break;
 
-            case HTTP_TOKEN:
+            case self::HTTP_TOKEN:
                 $this->http_token($event);
                 break;
 {{if .Api.authorization.oauth}}
-            case URL_SECRET:
+            case self::URL_SECRET:
                 $this->url_secret($event);
                 break;
 
-            case URL_TOKEN:
+            case self::URL_TOKEN:
                 $this->url_token($event);
                 break;
 {{end}}

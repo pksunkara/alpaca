@@ -4,7 +4,7 @@ namespace {{.Pkg.name}}\HttpClient;
 
 use Guzzle\Http\Client as GuzzleClient;
 use Guzzle\Http\ClientInterface;
-use Guzzle\Http\Message\Request;
+use Guzzle\Http\Message\RequestInterface;
 use Guzzle\Http\Message\Response;
 
 use {{.Pkg.name}}\HttpClient\AuthHandler;
@@ -89,7 +89,7 @@ class HttpClient
     {
         $headers = array();
 
-        if (isset($options['headers']) {
+        if (isset($options['headers'])) {
             $headers = $options['headers'];
             unset($options['headers']);
         }
@@ -98,7 +98,9 @@ class HttpClient
 
         $request = $this->createRequest($httpMethod, $path, null, $headers, $options);
 
-        $request = $this->setBody($request, $body, $options);
+        if ($httpMethod != 'GET') {
+            $request = $this->setBody($request, $body, $options);
+        }
 
         try {
             $response = $this->client->send($request);
@@ -170,8 +172,8 @@ class HttpClient
     /**
      * Set request body in correct format
      */
-    public function setBody(Request $request, $body, $options)
+    public function setBody(RequestInterface $request, $body, $options)
     {
-        return RequestHandler::setBody($request);
+        return RequestHandler::setBody($request, $body, $options);
     }
 }

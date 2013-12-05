@@ -2,14 +2,14 @@
 
 namespace {{.Pkg.name}}\HttpClient;
 
-use Guzzle\Http\Message\Request;
+use Guzzle\Http\Message\RequestInterface;
 
 /**
  * RequestHandler takes care of encoding the request body into format given by options
  */
 class RequestHandler {
 
-    public static function setBody(Request $request, $body, $options)
+    public static function setBody(RequestInterface $request, $body, $options)
     {
         $type = isset($options['request_type']) ? $options['request_type'] : "{{.Api.request.formats.default}}";
         $header = null;
@@ -20,7 +20,11 @@ class RequestHandler {
             $header = 'application/json';
         }
 {{end}}
-        return $request->setBody($body, $header);
+        if ($type == 'form') {
+            return $request->addPostFields($body);
+        } else {
+            return $request->setBody($body, $header);
+        }
     }
 
 }
