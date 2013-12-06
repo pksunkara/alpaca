@@ -127,8 +127,8 @@ client.HttpClient.prototype.request = function (path, body, method, options, cal
 client.HttpClient.prototype.createRequest = function (reqobj, callback) {
   var version = (this.options['api_version'] ? '/' + this.options['api_version'] : '');
 {{if .Api.response.suffix}}
-  // Adds a suffix (".html", ".json") to url
-  var suffix = (this.options['response_type'] ? this.options['response_type'] : "{{.Api.response.formats.default}}");
+  // Adds a suffix (ex: ".html", ".json") to url
+  var suffix = (this.options['response_type'] ? this.options['response_type'] : "{{or .Api.response.formats.default "html"}}");
   reqobj['url'] = reqobj['url'] + '.' + suffix;
 {{end}}
   reqobj['url'] = this.options['base'] + version + reqobj['url'];

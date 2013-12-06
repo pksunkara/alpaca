@@ -32,6 +32,11 @@
 			},
 			"profiles": {
 				"path": "/profiles"
+			},
+			"create_update": {
+				"path": "/updates/create",
+				"method": "post",
+				"params": ["text", "profile_ids"]
 			}
 		},
 		"link": {
@@ -42,7 +47,7 @@
 		},
 		"profile": {
 			"args": ["id"],
-			"get": {
+			"show": {
 				"path": "/profiles/:id"
 			},
 			"pending": {
@@ -76,17 +81,12 @@
 		},
 		"update": {
 			"args": ["id"],
-			"get": {
+			"show": {
 				"path": "/updates/:id"
 			},
 			"interactions": {
 				"path": "/updates/:id/interactions",
 				"paginate": true
-			},
-			"create": {
-				"path": "/updates/create",
-				"method": "post",
-				"params": ["text", "profile_ids"]
 			},
 			"update": {
 				"path": "/updates/:id/update",

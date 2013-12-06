@@ -11,7 +11,7 @@ class RequestHandler {
 
     public static function setBody(RequestInterface $request, $body, $options)
     {
-        $type = isset($options['request_type']) ? $options['request_type'] : "{{.Api.request.formats.default}}";
+        $type = isset($options['request_type']) ? $options['request_type'] : "{{or .Api.request.formats.default "raw"}}";
         $header = null;
 {{if .Api.request.formats.json}}
         // Encoding request body into JSON format
@@ -21,8 +21,10 @@ class RequestHandler {
         }
 {{end}}
         if ($type == 'form') {
+            // Encoding body into form-urlencoded format
             return $request->addPostFields($body);
         } else {
+            // Raw body
             return $request->setBody($body, $header);
         }
     }

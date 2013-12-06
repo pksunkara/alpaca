@@ -12,6 +12,10 @@
 		},
 		"profiles": {
 			"desc": "Returns an array of social media profiles connected to the authenticated users account."
+		},
+		"create_update": {
+			"desc": "Create one or more new status updates.",
+			"params": ["The status update text.", "An array of profile id’s that the status update should be sent to. Invalid profile_id’s will be silently ignored."]
 		}
 	},
 	"link": {
@@ -24,7 +28,7 @@
 	"profile": {
 		"desc": "Returns a social media profile api instance.",
 		"args": ["Identifier of a social media profile"],
-		"get": {
+		"show": {
 			"desc": "Returns details of the single specified social media profile."
 		},
 		"pending": {
@@ -55,15 +59,11 @@
 	"update": {
 		"desc": "Returns a social media update api instance.",
 		"args": ["Identifier of a social media update"],
-		"get": {
+		"show": {
 			"desc": "Returns a single social media update."
 		},
 		"interactions": {
 			"desc": "Returns the detailed information on individual interactions with the social media update such as favorites, retweets and likes."
-		},
-		"create": {
-			"desc": "Create one or more new status updates.",
-			"params": ["The status update text.", "An array of profile id’s that the status update should be sent to. Invalid profile_id’s will be silently ignored."]
 		},
 		"update": {
 			"desc": "Edit an existing, individual status update.",

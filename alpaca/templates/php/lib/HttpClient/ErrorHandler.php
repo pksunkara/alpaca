@@ -18,26 +18,33 @@ class ErrorHandler
         $request = $event['request'];
         $response = $request->getResponse();
 
+        $message = null;
+        $code = $response->getStatusCode();
+
         $content = ResponseHandler::getBody($response);
 
-        if ($response->isClientError() || $response->isServerError()) {
-            $error = null;
+        if ($response->isServerError()) {
+            throw new ClientException('Error '.$code, $code);
+        }
 
+        if ($response->isClientError()) {
             // If HTML, whole body is taken
             if (gettype($content) == "string") {
-                $error = new ClientException($content, $response->getStatusCode());
+                $message = $content;
             }
 {{if .Api.response.formats.json}}
             // If JSON, a particular field is taken and used
             if ($response->isContentType('json') && is_array($content) && isset($content['{{.Api.error.message}}'])) {
-                $error = new ClientException($content['{{.Api.error.message}}'], $response->getStatusCode());
+                $message = $content['{{.Api.error.message}}'];
             } else {
-                $error = new ClientException("Unable to select error message from json returned by request responsible for error", $response->getStatusCode());
+                $message = "Unable to select error message from json returned by request responsible for error";
             }
 {{end}}
-            if (empty($error)) {
-                $error = new \RuntimeException("Unable to understand the content type of response returned by request responsible for error", $response->getStatusCode());
+            if (empty($message)) {
+                $message = "Unable to understand the content type of response returned by request responsible for error";
             }
+
+            throw new ClientException($message, $code);
         }
     }
 }
