@@ -11,6 +11,7 @@ request.setBody = function(reqobj, body, options) {
   if (type == "json") {
     flag = true;
     reqobj['json'] = body;
+    reqobj['headers']['Content-Type'] = 'application/json';
   }
 {{end}}
   // Encoding body into form-urlencoded format

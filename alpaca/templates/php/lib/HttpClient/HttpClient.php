@@ -53,9 +53,9 @@ class HttpClient
         }
     }
 
-    public function get($path, array $parameters = array(), array $options = array())
+    public function get($path, array $params = array(), array $options = array())
     {
-        return $this->request($path, null, 'GET', array_merge($options, array('query' => $parameters)));
+        return $this->request($path, null, 'GET', array_merge($options, array('query' => $params)));
     }
 
     public function post($path, $body, array $options = array())
@@ -89,10 +89,14 @@ class HttpClient
     {
         $headers = array();
 
+        $options = array_merge($this->options, $options);
+
         if (isset($options['headers'])) {
             $headers = $options['headers'];
             unset($options['headers']);
         }
+
+        $headers = array_merge($this->headers, $headers);
 
         unset($options['body']);
 
@@ -133,14 +137,13 @@ class HttpClient
      */
     public function createRequest($httpMethod, $path, $body = null, array $headers = array(), array $options = array())
     {
-        $version = (isset($this->options['api_version']) ? "/".$this->options['api_version'] : "");
+        $version = (isset($options['api_version']) ? "/".$options['api_version'] : "");
 {{if .Api.response.suffix}}
         // Adds a suffix (ex: ".html", ".json") to url
         $suffix = (isset($options['response_type']) ? $options['response_type'] : "{{or .Api.response.formats.default "html"}}");
         $path = $path.".".$suffix;
 {{end}}
         $path    = $version.$path;
-        $headers = array_merge($this->headers, $headers);
 
         return $this->client->createRequest($httpMethod, $path, $headers, $body, $options);
     }

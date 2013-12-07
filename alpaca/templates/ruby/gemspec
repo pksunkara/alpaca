@@ -4,6 +4,7 @@ Gem::Specification.new do |gem|
   gem.name        = "{{.Pkg.package}}"
   gem.version     = "{{.Pkg.version}}"
   gem.description = "{{if .Pkg.official}}Official {{end}}{{.Pkg.name}} API library client for ruby"
+  gem.summary     = "{{if .Pkg.official}}Official {{end}}{{.Pkg.name}} API library client for ruby"
 
   gem.author   = "{{.Pkg.author.name}}"
   gem.email    = "{{.Pkg.author.email}}"
@@ -13,4 +14,6 @@ Gem::Specification.new do |gem|
   gem.require_paths = ['lib']
 
   gem.files = `git ls-files`.split("\n")
+
+  gem.add_dependency "faraday", "~> 0.8.8"
 end

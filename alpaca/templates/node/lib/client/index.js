@@ -63,11 +63,6 @@ client.HttpClient.prototype.delete = function (path, body, options, callback) {
 };
 
 client.HttpClient.prototype.put = function (path, body, options, callback) {
-  if (typeof options == "function") {
-    callback = options;
-    options = {};
-  }
-
   this.request(path, body, 'PUT', options, callback);
 };
 
@@ -81,9 +76,21 @@ client.HttpClient.prototype.put = function (path, body, options, callback) {
 client.HttpClient.prototype.request = function (path, body, method, options, callback) {
   var headers = {}, self = this;
 
+  for (var key in this.options) {
+    if (!options[key]) {
+      options[key] = this.options[key];
+    }
+  }
+
   if (options['headers']) {
     headers = options['headers'];
     delete options['headers'];
+  }
+
+  for (var key in this.headers) {
+    if (!headers[key]) {
+      headers[key] = this.headers[key];
+    }
   }
 
   delete options['body'];
@@ -98,7 +105,7 @@ client.HttpClient.prototype.request = function (path, body, method, options, cal
   reqobj = this.setBody(reqobj, body, options);
   reqobj = this.auth.set(reqobj);
 
-  reqobj = this.createRequest(reqobj, function(err, response, body) {
+  reqobj = this.createRequest(reqobj, options, function(err, response, body) {
     if (err) {
       return callback(err);
     }
@@ -124,20 +131,14 @@ client.HttpClient.prototype.request = function (path, body, method, options, cal
  *
  * If api_version is set, appends it immediately after host
  */
-client.HttpClient.prototype.createRequest = function (reqobj, callback) {
-  var version = (this.options['api_version'] ? '/' + this.options['api_version'] : '');
+client.HttpClient.prototype.createRequest = function (reqobj, options, callback) {
+  var version = (options['api_version'] ? '/' + options['api_version'] : '');
 {{if .Api.response.suffix}}
   // Adds a suffix (ex: ".html", ".json") to url
-  var suffix = (this.options['response_type'] ? this.options['response_type'] : "{{or .Api.response.formats.default "html"}}");
+  var suffix = (options['response_type'] ? options['response_type'] : "{{or .Api.response.formats.default "html"}}");
   reqobj['url'] = reqobj['url'] + '.' + suffix;
 {{end}}
-  reqobj['url'] = this.options['base'] + version + reqobj['url'];
-
-  for (var key in this.headers) {
-    if (!reqobj['headers'][key]) {
-      reqobj['headers'][key] = this.headers[key];
-    }
-  }
+  reqobj['url'] = options['base'] + version + reqobj['url'];
 
   request(reqobj, callback);
 };

@@ -10,10 +10,11 @@ func WriteRuby(data *Data) {
 
 	name := data.Pkg["name"].(string)
 
+	RunTemplate("gitignore", ".gitignore", data)
 	RunTemplate("gemspec", data.Pkg["package"].(string)+".gemspec", data)
 
 	MakeDir("lib")
-	RunTemplate("lib/name.rb", inflect.Underscore(name)+".rb", data)
+	RunTemplate("lib/name.rb", data.Pkg["package"].(string)+".rb", data)
 
 	MakeDir(inflect.Underscore(name))
 	RunTemplate("lib/client.rb", "client.rb", data)
@@ -45,5 +46,5 @@ func FunctionsRuby(fnc map[string]interface{}) {
 	path := fnc["path"].(map[string]interface{})
 
 	args["ruby"] = ArgsFunctionMaker("", ", ")
-	path["ruby"] = PathFunctionMaker("", "")
+	path["ruby"] = PathFunctionMaker("#{@", "}")
 }
