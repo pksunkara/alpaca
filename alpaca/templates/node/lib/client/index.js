@@ -2,11 +2,11 @@ var request = require("request");
 
 var client = module.exports;
 
-client.AuthHandler = require("./auth");
-client.ErrorHandler = require("./error");
+client.AuthHandler = require("./auth_handler");
+client.ErrorHandler = require("./error_handler");
 
-client.RequestHandler = require("./request");
-client.ResponseHandler = require("./response");
+client.RequestHandler = require("./request_handler");
+client.ResponseHandler = require("./response_handler");
 
 /**
  * Main HttpClient which is used by Api classes

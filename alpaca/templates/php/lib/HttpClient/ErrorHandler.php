@@ -21,7 +21,7 @@ class ErrorHandler
         $message = null;
         $code = $response->getStatusCode();
 
-        $content = ResponseHandler::getBody($response);
+        $body = ResponseHandler::getBody($response);
 
         if ($response->isServerError()) {
             throw new ClientException('Error '.$code, $code);
@@ -29,15 +29,17 @@ class ErrorHandler
 
         if ($response->isClientError()) {
             // If HTML, whole body is taken
-            if (gettype($content) == "string") {
-                $message = $content;
+            if (gettype($body) == "string") {
+                $message = $body;
             }
 {{if .Api.response.formats.json}}
             // If JSON, a particular field is taken and used
-            if ($response->isContentType('json') && is_array($content) && isset($content['{{.Api.error.message}}'])) {
-                $message = $content['{{.Api.error.message}}'];
-            } else {
-                $message = "Unable to select error message from json returned by request responsible for error";
+            if ($response->isContentType('json') && is_array($body)) {
+                if (isset($body['{{.Api.error.message}}'])) {
+                    $message = $body['{{.Api.error.message}}'];
+                } else {
+                    $message = "Unable to select error message from json returned by request responsible for error";
+                }
             }
 {{end}}
             if (empty($message)) {

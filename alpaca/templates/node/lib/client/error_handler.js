@@ -18,10 +18,12 @@ module.exports = function(response, body, callback) {
     }
 {{if .Api.response.formats.json}}
     // If JSON, a particular field is taken and used
-    if (type.indexOf('json') != -1 && body['{{.Api.error.message}}']) {
-      message = body['{{.Api.error.message}}'];
-    } else {
-      message = 'Unable to select error message from json returned by request responsible for error';
+    if (type.indexOf('json') != -1 && typeof body == 'object') {
+      if (body['{{.Api.error.message}}']) {
+        message = body['{{.Api.error.message}}'];
+      } else {
+        message = 'Unable to select error message from json returned by request responsible for error';
+      }
     }
 {{end}}
     if (message == '') {

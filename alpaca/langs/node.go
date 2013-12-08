@@ -20,15 +20,15 @@ func WriteNode(data *Data) {
 
 	MakeDir("error")
 	RunTemplate("lib/error/index.js", "index.js", data)
-	RunTemplate("lib/error/client.js", "client.js", data)
+	RunTemplate("lib/error/client_error.js", "client_error.js", data)
 	MoveDir("..")
 
 	MakeDir("client")
 	RunTemplate("lib/client/index.js", "index.js", data)
-	RunTemplate("lib/client/auth.js", "auth.js", data)
-	RunTemplate("lib/client/error.js", "error.js", data)
-	RunTemplate("lib/client/request.js", "request.js", data)
-	RunTemplate("lib/client/response.js", "response.js", data)
+	RunTemplate("lib/client/auth_handler.js", "auth_handler.js", data)
+	RunTemplate("lib/client/error_handler.js", "error_handler.js", data)
+	RunTemplate("lib/client/request_handler.js", "request_handler.js", data)
+	RunTemplate("lib/client/response_handler.js", "response_handler.js", data)
 	MoveDir("..")
 
 	MakeDir("api")

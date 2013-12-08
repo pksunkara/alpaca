@@ -37,7 +37,10 @@ module {{.Pkg.name}}
           @options.delete :headers
         end
 
-        @client = Faraday.new url: @options[:base]
+        @client = Faraday.new @options[:base] do |conn|
+          conn.use {{.Pkg.name}}::HttpClient::AuthHandler, auth: auth
+          conn.use {{.Pkg.name}}::HttpClient::ErrorHandler
+        end
       end
 
       def get(path, params = {}, options = {})

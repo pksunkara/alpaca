@@ -88,17 +88,10 @@ class AuthHandler
      */
     public function url_secret(Event $event)
     {
-        $url = $event['request']->getUrl();
+        $query = $event['request']->getQuery();
 
-        $parameters = array(
-            'client_id'     => $this->auth['client_id'],
-            'client_secret' => $this->auth['client_secret'],
-        );
-
-        $url .= (false === strpos($url, '?') ? '?' : '&');
-        $url .= utf8_encode(http_build_query($parameters, '', '&'));
-
-        $event['request']->setUrl($url);
+        $query->set('client_id', $this->auth['client_id']);
+        $query->set('client_secret', $this->auth['client_secret']);
     }
 
     /**
@@ -106,12 +99,9 @@ class AuthHandler
      */
     public function url_token(Event $event)
     {
-        $url = $event['request']->getUrl();
+        $query = $event['request']->getQuery();
 
-        $url .= (false === strpos($url, '?') ? '?' : '&');
-        $url .= utf8_encode(http_build_query(array('access_token' => $this->auth['access_token']), '', '&'));
-
-        $event['request']->setUrl($url);
+        $query->set('access_token', $this->auth['access_token']);
     }
 {{end}}
 }
