@@ -1,6 +1,6 @@
 /**
  * {{index .Doc .Api.active.name "desc"}}
- *{{with $data := .}}{{call $data.Fnc.counter.start}}{{range .Api.active.args}}
+ *{{with $data := .}}{{call .Fnc.counter.start}}{{range .Api.active.args}}
  * @param {{.}} {{index $data.Doc $data.Api.active.name "args" (call $data.Fnc.counter.value)}}{{end}}{{end}}
  */
 var {{call .Fnc.camelize .Api.active.name}} = function({{call .Fnc.args.node (index .Api.class .Api.active.name) "args" false}}client) {

@@ -87,16 +87,16 @@ module {{.Pkg.name}}
       #
       # If api_version is set, appends it immediately after host
       def create_request(method, path, body, headers, options)
-        version = options.has_key? :api_version ? "/#{options[:api_version]}" : ""
+        version = options.has_key?(:api_version) ? "/#{options[:api_version]}" : ""
 {{if .Api.response.suffix}}
         # Adds a suffix (ex: ".html", ".json") to url
-        suffix = options.has_key? :response_type ? options[:response_type] : "{{or .Api.response.formats.default "html"}}"
+        suffix = options.has_key?(:response_type) ? options[:response_type] : "{{or .Api.response.formats.default "html"}}"
         path = "#{path}.#{suffix}"
 {{end}}
         path = "#{version}#{path}"
 
-        class_eval <<-RUBY, __FILE__, __LINE__ + 1
-          @conn.#{method} path, body, headers
+        instance_eval <<-RUBY, __FILE__, __LINE__ + 1
+          @client.#{method} path, body, headers
         RUBY
       end
 

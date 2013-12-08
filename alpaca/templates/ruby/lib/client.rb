@@ -1,3 +1,6 @@
+{{with $data := .}}{{range .Api.classes}}
+require "{{call $data.Fnc.underscore $data.Pkg.name}}/api/{{call $data.Fnc.underscore .}}"{{end}}{{end}}
+
 module {{.Pkg.name}}
 
   class Client
