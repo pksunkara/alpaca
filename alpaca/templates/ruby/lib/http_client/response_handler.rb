@@ -2,10 +2,19 @@ module {{.Pkg.name}}
 
   module HttpClient
 
+    # ResponseHandler takes care of decoding the response body into suitable type
     class ResponseHandler
 
-      def initialize(args)
-
+      def self.get_body(response)
+        type = response.response_headers['content-type']
+        body = response.body
+{{if .Api.response.formats.json}}
+        # Response body is in JSON
+        if type.include? 'json'
+          body = JSON.parse body
+        end
+{{end}}
+        body
       end
 
     end

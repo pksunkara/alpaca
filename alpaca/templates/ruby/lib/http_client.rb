@@ -1,4 +1,3 @@
-require "faraday"
 require "{{call .Fnc.underscore .Pkg.name}}/http_client/auth_handler"
 require "{{call .Fnc.underscore .Pkg.name}}/http_client/error_handler"
 require "{{call .Fnc.underscore .Pkg.name}}/http_client/request_handler"
@@ -80,7 +79,11 @@ module {{.Pkg.name}}
 
         options.delete :body
 
+        body, headers = set_body body, headers, options
+
         response = create_request method, path, body, headers, options
+
+        body = get_body response
       end
 
       # Creating a request with the given arguments
@@ -98,6 +101,16 @@ module {{.Pkg.name}}
         instance_eval <<-RUBY, __FILE__, __LINE__ + 1
           @client.#{method} path, body, headers
         RUBY
+      end
+
+      # Get response body in correct format
+      def get_body(response)
+        {{.Pkg.name}}::HttpClient::ResponseHandler.get_body response
+      end
+
+      # Set request body in correct format
+      def set_body(body, headers, options)
+        {{.Pkg.name}}::HttpClient::RequestHandler.set_body body, headers, options
       end
 
     end
