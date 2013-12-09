@@ -38,8 +38,10 @@ module {{.Pkg.name}}
         end
 
         @client = Faraday.new @options[:base] do |conn|
-          conn.use {{.Pkg.name}}::HttpClient::AuthHandler, auth: auth
+          conn.use {{.Pkg.name}}::HttpClient::AuthHandler, auth
           conn.use {{.Pkg.name}}::HttpClient::ErrorHandler
+
+          conn.adapter Faraday.default_adapter
         end
       end
 

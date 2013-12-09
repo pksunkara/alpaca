@@ -14,8 +14,8 @@ module {{.Pkg.name}}
       URL_TOKEN = 3
 {{end}}
 
-      def initialize(app, options = {})
-        @auth = options[:auth]
+      def initialize(app, auth = {}, options = {})
+        @auth = auth
         super(app)
       end
 
@@ -55,25 +55,51 @@ module {{.Pkg.name}}
       # Basic Authorization with username and password
       def http_password(env)
         code = Base64.encode64 "#{@auth[:username]}:#{@auth[:password]}"
+
         env[:headers]['Authorization'] = "Basic #{code}"
+
+        return env
       end
 
       # Authorization with HTTP token
       def http_token(env)
         env[:headers]['Authorization'] = "token #{@auth[:http_token]}"
+
+        return env
       end
 {{if .Api.authorization.oauth}}
       # OAUTH2 Authorization with client secret
       def url_secret(env)
-        env[:params][:client_id] = @auth[:client_id]
-        env[:params][:client_secret] = @auth[:client_secret]
+        query = {
+          client_id: @auth[:client_id],
+          client_secret: @auth[:client_secret]
+        }
+
+        merge_query env, query
       end
 
       # OAUTH2 Authorization with access token
       def url_token(env)
-        env[:params][:access_token] = @auth[:access_token]
+        query = { access_token: @auth[:access_token] }
+
+        merge_query env, query
       end
 {{end}}
+      def query_params(url)
+        if url.query.nil? or url.query.empty?
+          {}
+        else
+          Faraday::Utils.parse_query url.query
+        end
+      end
+
+      def merge_query(env, query)
+        query = query.update query_params(env[:url])
+
+        env[:url].query = Faraday::Utils.build_query query
+
+        return env
+      end
     end
 
   end

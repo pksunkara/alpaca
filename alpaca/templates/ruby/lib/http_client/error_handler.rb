@@ -10,11 +10,11 @@ module {{.Pkg.name}}
       end
 
       def call(env)
-        @app.call(env).on_complete do
-          code = env[:status]
-          type = env[:response_headers]['content-type']
+        @app.call(env).on_complete do |env|
+          code = env[:response].status
+          type = env[:response].headers['content-type']
 
-          body = {{.Pkg.name}}::HttpClient::ResponseHandler.get_body env[:body]
+          body = {{.Pkg.name}}::HttpClient::ResponseHandler.get_body env[:response]
 
           case code
           when 500...599
@@ -30,7 +30,7 @@ module {{.Pkg.name}}
             # If JSON, a particular field is taken and used
             if type.include?('json') and body.is_a?(Hash)
               if body.has_key? '{{.Api.error.message}}'
-                message = body
+                message = body['{{.Api.error.message}}']
               else
                 message = "Unable to select error message from json returned by request responsible for error"
               end
