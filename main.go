@@ -16,10 +16,18 @@ func main() {
 	// Options for flags package
 	var opts struct {
 		Version bool `short:"v" long:"version" description:"Show version information"`
+
+		Langs alpaca.LanguageOptions `group:"Language Options"`
 	}
 
+	// Build the parser
+	parser := flags.NewParser(&opts, flags.Default)
+
+	// Set usage string
+	parser.Usage = "[options] <dir>"
+
 	// Parse the arguments
-	args, err := flags.Parse(&opts)
+	args, err := parser.Parse()
 
 	if err != nil {
 		os.Exit(0)
@@ -33,9 +41,9 @@ func main() {
 
 	// If no argument is given
 	if len(args) == 0 {
-		fmt.Println("Usage: alpaca <dir>")
+		parser.WriteHelp(os.Stdout)
 		os.Exit(0)
 	}
 
-	alpaca.WriteLibraries(args[0])
+	alpaca.WriteLibraries(args[0], &opts.Langs)
 }

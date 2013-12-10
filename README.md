@@ -39,7 +39,7 @@ All the following fields are required unless mentioned.
   "version": "0.1.0", // Version of the package
   "url": "https://bufferapp.com", // URL of the api
   "keywords": ["alpaca", "buffer", "api"], // Keywords for the package
-  "official": false, // Is the api official?
+  "official": false, // Are the api libraries official?
   "author": {
     "name": "Pavan Kumar Sunkara", // Name of the package author
     "email": "pavan.sss1991@gmail.com", // Email of the package author

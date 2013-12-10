@@ -9,6 +9,13 @@ import (
 	"strings"
 )
 
+type LanguageOptions struct {
+	Php    bool `long:"no-php" description:"Do not write php library"`
+	Python bool `long:"no-python" description:"Do not write python library"`
+	Ruby   bool `long:"no-ruby" description:"Do not write ruby library"`
+	Node   bool `long:"no-node" description:"Do not write node library"`
+}
+
 func ReadData(directory string) *langs.Data {
 	var pkg, api, doc map[string]interface{}
 
@@ -19,16 +26,27 @@ func ReadData(directory string) *langs.Data {
 	return &langs.Data{pkg, api, doc, make(map[string]interface{})}
 }
 
-func WriteLibraries(directory string) {
+func WriteLibraries(directory string, opts *LanguageOptions) {
 	data := ReadData(directory)
 	ModifyData(data)
 
 	langs.Init(HandleError, directory, "alpaca/templates")
 
-	langs.WriteNode(data)
-	langs.WritePhp(data)
-	langs.WritePython(data)
-	langs.WriteRuby(data)
+	if !opts.Php {
+		langs.WritePhp(data)
+	}
+
+	if !opts.Python {
+		langs.WritePython(data)
+	}
+
+	if !opts.Ruby {
+		langs.WriteRuby(data)
+	}
+
+	if !opts.Node {
+		langs.WriteNode(data)
+	}
 }
 
 func ModifyData(data *langs.Data) {
