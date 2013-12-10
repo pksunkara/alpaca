@@ -30,7 +30,7 @@ module {{.Pkg.name}}
 
         @headers = {}
 
-        @headers[:user_agent] = @options[:user_agent]
+        @headers['user-agent'] = @options[:user_agent]
 
         if @options.has_key? :headers
           @headers.update @options[:headers]
@@ -71,22 +71,17 @@ module {{.Pkg.name}}
       # - Creates the requests with give parameters
       # - Returns response body after parsing it into correct format
       def request(path, body, method, options)
-        headers = {}
-
         options = @options.merge options
 
-        if options.has_key? :headers
-          headers = options[:headers]
-          options.delete :headers
+        options[:headers] = @headers.merge(options[:headers] || {})
+        options[:body] = body
+
+        if method != 'get'
+          options[:body] = options[:body] || {}
+          options = set_body options
         end
 
-        headers = @headers.merge headers
-
-        options.delete :body
-
-        body, headers = set_body body, headers, options
-
-        response = create_request method, path, body, headers, options
+        response = create_request method, path, options
 
         body = get_body response
       end
@@ -94,7 +89,7 @@ module {{.Pkg.name}}
       # Creating a request with the given arguments
       #
       # If api_version is set, appends it immediately after host
-      def create_request(method, path, body, headers, options)
+      def create_request(method, path, options)
         version = options.has_key?(:api_version) ? "/#{options[:api_version]}" : ""
 {{if .Api.response.suffix}}
         # Adds a suffix (ex: ".html", ".json") to url
@@ -104,7 +99,11 @@ module {{.Pkg.name}}
         path = "#{version}#{path}"
 
         instance_eval <<-RUBY, __FILE__, __LINE__ + 1
-          @client.#{method} path, body, headers
+          @client.#{method} path do |req|
+            req.body = options[:body]
+            req.headers.update(options[:headers])
+            req.params.update(options[:query]) if options[:query]
+          end
         RUBY
       end
 
@@ -114,8 +113,8 @@ module {{.Pkg.name}}
       end
 
       # Set request body in correct format
-      def set_body(body, headers, options)
-        {{.Pkg.name}}::HttpClient::RequestHandler.set_body body, headers, options
+      def set_body(options)
+        {{.Pkg.name}}::HttpClient::RequestHandler.set_body options
       end
 
     end

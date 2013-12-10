@@ -93,14 +93,15 @@ client.HttpClient.prototype.request = function (path, body, method, options, cal
     }
   }
 
-  delete options['body'];
-
   var reqobj = {
     'url': path,
     'qs': options['query'] || {},
     'method': method,
     'headers': headers
   };
+
+  delete options['query'];
+  delete options['body'];
 
   reqobj = this.setBody(reqobj, body, options);
   reqobj = this.auth.set(reqobj);
