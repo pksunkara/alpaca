@@ -1,9 +1,9 @@
 package main
 
 import (
-	"./alpaca"
 	"fmt"
 	"github.com/jessevdk/go-flags"
+	"github.com/pksunkara/alpaca/alpaca"
 	"os"
 )
 

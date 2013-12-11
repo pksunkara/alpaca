@@ -6,6 +6,7 @@ func WritePython(data *Data) {
 
 	//name := data.Pkg["name"].(string)
 
+	RunTemplate("gitignore", ".gitignore", data)
 	RunTemplate("setup.py", "setup.py", data)
 }
 

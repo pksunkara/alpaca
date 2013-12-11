@@ -1,9 +1,9 @@
 package alpaca
 
 import (
-	"./langs"
 	"bitbucket.org/pkg/inflect"
 	"encoding/json"
+	"github.com/pksunkara/alpaca/alpaca/langs"
 	"os"
 	"path"
 	"strings"

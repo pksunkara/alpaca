@@ -10,6 +10,7 @@ func WritePhp(data *Data) {
 
 	name := data.Pkg["name"].(string)
 
+	RunTemplate("gitignore", ".gitignore", data)
 	RunTemplate("composer.json", "composer.json", data)
 
 	MakeDir("lib")
