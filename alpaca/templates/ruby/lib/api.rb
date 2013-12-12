@@ -1,5 +1,5 @@
 module {{.Pkg.name}}
-
+{{define "bodyorquery"}}{{if (eq (or (index . "method") "get") "get")}}query{{else}}body{{end}}{{end}}
   module Api
 
     # {{index .Doc .Api.active.name "desc"}}
@@ -17,7 +17,7 @@ module {{.Pkg.name}}
       #{{with $method := .}}{{call $data.Fnc.counter.start}}{{range (index $data.Api.class $data.Api.active.name $method "params")}}
       # {{.}} - {{index $data.Doc $data.Api.active.name $method "params" (call $data.Fnc.counter.value)}}{{end}}{{end}}
       def {{call $data.Fnc.underscore .}}({{call $data.Fnc.args.ruby (index $data.Api.class $data.Api.active.name .) "params" false}}options = {})
-        body = options.has_key?(:body) ? options[:body] : {}{{range (index $data.Api.class $data.Api.active.name . "params")}}
+        body = options.has_key?(:{{template "bodyorquery" (index $data.Api.class $data.Api.active.name .)}}) ? options[:{{template "bodyorquery" (index $data.Api.class $data.Api.active.name .)}}] : {}{{range (index $data.Api.class $data.Api.active.name . "params")}}
         body[:{{.}}] = {{.}}{{end}}
 
         @client.{{or (index $data.Api.class $data.Api.active.name . "method") "get"}} "{{call $data.Fnc.path.ruby (index $data.Api.class $data.Api.active.name . "path") $data.Api.active.args}}", body, options

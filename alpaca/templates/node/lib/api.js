@@ -1,4 +1,4 @@
-/**
+{{define "bodyorquery"}}{{if (eq (or (index . "method") "get") "get")}}query{{else}}body{{end}}{{end}}/**
  * {{index .Doc .Api.active.name "desc"}}
  *{{with $data := .}}{{call .Fnc.counter.start}}{{range .Api.active.args}}
  * @param {{.}} {{index $data.Doc $data.Api.active.name "args" (call $data.Fnc.counter.value)}}{{end}}{{end}}
@@ -22,7 +22,7 @@ var {{call .Fnc.camelize .Api.active.name}} = function({{call .Fnc.args.node (in
     options = {};
   }
 
-  var body = (options['body'] ? options['body'] : {});{{range (index $data.Api.class $data.Api.active.name . "params")}}
+  var body = (options['{{template "bodyorquery" (index $data.Api.class $data.Api.active.name .)}}'] ? options['{{template "bodyorquery" (index $data.Api.class $data.Api.active.name .)}}'] : {});{{range (index $data.Api.class $data.Api.active.name . "params")}}
   body['{{.}}'] = {{.}};{{end}}
 
   this.client.{{or (index $data.Api.class $data.Api.active.name . "method") "get"}}("{{call $data.Fnc.path.node (index $data.Api.class $data.Api.active.name . "path") $data.Api.active.args}}", body, options, function(err, body, code, headers) {
