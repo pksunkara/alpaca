@@ -23,12 +23,12 @@ func WriteNode(data *Data) {
 	RunTemplate("lib/error/client_error.js", "client_error.js", data)
 	MoveDir("..")
 
-	MakeDir("client")
-	RunTemplate("lib/client/index.js", "index.js", data)
-	RunTemplate("lib/client/auth_handler.js", "auth_handler.js", data)
-	RunTemplate("lib/client/error_handler.js", "error_handler.js", data)
-	RunTemplate("lib/client/request_handler.js", "request_handler.js", data)
-	RunTemplate("lib/client/response_handler.js", "response_handler.js", data)
+	MakeDir("http_client")
+	RunTemplate("lib/http_client/index.js", "index.js", data)
+	RunTemplate("lib/http_client/auth_handler.js", "auth_handler.js", data)
+	RunTemplate("lib/http_client/error_handler.js", "error_handler.js", data)
+	RunTemplate("lib/http_client/request_handler.js", "request_handler.js", data)
+	RunTemplate("lib/http_client/response_handler.js", "response_handler.js", data)
 	MoveDir("..")
 
 	MakeDir("api")

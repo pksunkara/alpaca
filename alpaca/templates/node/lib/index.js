@@ -1,4 +1,4 @@
-var client = require('./{{call .Fnc.camelizeDownFirst .Pkg.name}}/client');
+var client = require('./{{call .Fnc.camelizeDownFirst .Pkg.name}}/http_client');
 
 // Export module
 var {{call .Fnc.camelizeDownFirst .Pkg.name}} = module.exports;
