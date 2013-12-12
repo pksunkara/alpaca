@@ -47,18 +47,14 @@ func TestActiveClassInfo(t *testing.T) {
 func TestArgsFunctionMaker(t *testing.T) {
 	terst.Terst(t)
 
-	f := ArgsFunctionMaker("$", ", ").(func(interface{}, string, bool) string)
-	old := make(map[string]interface{})
+	f := ArgsFunctionMaker("$", ", ").(func(interface{}, bool) string)
 	args := make([]interface{}, 2)
 
 	args[0] = "id"
 	args[1] = "url"
 
-	old["args"] = args
-	old["method"] = "post"
-
-	terst.Is(f(old, "args", false), "$id, $url, ")
-	terst.Is(f(old, "args", true), "$id, $url")
+	terst.Is(f(args, false), "$id, $url, ")
+	terst.Is(f(args, true), "$id, $url")
 }
 
 func TestPathFunctionMaker(t *testing.T) {

@@ -3,7 +3,7 @@
  *{{with $data := .}}{{call .Fnc.counter.start}}{{range .Api.active.args}}
  * @param {{.}} {{index $data.Doc $data.Api.active.name "args" (call $data.Fnc.counter.value)}}{{end}}{{end}}
  */
-var {{call .Fnc.camelize .Api.active.name}} = function({{call .Fnc.args.node (index .Api.class .Api.active.name) "args" false}}client) {
+var {{call .Fnc.camelize .Api.active.name}} = function({{call .Fnc.args.node .Api.active.args false}}client) {
 {{range .Api.active.args}}  this.{{.}} = {{.}};
 {{end}}  this.client = client;
 
@@ -16,7 +16,7 @@ var {{call .Fnc.camelize .Api.active.name}} = function({{call .Fnc.args.node (in
  *{{with $method := .}}{{call $data.Fnc.counter.start}}{{range (index $data.Api.class $data.Api.active.name $method "params")}}
  * @param "{{.}}" {{index $data.Doc $data.Api.active.name $method "params" (call $data.Fnc.counter.value)}}{{end}}{{end}}
  */
-{{call $data.Fnc.camelize $data.Api.active.name}}.prototype.{{call $data.Fnc.camelizeDownFirst .}} = function ({{call $data.Fnc.args.node (index $data.Api.class $data.Api.active.name .) "params" false}}options, callback) {
+{{call $data.Fnc.camelize $data.Api.active.name}}.prototype.{{call $data.Fnc.camelizeDownFirst .}} = function ({{call $data.Fnc.args.node (index (index $data.Api.class $data.Api.active.name .) "params") false}}options, callback) {
   if (typeof options == "function") {
     callback = options;
     options = {};

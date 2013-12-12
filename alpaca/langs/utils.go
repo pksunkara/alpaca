@@ -47,8 +47,8 @@ func ActiveClassInfo(name string, class interface{}) map[string]interface{} {
 }
 
 func ArgsFunctionMaker(before, after string) interface{} {
-	return func(class interface{}, key string, last bool) string {
-		str, args := "", class.(map[string]interface{})[key]
+	return func(args interface{}, last bool) string {
+		str := ""
 
 		if args != nil {
 			for _, v := range ArrayInterfaceToString(args) {

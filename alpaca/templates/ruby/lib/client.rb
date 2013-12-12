@@ -14,8 +14,8 @@ module {{.Pkg.name}}
     # {{index $data.Doc . "desc"}}
     #{{with $class := .}}{{call $data.Fnc.counter.start}}{{range (index $data.Doc $class "args")}}
     # {{index $data.Api.class $class "args" (call $data.Fnc.counter.value)}} - {{.}}{{end}}{{end}}
-    def {{call $data.Fnc.underscore .}}({{call $data.Fnc.args.ruby (index $data.Api.class .) "args" true}})
-      {{$data.Pkg.name}}::Api::{{call $data.Fnc.camelize .}}.new {{call $data.Fnc.args.ruby (index $data.Api.class .) "args" false}}@http_client
+    def {{call $data.Fnc.underscore .}}({{call $data.Fnc.args.ruby (index $data.Api.class . "args") true}})
+      {{$data.Pkg.name}}::Api::{{call $data.Fnc.camelize .}}.new {{call $data.Fnc.args.ruby (index $data.Api.class . "args") false}}@http_client
     end
 {{end}}{{end}}
   end

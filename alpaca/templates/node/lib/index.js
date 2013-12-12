@@ -29,7 +29,7 @@ var Client = function(auth, options) {
  *{{with $class := .}}{{call $data.Fnc.counter.start}}{{range (index $data.Doc $class "args")}}
  * @param ${{index $data.Api.class $class "args" (call $data.Fnc.counter.value)}} {{.}}{{end}}{{end}}
  */
-Client.prototype.{{call $data.Fnc.camelizeDownFirst .}} = function ({{call $data.Fnc.args.node (index $data.Api.class .) "args" true}}) {
-    return new {{call $data.Fnc.camelizeDownFirst $data.Pkg.name}}.{{call $data.Fnc.camelize .}}({{call $data.Fnc.args.node (index $data.Api.class .) "args" false}}this.client);
+Client.prototype.{{call $data.Fnc.camelizeDownFirst .}} = function ({{call $data.Fnc.args.node (index $data.Api.class . "args") true}}) {
+    return new {{call $data.Fnc.camelizeDownFirst $data.Pkg.name}}.{{call $data.Fnc.camelize .}}({{call $data.Fnc.args.node (index $data.Api.class . "args") false}}this.client);
 };
 {{end}}{{end}}

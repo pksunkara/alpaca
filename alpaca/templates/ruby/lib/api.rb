@@ -7,7 +7,7 @@ module {{.Pkg.name}}
     # {{.}} - {{index $data.Doc $data.Api.active.name "args" (call $data.Fnc.counter.value)}}{{end}}{{end}}
     class {{call .Fnc.camelize .Api.active.name}}
 
-      def initialize({{call .Fnc.args.ruby (index .Api.class .Api.active.name) "args" false}}client)
+      def initialize({{call .Fnc.args.ruby .Api.active.args false}}client)
 {{range .Api.active.args}}        @{{.}} = {{.}}
 {{end}}        @client = client
       end
@@ -16,7 +16,7 @@ module {{.Pkg.name}}
       # '{{index $data.Api.class $data.Api.active.name . "path"}}' {{call $data.Fnc.upper (or (index $data.Api.class $data.Api.active.name . "method") "get")}}
       #{{with $method := .}}{{call $data.Fnc.counter.start}}{{range (index $data.Api.class $data.Api.active.name $method "params")}}
       # {{.}} - {{index $data.Doc $data.Api.active.name $method "params" (call $data.Fnc.counter.value)}}{{end}}{{end}}
-      def {{call $data.Fnc.underscore .}}({{call $data.Fnc.args.ruby (index $data.Api.class $data.Api.active.name .) "params" false}}options = {})
+      def {{call $data.Fnc.underscore .}}({{call $data.Fnc.args.ruby (index (index $data.Api.class $data.Api.active.name .) "params") false}}options = {})
         body = options.has_key?(:{{template "bodyorquery" (index $data.Api.class $data.Api.active.name .)}}) ? options[:{{template "bodyorquery" (index $data.Api.class $data.Api.active.name .)}}] : {}{{range (index $data.Api.class $data.Api.active.name . "params")}}
         body[:{{.}}] = {{.}}{{end}}
 
