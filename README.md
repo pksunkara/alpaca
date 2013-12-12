@@ -111,6 +111,12 @@ Supported response formats are `html`, `json`.
 
 The formats `html` are always true.
 
+### Authorization strategies
+
+Supported are `Basic`, `Oauth`
+
+The strategy `Basic` is always true.
+
 ## Contributors
 
 Here is a list of [Contributors](http://github.com/pksunkara/alpaca/contributors)

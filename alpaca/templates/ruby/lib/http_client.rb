@@ -28,9 +28,9 @@ module {{.Pkg.name}}
 
         @options.update options
 
-        @headers = {}
-
-        @headers['user-agent'] = @options[:user_agent]
+        @headers = {
+          'user-agent' => @options[:user_agent]
+        }
 
         if @options.has_key? :headers
           @headers.update @options[:headers]
