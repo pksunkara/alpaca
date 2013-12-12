@@ -114,20 +114,7 @@ class HttpClient
             throw new \RuntimeException($e->getMessage());
         }
 
-        $this->lastRequest  = $request;
-        $this->lastResponse = $response;
-
-        return $this->getBody($response);
-    }
-
-    public function getLastRequest()
-    {
-        return $this->lastRequest;
-    }
-
-    public function getLastResponse()
-    {
-        return $this->lastResponse;
+        return array('body' => $this->getBody($response), 'status' => $response->getStatusCode(), 'headers' => $response->getHeaders());
     }
 
     /**
@@ -146,22 +133,6 @@ class HttpClient
         $path    = $version.$path;
 
         return $this->client->createRequest($httpMethod, $path, $headers, $body, $options);
-    }
-
-    /**
-     * Get the status code for the latest response
-     */
-    public function status($code)
-    {
-        return ($this->lastResponse->getStatusCode() == $code);
-    }
-
-    /**
-     * Get headers for the latest response
-     */
-    public function headers()
-    {
-        return $this->lastResponse->getHeaders();
     }
 
     /**

@@ -103,7 +103,10 @@ client.HttpClient.prototype.request = function (path, body, method, options, cal
   delete options['query'];
   delete options['body'];
 
-  reqobj = this.setBody(reqobj, body, options);
+  if (method != "GET") {
+    reqobj = this.setBody(reqobj, body, options);
+  }
+
   reqobj = this.auth.set(reqobj);
 
   reqobj = this.createRequest(reqobj, options, function(err, response, body) {

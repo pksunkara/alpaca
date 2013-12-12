@@ -25,7 +25,7 @@ var {{call .Fnc.camelize .Api.active.name}} = function({{call .Fnc.args.node (in
   var body = (options['{{template "bodyorquery" (index $data.Api.class $data.Api.active.name .)}}'] ? options['{{template "bodyorquery" (index $data.Api.class $data.Api.active.name .)}}'] : {});{{range (index $data.Api.class $data.Api.active.name . "params")}}
   body['{{.}}'] = {{.}};{{end}}
 
-  this.client.{{or (index $data.Api.class $data.Api.active.name . "method") "get"}}("{{call $data.Fnc.path.node (index $data.Api.class $data.Api.active.name . "path") $data.Api.active.args}}", body, options, function(err, body, code, headers) {
+  this.client.{{or (index $data.Api.class $data.Api.active.name . "method") "get"}}("{{call $data.Fnc.path.node (index $data.Api.class $data.Api.active.name . "path") $data.Api.active.args}}", body, options, function(err, body, status, headers) {
     if (err) {
       return callback(err);
     }

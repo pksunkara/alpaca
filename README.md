@@ -129,7 +129,6 @@ __I accept pull requests and guarantee a reply back within a day__
 
 #### Api
 - Check returned status code
-- Output the headers too (somehow)
 - Special case for 204:true and 404:false
 
 #### General

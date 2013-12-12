@@ -84,6 +84,8 @@ module {{.Pkg.name}}
         response = create_request method, path, options
 
         body = get_body response
+
+        [body, response.status, response.headers]
       end
 
       # Creating a request with the given arguments
