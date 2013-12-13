@@ -15,18 +15,18 @@ class HttpClient():
 			auth = { 'access_token': auth }
 {{end}}
 		self.options = {
-			"base": "{{.Api.base}}",{{with .Api.version}}
-			"api_version": "{{.}}",{{end}}
-			"user_agent": "alpaca/0.1.0 (https://github.com/pksunkara/alpaca)"
+			'base': '{{.Api.base}}',{{with .Api.version}}
+			'api_version': '{{.}}',{{end}}
+			'user_agent': 'alpaca/0.1.0 (https://github.com/pksunkara/alpaca)'
 		}
 
 		self.options.update(options)
 
 		self.headers = {
-			"user-agent": self.options['user_agent']
+			'user-agent': self.options['user_agent']
 		}
 
-		if "headers" in self.options:
+		if 'headers' in self.options:
 			self.headers.update(self.options['headers'])
 			del self.options['headers']
 
@@ -34,19 +34,19 @@ class HttpClient():
 
 	def get(self, path, params={}, options={}):
 		options.update({ 'query': params })
-		return self.request(path, None, "get", options)
+		return self.request(path, None, 'get', options)
 
 	def post(self, path, body={}, options={}):
-		return self.request(path, body, "post", options)
+		return self.request(path, body, 'post', options)
 
 	def patch(self, path, body={}, options={}):
-		return self.request(path, body, "patch", options)
+		return self.request(path, body, 'patch', options)
 
 	def delete(self, path, body={}, options={}):
-		return self.request(path, body, "delete", options)
+		return self.request(path, body, 'delete', options)
 
 	def put(self, path, body={}, options={}):
-		return self.request(path, body, "put", options)
+		return self.request(path, body, 'put', options)
 
 	# Intermediate function which does three main things
 	#
@@ -59,13 +59,13 @@ class HttpClient():
 
 		kwargs['headers'] = copy.deepcopy(self.headers)
 
-		if "headers" in options:
+		if 'headers' in options:
 			kwargs['headers'].update(options['headers'])
 
 		kwargs['data'] = body
 		kwargs['allow_redirects'] = True
 
-		kwargs['params'] = kwargs['query'] if "query" in kwargs else {}
+		kwargs['params'] = kwargs['query'] if 'query' in kwargs else {}
 
 		if method != 'get':
 			kwargs = self.set_body(kwargs)
@@ -82,10 +82,10 @@ class HttpClient():
 	#
 	# If api_version is set, appends it immediately after host
 	def create_request(method, path, options):
-		version = '/' + options['api_version'] if "api_version" in options else ''
+		version = '/' + options['api_version'] if 'api_version' in options else ''
 {{if .Api.response.suffix}}
 		# Adds a suffix (ex: ".html", ".json") to url
-		suffix = options['response_type'] if "response_type" in options else "{{or .Api.response.formats.default "html"}}"
+		suffix = options['response_type'] if 'response_type' in options else '{{or .Api.response.formats.default "html"}}'
 		path = path + '.' + suffix
 {{end}}
 		path = options['base'] + version + path
