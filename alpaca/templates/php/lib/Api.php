@@ -33,7 +33,7 @@ class {{call .Fnc.camelize .Api.active.name}}
         $body = (isset($options['{{template "bodyorquery" (index $data.Api.class $data.Api.active.name .)}}']) ? $options['{{template "bodyorquery" (index $data.Api.class $data.Api.active.name .)}}'] : array());{{range (index $data.Api.class $data.Api.active.name . "params")}}
         $body['{{.}}'] = ${{.}};{{end}}
 
-        $response = $this->client->{{or (index $data.Api.class $data.Api.active.name . "method") "get"}}("{{call $data.Fnc.path.php (index $data.Api.class $data.Api.active.name . "path") $data.Api.active.args}}", $body, $options);
+        $response = $this->client->{{or (index $data.Api.class $data.Api.active.name . "method") "get"}}('{{call $data.Fnc.path.php (index $data.Api.class $data.Api.active.name . "path") $data.Api.active.args}}', $body, $options);
 
         return array('body' => $response['body'], 'headers' => $response['headers']);
     }

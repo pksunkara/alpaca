@@ -45,5 +45,5 @@ func FunctionsPhp(fnc map[string]interface{}) {
 	path := fnc["path"].(map[string]interface{})
 
 	args["php"] = ArgsFunctionMaker("$", ", ")
-	path["php"] = PathFunctionMaker("\".rawurlencode($$this->", ").\"")
+	path["php"] = PathFunctionMaker("'.rawurlencode($$this->", ").'")
 }

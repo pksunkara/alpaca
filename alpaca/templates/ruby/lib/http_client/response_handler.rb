@@ -6,11 +6,11 @@ module {{.Pkg.name}}
     class ResponseHandler
 
       def self.get_body(response)
-        type = response.headers['content-type']
+        type = response.headers["content-type"]
         body = response.body
 {{if .Api.response.formats.json}}
         # Response body is in JSON
-        if type.include? 'json'
+        if type.include? "json"
           body = JSON.parse body
         end
 {{end}}

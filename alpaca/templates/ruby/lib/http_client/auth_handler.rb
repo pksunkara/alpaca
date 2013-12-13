@@ -13,7 +13,6 @@ module {{.Pkg.name}}
       URL_SECRET = 2
       URL_TOKEN = 3
 {{end}}
-
       def initialize(app, auth = {}, options = {})
         @auth = auth
         super(app)
@@ -56,14 +55,14 @@ module {{.Pkg.name}}
       def http_password(env)
         code = Base64.encode64 "#{@auth[:username]}:#{@auth[:password]}"
 
-        env[:headers]['Authorization'] = "Basic #{code}"
+        env[:headers]["Authorization"] = "Basic #{code}"
 
         return env
       end
 
       # Authorization with HTTP token
       def http_token(env)
-        env[:headers]['Authorization'] = "token #{@auth[:http_token]}"
+        env[:headers]["Authorization"] = "token #{@auth[:http_token]}"
 
         return env
       end

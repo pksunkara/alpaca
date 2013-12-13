@@ -17,7 +17,7 @@ var {{call .Fnc.camelize .Api.active.name}} = function({{call .Fnc.args.node .Ap
  * @param "{{.}}" {{index $data.Doc $data.Api.active.name $method "params" (call $data.Fnc.counter.value)}}{{end}}{{end}}
  */
 {{call $data.Fnc.camelize $data.Api.active.name}}.prototype.{{call $data.Fnc.camelizeDownFirst .}} = function ({{call $data.Fnc.args.node (index (index $data.Api.class $data.Api.active.name .) "params") false}}options, callback) {
-  if (typeof options == "function") {
+  if (typeof options == 'function') {
     callback = options;
     options = {};
   }
@@ -25,7 +25,7 @@ var {{call .Fnc.camelize .Api.active.name}} = function({{call .Fnc.args.node .Ap
   var body = (options['{{template "bodyorquery" (index $data.Api.class $data.Api.active.name .)}}'] ? options['{{template "bodyorquery" (index $data.Api.class $data.Api.active.name .)}}'] : {});{{range (index $data.Api.class $data.Api.active.name . "params")}}
   body['{{.}}'] = {{.}};{{end}}
 
-  this.client.{{or (index $data.Api.class $data.Api.active.name . "method") "get"}}("{{call $data.Fnc.path.node (index $data.Api.class $data.Api.active.name . "path") $data.Api.active.args}}", body, options, function(err, body, status, headers) {
+  this.client.{{or (index $data.Api.class $data.Api.active.name . "method") "get"}}('{{call $data.Fnc.path.node (index $data.Api.class $data.Api.active.name . "path") $data.Api.active.args}}', body, options, function(err, body, status, headers) {
     if (err) {
       return callback(err);
     }

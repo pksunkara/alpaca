@@ -29,7 +29,7 @@ class ErrorHandler
 
         if ($response->isClientError()) {
             // If HTML, whole body is taken
-            if (gettype($body) == "string") {
+            if (gettype($body) == 'string') {
                 $message = $body;
             }
 {{if .Api.response.formats.json}}
@@ -38,12 +38,12 @@ class ErrorHandler
                 if (isset($body['{{.Api.error.message}}'])) {
                     $message = $body['{{.Api.error.message}}'];
                 } else {
-                    $message = "Unable to select error message from json returned by request responsible for error";
+                    $message = 'Unable to select error message from json returned by request responsible for error';
                 }
             }
 {{end}}
             if (empty($message)) {
-                $message = "Unable to understand the content type of response returned by request responsible for error";
+                $message = 'Unable to understand the content type of response returned by request responsible for error';
             }
 
             throw new ClientException($message, $code);

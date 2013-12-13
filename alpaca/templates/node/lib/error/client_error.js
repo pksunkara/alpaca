@@ -1,4 +1,4 @@
-var util = require("util");
+var util = require('util');
 
 /**
  * ClientError is used when the api returns an error

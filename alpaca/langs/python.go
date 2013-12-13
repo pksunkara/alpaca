@@ -43,5 +43,5 @@ func FunctionsPython(fnc map[string]interface{}) {
 	path := fnc["path"].(map[string]interface{})
 
 	args["python"] = ArgsFunctionMaker("", ", ")
-	path["python"] = PathFunctionMaker("\" + self.", " + \"")
+	path["python"] = PathFunctionMaker("' + self.", " + '")
 }

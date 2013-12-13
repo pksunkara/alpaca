@@ -40,19 +40,19 @@ Auth.prototype.set = function (request) {
 
   switch (this.getAuthType()) {
     case this.HTTP_PASSWORD:
-      request = this.http_password(request);
+      request = this.httpPassword(request);
       break;
 
     case this.HTTP_TOKEN:
-      request = this.http_token(request);
+      request = this.httpToken(request);
       break;
 {{if .Api.authorization.oauth}}
     case this.URL_SECRET:
-      request = this.url_secret(request);
+      request = this.urlSecret(request);
       break;
 
     case this.URL_TOKEN:
-      request = this.url_token(request);
+      request = this.urlToken(request);
       break;
 {{end}}
     default:
@@ -65,7 +65,7 @@ Auth.prototype.set = function (request) {
 /**
  * Basic Authorization with username and password
  */
-Auth.prototype.http_password = function(request) {
+Auth.prototype.httpPassword = function(request) {
   request['auth'] = this.auth;
 
   return request;
@@ -74,7 +74,7 @@ Auth.prototype.http_password = function(request) {
 /**
  * Authorization with HTTP token
  */
-Auth.prototype.http_token = function(request) {
+Auth.prototype.httpToken = function(request) {
   request['headers']['Authorization'] = 'token ' + this.auth['http_token'];
 
   return request;
@@ -83,7 +83,7 @@ Auth.prototype.http_token = function(request) {
 /**
  * OAUTH2 Authorization with client secret
  */
-Auth.prototype.url_secret = function(request) {
+Auth.prototype.urlSecret = function(request) {
   request['qs']['client_id'] = this.auth['client_id'];
   request['qs']['client_id'] = this.auth['client_secret'];
 
@@ -93,7 +93,7 @@ Auth.prototype.url_secret = function(request) {
 /**
  * OAUTH2 Authorization with access token
  */
-Auth.prototype.url_token = function(request) {
+Auth.prototype.urlToken = function(request) {
   request['qs']['access_token'] = this.auth['access_token'];
 
   return request;

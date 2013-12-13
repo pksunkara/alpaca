@@ -29,7 +29,7 @@ module {{.Pkg.name}}
         @options.update options
 
         @headers = {
-          'user-agent' => @options[:user_agent]
+          "user-agent" => @options[:user_agent]
         }
 
         if @options.has_key? :headers
@@ -76,7 +76,7 @@ module {{.Pkg.name}}
         options[:headers] = @headers.merge(options[:headers] || {})
         options[:body] = body
 
-        if method != 'get'
+        if method != "get"
           options[:body] = options[:body] || {}
           options = set_body options
         end

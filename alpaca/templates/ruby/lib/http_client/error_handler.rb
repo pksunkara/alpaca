@@ -12,7 +12,7 @@ module {{.Pkg.name}}
       def call(env)
         @app.call(env).on_complete do |env|
           code = env[:response].status
-          type = env[:response].headers['content-type']
+          type = env[:response].headers["content-type"]
 
           body = {{.Pkg.name}}::HttpClient::ResponseHandler.get_body env[:response]
 
@@ -28,15 +28,15 @@ module {{.Pkg.name}}
             end
 {{if .Api.response.formats.json}}
             # If JSON, a particular field is taken and used
-            if type.include?('json') and body.is_a?(Hash)
-              if body.has_key? '{{.Api.error.message}}'
-                message = body['{{.Api.error.message}}']
+            if type.include?("json") and body.is_a?(Hash)
+              if body.has_key? "{{.Api.error.message}}"
+                message = body["{{.Api.error.message}}"]
               else
                 message = "Unable to select error message from json returned by request responsible for error"
               end
             end
 {{end}}
-            if message == ''
+            if message == ""
               message = "Unable to understand the content type of response returned by request responsible for error"
             end
 

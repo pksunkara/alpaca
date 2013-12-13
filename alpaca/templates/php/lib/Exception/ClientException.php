@@ -8,4 +8,11 @@ namespace {{.Pkg.name}}\Exception;
 class ClientException extends \ErrorException implements ExceptionInterface
 {
 
+    public $code = null;
+
+    public function __construct($message, $code) {
+        $this->code = $code;
+        parent::__construct($message);
+    }
+
 }

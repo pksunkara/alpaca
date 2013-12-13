@@ -46,19 +46,19 @@ class AuthHandler
 
         switch ($this->getAuthType()) {
             case self::HTTP_PASSWORD:
-                $this->http_password($event);
+                $this->httpPassword($event);
                 break;
 
             case self::HTTP_TOKEN:
-                $this->http_token($event);
+                $this->httpToken($event);
                 break;
 {{if .Api.authorization.oauth}}
             case self::URL_SECRET:
-                $this->url_secret($event);
+                $this->urlSecret($event);
                 break;
 
             case self::URL_TOKEN:
-                $this->url_token($event);
+                $this->urlToken($event);
                 break;
 {{end}}
             default:
@@ -70,7 +70,7 @@ class AuthHandler
     /**
      * Basic Authorization with username and password
      */
-    public function http_password(Event $event)
+    public function httpPassword(Event $event)
     {
         $event['request']->setHeader('Authorization', sprintf('Basic %s', base64_encode($this->auth['username'] . ':' . $this->auth['password'])));
     }
@@ -78,7 +78,7 @@ class AuthHandler
     /**
      * Authorization with HTTP token
      */
-    public function http_token(Event $event)
+    public function httpToken(Event $event)
     {
         $event['request']->setHeader('Authorization', sprintf('token %s', $this->auth['http_token']));
     }
@@ -86,7 +86,7 @@ class AuthHandler
     /**
      * OAUTH2 Authorization with client secret
      */
-    public function url_secret(Event $event)
+    public function urlSecret(Event $event)
     {
         $query = $event['request']->getQuery();
 
@@ -97,7 +97,7 @@ class AuthHandler
     /**
      * OAUTH2 Authorization with access token
      */
-    public function url_token(Event $event)
+    public function urlToken(Event $event)
     {
         $query = $event['request']->getQuery();
 

@@ -1,26 +1,26 @@
-var request = require("request");
+var request = require('request');
 
 var client = module.exports;
 
-client.AuthHandler = require("./auth_handler");
-client.ErrorHandler = require("./error_handler");
+client.AuthHandler = require('./auth_handler');
+client.ErrorHandler = require('./error_handler');
 
-client.RequestHandler = require("./request_handler");
-client.ResponseHandler = require("./response_handler");
+client.RequestHandler = require('./request_handler');
+client.ResponseHandler = require('./response_handler');
 
 /**
  * Main HttpClient which is used by Api classes
  */
 client.HttpClient = function (auth, options) {
 {{if .Api.authorization.oauth}}
-  if (typeof auth == "string") {
-    auth = { "access_token": auth };
+  if (typeof auth == 'string') {
+    auth = { 'access_token': auth };
   }
 {{end}}
   this.options = {
-    "base": "{{.Api.base}}",{{with .Api.version}}
-    "api_version": "{{.}}",{{end}}
-    "user_agent": "alpaca/0.1.0 (https://github.com/pksunkara/alpaca)"
+    'base': '{{.Api.base}}',{{with .Api.version}}
+    'api_version': '{{.}}',{{end}}
+    'user_agent': 'alpaca/0.1.0 (https://github.com/pksunkara/alpaca)'
   };
 
   for (var key in options) {
@@ -28,7 +28,7 @@ client.HttpClient = function (auth, options) {
   }
 
   this.headers = {
-    "User-Agent": this.options['user_agent']
+    'User-Agent': this.options['user_agent']
   };
 
   if (this.options['headers']) {
@@ -103,7 +103,7 @@ client.HttpClient.prototype.request = function (path, body, method, options, cal
   delete options['query'];
   delete options['body'];
 
-  if (method != "GET") {
+  if (method != 'GET') {
     reqobj = this.setBody(reqobj, body, options);
   }
 
@@ -139,7 +139,7 @@ client.HttpClient.prototype.createRequest = function (reqobj, options, callback)
   var version = (options['api_version'] ? '/' + options['api_version'] : '');
 {{if .Api.response.suffix}}
   // Adds a suffix (ex: ".html", ".json") to url
-  var suffix = (options['response_type'] ? options['response_type'] : "{{or .Api.response.formats.default "html"}}");
+  var suffix = (options['response_type'] ? options['response_type'] : '{{or .Api.response.formats.default "html"}}');
   reqobj['url'] = reqobj['url'] + '.' + suffix;
 {{end}}
   reqobj['url'] = options['base'] + version + reqobj['url'];
