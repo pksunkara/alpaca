@@ -1,2 +1,2 @@
-{{with $data := .}}{{range .Api.classes}}from {{call $data.Fnc.underscore .}} import {{call $data.Fnc.camelize .}}
-{{end}}{{end}}
+# Import all the classes into api module{{with $data := .}}{{range .Api.classes}}
+import {{call $data.Fnc.underscore .}}{{end}}{{end}}
