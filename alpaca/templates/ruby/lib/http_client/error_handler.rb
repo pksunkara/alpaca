@@ -14,12 +14,11 @@ module {{.Pkg.name}}
           code = env[:response].status
           type = env[:response].headers["content-type"]
 
-          body = {{.Pkg.name}}::HttpClient::ResponseHandler.get_body env[:response]
-
           case code
           when 500...599
             raise {{.Pkg.name}}::Error::ClientError.new "Error #{code}", code
           when 400...499
+            body = {{.Pkg.name}}::HttpClient::ResponseHandler.get_body env[:response]
             message = ""
 
             # If HTML, whole body is taken

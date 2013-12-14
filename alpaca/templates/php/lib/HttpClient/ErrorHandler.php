@@ -21,13 +21,13 @@ class ErrorHandler
         $message = null;
         $code = $response->getStatusCode();
 
-        $body = ResponseHandler::getBody($response);
-
         if ($response->isServerError()) {
             throw new ClientException('Error '.$code, $code);
         }
 
         if ($response->isClientError()) {
+            $body = ResponseHandler::getBody($response);
+
             // If HTML, whole body is taken
             if (gettype($body) == 'string') {
                 $message = $body;
