@@ -48,6 +48,8 @@ module {{.Pkg.name}}
           return URL_SECRET
         elsif @auth.has_key?(:access_token)
           return URL_TOKEN{{end}}
+        else
+          return -1
         end
       end
 

@@ -25,7 +25,9 @@ Auth.prototype.getAuthType = function () {
     return this.URL_SECRET;
   } else if (this.auth['access_token']) {
     return this.URL_TOKEN;
-  }{{end}}
+  }{{end}} else {
+    return -1;
+  }
 };
 
 /**

@@ -35,7 +35,9 @@ class AuthHandler
             return self::URL_SECRET;
         } else if (isset($this->auth['access_token'])) {
             return self::URL_TOKEN;
-        }{{end}}
+        }{{end}} else {
+            return -1;
+        }
     }
 
     public function onRequestBeforeSend(Event $event)
