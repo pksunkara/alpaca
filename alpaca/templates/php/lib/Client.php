@@ -20,7 +20,7 @@ class Client
      */
     public function {{call $data.Fnc.camelizeDownFirst .}}({{call $data.Fnc.args.php (index $data.Api.class . "args") true}})
     {
-        return new Api\{{call $data.Fnc.camelize .}}({{call $data.Fnc.args.php (index $data.Api.class . "args") false}}$this->httpClient);
+        return new Api\{{call $data.Fnc.camelize .}}({{call $data.Fnc.args.php (index $data.Api.class . "args")}}$this->httpClient);
     }
 {{end}}{{end}}
 }

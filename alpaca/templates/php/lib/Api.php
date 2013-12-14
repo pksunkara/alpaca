@@ -16,7 +16,7 @@ class {{call .Fnc.camelize .Api.active.name}}
 {{range .Api.active.args}}    private ${{.}};
 {{end}}    private $client;
 
-    public function __construct({{call .Fnc.args.php .Api.active.args false}}HttpClient $client)
+    public function __construct({{call .Fnc.args.php .Api.active.args}}HttpClient $client)
     {
 {{range .Api.active.args}}        $this->{{.}} = ${{.}};
 {{end}}        $this->client = $client;
@@ -28,7 +28,7 @@ class {{call .Fnc.camelize .Api.active.name}}
      *{{with $method := .}}{{call $data.Fnc.counter.start}}{{range (index $data.Api.class $data.Api.active.name $method "params")}}
      * @param ${{.}} {{index $data.Doc $data.Api.active.name $method "params" (call $data.Fnc.counter.value)}}{{end}}{{end}}
      */
-    public function {{call $data.Fnc.camelizeDownFirst .}}({{call $data.Fnc.args.php (index (index $data.Api.class $data.Api.active.name .) "params") false}}array $options = array())
+    public function {{call $data.Fnc.camelizeDownFirst .}}({{call $data.Fnc.args.php (index (index $data.Api.class $data.Api.active.name .) "params")}}array $options = array())
     {
         $body = (isset($options['{{template "bodyorquery" (index $data.Api.class $data.Api.active.name .)}}']) ? $options['{{template "bodyorquery" (index $data.Api.class $data.Api.active.name .)}}'] : array());{{range (index $data.Api.class $data.Api.active.name . "params")}}
         $body['{{.}}'] = ${{.}};{{end}}

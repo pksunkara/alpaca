@@ -47,15 +47,20 @@ func ActiveClassInfo(name string, class interface{}) map[string]interface{} {
 }
 
 func ArgsFunctionMaker(before, after string) interface{} {
-	return func(args interface{}, last bool) string {
+	return func(args interface{}, options ...bool) string {
 		str := ""
 
-		if args != nil {
+		if args != nil && len(args.([]interface{})) > 0 {
 			for _, v := range ArrayInterfaceToString(args) {
 				str += before + v + after
 			}
-			if last {
+
+			if len(options) > 0 && options[0] {
 				str = str[0 : len(str)-len(after)]
+			}
+
+			if len(options) > 1 && options[1] {
+				str = after + str
 			}
 		}
 

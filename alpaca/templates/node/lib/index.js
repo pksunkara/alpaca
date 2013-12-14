@@ -19,7 +19,7 @@ var {{call .Fnc.camelizeDownFirst .Pkg.name}} = module.exports;
  * Main client for the module
  */
 var Client = function(auth, options) {
-  this.client = new client.HttpClient(auth, options);
+  this.httpClient = new client.HttpClient(auth, options);
 
   return this;
 };
@@ -30,6 +30,6 @@ var Client = function(auth, options) {
  * @param ${{index $data.Api.class $class "args" (call $data.Fnc.counter.value)}} {{.}}{{end}}{{end}}
  */
 Client.prototype.{{call $data.Fnc.camelizeDownFirst .}} = function ({{call $data.Fnc.args.node (index $data.Api.class . "args") true}}) {
-    return new {{call $data.Fnc.camelizeDownFirst $data.Pkg.name}}.{{call $data.Fnc.camelize .}}({{call $data.Fnc.args.node (index $data.Api.class . "args") false}}this.client);
+    return new {{call $data.Fnc.camelizeDownFirst $data.Pkg.name}}.{{call $data.Fnc.camelize .}}({{call $data.Fnc.args.node (index $data.Api.class . "args")}}this.httpClient);
 };
 {{end}}{{end}}
