@@ -36,7 +36,7 @@ func WriteRuby(data *Data) {
 
 	for k, v := range data.Api["class"].(map[string]interface{}) {
 		data.Api["active"] = ActiveClassInfo(k, v)
-		RunTemplate("lib/api.rb", inflect.Underscore(k)+".rb", data)
+		RunTemplate("lib/api/api.rb", inflect.Underscore(k)+".rb", data)
 		delete(data.Api, "active")
 	}
 }

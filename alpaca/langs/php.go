@@ -35,7 +35,7 @@ func WritePhp(data *Data) {
 
 	for k, v := range data.Api["class"].(map[string]interface{}) {
 		data.Api["active"] = ActiveClassInfo(k, v)
-		RunTemplate("lib/Api.php", inflect.Camelize(k)+".php", data)
+		RunTemplate("lib/Api/Api.php", inflect.Camelize(k)+".php", data)
 		delete(data.Api, "active")
 	}
 }

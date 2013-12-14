@@ -1,7 +1,7 @@
 from http_client import HttpClient
 
 # Assign all the api classes{{with $data := .}}{{range .Api.classes}}
-from api.{{call $data.Fnc.underscore .}} import {{call $data.Fnc.camelize .}}{{end}}{{end}}
+from api import {{call $data.Fnc.camelize .}}{{end}}{{end}}
 
 class Client():
 

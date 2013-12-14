@@ -30,10 +30,11 @@ func WritePython(data *Data) {
 	MoveDir("..")
 
 	MakeDir("api")
+	RunTemplate("lib/api/__init__.py", "__init__.py", data)
 
 	for k, v := range data.Api["class"].(map[string]interface{}) {
 		data.Api["active"] = ActiveClassInfo(k, v)
-		RunTemplate("lib/api.py", inflect.Underscore(k)+".py", data)
+		RunTemplate("lib/api/api.py", inflect.Underscore(k)+".py", data)
 		delete(data.Api, "active")
 	}
 }

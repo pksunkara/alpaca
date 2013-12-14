@@ -35,7 +35,7 @@ func WriteNode(data *Data) {
 
 	for k, v := range data.Api["class"].(map[string]interface{}) {
 		data.Api["active"] = ActiveClassInfo(k, v)
-		RunTemplate("lib/api.js", inflect.CamelizeDownFirst(k)+".js", data)
+		RunTemplate("lib/api/api.js", inflect.CamelizeDownFirst(k)+".js", data)
 		delete(data.Api, "active")
 	}
 }
