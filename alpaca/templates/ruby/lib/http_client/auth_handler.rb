@@ -6,10 +6,11 @@ module {{.Pkg.name}}
 
     # AuthHandler takes care of devising the auth type and using it
     class AuthHandler < Faraday::Middleware
-
+{{if .Api.authorization.basic}}
       HTTP_PASSWORD = 0
-      HTTP_TOKEN = 1
-{{if .Api.authorization.oauth}}
+{{end}}{{if .Api.authorization.header}}
+      HTTP_HEADER = 1
+{{end}}{{if .Api.authorization.oauth}}
       URL_SECRET = 2
       URL_TOKEN = 3
 {{end}}
@@ -20,17 +21,30 @@ module {{.Pkg.name}}
 
       def call(env)
         if !@auth.empty?
-          case get_auth_type
-
-          when HTTP_PASSWORD
+          auth = get_auth_type
+          flag = false
+{{if .Api.authorization.basic}}
+          if auth == HTTP_PASSWORD
             env = http_password env
-          when HTTP_TOKEN
-            env = http_token env{{if .Api.authorization.oauth}}
-          when URL_SECRET
+            flag = true
+          end
+{{end}}{{if .Api.authorization.header}}
+          if auth == HTTP_HEADER
+            env = http_header env
+            flag = true
+          end
+{{end}}{{if .Api.authorization.oauth}}
+          if auth == URL_SECRET
             env = url_secret env
-          when URL_TOKEN
-            env = url_token env{{end}}
-          else
+            flag = true
+          end
+
+          if auth == URL_TOKEN
+            env = url_token env
+            flag = true
+          end
+{{end}}
+          if !flag
             raise StandardError.new "Unable to calculate authorization method. Please check"
           end
         end
@@ -40,19 +54,26 @@ module {{.Pkg.name}}
 
       # Calculating the Authentication Type
       def get_auth_type()
+{{if .Api.authorization.basic}}
         if @auth.has_key?(:username) and @auth.has_key?(:password)
           return HTTP_PASSWORD
-        elsif @auth.has_key?(:http_token)
-          return HTTP_TOKEN{{if .Api.authorization.oauth}}
-        elsif @auth.has_key?(:client_id) and @auth.has_key?(:client_secret)
-          return URL_SECRET
-        elsif @auth.has_key?(:access_token)
-          return URL_TOKEN{{end}}
-        else
-          return -1
         end
-      end
+{{end}}{{if .Api.authorization.header}}
+        if @auth.has_key?(:http_header)
+          return HTTP_HEADER
+        end
+{{end}}{{if .Api.authorization.oauth}}
+        if @auth.has_key?(:client_id) and @auth.has_key?(:client_secret)
+          return URL_SECRET
+        end
 
+        if @auth.has_key?(:access_token)
+          return URL_TOKEN
+        end
+{{end}}
+        return -1
+      end
+{{if .Api.authorization.basic}}
       # Basic Authorization with username and password
       def http_password(env)
         code = Base64.encode64 "#{@auth[:username]}:#{@auth[:password]}"
@@ -61,14 +82,14 @@ module {{.Pkg.name}}
 
         return env
       end
-
-      # Authorization with HTTP token
-      def http_token(env)
-        env[:headers]["Authorization"] = "token #{@auth[:http_token]}"
+{{end}}{{if .Api.authorization.header}}
+      # Authorization with HTTP header
+      def http_header(env)
+        env[:headers]["Authorization"] = "token #{@auth[:http_header]}"
 
         return env
       end
-{{if .Api.authorization.oauth}}
+{{end}}{{if .Api.authorization.oauth}}
       # OAUTH2 Authorization with client secret
       def url_secret(env)
         query = {

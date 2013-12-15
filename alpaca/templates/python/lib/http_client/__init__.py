@@ -13,7 +13,10 @@ class HttpClient():
 {{if .Api.authorization.oauth}}
 		if isinstance(auth, str):
 			auth = { 'access_token': auth }
-{{end}}
+{{else}}{{if .Api.authorization.header}}
+		if isinstance(auth, str):
+			auth = { 'http_header': auth }
+{{end}}{{end}}
 		self.options = {
 			'base': '{{.Api.base}}',{{with .Api.version}}
 			'api_version': '{{.}}',{{end}}

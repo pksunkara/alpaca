@@ -19,7 +19,11 @@ module {{.Pkg.name}}
         if auth.is_a? String
           auth = { access_token: auth }
         end
-{{end}}
+{{else}}{{if .Api.authorization.header}}
+        if auth.is_a? String
+          auth = { http_header: auth }
+        end
+{{end}}{{end}}
         @options = {
           base: "{{.Api.base}}",{{with .Api.version}}
           api_version: "{{.}}",{{end}}

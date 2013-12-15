@@ -16,7 +16,11 @@ client.HttpClient = function (auth, options) {
   if (typeof auth == 'string') {
     auth = { 'access_token': auth };
   }
-{{end}}
+{{else}}{{if .Api.authorization.header}}
+  if (typeof auth == 'string') {
+    auth = { 'http_header': auth };
+  }
+{{end}}{{end}}
   this.options = {
     'base': '{{.Api.base}}',{{with .Api.version}}
     'api_version': '{{.}}',{{end}}

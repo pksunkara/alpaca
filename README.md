@@ -12,7 +12,7 @@ You are planning to build an API for your website and develop API libraries? _Th
 
 ---
 
-You define your API, **alpaca** builds the API libraries along with the documentation. All you have to do is publishing them to their respective package managers.
+You define your API, **alpaca** builds the API libraries along with their documentation. All you have to do is publishing them to their respective package managers.
 
 Join us at [gitter](https://gitter.im/pksunkara/alpaca) if you need any help.
 
@@ -45,7 +45,7 @@ All the following fields are required unless mentioned.
     "email": "pavan.sss1991@gmail.com", // Email of the package author
     "url": "http://github.com/pksunkara" // URL of the package author
   },
-  "git": {
+  "git": { // Used in the package definition
     "site": "github.com", // Name of the git website
     "user": "alpaca-api", // Username of the git website
     "name": "buffer" // Namespace of the git repositories
@@ -69,6 +69,8 @@ All the following fields are required unless mentioned.
   "base": "https://api.bufferapp.com", // Base URL of the api
   "version": "1", // Default version for the api (https://api.example.com{/version}/users) [optional]
   "authorization": { // Authorization strategies
+    "basic" : false, // Basic authentication [optional] (default: false)
+    "header": false, // Token in authorization header [optional] (default: false)
     "oauth" : true // OAUTH authorization [optional] (default: false)
   },
   "request": { // Settings for requests to the api
@@ -109,13 +111,11 @@ The formats `raw` and `form` are always true.
 
 Supported response formats are `html`, `json`.
 
-The formats `html` are always true.
+The format `html` is always true.
 
 ### Authorization strategies
 
-Supported are `Basic`, `Oauth`
-
-The strategy `Basic` is always true.
+Supported are `basic`, `header`, `oauth`
 
 ## Contributors
 
@@ -123,7 +123,7 @@ Here is a list of [Contributors](http://github.com/pksunkara/alpaca/contributors
 
 __I accept pull requests and guarantee a reply back within a day__
 
-## TODO
+### TODO
 
 #### Responses
 - Add support for XML
@@ -149,7 +149,7 @@ __I accept pull requests and guarantee a reply back within a day__
 - Align @param descriptions
 
 #### Languages
-- Support Java, Perl, Clojure & Go
+- Support Java, Go, Perl, Clojure, Scala, Obj-C
 - Build API docs (Resulting in bloated definitions?)
 - Build cli tool for APIs (bash? python? go?)
 

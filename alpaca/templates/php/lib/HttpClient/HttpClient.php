@@ -29,7 +29,11 @@ class HttpClient
         if (gettype($auth) == 'string') {
             $auth = array('access_token' => $auth);
         }
-{{end}}
+{{else}}{{if .Api.authorization.header}}
+        if (gettype($auth) == 'string') {
+            $auth = array('http_header' => $auth);
+        }
+{{end}}{{end}}
         $this->options = array_merge($this->options, $options);
 
         $this->headers = array(

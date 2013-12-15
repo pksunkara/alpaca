@@ -2,6 +2,8 @@
 	"base": "https://api.bufferapp.com",
 	"version": "1",
 	"authorization": {
+		"basic" : false,
+		"header": false,
 		"oauth" : true
 	},
 	"request": {

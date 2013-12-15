@@ -3,10 +3,11 @@
  */
 var Auth = function(auth) {
   this.auth = auth;
-
+{{if .Api.authorization.basic}}
   this.HTTP_PASSWORD = 0;
-  this.HTTP_TOKEN = 1;
-{{if .Api.authorization.oauth}}
+{{end}}{{if .Api.authorization.header}}
+  this.HTTP_HEADER = 1;
+{{end}}{{if .Api.authorization.oauth}}
   this.URL_SECRET = 2;
   this.URL_TOKEN = 3;
 {{end}}
@@ -17,17 +18,24 @@ var Auth = function(auth) {
  * Calculating the type of authentication
  */
 Auth.prototype.getAuthType = function () {
+{{if .Api.authorization.basic}}
   if (this.auth['username'] && this.auth['password']) {
     return this.HTTP_PASSWORD;
-  } else if (this.auth['http_token']) {
-    return this.HTTP_TOKEN;
-  }{{if .Api.authorization.oauth}} else if (this.auth['client_id'] && this.auth['client_secret']) {
-    return this.URL_SECRET;
-  } else if (this.auth['access_token']) {
-    return this.URL_TOKEN;
-  }{{end}} else {
-    return -1;
   }
+{{end}}{{if .Api.authorization.header}}
+  if (this.auth['http_header']) {
+    return this.HTTP_HEADER;
+  }
+{{end}}{{if .Api.authorization.oauth}}
+  if (this.auth['client_id'] && this.auth['client_secret']) {
+    return this.URL_SECRET;
+  }
+
+  if (this.auth['access_token']) {
+    return this.URL_TOKEN;
+  }
+{{end}}
+  return -1;
 };
 
 /**
@@ -40,30 +48,35 @@ Auth.prototype.set = function (request) {
     return request;
   }
 
-  switch (this.getAuthType()) {
-    case this.HTTP_PASSWORD:
-      request = this.httpPassword(request);
-      break;
+  var auth = this.getAuthType(), flag = false;
+{{if .Api.authorization.basic}}
+  if (auth == this.HTTP_PASSWORD) {
+    request = this.httpPassword(request);
+    flag = true;
+  }
+{{end}}{{if .Api.authorization.header}}
+  if (auth == this.HTTP_HEADER) {
+    request = this.httpHeader(request);
+    flag = true;
+  }
+{{end}}{{if .Api.authorization.oauth}}
+  if (auth == this.URL_SECRET) {
+    request = this.urlSecret(request);
+    flag = true;
+  }
 
-    case this.HTTP_TOKEN:
-      request = this.httpToken(request);
-      break;
-{{if .Api.authorization.oauth}}
-    case this.URL_SECRET:
-      request = this.urlSecret(request);
-      break;
-
-    case this.URL_TOKEN:
-      request = this.urlToken(request);
-      break;
+  if (auth == this.URL_TOKEN) {
+    request = this.urlToken(request);
+    flag = true;
+  }
 {{end}}
-    default:
+  if (!flag) {
       throw new Error('Unable to calculate authorization method. Please check.');
   }
 
   return request;
 };
-
+{{if .Api.authorization.basic}}
 /**
  * Basic Authorization with username and password
  */
@@ -72,16 +85,16 @@ Auth.prototype.httpPassword = function(request) {
 
   return request;
 };
-
+{{end}}{{if .Api.authorization.header}}
 /**
- * Authorization with HTTP token
+ * Authorization with HTTP header
  */
-Auth.prototype.httpToken = function(request) {
-  request['headers']['Authorization'] = 'token ' + this.auth['http_token'];
+Auth.prototype.httpHeader = function(request) {
+  request['headers']['Authorization'] = 'token ' + this.auth['http_header'];
 
   return request;
 };
-{{if .Api.authorization.oauth}}
+{{end}}{{if .Api.authorization.oauth}}
 /**
  * OAUTH2 Authorization with client secret
  */
