@@ -12,6 +12,7 @@ func WriteRuby(data *Data) {
 
 	RunTemplate("gitignore", ".gitignore", data)
 	RunTemplate("gemspec", data.Pkg["package"].(string)+".gemspec", data)
+	RunTemplate("readme.md", "README.md", data)
 
 	MakeDir("lib")
 	RunTemplate("lib/name.rb", data.Pkg["package"].(string)+".rb", data)

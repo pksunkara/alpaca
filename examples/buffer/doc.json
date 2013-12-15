@@ -1,81 +1,105 @@
 {
 	"info": {
+		"title": "Information",
 		"desc": "Returns api instance to get auxilary information about Buffer useful when creating your app.",
 		"show": {
+			"title": "Services and configuration",
 			"desc": "Returns an object with the current configuration that Buffer is using, including supported services, their icons and the varying limits of character and schedules."
 		}
 	},
 	"user": {
+		"title": "Authenticated user",
 		"desc": "Returns authenticated user api instance.",
 		"show": {
+			"title": "User information",
 			"desc": "Returns information about the authenticated user."
 		},
 		"profiles": {
+			"title": "List of user's social profiles",
 			"desc": "Returns an array of social media profiles connected to the authenticated users account."
 		},
 		"create_update": {
+			"title": "Create a social update",
 			"desc": "Create one or more new status updates.",
 			"params": ["The status update text.", "An array of profile id's that the status update should be sent to. Invalid profile_id's will be silently ignored."]
 		}
 	},
 	"link": {
+		"title": "Links",
 		"desc": "Returns api instance to get information about links shared through Buffer.",
 		"shares": {
+			"title": "Amount of link shares",
 			"desc": "Returns an object with a the numbers of shares a link has had using Buffer.",
 			"params": ["URL of the page for which the number of shares is requested."]
 		}
 	},
 	"profile": {
+		"title": "Social profiles",
 		"desc": "Returns a social media profile api instance.",
 		"args": ["Identifier of a social media profile"],
 		"show": {
+			"title": "Get this social profile",
 			"desc": "Returns details of the single specified social media profile."
 		},
 		"pending": {
+			"title": "List profile's pending updates",
 			"desc": "Returns an array of updates that are currently in the buffer for an individual social media profile."
 		},
 		"sent": {
+			"title": "List profile's sent updates",
 			"desc": "Returns an array of updates that have been sent from the buffer for an individual social media profile."
 		},
 		"reorder": {
+			"title": "Edit profile's updates order",
 			"desc": "Edit the order at which statuses for the specified social media profile will be sent out of the buffer.",
 			"params": ["An ordered array of status update id's. This can be a partial array in combination with the offset parameter or a full array of every update in the profiles Buffer."]
 		},
 		"shuffle": {
+			"title": "Shuffle profile's updates",
 			"desc": "Randomize the order at which statuses for the specified social media profile will be sent out of the buffer."
 		}
 	},
 	"schedule": {
+		"title": "Posting schedules",
 		"desc": "Returns scheduling api instance for social media profile.",
 		"args": ["Identifier of a social media profile"],
 		"list": {
+			"title": "Get profile's posting schedules",
 			"desc": "Returns details of the posting schedules associated with a social media profile."
 		},
 		"update": {
+			"title": "Update profile's posting schedules",
 			"desc": "Set the posting schedules for the specified social media profile.",
 			"params": ["Each item in the array is an individual posting schedule which consists of days and times to match the format return by the above method."]
 		}
 	},
 	"update": {
+		"title": "Social updates",
 		"desc": "Returns a social media update api instance.",
 		"args": ["Identifier of a social media update"],
 		"show": {
+			"title": "Get this social update",
 			"desc": "Returns a single social media update."
 		},
 		"interactions": {
+			"title": "List interactions of the update",
 			"desc": "Returns the detailed information on individual interactions with the social media update such as favorites, retweets and likes."
 		},
 		"update": {
+			"title": "Edit this update",
 			"desc": "Edit an existing, individual status update.",
 			"params": ["The status update text."]
 		},
 		"share": {
+			"title": "Share this update",
 			"desc": "Immediately shares a single pending update and recalculates times for updates remaining in the queue."
 		},
 		"destroy": {
+			"title": "Delete this update",
 			"desc": "Permanently delete an existing status update."
 		},
 		"top": {
+			"title": "Move this update to top",
 			"desc": "Move an existing status update to the top of the queue and recalculate times for all updates in the queue. Returns the update with its new posting time."
 		}
 	}

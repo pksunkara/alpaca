@@ -12,6 +12,7 @@ func WriteNode(data *Data) {
 
 	RunTemplate("gitignore", ".gitignore", data)
 	RunTemplate("package.json", "package.json", data)
+	RunTemplate("readme.md", "README.md", data)
 
 	MakeDir("lib")
 	RunTemplate("lib/index.js", "index.js", data)

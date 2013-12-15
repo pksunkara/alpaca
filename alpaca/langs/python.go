@@ -12,6 +12,7 @@ func WritePython(data *Data) {
 
 	RunTemplate("gitignore", ".gitignore", data)
 	RunTemplate("setup.py", "setup.py", data)
+	RunTemplate("readme.md", "README.md", data)
 
 	MakeDir(inflect.Underscore(name))
 	RunTemplate("lib/__init__.py", "__init__.py", data)

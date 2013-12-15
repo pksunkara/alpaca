@@ -12,6 +12,7 @@ func WritePhp(data *Data) {
 
 	RunTemplate("gitignore", ".gitignore", data)
 	RunTemplate("composer.json", "composer.json", data)
+	RunTemplate("readme.md", "README.md", data)
 
 	MakeDir("lib")
 
