@@ -1,3 +1,4 @@
+templates/*.go
 examples/*/php
 examples/*/node
 examples/*/ruby

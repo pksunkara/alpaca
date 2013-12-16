@@ -2,10 +2,12 @@ package alpaca
 
 import (
 	"bitbucket.org/pkg/inflect"
-	"encoding/json"
-	"os"
-	"path"
+	"path/filepath"
 	"strings"
+)
+
+var (
+	LibraryRoot string
 )
 
 type Data struct {
@@ -22,21 +24,14 @@ type LanguageOptions struct {
 	Node   bool `long:"no-node" description:"Do not write node library"`
 }
 
-func ReadData(directory string) *Data {
-	var pkg, api, doc map[string]interface{}
-
-	ReadJSON(directory+"/pkg.json", &pkg)
-	ReadJSON(directory+"/api.json", &api)
-	ReadJSON(directory+"/doc.json", &doc)
-
-	return &Data{pkg, api, doc, make(map[string]interface{})}
-}
-
 func WriteLibraries(directory string, opts *LanguageOptions) {
-	data := ReadData(directory)
-	ModifyData(data)
+	var err error
 
-	TemplateInit(directory, "templates")
+	LibraryRoot, err = filepath.Abs(directory)
+	HandleError(err)
+
+	data := ReadData()
+	ModifyData(data)
 
 	if !opts.Php {
 		WritePhp(data)
@@ -75,19 +70,4 @@ func ModifyData(data *Data) {
 	FunctionsPhp(data.Fnc)
 	FunctionsPython(data.Fnc)
 	FunctionsRuby(data.Fnc)
-}
-
-func ReadJSON(name string, v interface{}) {
-	file, err := os.Open(path.Clean(name))
-	defer file.Close()
-	HandleError(err)
-
-	HandleError(json.NewDecoder(file).Decode(v))
-}
-
-func MakeLibraryDir(name string) {
-	name = path.Join(LibraryRoot, name)
-
-	HandleError(os.RemoveAll(name))
-	MakeDir(name)
 }
