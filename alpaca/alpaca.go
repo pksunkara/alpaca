@@ -3,11 +3,17 @@ package alpaca
 import (
 	"bitbucket.org/pkg/inflect"
 	"encoding/json"
-	"github.com/pksunkara/alpaca/alpaca/langs"
 	"os"
 	"path"
 	"strings"
 )
+
+type Data struct {
+	Pkg map[string]interface{}
+	Api map[string]interface{}
+	Doc map[string]interface{}
+	Fnc map[string]interface{}
+}
 
 type LanguageOptions struct {
 	Php    bool `long:"no-php" description:"Do not write php library"`
@@ -16,42 +22,42 @@ type LanguageOptions struct {
 	Node   bool `long:"no-node" description:"Do not write node library"`
 }
 
-func ReadData(directory string) *langs.Data {
+func ReadData(directory string) *Data {
 	var pkg, api, doc map[string]interface{}
 
 	ReadJSON(directory+"/pkg.json", &pkg)
 	ReadJSON(directory+"/api.json", &api)
 	ReadJSON(directory+"/doc.json", &doc)
 
-	return &langs.Data{pkg, api, doc, make(map[string]interface{})}
+	return &Data{pkg, api, doc, make(map[string]interface{})}
 }
 
 func WriteLibraries(directory string, opts *LanguageOptions) {
 	data := ReadData(directory)
 	ModifyData(data)
 
-	langs.Init(HandleError, directory, "alpaca/templates")
+	TemplateInit(directory, "templates")
 
 	if !opts.Php {
-		langs.WritePhp(data)
+		WritePhp(data)
 	}
 
 	if !opts.Python {
-		langs.WritePython(data)
+		WritePython(data)
 	}
 
 	if !opts.Ruby {
-		langs.WriteRuby(data)
+		WriteRuby(data)
 	}
 
 	if !opts.Node {
-		langs.WriteNode(data)
+		WriteNode(data)
 	}
 }
 
-func ModifyData(data *langs.Data) {
-	data.Pkg["keywords"] = langs.ArrayInterfaceToString(data.Pkg["keywords"])
-	data.Api["classes"] = langs.MapKeysToStringArray(data.Api["class"], []string{})
+func ModifyData(data *Data) {
+	data.Pkg["keywords"] = ArrayInterfaceToString(data.Pkg["keywords"])
+	data.Api["classes"] = MapKeysToStringArray(data.Api["class"], []string{})
 
 	data.Fnc["join"] = strings.Join
 	data.Fnc["upper"] = strings.ToUpper
@@ -60,15 +66,15 @@ func ModifyData(data *langs.Data) {
 	data.Fnc["camelizeDownFirst"] = inflect.CamelizeDownFirst
 	data.Fnc["underscore"] = inflect.Underscore
 
-	data.Fnc["counter"] = langs.CounterTracker()
+	data.Fnc["counter"] = CounterTracker()
 
 	data.Fnc["args"] = make(map[string]interface{})
 	data.Fnc["path"] = make(map[string]interface{})
 
-	langs.FunctionsNode(data.Fnc)
-	langs.FunctionsPhp(data.Fnc)
-	langs.FunctionsPython(data.Fnc)
-	langs.FunctionsRuby(data.Fnc)
+	FunctionsNode(data.Fnc)
+	FunctionsPhp(data.Fnc)
+	FunctionsPython(data.Fnc)
+	FunctionsRuby(data.Fnc)
 }
 
 func ReadJSON(name string, v interface{}) {
@@ -77,4 +83,11 @@ func ReadJSON(name string, v interface{}) {
 	HandleError(err)
 
 	HandleError(json.NewDecoder(file).Decode(v))
+}
+
+func MakeLibraryDir(name string) {
+	name = path.Join(LibraryRoot, name)
+
+	HandleError(os.RemoveAll(name))
+	MakeDir(name)
 }

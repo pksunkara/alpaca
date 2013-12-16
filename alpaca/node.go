@@ -1,4 +1,4 @@
-package langs
+package alpaca
 
 import (
 	"bitbucket.org/pkg/inflect"

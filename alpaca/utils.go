@@ -1,8 +1,18 @@
-package langs
+package alpaca
 
 import (
+	"os"
 	"regexp"
 )
+
+func MakeDir(name string) {
+	HandleError(os.Mkdir(name, 0755))
+	MoveDir(name)
+}
+
+func MoveDir(name string) {
+	HandleError(os.Chdir(name))
+}
 
 func ArrayInterfaceToString(inter interface{}) []string {
 	old := inter.([]interface{})

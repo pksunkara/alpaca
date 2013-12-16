@@ -1,4 +1,4 @@
-package langs
+package alpaca
 
 import (
 	"os"
@@ -8,26 +8,19 @@ import (
 )
 
 var (
-	HandleError func(error)
 	TemplateDir string
 	LibraryRoot string
 )
 
-type Data struct {
-	Pkg map[string]interface{}
-	Api map[string]interface{}
-	Doc map[string]interface{}
-	Fnc map[string]interface{}
-}
-
-//TODO: Remove 3rd argument
-func Init(fun func(error), lib string, tmp string) {
+//TODO: Remove 2nd argument
+func TemplateInit(lib string, tmp string) {
 	var err error
 
-	HandleError = fun
 	LibraryRoot, err = filepath.Abs(lib)
 	HandleError(err)
-	TemplateDir, _ = filepath.Abs(tmp)
+
+	TemplateDir, err = filepath.Abs(tmp)
+	HandleError(err)
 }
 
 func ReadTemplate(name string) *template.Template {
@@ -52,21 +45,4 @@ func ChooseTemplate(name string) func(string, string, interface{}) {
 		temp := ReadTemplate(path.Join(tmp, name))
 		WriteTemplate(temp, out, data)
 	}
-}
-
-func MakeLibraryDir(name string) {
-	name = path.Join(LibraryRoot, name)
-
-	//TODO: Should we delete previous code?
-	HandleError(os.RemoveAll(name))
-	MakeDir(name)
-}
-
-func MakeDir(name string) {
-	HandleError(os.Mkdir(name, 0755))
-	HandleError(os.Chdir(name))
-}
-
-func MoveDir(name string) {
-	HandleError(os.Chdir(name))
 }
