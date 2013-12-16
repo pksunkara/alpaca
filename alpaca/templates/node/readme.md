@@ -66,10 +66,8 @@ var client = {{call .Fnc.underscore .Pkg.name}}.client({
 __All the callbacks provided to an api call will recieve the arguments as shown below__
 
 ```js
-function callback(error, body, headers) {
-  console.log("error: " + error);
-  console.log("body: " + body);
-  console.log("headers: " + headers);
+client.klass('args').method('args', function (err, body, headers) {
+    if (err) console.log(err);
 }
 ```
 {{with $data := .}}{{range .Api.classes}}

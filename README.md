@@ -138,6 +138,7 @@ __I accept pull requests and guarantee a reply back within a day__
 - Special case for 204:true and 404:false
 
 #### General
+- Response class
 - Pagination support
 - Classes inside classes (so on..)
 - Validations for params/body in api methods

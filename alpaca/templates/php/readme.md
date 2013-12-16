@@ -50,12 +50,10 @@ $client = new \{{call .Fnc.camelize .Pkg.name}}\Client(array(), $options);
 {{if .Api.authorization.basic}}
 ##### Basic authentication
 
+```php
+$auth = array('username' => 'pksunkara', 'password' => 'password');
 
-<?php`
-``php
-$client = new \{{call .Fnc.camelize .Pkg.name}}\Client(
-	array('username' => 'pksunkara', 'password' => 'password')
-, $options);
+$client = new \{{call .Fnc.camelize .Pkg.name}}\Client($auth, $options);
 ```
 {{end}}{{if .Api.authorization.header}}
 ##### Authorization header token
@@ -73,17 +71,20 @@ $client = new \{{call .Fnc.camelize .Pkg.name}}\Client('1a2b3', $options);
 ##### Oauth client secret
 
 ```php
-$client = new \{{call .Fnc.camelize .Pkg.name}}\Client({
-    array('client_id' => '09a8b7', 'client_secret' => '1a2b3')
-, $options);
+$auth = array('client_id' => '09a8b7', 'client_secret' => '1a2b3');
+
+$client = new \{{call .Fnc.camelize .Pkg.name}}\Client($auth, $options);
 ```
 {{end}}
 ### Return data information
 
 __All the api calls return an array of data as shown below__
+
 ```php
-echo print_r($data['body']);
-echo print_r($data['headers']);
+$data = $client->klass('args')->method('args');
+
+echo $data['body'];
+echo $data['headers'];
 ```
 {{with $data := .}}{{range .Api.classes}}
 ### {{index $data.Doc . "title"}} api
