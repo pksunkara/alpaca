@@ -90,19 +90,3 @@ func PathFunctionMaker(before, after string) interface{} {
 		return path
 	}
 }
-
-func CounterTracker() map[string]interface{} {
-	val, fnc := 0, make(map[string]interface{})
-
-	fnc["value"] = func() int {
-		val = val + 1
-		return val - 1
-	}
-
-	fnc["start"] = func() string {
-		val = 0
-		return ""
-	}
-
-	return fnc
-}

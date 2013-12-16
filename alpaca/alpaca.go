@@ -61,8 +61,6 @@ func ModifyData(data *Data) {
 	data.Fnc["camelizeDownFirst"] = inflect.CamelizeDownFirst
 	data.Fnc["underscore"] = inflect.Underscore
 
-	data.Fnc["counter"] = CounterTracker()
-
 	data.Fnc["args"] = make(map[string]interface{})
 	data.Fnc["path"] = make(map[string]interface{})
 

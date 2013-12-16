@@ -6,8 +6,8 @@ use {{.Pkg.name}}\HttpClient\HttpClient;
 
 /**
  * {{index .Doc .Api.active.name "desc"}}
- *{{with $data := .}}{{call $data.Fnc.counter.start}}{{range .Api.active.args}}
- * @param ${{.}} {{index $data.Doc $data.Api.active.name "args" (call $data.Fnc.counter.value)}}{{end}}{{end}}
+ *{{with $data := .}}{{range $index, $element := .Api.active.args}}
+ * @param ${{.}} {{index $data.Doc $data.Api.active.name "args" $index}}{{end}}{{end}}
  * @param $client HttpClient Instance
  */
 class {{call .Fnc.camelize .Api.active.name}}
@@ -25,8 +25,8 @@ class {{call .Fnc.camelize .Api.active.name}}
     /**
      * {{index $data.Doc $data.Api.active.name . "desc"}}
      * '{{index $data.Api.class $data.Api.active.name . "path"}}' {{call $data.Fnc.upper (or (index $data.Api.class $data.Api.active.name . "method") "get")}}
-     *{{with $method := .}}{{call $data.Fnc.counter.start}}{{range (index $data.Api.class $data.Api.active.name $method "params")}}
-     * @param ${{.}} {{index $data.Doc $data.Api.active.name $method "params" (call $data.Fnc.counter.value)}}{{end}}{{end}}
+     *{{with $method := .}}{{range $index, $element := (index $data.Api.class $data.Api.active.name $method "params")}}
+     * @param ${{.}} {{index $data.Doc $data.Api.active.name $method "params" $index}}{{end}}{{end}}
      */
     public function {{call $data.Fnc.camelizeDownFirst .}}({{call $data.Fnc.args.php (index (index $data.Api.class $data.Api.active.name .) "params")}}array $options = array())
     {

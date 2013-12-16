@@ -20,4 +20,4 @@ for tmpl in $(find templates -type f); do
 done
 
 echo "}" >> templates/templates.go
-go fmt templates/*.go
+gofmt -w templates/*.go

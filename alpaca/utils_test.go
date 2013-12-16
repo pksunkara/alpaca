@@ -76,15 +76,3 @@ func TestPathFunctionMaker(t *testing.T) {
 
 	terst.Is(f("/user/:id/:not/:url/wow", args), "/user/\"+@id+\"/:not/\"+@url+\"/wow")
 }
-
-func TestCounterTracker(t *testing.T) {
-	terst.Terst(t)
-
-	f := CounterTracker()
-
-	terst.Is(f["start"].(func() string)(), "")
-
-	for i := 0; i < 5; i++ {
-		terst.Is(f["value"].(func() int)(), i)
-	}
-}
