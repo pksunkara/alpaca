@@ -1,0 +1,25 @@
+{
+	"base": "http://localhost:3000",
+	"version": "v1",
+	"authorization": {
+		"basic" : true,
+		"header": true,
+		"oauth" : true
+	},
+	"request": {
+		"formats": {
+			"json": true
+		}
+	},
+	"response": {
+		"formats": {
+			"json": true
+		},
+		"suffix": true
+	},
+	"error": {
+		"message": "error"
+	},
+	"class": {
+	}
+}
