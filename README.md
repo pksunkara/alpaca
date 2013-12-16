@@ -14,7 +14,7 @@ You are planning to build an API for your website and develop API libraries? _Th
 
 You define your API, **alpaca** builds the API libraries along with their documentation. All you have to do is publishing them to their respective package managers.
 
-Join us at [gitter](https://gitter.im/pksunkara/alpaca) if you need any help.
+Join us at [gitter](https://gitter.im/pksunkara/alpaca) if you need any help. Or at `#alpaca` on freenode IRC.
 
 ## Installation
 
@@ -143,6 +143,11 @@ __I accept pull requests and guarantee a reply back within a day__
 - Validations for params/body in api methods
 - Allow customization of errors
 - Tests for libraries (lots and lots of tests)
+
+#### Readme
+- Examples in place of args/params
+- Return types of api calls
+- Options available
 
 #### Comments
 - The descriptions should be wrapped

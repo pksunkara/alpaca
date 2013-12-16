@@ -12,6 +12,14 @@ client.ResponseHandler = require('./response_handler');
  * Main HttpClient which is used by Api classes
  */
 client.HttpClient = function (auth, options) {
+  if (!options) {
+    options = {};
+  }
+
+  if (!auth) {
+    auth = {};
+  }
+
 {{if .Api.authorization.oauth}}
   if (typeof auth == 'string') {
     auth = { 'access_token': auth };
