@@ -8,6 +8,8 @@ client.ErrorHandler = require('./error_handler');
 client.RequestHandler = require('./request_handler');
 client.ResponseHandler = require('./response_handler');
 
+client.Response = require('./response.js');
+
 /**
  * Main HttpClient which is used by Api classes
  */
@@ -136,7 +138,7 @@ client.HttpClient.prototype.request = function (path, body, method, options, cal
           return callback(err);
         }
 
-        callback(null, body, response.statusCode, response.headers);
+        callback(null, new client.Response(body, response.statusCode, response.headers));
       });
     });
   });

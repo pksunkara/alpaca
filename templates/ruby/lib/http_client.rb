@@ -1,6 +1,7 @@
 require "{{call .Fnc.underscore .Pkg.name}}/http_client/auth_handler"
 require "{{call .Fnc.underscore .Pkg.name}}/http_client/error_handler"
 require "{{call .Fnc.underscore .Pkg.name}}/http_client/request_handler"
+require "{{call .Fnc.underscore .Pkg.name}}/http_client/response"
 require "{{call .Fnc.underscore .Pkg.name}}/http_client/response_handler"
 
 module {{.Pkg.name}}
@@ -89,7 +90,7 @@ module {{.Pkg.name}}
 
         body = get_body response
 
-        [body, response.status, response.headers]
+        {{.Pkg.name}}::HttpClient::Response.new body, response.status, response.headers
       end
 
       # Creating a request with the given arguments

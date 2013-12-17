@@ -15,7 +15,7 @@ class {{call .Fnc.camelize .Api.active.name}}():
 		body = options['{{template "bodyorquery" (index $data.Api.class $data.Api.active.name .)}}'] if '{{template "bodyorquery" (index $data.Api.class $data.Api.active.name .)}}' in options else {}{{range (index $data.Api.class $data.Api.active.name . "params")}}
 		body['{{.}}'] = {{.}}{{end}}
 
-		body, status, headers = self.client.{{or (index $data.Api.class $data.Api.active.name . "method") "get"}}('{{call $data.Fnc.path.python (index $data.Api.class $data.Api.active.name . "path") $data.Api.active.args}}', body, options)
+		response = self.client.{{or (index $data.Api.class $data.Api.active.name . "method") "get"}}('{{call $data.Fnc.path.python (index $data.Api.class $data.Api.active.name . "path") $data.Api.active.args}}', body, options)
 
-		return (body, headers)
+		return response
 {{end}}{{end}}

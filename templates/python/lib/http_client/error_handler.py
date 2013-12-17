@@ -14,7 +14,7 @@ class ErrorHandler():
 		if code in range(500, 600):
 			raise ClientError('Error ' + code, code)
 		elif code in range(400, 500):
-			body = ResponseHandler(response)
+			body = ResponseHandler.get_body(response)
 			message = ''
 
 			# If HTML, whole body is taken

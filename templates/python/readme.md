@@ -59,13 +59,54 @@ auth = { 'client_id': '09a8b7', 'client_secret': '1a2b3' }
 client = {{call .Fnc.underscore .Pkg.name}}.Client(auth, options)
 ```
 {{end}}
-### Return data information
-
-__All the api calls return body and headers__
+### Response information
 
 ```python
-body, headers = client.klass('args').method('args')
+response = client.klass('args').method('args')
+
+response.body
+# >>> 'Hello world!'
+
+response.code
+# >>> 200
+
+response.headers
+# >>> {'content-type': 'text/html'}
 ```
+##### HTML response
+
+```python
+response.body
+# >>> 'The username is pksunkara!'
+```
+{{if .Api.response.formats.json}}
+##### JSON response
+
+```python
+response.body
+# >>> {'user': 'pksunkara'}
+```
+{{end}}
+### Request body information
+
+##### RAW request
+
+```python
+body = 'username=pksunkara'
+```
+
+##### FORM request
+
+```python
+body = {'user': 'pksunkara'}
+```
+{{if .Api.request.formats.json}}
+##### JSON request
+
+```python
+body = {'user': 'pksunkara'}
+```
+{{end}}
 {{with $data := .}}{{range .Api.classes}}
 ### {{index $data.Doc . "title"}} api
 

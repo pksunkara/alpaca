@@ -18,6 +18,7 @@ func WriteNode(data *Data) {
 	RunTemplate("lib/index.js", "index.js", data)
 
 	MakeDir(inflect.CamelizeDownFirst(name))
+	RunTemplate("lib/client.js", "client.js", data)
 
 	MakeDir("error")
 	RunTemplate("lib/error/index.js", "index.js", data)
@@ -29,6 +30,7 @@ func WriteNode(data *Data) {
 	RunTemplate("lib/http_client/auth_handler.js", "auth_handler.js", data)
 	RunTemplate("lib/http_client/error_handler.js", "error_handler.js", data)
 	RunTemplate("lib/http_client/request_handler.js", "request_handler.js", data)
+	RunTemplate("lib/http_client/response.js", "response.js", data)
 	RunTemplate("lib/http_client/response_handler.js", "response_handler.js", data)
 	MoveDir("..")
 

@@ -5,10 +5,12 @@ namespace {{.Pkg.name}}\HttpClient;
 use Guzzle\Http\Client as GuzzleClient;
 use Guzzle\Http\ClientInterface;
 use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Http\Message\Response;
 
 use {{.Pkg.name}}\HttpClient\AuthHandler;
 use {{.Pkg.name}}\HttpClient\ErrorHandler;
+use {{.Pkg.name}}\HttpClient\RequestHandler;
+use {{.Pkg.name}}\HttpClient\Response;
+use {{.Pkg.name}}\HttpClient\ResponseHandler;
 
 /**
  * Main HttpClient which is used by Api classes
@@ -118,7 +120,7 @@ class HttpClient
             throw new \RuntimeException($e->getMessage());
         }
 
-        return array('body' => $this->getBody($response), 'status' => $response->getStatusCode(), 'headers' => $response->getHeaders());
+        return new Response($this->getBody($response), $response->getStatusCode(), $response->getHeaders());
     }
 
     /**
@@ -142,7 +144,7 @@ class HttpClient
     /**
      * Get response body in correct format
      */
-    public function getBody(Response $response)
+    public function getBody($response)
     {
         return ResponseHandler::getBody($response);
     }

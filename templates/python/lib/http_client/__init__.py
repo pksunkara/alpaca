@@ -4,6 +4,7 @@ import copy
 from auth_handler import AuthHandler
 from error_handler import ErrorHandler
 from request_handler import RequestHandler
+from response import Response
 from response_handler import ResponseHandler
 
 # Main HttpClient which is used by Api classes
@@ -79,7 +80,7 @@ class HttpClient():
 
 		response = self.create_request(method, path, kwargs)
 
-		return (self.get_body(response), response.status_code, response.headers)
+		return Response(self.get_body(response), response.status_code, response.headers)
 
 	# Creating a request with the given arguments
 	#

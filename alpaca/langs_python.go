@@ -16,6 +16,7 @@ func WritePython(data *Data) {
 
 	MakeDir(inflect.Underscore(name))
 	RunTemplate("lib/__init__.py", "__init__.py", data)
+	RunTemplate("lib/client.py", "client.py", data)
 
 	MakeDir("error")
 	RunTemplate("lib/error/__init__.py", "__init__.py", data)
@@ -27,6 +28,7 @@ func WritePython(data *Data) {
 	RunTemplate("lib/http_client/auth_handler.py", "auth_handler.py", data)
 	RunTemplate("lib/http_client/error_handler.py", "error_handler.py", data)
 	RunTemplate("lib/http_client/request_handler.py", "request_handler.py", data)
+	RunTemplate("lib/http_client/response.py", "response.py", data)
 	RunTemplate("lib/http_client/response_handler.py", "response_handler.py", data)
 	MoveDir("..")
 

@@ -1,4 +1,4 @@
-# alpaca
+# alpaca [![Build Status](https://drone.io/github.com/pksunkara/alpaca/status.png)](https://drone.io/github.com/pksunkara/alpaca/latest)
 
 Api Libraries Powered And Created by Alpaca
 
@@ -20,10 +20,25 @@ Join us at [gitter](https://gitter.im/pksunkara/alpaca) if you need any help. Or
 
 You can download the binary files.
 
+Or by using golang
+
+```bash
+# Clone the project into your golang workspace
+$ git clone git://github.com/pksunkara/alpaca
+
+# Compile templates
+$ go get github.com/jteeuwen/go-bindata
+$ cd alpaca && ./make
+
+# Install the program
+$ go get
+$ go install github.com/pksunkara/alpaca
+```
+
 ## Usage
 
-```
-alpaca </path/to/dir>
+```bash
+$ alpaca </path/to/dir>
 ```
 
 The path here should be a directory with `api.json`, `pkg.json`, `doc.json`
@@ -34,11 +49,11 @@ All the following fields are required unless mentioned.
 
 ```js
 {
-  "name": "Buffer", // Name of the api (also used as class name for the library)
-  "package": "buffer-alpaca", // Name of the package
+  "name": "Example", // Name of the api (also used as class name for the library)
+  "package": "example-alpaca", // Name of the package
   "version": "0.1.0", // Version of the package
-  "url": "https://bufferapp.com", // URL of the api
-  "keywords": ["alpaca", "buffer", "api"], // Keywords for the package
+  "url": "https://exampleapp.com", // URL of the api
+  "keywords": ["alpaca", "exampleapp", "api"], // Keywords for the package
   "official": false, // Are the api libraries official?
   "author": {
     "name": "Pavan Kumar Sunkara", // Name of the package author
@@ -66,17 +81,17 @@ All the following fields are required unless mentioned.
 
 ```js
 {
-  "base": "https://api.bufferapp.com", // Base URL of the api
-  "version": "1", // Default version for the api (https://api.example.com{/version}/users) [optional]
+  "base": "https://exampleapp.com", // Base URL of the api
+  "version": "v1", // Default version for the api (https://api.example.com{/version}/users) [optional]
   "authorization": { // Authorization strategies
-    "basic" : false, // Basic authentication [optional] (default: false)
-    "header": false, // Token in authorization header [optional] (default: false)
+    "basic" : true, // Basic authentication [optional] (default: false)
+    "header": true, // Token in authorization header [optional] (default: false)
     "oauth" : true // OAUTH authorization [optional] (default: false)
   },
   "request": { // Settings for requests to the api
     "formats": { // Format of the request body
       "default": "form", // Default format for the request body [optional] (default: raw)
-      "json": false // Support json? [optional] (default: false)
+      "json": true // Support json? [optional] (default: false)
     }
   },
   "response": { // Settings for responses from the api
@@ -138,7 +153,6 @@ __I accept pull requests and guarantee a reply back within a day__
 - Special case for 204:true and 404:false
 
 #### General
-- Response class
 - Pagination support
 - Classes inside classes (so on..)
 - Validations for params/body in api methods

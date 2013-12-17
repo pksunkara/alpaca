@@ -61,15 +61,59 @@ var client = {{call .Fnc.underscore .Pkg.name}}.client({
 }, options);
 ```
 {{end}}
-### Callback Information
+### Response information
 
-__All the callbacks provided to an api call will recieve the arguments as shown below__
+__All the callbacks provided to an api call will recieve the response as shown below__
 
 ```js
-client.klass('args').method('args', function (err, body, headers) {
+client.klass('args').method('args', function (err, response) {
     if (err) console.log(err);
+
+    response.body;
+    // >>> 'Hello world!'
+
+    response.code;
+    // >>> 200
+
+    response.headers;
+    // >>> {'content-type': 'text/html'}
 }
 ```
+
+##### HTML response
+
+```js
+response.body;
+// >>> 'The username is pksunkara!'
+```
+{{if .Api.response.formats.json}}
+##### JSON response
+
+```js
+response.body;
+// >>> {'user': 'pksunkara'}
+```
+{{end}}
+### Request body information
+
+##### RAW request
+
+```js
+body = 'username=pksunkara';
+```
+
+##### FORM request
+
+```js
+body = {'user': 'pksunkara'};
+```
+{{if .Api.request.formats.json}}
+##### JSON request
+
+```js
+body = {'user': 'pksunkara'};
+```
+{{end}}
 {{with $data := .}}{{range .Api.classes}}
 ### {{index $data.Doc . "title"}} api
 

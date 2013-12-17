@@ -30,6 +30,7 @@ func WriteRuby(data *Data) {
 	RunTemplate("lib/http_client/auth_handler.rb", "auth_handler.rb", data)
 	RunTemplate("lib/http_client/error_handler.rb", "error_handler.rb", data)
 	RunTemplate("lib/http_client/request_handler.rb", "request_handler.rb", data)
+	RunTemplate("lib/http_client/response.rb", "response.rb", data)
 	RunTemplate("lib/http_client/response_handler.rb", "response_handler.rb", data)
 	MoveDir("..")
 

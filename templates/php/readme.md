@@ -76,16 +76,54 @@ $auth = array('client_id' => '09a8b7', 'client_secret' => '1a2b3');
 $client = new \{{call .Fnc.camelize .Pkg.name}}\Client($auth, $options);
 ```
 {{end}}
-### Return data information
-
-__All the api calls return an array of data as shown below__
+### Response information
 
 ```php
-$data = $client->klass('args')->method('args');
+$response = $client->klass('args')->method('args');
 
-echo $data['body'];
-echo $data['headers'];
+$response->body;
+// >>> 'Hello world!'
+
+$response->code;
+// >>> 200
+
+$response->headers;
+// >>> array('content-type' => 'text/html')
 ```
+##### HTML response
+
+```php
+$response->body;
+// >>> 'The username is pksunkara!'
+```
+{{if .Api.response.formats.json}}
+##### JSON response
+
+```php
+$response->body;
+// >>> array('user' => 'pksunkara')
+```
+{{end}}
+### Request body information
+
+##### RAW request
+
+```php
+$body = 'username=pksunkara';
+```
+
+##### FORM request
+
+```php
+$body = array('user' => 'pksunkara');
+```
+{{if .Api.request.formats.json}}
+##### JSON request
+
+```php
+$body = array('user' => 'pksunkara');
+```
+{{end}}
 {{with $data := .}}{{range .Api.classes}}
 ### {{index $data.Doc . "title"}} api
 
