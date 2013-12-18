@@ -15,11 +15,16 @@
 		"formats": {
 			"json": true
 		},
-		"suffix": true
+		"suffix": false
 	},
 	"error": {
 		"message": "error"
 	},
 	"class": {
+		"client_options": {
+			"base_default": {
+				"path": "/"
+			}
+		}
 	}
 }

@@ -1,3 +1,10 @@
 {
-	
+	"client_options": {
+		"title": "Client Options",
+		"desc": "Handles the options used or instantiated when building the client",
+		"base_default": {
+			"title": "Default Base url",
+			"desc": "Making sure the connection is correct with base give in api.json"
+		}
+	}	
 }

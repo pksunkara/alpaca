@@ -1,4 +1,10 @@
 test/node
+test/php
 test/python
 test/ruby
-test/php
+examples/*/node
+examples/*/php
+examples/*/python
+examples/*/ruby
+templates/*.go
+*.pyc
