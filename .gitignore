@@ -3,3 +3,5 @@ examples/*/php
 examples/*/node
 examples/*/ruby
 examples/*/python
+test
+*.pyc

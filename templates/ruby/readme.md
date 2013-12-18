@@ -28,7 +28,7 @@ require "{{.Pkg.package}}"
 client = {{call .Fnc.camelize .Pkg.name}}::Client.new
 
 # If you need to send options
-client = {{call .Fnc.camelize .Pkg.name}}::Client.new {}, options
+client = {{call .Fnc.camelize .Pkg.name}}::Client.new({}, options)
 ```
 {{if .Api.authorization.basic}}
 ##### Basic authentication
@@ -36,19 +36,19 @@ client = {{call .Fnc.camelize .Pkg.name}}::Client.new {}, options
 ```ruby
 auth = { :username => 'pksunkara', :password => 'password' }
 
-client = {{call .Fnc.camelize .Pkg.name}}::Client.new auth, options
+client = {{call .Fnc.camelize .Pkg.name}}::Client.new(auth, options)
 ```
 {{end}}{{if .Api.authorization.header}}
 ##### Authorization header token
 
 ```ruby
-client = {{call .Fnc.camelize .Pkg.name}}::Client.new {{if .Api.authorization.oauth}}{:http_header => '1a2b3'}{{else}}'1a2b3'{{end}}, options
+client = {{call .Fnc.camelize .Pkg.name}}::Client.new({{if .Api.authorization.oauth}}{:http_header => '1a2b3'}{{else}}'1a2b3'{{end}}, options)
 ```
 {{end}}{{if .Api.authorization.oauth}}
 ##### Oauth acess token
 
 ```ruby
-client = {{call .Fnc.camelize .Pkg.name}}::Client.new '1a2b3', options
+client = {{call .Fnc.camelize .Pkg.name}}::Client.new('1a2b3', options)
 ```
 
 ##### Oauth client secret
@@ -56,7 +56,7 @@ client = {{call .Fnc.camelize .Pkg.name}}::Client.new '1a2b3', options
 ```ruby
 auth = { :client_id => '09a8b7', :client_secret => '1a2b3' }
 
-client = {{call .Fnc.camelize .Pkg.name}}::Client.new auth, options
+client = {{call .Fnc.camelize .Pkg.name}}::Client.new(auth, options)
 ```
 {{end}}
 ### Response information
@@ -113,7 +113,7 @@ body = {'user' => 'pksunkara'}
 {{index $data.Doc . "desc"}}
 
 ```ruby
-{{call $data.Fnc.underscore .}} = client.{{call $data.Fnc.underscore .}} {{call $data.Fnc.args.ruby (index $data.Api.class . "args") true}}
+{{call $data.Fnc.underscore .}} = client.{{call $data.Fnc.underscore .}}({{call $data.Fnc.args.ruby (index $data.Api.class . "args") true}})
 ```
 {{with $class := .}}{{range $index, $element := (index $data.Api.class .)}}{{if (ne $index "args")}}
 ##### {{index $data.Doc $class $index "title"}} ({{call $data.Fnc.upper (or (index $element "method") "get")}} {{index $element "path"}})
@@ -121,7 +121,7 @@ body = {'user' => 'pksunkara'}
 {{index $data.Doc $class $index "desc"}}
 
 ```ruby
-body, headers = {{call $data.Fnc.underscore $class}}.{{call $data.Fnc.underscore $index}} {{call $data.Fnc.args.ruby (index $element "params")}}options
+body, headers = {{call $data.Fnc.underscore $class}}.{{call $data.Fnc.underscore $index}}({{call $data.Fnc.args.ruby (index $element "params")}}options)
 ```
 {{end}}{{end}}{{end}}{{end}}{{end}}
 ## Contributors
