@@ -2,9 +2,21 @@
 	"client_options": {
 		"title": "Client Options",
 		"desc": "Handles the options used or instantiated when building the client",
-		"base_default": {
-			"title": "Default Base url",
-			"desc": "Making sure the connection is correct with base give in api.json"
+		"base": {
+			"title": "Base url value",
+			"desc": "Making sure the connection is correct with base value in options"
 		}
-	}	
+	},
+	"methods": {
+		"title": "Methods",
+		"desc": "Handles the http methods",
+		"get": {
+			"title": "GET request",
+			"desc": "Making sure GET requests works"
+		},
+		"post": {
+			"title": "POST request",
+			"desc": "Making sure POST requests works"
+		}
+	}
 }

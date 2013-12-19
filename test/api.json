@@ -22,8 +22,17 @@
 	},
 	"class": {
 		"client_options": {
-			"base_default": {
+			"base": {
 				"path": "/"
+			}
+		},
+		"methods": {
+			"get": {
+				"path": "/method"
+			},
+			"post": {
+				"path": "/method",
+				"method": "post"
 			}
 		}
 	}
