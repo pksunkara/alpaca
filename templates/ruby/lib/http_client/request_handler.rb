@@ -22,6 +22,7 @@ module {{.Pkg.name}}
 
         # Raw body
         if type == "raw"
+          options[:body] = options[:body].is_a?(Hash) ? "" : options[:body]
           options[:headers].delete "Content-Type"
         end
 
