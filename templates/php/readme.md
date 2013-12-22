@@ -138,7 +138,7 @@ ${{call $data.Fnc.camelizeDownFirst .}} = $client->{{call $data.Fnc.camelizeDown
 {{index $data.Doc $class $index "desc"}}
 
 ```php
-$data = ${{call $data.Fnc.camelizeDownFirst $class}}->{{call $data.Fnc.camelizeDownFirst $index}}({{call $data.Fnc.args.php (index $element "params")}}$options);
+$response = ${{call $data.Fnc.camelizeDownFirst $class}}->{{call $data.Fnc.camelizeDownFirst $index}}({{call $data.Fnc.args.php (index $element "params")}}$options);
 ```
 {{end}}{{end}}{{end}}{{end}}{{end}}
 ## Contributors

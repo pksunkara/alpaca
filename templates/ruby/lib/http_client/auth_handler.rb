@@ -78,14 +78,14 @@ module {{.Pkg.name}}
       def http_password(env)
         code = Base64.encode64 "#{@auth[:username]}:#{@auth[:password]}"
 
-        env[:headers]["Authorization"] = "Basic #{code}"
+        env[:request_headers]["Authorization"] = "Basic #{code}"
 
         return env
       end
 {{end}}{{if .Api.authorization.header}}
       # Authorization with HTTP header
       def http_header(env)
-        env[:headers]["Authorization"] = "token #{@auth[:http_header]}"
+        env[:request_headers]["Authorization"] = "token #{@auth[:http_header]}"
 
         return env
       end

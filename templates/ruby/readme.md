@@ -121,7 +121,7 @@ body = {'user' => 'pksunkara'}
 {{index $data.Doc $class $index "desc"}}
 
 ```ruby
-body, headers = {{call $data.Fnc.underscore $class}}.{{call $data.Fnc.underscore $index}}({{call $data.Fnc.args.ruby (index $element "params")}}options)
+response = {{call $data.Fnc.underscore $class}}.{{call $data.Fnc.underscore $index}}({{call $data.Fnc.args.ruby (index $element "params")}}options)
 ```
 {{end}}{{end}}{{end}}{{end}}{{end}}
 ## Contributors
