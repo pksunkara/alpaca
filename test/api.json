@@ -15,7 +15,7 @@
 		"formats": {
 			"json": true
 		},
-		"suffix": false
+		"suffix": true
 	},
 	"error": {
 		"message": "error"
@@ -26,6 +26,17 @@
 				"path": "/"
 			}
 		},
+		"request_options": {
+			"base": {
+				"path": "/"
+			},
+			"suffix": {
+				"path": "/request_options.html"
+			},
+			"response": {
+				"path": "/request_options.json"
+			}
+		},
 		"methods": {
 			"get": {
 				"path": "/method"
@@ -33,6 +44,18 @@
 			"post": {
 				"path": "/method",
 				"method": "post"
+			},
+			"put": {
+				"path": "/method",
+				"method": "put"
+			},
+			"patch": {
+				"path": "/method",
+				"method": "patch"
+			},
+			"delete": {
+				"path": "/method",
+				"method": "delete"
 			}
 		}
 	}

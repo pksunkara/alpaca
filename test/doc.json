@@ -3,8 +3,23 @@
 		"title": "Client Options",
 		"desc": "Handles the options used or instantiated when building the client",
 		"base": {
-			"title": "Base url value",
-			"desc": "Making sure the connection is correct with base value in options"
+			"title": "Basic options",
+			"desc": "Making sure client options work"
+		}
+	},
+	"request_options": {
+		"title": "Request Options",
+		"desc": "Handles the options used when sending requests",
+		"base": {
+			"title": "Basic options",
+			"desc": "Making sure request options work"
+		},
+		"suffix": {
+			"title": "Suffix option",
+			"desc": "Check working of suffix option"
+		},
+		"response": {
+			"title": "Response format option"
 		}
 	},
 	"methods": {
@@ -17,6 +32,18 @@
 		"post": {
 			"title": "POST request",
 			"desc": "Making sure POST requests works"
+		},
+		"put": {
+			"title": "PUT request",
+			"desc": "Making sure PUT requests works"
+		},
+		"patch": {
+			"title": "PATCH request",
+			"desc": "Making sure PATCH requests works"
+		},
+		"delete": {
+			"title": "DELETE request",
+			"desc": "Making sure DELETE requests works"
 		}
 	}
 }
