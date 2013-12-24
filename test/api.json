@@ -13,6 +13,7 @@
 	},
 	"response": {
 		"formats": {
+			"default": "json",
 			"json": true
 		},
 		"suffix": true
@@ -21,41 +22,48 @@
 		"message": "error"
 	},
 	"class": {
+		"test": {
+			"equal": {
+				"path": "/test/equal"
+			},
+			"end": {
+				"path": "/test/end"
+			}
+		},
 		"client_options": {
 			"base": {
-				"path": "/"
+				"path": "/index"
 			}
 		},
 		"request_options": {
 			"base": {
-				"path": "/"
+				"path": "/index"
 			},
 			"suffix": {
-				"path": "/request_options.html"
-			},
-			"response": {
-				"path": "/request_options.json"
+				"path": "/suffix"
 			}
 		},
-		"methods": {
-			"get": {
-				"path": "/method"
+		"get": {
+			"api_params": {
+				"path": "/get/api_params",
+				"params": ["first", "second"]
 			},
-			"post": {
-				"path": "/method",
-				"method": "post"
+			"query_options": {
+				"path": "/get/query_options"
+			}
+		},
+		"response": {
+			"basic": {
+				"path": "/response/basic"
 			},
-			"put": {
-				"path": "/method",
-				"method": "put"
+			"header": {
+				"path": "/response/header"
 			},
-			"patch": {
-				"path": "/method",
-				"method": "patch"
+			"html": {
+				"path": "/response/html"
 			},
-			"delete": {
-				"path": "/method",
-				"method": "delete"
+			"json": {
+				"path": "/response/json"
 			}
 		}
 	}
