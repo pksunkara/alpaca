@@ -5,7 +5,7 @@ from api.{{call $data.Fnc.underscore .}} import {{call $data.Fnc.camelize .}}{{e
 
 class Client():
 
-	def __init__(self, auth, options = {}):
+	def __init__(self, auth = {}, options = {}):
 		self.http_client = HttpClient(auth, options)
 {{with $data := .}}{{range .Api.classes}}
 	# {{index $data.Doc . "desc"}}

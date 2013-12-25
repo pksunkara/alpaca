@@ -1,6 +1,6 @@
 import string
 
-from error import ClientError
+from ..error import ClientError
 from response_handler import ResponseHandler
 
 # ErrorHanlder takes care of selecting the error message from response body
@@ -12,7 +12,7 @@ class ErrorHandler():
 		typ = response.headers.get('content-type')
 
 		if code in range(500, 600):
-			raise ClientError('Error ' + code, code)
+			raise ClientError('Error ' + str(code), code)
 		elif code in range(400, 500):
 			body = ResponseHandler.get_body(response)
 			message = ''

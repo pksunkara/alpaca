@@ -35,20 +35,20 @@ class AuthHandler():
 		auth = self.get_auth_type()
 		flag = False
 {{if .Api.authorization.basic}}
-		if auth == HTTP_PASSWORD:
-			request = http_password(request)
+		if auth == self.HTTP_PASSWORD:
+			request = self.http_password(request)
 			flag = True
 {{end}}{{if .Api.authorization.header}}
-		if auth == HTTP_HEADER:
-			request = http_header(request)
+		if auth == self.HTTP_HEADER:
+			request = self.http_header(request)
 			flag = True
 {{end}}{{if .Api.authorization.oauth}}
-		if auth == URL_SECRET:
-			request = url_secret(request)
+		if auth == self.URL_SECRET:
+			request = self.url_secret(request)
 			flag = True
 
-		if auth == URL_TOKEN:
-			request = url_token(request)
+		if auth == self.URL_TOKEN:
+			request = self.url_token(request)
 			flag = True
 {{end}}
 		if not flag:

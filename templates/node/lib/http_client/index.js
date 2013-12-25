@@ -129,6 +129,9 @@ client.HttpClient.prototype.request = function (path, body, method, options, cal
   delete options['query'];
   delete options['body'];
 
+  delete options['base'];
+  delete options['user_agent'];
+
   if (method != 'GET') {
     reqobj = this.setBody(reqobj, body, options);
   }

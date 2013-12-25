@@ -3,6 +3,6 @@ examples/*/php
 examples/*/node
 examples/*/ruby
 examples/*/python
-test
+tests
 *.pyc
 node_modules

@@ -1,5 +1,5 @@
 import requests
-import copy
+import copy, urlparse, string
 
 from auth_handler import AuthHandler
 from error_handler import ErrorHandler
@@ -26,12 +26,14 @@ class HttpClient():
 
 		self.options.update(options)
 
+		self.base = self.options['base']
+
 		self.headers = {
 			'user-agent': self.options['user_agent']
 		}
 
 		if 'headers' in self.options:
-			self.headers.update(self.options['headers'])
+			self.headers.update(self.dict_key_lower(self.options['headers']))
 			del self.options['headers']
 
 		self.auth = AuthHandler(auth)
@@ -64,12 +66,21 @@ class HttpClient():
 		kwargs['headers'] = copy.deepcopy(self.headers)
 
 		if 'headers' in options:
-			kwargs['headers'].update(options['headers'])
+			kwargs['headers'].update(self.dict_key_lower(options['headers']))
 
 		kwargs['data'] = body
 		kwargs['allow_redirects'] = True
 
 		kwargs['params'] = kwargs['query'] if 'query' in kwargs else {}
+
+		if 'query' in kwargs:
+			del kwargs['query']
+
+		if 'body' in kwargs:
+			del kwargs['body']
+
+		del kwargs['base']
+		del kwargs['user_agent']
 
 		if method != 'get':
 			kwargs = self.set_body(kwargs)
@@ -85,14 +96,20 @@ class HttpClient():
 	# Creating a request with the given arguments
 	#
 	# If api_version is set, appends it immediately after host
-	def create_request(method, path, options):
+	def create_request(self, method, path, options):
 		version = '/' + options['api_version'] if 'api_version' in options else ''
 {{if .Api.response.suffix}}
 		# Adds a suffix (ex: ".html", ".json") to url
 		suffix = options['response_type'] if 'response_type' in options else '{{or .Api.response.formats.default "html"}}'
 		path = path + '.' + suffix
 {{end}}
-		path = options['base'] + version + path
+		path = urlparse.urljoin(self.base, version + path)
+
+		if 'api_version' in options:
+			del options['api_version']
+
+		if 'response_type' in options:
+			del options['response_type']
 
 		return requests.request(method, path, **options)
 
@@ -103,3 +120,7 @@ class HttpClient():
 	# Set request body in correct format
 	def set_body(self, request):
 		return RequestHandler.set_body(request)
+
+	# Make dict keys all lowercase
+	def dict_key_lower(self, dic):
+		return dict(zip(map(string.lower, dic.keys()), dic.values()))

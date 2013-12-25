@@ -20,4 +20,7 @@ class RequestHandler():
 			if 'content-type' in request['headers']:
 				del request['headers']['content-type']
 
+		if 'request_type' in request:
+			del request['request_type']
+
 		return request
