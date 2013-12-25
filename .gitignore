@@ -9,3 +9,5 @@ examples/*/ruby
 templates/*.go
 *.pyc
 node_modules
+vendor
+composer.*

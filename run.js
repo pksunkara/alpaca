@@ -1,3 +1,8 @@
+// ----------------------------------------------
+// npm install request 2.29.x
+// npm install async
+// ----------------------------------------------
+
 var testing = require('./tests/node/lib')
   , async = require('async')
   , tasks = []
@@ -18,9 +23,7 @@ tasks.push(function(callback) {
     base: 'http://localhost:3001/useless',
     api_version: 'v2',
     user_agent: 'testing (user agent)',
-    headers: {
-      'custom-header': 'custom'
-    }
+    headers: { 'custom-header': 'custom' }
   }).clientOptions().basic(function() {
     callback();
   });

@@ -1,6 +1,9 @@
 ## Testing
 
 ```bash
+# Build the api libs
+$ alpaca tests
+
 # Run the server
 $ go run server.go &
 

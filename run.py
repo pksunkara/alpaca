@@ -1,3 +1,7 @@
+# ----------------------------------------------
+# pip install requests
+# ----------------------------------------------
+
 import os, sys
 sys.path.append(os.path.abspath('./tests/python'))
 
@@ -13,9 +17,7 @@ testing.Client({}, {
   'base': 'http://localhost:3001/useless',
   'api_version': 'v2',
   'user_agent': 'testing (user agent)',
-  'headers': {
-    'custom-header': 'custom'
-  }
+  'headers': { 'custom-header': 'custom' }
 }).client_options().basic()
 
 # Request Options
