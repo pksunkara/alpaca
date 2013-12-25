@@ -117,5 +117,38 @@
 			"title": "JSON response",
 			"desc": "Testing json response format"
 		}
+	},
+	"paths": {
+		"title": "Api paths",
+		"desc": "Handling the testing of api paths and arg substitutions",
+		"args": ["Testing foo arg"],
+		"basic": {
+			"title": "Basic path",
+			"desc": "Basic path substitution"
+		},
+		"no_arg": {
+			"title": "Arg not found",
+			"desc": "Path substitution when arg not found"
+		}
+	},
+	"auth": {
+		"title": "Authorizations",
+		"desc": "Handles all kinds of authorizations",
+		"basic": {
+			"title": "Authorization basic",
+			"desc": "Testing authorization strategy basic"
+		},
+		"header": {
+			"title": "Authorization header",
+			"desc": "Testing authorization strategy header"
+		},
+		"oauth_secret": {
+			"title": "Authorization oauth_secret",
+			"desc": "Testing authorization strategy oauth_secret"
+		},
+		"oauth_token": {
+			"title": "Authorization oauth_token",
+			"desc": "Testing authorization strategy oauth_token"
+		}
 	}
 }

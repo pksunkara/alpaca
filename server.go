@@ -87,6 +87,8 @@ func main() {
 
 		if ClassCount != num {
 			terminal.Stdout.Nl().Color("r!").Print("Missing " + strconv.Itoa(num-ClassCount) + " sectons of tests").Nl()
+		} else {
+			terminal.Stdout.Nl()
 		}
 
 		go os.Exit(0)
@@ -190,6 +192,43 @@ func main() {
 	app.Delete("/v1/methods/delete.json", func() string {
 		Test("Basic DELETE request is successful")
 		return "/"
+	})
+
+	app.Get("/v1/paths/lol/bar.json", func() string {
+		Suite("Api paths", 2)
+		Test("Basic path substitutions works correctly")
+		return "/"
+	})
+
+	app.Get("/v1/paths/:id/lol/7/rank.json", func() string {
+		Test("If the arg is not found it will not substitute")
+		return "/"
+	})
+
+	app.Get("/v1/auth/basic.json", func(rw http.ResponseWriter, req *http.Request) {
+		Suite("Authorization", 4)
+
+		if req.Header.Get("Authorization") == "Basic bmluZTp0aW1l" {
+			Test("Basic http authentication works correctly")
+		}
+	})
+
+	app.Get("/v1/auth/header.json", func(rw http.ResponseWriter, req *http.Request) {
+		if req.Header.Get("Authorization") == "token passwordtoken" {
+			Test("Header http authentication works correctly")
+		}
+	})
+
+	app.Get("/v1/auth/oauth_secret.json", func(rw http.ResponseWriter, req *http.Request) {
+		if req.URL.RawQuery == "client_id=fine&client_secret=line" {
+			Test("OAuth secret authentication works correctly")
+		}
+	})
+
+	app.Get("/v1/auth/oauth_token.json", func(rw http.ResponseWriter, req *http.Request) {
+		if req.URL.RawQuery == "access_token=accesstoken" {
+			Test("OAuth access token authentication works correctly")
+		}
 	})
 
 	go http.ListenAndServe(":3000", app)

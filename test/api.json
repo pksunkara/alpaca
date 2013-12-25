@@ -115,6 +115,29 @@
 			"json": {
 				"path": "/response/json"
 			}
+		},
+		"paths": {
+			"args": ["foo"],
+			"basic": {
+				"path": "/paths/:foo/bar"
+			},
+			"no_arg": {
+				"path": "/paths/:id/:foo/7/rank"
+			}
+		},
+		"auth": {
+			"basic": {
+				"path": "/auth/basic"
+			},
+			"header": {
+				"path": "/auth/header"
+			},
+			"oauth_secret": {
+				"path": "/auth/oauth_secret"
+			},
+			"oauth_token": {
+				"path": "/auth/oauth_token"
+			}
 		}
 	}
 }

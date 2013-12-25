@@ -6,6 +6,7 @@ require "test-alpaca"
 # Client Options
 
 client = Test::Client.new
+
 client.client_options.base
 
 Test::Client.new({}, {
@@ -30,7 +31,7 @@ client.request_options.base({
 })
 client.request_options.suffix :response_type => 'png'
 
-# GET request
+# GET Request
 
 client.get.api('foo', 'bar')
 client.get.options :query => { :foo => 'bar' }
@@ -92,6 +93,19 @@ client.post.options_json({
 client.methods.patch
 client.methods.put
 client.methods.delete
+
+# Api paths
+api = client.paths('lol')
+
+api.basic
+api.no_arg
+
+# Authorization
+
+Test::Client.new({ :username => 'nine', :password => 'time' }).auth.basic
+Test::Client.new({ :http_header => 'passwordtoken' }).auth.header
+Test::Client.new({ :client_id => 'fine', :client_secret => 'line' }).auth.oauth_secret
+Test::Client.new('accesstoken').auth.oauth_token
 
 # End tests
 
