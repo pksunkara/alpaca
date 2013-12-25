@@ -39,11 +39,11 @@ class HttpClient
         $this->options = array_merge($this->options, $options);
 
         $this->headers = array(
-            sprintf('User-Agent: %s', $this->options['user_agent']),
+            'user-agent' => $this->options['user_agent'],
         );
 
         if (isset($this->options['headers'])) {
-            $this->headers = array_merge($this->headers, $this->options['headers']);
+            $this->headers = array_merge($this->headers, array_change_key_case($this->options['headers']));
             unset($this->options['headers']);
         }
 
@@ -102,9 +102,12 @@ class HttpClient
             unset($options['headers']);
         }
 
-        $headers = array_merge($this->headers, $headers);
+        $headers = array_merge($this->headers, array_change_key_case($headers));
 
         unset($options['body']);
+
+        unset($options['base']);
+        unset($options['user_agent']);
 
         $request = $this->createRequest($httpMethod, $path, null, $headers, $options);
 

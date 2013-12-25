@@ -6,3 +6,5 @@ examples/*/python
 tests
 *.pyc
 node_modules
+vendor
+composer.*

@@ -38,7 +38,7 @@ module {{.Pkg.name}}
         }
 
         if @options.has_key? :headers
-          @headers.update @options[:headers]
+          @headers.update Hash[@options[:headers].map { |k, v| [k.downcase, v] }]
           @options.delete :headers
         end
 
@@ -78,7 +78,9 @@ module {{.Pkg.name}}
       def request(path, body, method, options)
         options = @options.merge options
 
-        options[:headers] = @headers.merge(options[:headers] || {})
+        options[:headers] = options[:headers] || {}
+        options[:headers] = @headers.merge Hash[options[:headers].map { |k, v| [k.downcase, v] }]
+
         options[:body] = body
 
         if method != "get"

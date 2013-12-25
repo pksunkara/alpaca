@@ -8,7 +8,7 @@ class Client
 {
     private $httpClient;
 
-    public function __construct($auth, array $options = array())
+    public function __construct($auth = array(), array $options = array())
     {
         $this->httpClient = new HttpClient($auth, $options);
     }

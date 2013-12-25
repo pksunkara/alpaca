@@ -16,7 +16,7 @@ class RequestHandler {
 {{if .Api.request.formats.json}}
         // Encoding request body into JSON format
         if ($type == 'json') {
-            $body = ((count($body) === 0) ? null : json_encode($body, empty($body) ? JSON_FORCE_OBJECT : 0));
+            $body = ((count($body) === 0) ? '{}' : json_encode($body, empty($body) ? JSON_FORCE_OBJECT : 0));
             $header = 'application/json';
         }
 {{end}}
