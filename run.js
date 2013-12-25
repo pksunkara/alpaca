@@ -1,11 +1,11 @@
-var test = require('./test/node/lib')
+var testing = require('./tests/node/lib')
   , async = require('async')
   , tasks = []
   , client;
 
 // Client Options
 
-client = test.client()
+client = testing.client()
 
 tasks.push(function(callback) {
   client.clientOptions().basic(function() {
@@ -14,7 +14,7 @@ tasks.push(function(callback) {
 });
 
 tasks.push(function(callback) {
-  test.client({}, {
+  testing.client({}, {
     base: 'http://localhost:3001/useless',
     api_version: 'v2',
     user_agent: 'testing (user agent)',
@@ -220,25 +220,25 @@ tasks.push(function(callback) {
 // Authorization
 
 tasks.push(function(callback) {
-  test.client({ username: 'nine', password: 'time' }).auth().basic(function() {
+  testing.client({ username: 'nine', password: 'time' }).auth().basic(function() {
     callback();
   });
 });
 
 tasks.push(function(callback) {
-  test.client({ http_header: 'passwordtoken' }).auth().header(function() {
+  testing.client({ http_header: 'passwordtoken' }).auth().header(function() {
     callback();
   });
 });
 
 tasks.push(function(callback) {
-  test.client({ client_id: 'fine', client_secret: 'line' }).auth().oauthSecret(function() {
+  testing.client({ client_id: 'fine', client_secret: 'line' }).auth().oauthSecret(function() {
     callback();
   });
 });
 
 tasks.push(function(callback) {
-  test.client('accesstoken').auth().oauthToken(function() {
+  testing.client('accesstoken').auth().oauthToken(function() {
     callback();
   });
 });

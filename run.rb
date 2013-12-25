@@ -1,15 +1,15 @@
-lib = File.expand_path('../test/ruby/lib', __FILE__)
+lib = File.expand_path('../tests/ruby/lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 require "test-alpaca"
 
 # Client Options
 
-client = Test::Client.new
+client = Testing::Client.new
 
 client.client_options.basic
 
-Test::Client.new({}, {
+Testing::Client.new({}, {
   :base => 'http://localhost:3001/useless',
   :api_version => 'v2',
   :user_agent => 'testing (user agent)',
@@ -100,10 +100,10 @@ client.paths('lol').no_arg
 
 # Authorization
 
-Test::Client.new({ :username => 'nine', :password => 'time' }).auth.basic
-Test::Client.new({ :http_header => 'passwordtoken' }).auth.header
-Test::Client.new({ :client_id => 'fine', :client_secret => 'line' }).auth.oauth_secret
-Test::Client.new('accesstoken').auth.oauth_token
+Testing::Client.new({ :username => 'nine', :password => 'time' }).auth.basic
+Testing::Client.new({ :http_header => 'passwordtoken' }).auth.header
+Testing::Client.new({ :client_id => 'fine', :client_secret => 'line' }).auth.oauth_secret
+Testing::Client.new('accesstoken').auth.oauth_token
 
 # End tests
 
