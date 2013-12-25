@@ -34,14 +34,68 @@
 	"get": {
 		"title": "GET request",
 		"desc": "Handles different aspects about get request",
-		"api_params": {
-			"title": "Using api params",
+		"api": {
+			"title": "Using api",
 			"desc": "Set query params using api",
 			"params": ["Testing first param", "Testing second param"]
 		},
-		"query_options": {
-			"title": "Using query options",
+		"options": {
+			"title": "Using options",
 			"desc": "Set query params using options"
+		}
+	},
+	"post": {
+		"title": "POST request",
+		"desc": "Handles different aspects about post request",
+		"empty_raw": {
+			"title": "Empty body (raw)",
+			"desc": "Do not give any body"
+		},
+		"options_raw": {
+			"title": "Using options (raw)",
+			"desc": "Set body using options"
+		},
+		"empty_form": {
+			"title": "Empty body (form)",
+			"desc": "Do not give any body"
+		},
+		"api_form": {
+			"title": "Using api params (form)",
+			"desc": "Set body using params",
+			"params": ["Testing first param", "Testing second param"]
+		},
+		"options_form": {
+			"title": "Using options (form)",
+			"desc": "Set body using options"
+		},
+		"empty_json": {
+			"title": "Empty body (json)",
+			"desc": "Do not give any body"
+		},
+		"api_json": {
+			"title": "Using api params (json)",
+			"desc": "Set body using params",
+			"params": ["Testing first param", "Testing second param"]
+		},
+		"options_json": {
+			"title": "Using options (json)",
+			"desc": "Set body using options"
+		}
+	},
+	"methods": {
+		"title": "HTTP methods",
+		"desc": "Checking other http methods",
+		"patch": {
+			"title": "PATCH Request",
+			"desc": "Testing PATCH method request"
+		},
+		"put": {
+			"title": "PUT Request",
+			"desc": "Testing PUT method request"
+		},
+		"delete": {
+			"title": "DELETE Request",
+			"desc": "Testing DELETE method request"
 		}
 	},
 	"response": {

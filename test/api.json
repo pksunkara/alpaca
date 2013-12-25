@@ -44,12 +44,62 @@
 			}
 		},
 		"get": {
-			"api_params": {
-				"path": "/get/api_params",
+			"api": {
+				"path": "/get/api",
 				"params": ["first", "second"]
 			},
-			"query_options": {
-				"path": "/get/query_options"
+			"options": {
+				"path": "/get/options"
+			}
+		},
+		"post": {
+			"empty_raw": {
+				"path": "/post/empty_raw",
+				"method": "post"
+			},
+			"options_raw": {
+				"path": "/post/options_raw",
+				"method": "post"
+			},
+			"empty_form": {
+				"path": "/post/empty_form",
+				"method": "post"
+			},
+			"api_form": {
+				"path": "/post/api_form",
+				"method": "post",
+				"params": ["first", "second"]
+			},
+			"options_form": {
+				"path": "/post/options_form",
+				"method": "post"
+			},
+			"empty_json": {
+				"path": "/post/empty_json",
+				"method": "post"
+			},
+			"api_json": {
+				"path": "/post/api_json",
+				"method": "post",
+				"params": ["first", "second"]
+			},
+			"options_json": {
+				"path": "/post/options_json",
+				"method": "post"
+			}
+		},
+		"methods": {
+			"patch": {
+				"path": "/methods/patch",
+				"method": "patch"
+			},
+			"put": {
+				"path": "/methods/put",
+				"method": "put"
+			},
+			"delete": {
+				"path": "/methods/delete",
+				"method": "delete"
 			}
 		},
 		"response": {

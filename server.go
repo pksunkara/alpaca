@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/codegangsta/martini"
 	"github.com/wsxiaoys/terminal"
+	"io/ioutil"
 	"net/http"
 	"os"
 	"strconv"
@@ -25,26 +26,26 @@ func main() {
 
 	app.Get("/v1/index.json", func(rw http.ResponseWriter, req *http.Request) {
 		Suite("Client Options", 8)
-		Test("Base value given by api")
-		Test("Api version value given by api")
+		Test("Base value given by api works correctly")
+		Test("Api version value given by api works correctly")
 
 		if req.UserAgent() == "alpaca/0.1.0 (https://github.com/pksunkara/alpaca)" {
-			Test("User agent value given by api")
+			Test("User agent default value works correctly")
 		}
 
 		fmt.Fprintf(rw, "/")
 	})
 
 	tmp.Get("/v2/index.json", func(rw http.ResponseWriter, req *http.Request) {
-		Test("Base value given by options")
-		Test("Api version value given by options")
+		Test("Base value given by options works correctly")
+		Test("Api version value given by options works correctly")
 
 		if req.UserAgent() == "testing (user agent)" {
-			Test("User agent value given by options")
+			Test("User agent value given by options works correctly")
 		}
 
 		if req.Header["Custom-Header"][0] == "custom" {
-			Test("Headers value given by options")
+			Test("Headers value given by options works correctly")
 		}
 
 		Test("Base value's path should not be used")
@@ -55,14 +56,14 @@ func main() {
 	app.Get("/v2/index.json", func(rw http.ResponseWriter, req *http.Request) {
 		Suite("Request Options", 5)
 		Test("Base value should not be changed")
-		Test("Api version value given by options")
-
-		if req.UserAgent() == "alpaca/0.1.0 (https://github.com/pksunkara/alpaca)" {
-			Test("User agent value should not be changed")
-		}
+		Test("Api version value given by options works correctly")
 
 		if req.Header["Custom-Header"][0] == "custom" {
-			Test("Headers value given by options")
+			Test("Headers value given by options works correctly")
+		}
+
+		if req.UserAgent() == "testing again" {
+			Test("Headers value is merged with client options headers correctly")
 		}
 
 		fmt.Fprintf(rw, "/")
@@ -91,7 +92,7 @@ func main() {
 		go os.Exit(0)
 	})
 
-	app.Get("/v1/get/api_params.json", func(rw http.ResponseWriter, req *http.Request) {
+	app.Get("/v1/get/api.json", func(rw http.ResponseWriter, req *http.Request) {
 		Suite("GET Request", 3)
 		Test("Basic request is successful")
 
@@ -100,7 +101,7 @@ func main() {
 		}
 	})
 
-	app.Get("/v1/get/query_options.json", func(rw http.ResponseWriter, req *http.Request) {
+	app.Get("/v1/get/options.json", func(rw http.ResponseWriter, req *http.Request) {
 		if req.URL.RawQuery == "foo=bar" {
 			Test("Query params using options works correctly")
 		}
@@ -122,6 +123,73 @@ func main() {
 	app.Get("/v1/response/json.json", func(rw http.ResponseWriter, req *http.Request) {
 		rw.Header().Add("content-type", "application/json; charset=utf-8")
 		fmt.Fprintf(rw, "{\"message\": \"checking json\"}")
+	})
+
+	app.Post("/v1/post/empty_raw.json", func(rw http.ResponseWriter, req *http.Request) {
+		Suite("POST Request", 9)
+		Test("Basic request is successful")
+
+		if data, _ := ioutil.ReadAll(req.Body); string(data) == "" {
+			Test("Empty raw body works correctly")
+		}
+	})
+
+	app.Post("/v1/post/options_raw.json", func(rw http.ResponseWriter, req *http.Request) {
+		if data, _ := ioutil.ReadAll(req.Body); string(data) == "hello world" {
+			Test("Setting raw body using options works correctly")
+		}
+	})
+
+	app.Post("/v1/post/empty_form.json", func(rw http.ResponseWriter, req *http.Request) {
+		if data, _ := ioutil.ReadAll(req.Body); string(data) == "" {
+			Test("Empty form body works correctly")
+		}
+	})
+
+	app.Post("/v1/post/api_form.json", func(rw http.ResponseWriter, req *http.Request) {
+		if data, _ := ioutil.ReadAll(req.Body); string(data) == "first=foo&second=bar" {
+			Test("Setting form body using api works correctly")
+		}
+	})
+
+	app.Post("/v1/post/options_form.json", func(rw http.ResponseWriter, req *http.Request) {
+		if data, _ := ioutil.ReadAll(req.Body); string(data) == "foo%5B%5D=bar&foo%5B%5D=baz" {
+			Test("Setting form body using options works correctly")
+		}
+	})
+
+	app.Post("/v1/post/empty_json.json", func(rw http.ResponseWriter, req *http.Request) {
+		if data, _ := ioutil.ReadAll(req.Body); string(data) == "{}" {
+			Test("Empty json body works correctly")
+		}
+	})
+
+	app.Post("/v1/post/api_json.json", func(rw http.ResponseWriter, req *http.Request) {
+		if data, _ := ioutil.ReadAll(req.Body); string(data) == "{\"first\":\"foo\",\"second\":\"bar\"}" {
+			Test("Setting json body using api works correctly")
+		}
+	})
+
+	app.Post("/v1/post/options_json.json", func(rw http.ResponseWriter, req *http.Request) {
+		if data, _ := ioutil.ReadAll(req.Body); string(data) == "{\"foo\":[\"bar\",\"baz\"]}" {
+			Test("Setting json body using options works correctly")
+		}
+	})
+
+	app.Patch("/v1/methods/patch.json", func() string {
+		Suite("HTTP methods", 3)
+		Test("Basic PATCH request is successful")
+		return "/"
+	})
+
+	app.Put("/v1/methods/put.json", func() string {
+		Test("Basic PUT request is successful")
+		return "/"
+	})
+
+	app.Delete("/v1/methods/delete.json", func() string {
+		Test("Basic DELETE request is successful")
+		return "/"
 	})
 
 	go http.ListenAndServe(":3000", app)
