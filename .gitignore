@@ -5,3 +5,4 @@ examples/*/ruby
 examples/*/python
 test
 *.pyc
+node_modules

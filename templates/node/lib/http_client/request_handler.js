@@ -20,6 +20,10 @@ request.setBody = function(reqobj, body, options) {
   // Raw body
   if (type == 'raw') {
     reqobj['body'] = body;
+
+    if (typeof reqobj['body'] == 'object') {
+      delete reqobj['body'];
+    }
   }
 
   return reqobj;

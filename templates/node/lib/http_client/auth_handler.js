@@ -100,7 +100,7 @@ Auth.prototype.httpHeader = function(request) {
  */
 Auth.prototype.urlSecret = function(request) {
   request['qs']['client_id'] = this.auth['client_id'];
-  request['qs']['client_id'] = this.auth['client_secret'];
+  request['qs']['client_secret'] = this.auth['client_secret'];
 
   return request;
 };

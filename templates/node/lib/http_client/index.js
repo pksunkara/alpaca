@@ -1,4 +1,5 @@
-var request = require('request');
+var url = require('url')
+  , request = require('request');
 
 var client = module.exports;
 
@@ -41,13 +42,15 @@ client.HttpClient = function (auth, options) {
     this.options[key] = options[key];
   }
 
+  this.base = this.options['base'];
+
   this.headers = {
-    'User-Agent': this.options['user_agent']
+    'user-agent': this.options['user_agent']
   };
 
   if (this.options['headers']) {
     for (var key in this.options['headers']) {
-      this.headers[key] = this.options['headers'][key];
+      this.headers[key.toLowerCase()] = this.options['headers'][key];
     }
 
     delete this.options['headers'];
@@ -99,6 +102,15 @@ client.HttpClient.prototype.request = function (path, body, method, options, cal
   if (options['headers']) {
     headers = options['headers'];
     delete options['headers'];
+  }
+
+  for (var key in headers) {
+    lowerKey = key.toLowerCase();
+
+    if (key != lowerKey) {
+      headers[lowerKey] = headers[key];
+      delete headers[key];
+    }
   }
 
   for (var key in this.headers) {
@@ -156,7 +168,7 @@ client.HttpClient.prototype.createRequest = function (reqobj, options, callback)
   var suffix = (options['response_type'] ? options['response_type'] : '{{or .Api.response.formats.default "html"}}');
   reqobj['url'] = reqobj['url'] + '.' + suffix;
 {{end}}
-  reqobj['url'] = options['base'] + version + reqobj['url'];
+  reqobj['url'] = url.resolve(this.base, version + reqobj['url']);
 
   request(reqobj, callback);
 };
