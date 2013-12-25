@@ -7,7 +7,7 @@ require "test-alpaca"
 
 client = Test::Client.new
 
-client.client_options.base
+client.client_options.basic
 
 Test::Client.new({}, {
   :base => 'http://localhost:3001/useless',
@@ -16,19 +16,19 @@ Test::Client.new({}, {
   :headers => {
     'custom-header' => 'custom'
   }
-}).client_options.base
+}).client_options.basic
 
 # Request Options
 
-client.request_options.base({
+client.request_options.basic({
   :base => 'http://localhost:3001/useless',
   :api_version => 'v2',
-  :user_agent => 'testing (user agent)',
   :headers => {
     'custom-header' => 'custom',
-    'user-agent' => 'testing again'
+    'user-Agent' => 'testing again'
   }
 })
+
 client.request_options.suffix :response_type => 'png'
 
 # GET Request
@@ -48,7 +48,7 @@ client.test.equal :query => {
 
 client.test.equal :query => {
   :expected => response.body,
-  :actual => '/',
+  :actual => 'is a response',
   :name => 'The response body is correctly propogated'
 }
 
@@ -95,10 +95,8 @@ client.methods.put
 client.methods.delete
 
 # Api paths
-api = client.paths('lol')
-
-api.basic
-api.no_arg
+client.paths('lol').basic
+client.paths('lol').no_arg
 
 # Authorization
 

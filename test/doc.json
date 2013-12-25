@@ -14,7 +14,7 @@
 	"client_options": {
 		"title": "Client Options",
 		"desc": "Handles the options used or instantiated when building the client",
-		"base": {
+		"basic": {
 			"title": "Basic options",
 			"desc": "Making sure client options work"
 		}
@@ -22,7 +22,7 @@
 	"request_options": {
 		"title": "Request Options",
 		"desc": "Handles the options used when sending requests",
-		"base": {
+		"basic": {
 			"title": "Basic options",
 			"desc": "Making sure request options work"
 		},

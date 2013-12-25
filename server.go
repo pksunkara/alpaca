@@ -85,8 +85,10 @@ func main() {
 	app.Get("/v1/test/end.json", func(rw http.ResponseWriter, req *http.Request) {
 		num := 8
 
+		SuiteResults()
+
 		if ClassCount != num {
-			terminal.Stdout.Nl().Color("r!").Print("Missing " + strconv.Itoa(num-ClassCount) + " sectons of tests").Nl()
+			terminal.Stdout.Nl().Color("r!").Print("Missing " + strconv.Itoa(num-ClassCount) + " sectons of tests").Color("|").Nl()
 		} else {
 			terminal.Stdout.Nl()
 		}
@@ -111,7 +113,7 @@ func main() {
 
 	app.Get("/v1/response/basic.json", func() (int, string) {
 		Suite("Responses", 5)
-		return 206, "/"
+		return 206, "is a response"
 	})
 
 	app.Get("/v1/response/header.json", func(rw http.ResponseWriter, req *http.Request) {
@@ -236,17 +238,21 @@ func main() {
 }
 
 func Suite(name string, count int) {
-	if SuiteCount > TestsCount {
-		terminal.Stdout.Color("r!").Print(" ✗ ").Color("r").Print(strconv.Itoa(SuiteCount-TestsCount) + " out of " + strconv.Itoa(SuiteCount) + " failed!").Nl()
-	} else if SuiteCount < TestsCount {
-		terminal.Stdout.Color("r!").Print(" ✗ ").Color("r").Print("Got " + strconv.Itoa(TestsCount-SuiteCount) + " extra tests!")
-	}
+	SuiteResults()
 
 	ClassCount++
 	SuiteCount = count
 	TestsCount = 0
 
 	terminal.Stdout.Nl().Color("y!").Print("• ").Color("w!").Print(name).Nl()
+}
+
+func SuiteResults() {
+	if SuiteCount > TestsCount {
+		terminal.Stdout.Color("r!").Print("\t✗ ").Color("r").Print(strconv.Itoa(SuiteCount-TestsCount) + " out of " + strconv.Itoa(SuiteCount) + " failed!").Color("|").Nl()
+	} else if SuiteCount < TestsCount {
+		terminal.Stdout.Color("r!").Print("\t✗ ").Color("r").Print("Got " + strconv.Itoa(TestsCount-SuiteCount) + " extra tests!").Color("|").Nl()
+	}
 }
 
 func Test(name string) {

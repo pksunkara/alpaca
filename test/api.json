@@ -31,12 +31,12 @@
 			}
 		},
 		"client_options": {
-			"base": {
+			"basic": {
 				"path": "/index"
 			}
 		},
 		"request_options": {
-			"base": {
+			"basic": {
 				"path": "/index"
 			},
 			"suffix": {
