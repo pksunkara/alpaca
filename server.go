@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/codegangsta/martini"
 	"github.com/wsxiaoys/terminal"
@@ -100,7 +101,9 @@ func main() {
 		Suite("GET Request", 3)
 		Test("Basic request is successful")
 
-		if req.URL.RawQuery == "first=foo&second=bar" {
+		query := req.URL.Query()
+
+		if query.Get("first") == "foo" && query.Get("second") == "bar" {
 			Test("Query params using api works correctly")
 		}
 	})
@@ -151,7 +154,9 @@ func main() {
 	})
 
 	app.Post("/v1/post/api_form.json", func(rw http.ResponseWriter, req *http.Request) {
-		if data, _ := ioutil.ReadAll(req.Body); string(data) == "first=foo&second=bar" {
+		req.ParseForm()
+
+		if req.FormValue("first") == "foo" && req.FormValue("second") == "bar" {
 			Test("Setting form body using api works correctly")
 		}
 	})
@@ -169,13 +174,21 @@ func main() {
 	})
 
 	app.Post("/v1/post/api_json.json", func(rw http.ResponseWriter, req *http.Request) {
-		if data, _ := ioutil.ReadAll(req.Body); string(data) == "{\"first\":\"foo\",\"second\":\"bar\"}" {
+		body := make(map[string]interface{})
+		json.NewDecoder(req.Body).Decode(&body)
+
+		if body["first"].(string) == "foo" && body["second"].(string) == "bar" {
 			Test("Setting json body using api works correctly")
 		}
 	})
 
 	app.Post("/v1/post/options_json.json", func(rw http.ResponseWriter, req *http.Request) {
-		if data, _ := ioutil.ReadAll(req.Body); string(data) == "{\"foo\":[\"bar\",\"baz\"]}" {
+		body := make(map[string]interface{})
+		json.NewDecoder(req.Body).Decode(&body)
+
+		data := body["foo"].([]interface{})
+
+		if data[0].(string) == "bar" && data[1].(string) == "baz" {
 			Test("Setting json body using options works correctly")
 		}
 	})
@@ -222,7 +235,9 @@ func main() {
 	})
 
 	app.Get("/v1/auth/oauth_secret.json", func(rw http.ResponseWriter, req *http.Request) {
-		if req.URL.RawQuery == "client_id=fine&client_secret=line" {
+		query := req.URL.Query()
+
+		if query.Get("client_id") == "fine" && query.Get("client_secret") == "line" {
 			Test("OAuth secret authentication works correctly")
 		}
 	})

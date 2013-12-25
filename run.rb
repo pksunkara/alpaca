@@ -90,11 +90,13 @@ client.post.options_json({
 })
 
 # HTTP Methods
+
 client.methods.patch
 client.methods.put
 client.methods.delete
 
-# Api paths
+# Api Paths
+
 client.paths('lol').basic
 client.paths('lol').no_arg
 
