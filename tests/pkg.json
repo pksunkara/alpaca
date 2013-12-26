@@ -1,6 +1,6 @@
 {
   "name": "Testing",
-  "package": "test-alpaca",
+  "package": "testing-alpaca",
   "version": "0.1.0",
   "url": "https://github.com/pksunkara/alpaca",
   "keywords": ["alpaca", "test", "api", "client", "library"],

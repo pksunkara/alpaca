@@ -1,8 +1,3 @@
-// ----------------------------------------------
-// npm install request 2.29.x
-// npm install async
-// ----------------------------------------------
-
 var testing = require('./tests/node/lib')
   , async = require('async')
   , tasks = []

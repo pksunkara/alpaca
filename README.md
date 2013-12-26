@@ -1,19 +1,18 @@
 ## Testing
 
 ```bash
-# Build the api libs
-$ alpaca tests
-
-# Install dependencies
-$ go get
+# Get everything ready
+$ make deps
 
 # Run the server
 $ go run server.go &
 
 # Choose a language version and install dependencies
+$ nvm use 0.10
+$ make node
 
 # Run the test file
-$ php run.php
+$ node run.js
 ```
 
 ## Versions tested
@@ -22,20 +21,34 @@ $ php run.php
 
 Using [rvm](https://github.com/wayneeseguin/rvm)
 
+ * 1.8.7
+ * 1.9.1
+ * 1.9.2
+ * 1.9.3
  * 2.0.0
+ * 2.1.0
 
 #### Node versions
 
 Using [nvm](https://github.com/creationix/nvm)
 
- * 0.10.21
+ * 0.8
+ * 0.9
+ * 0.10
+ * 0.11
 
 #### Python versions
 
 Using [pyenv](https://github.com/yyuu/pyenv)
 
- * 2.7.6
+ * 2.6
+ * 2.7
+ * 3.2
+ * 3.3
 
 #### Php versions
 
- * 5.4.4
+Using [phpenv](https://github.com/phpenv/phpenv)
+
+ * 5.4
+ * 5.5

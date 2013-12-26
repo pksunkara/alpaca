@@ -1,12 +1,7 @@
-# ----------------------------------------------
-# gem install faraday -v 0.8.8
-# gem install json -v 1.7.7
-# ----------------------------------------------
-
 lib = File.expand_path('../tests/ruby/lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
-require "test-alpaca"
+require "testing-alpaca"
 
 # Client Options
 
