@@ -12,6 +12,10 @@ Make sure you have [pip](https://pypi.python.org/pypi/pip) installed
 $ pip install {{.Pkg.package}}
 ```
 
+#### Versions
+
+Works with [ 2.6 / 2.7 / 3.2 / 3.3 ]
+
 ## Usage
 
 ```python

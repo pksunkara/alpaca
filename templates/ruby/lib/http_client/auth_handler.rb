@@ -93,8 +93,8 @@ module {{.Pkg.name}}
       # OAUTH2 Authorization with client secret
       def url_secret(env)
         query = {
-          client_id: @auth[:client_id],
-          client_secret: @auth[:client_secret]
+          :client_id => @auth[:client_id],
+          :client_secret => @auth[:client_secret]
         }
 
         merge_query env, query
@@ -102,7 +102,7 @@ module {{.Pkg.name}}
 
       # OAUTH2 Authorization with access token
       def url_token(env)
-        query = { access_token: @auth[:access_token] }
+        query = { :access_token => @auth[:access_token] }
 
         merge_query env, query
       end

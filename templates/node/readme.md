@@ -12,6 +12,10 @@ Make sure you have [npm](https://npmjs.org) installed.
 $ npm install {{.Pkg.package}}
 ```
 
+#### Versions
+
+Works with [ 0.8 / 0.9 / 0.10 / 0.11 ]
+
 ## Usage
 
 ```js

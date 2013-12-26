@@ -11,19 +11,19 @@ module {{.Pkg.name}}
         # Encoding request body into JSON format
         if type == "json"
           options[:body] = options[:body].to_json
-          options[:headers]["Content-Type"] = "application/json"
+          options[:headers]["content-type"] = "application/json"
         end
 {{end}}
         # Encoding body into form-urlencoded format
         if type == "form"
           options[:body] = Faraday::Utils::ParamsHash[options[:body]].to_query
-          options[:headers]["Content-Type"] = "application/x-www-form-urlencoded"
+          options[:headers]["content-type"] = "application/x-www-form-urlencoded"
         end
 
         # Raw body
         if type == "raw"
           options[:body] = options[:body].is_a?(Hash) ? "" : options[:body]
-          options[:headers].delete "Content-Type"
+          options[:headers].delete "content-type"
         end
 
         return options

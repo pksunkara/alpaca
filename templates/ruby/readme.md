@@ -12,6 +12,10 @@ Make sure you have [rubygems](https://rubygems.org) installed
 $ gem install {{.Pkg.package}}
 ```
 
+#### Versions
+
+Works with [ 1.8.6 / 1.8.7 / 1.9.1 / 1.9.2 / 1.9.3 / 2.0.0 / 2.1.0 ]
+
 ## Usage
 
 ```ruby

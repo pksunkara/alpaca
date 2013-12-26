@@ -1,7 +1,5 @@
-import string
-
 from ..error import ClientError
-from response_handler import ResponseHandler
+from .response_handler import ResponseHandler
 
 # ErrorHanlder takes care of selecting the error message from response body
 class ErrorHandler():
@@ -22,7 +20,7 @@ class ErrorHandler():
 				message = body
 {{if .Api.response.formats.json}}
 			# If JSON, a particular field is taken and used
-			if string.find(typ, 'json') != -1 and isinstance(body, dict):
+			if typ.find('json') != -1 and isinstance(body, dict):
 				if '{{.Api.error.message}}' in body:
 					message = body['{{.Api.error.message}}']
 				else:

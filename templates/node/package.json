@@ -11,7 +11,7 @@
   },
   "main": "./lib/index.js",
   "dependencies": {
-    "request": "2.29.x"
+    "request": "2.x.x"
   },
   "bugs": {
     "url": "https://{{.Pkg.git.site}}/{{.Pkg.git.user}}/{{.Pkg.git.name}}-node/issues"

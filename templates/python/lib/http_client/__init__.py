@@ -1,11 +1,16 @@
 import requests
-import copy, urlparse, string
+import copy
 
-from auth_handler import AuthHandler
-from error_handler import ErrorHandler
-from request_handler import RequestHandler
-from response import Response
-from response_handler import ResponseHandler
+try:
+	import urlparse
+except ImportError:
+	import urllib.parse as urlparse
+
+from .auth_handler import AuthHandler
+from .error_handler import ErrorHandler
+from .request_handler import RequestHandler
+from .response import Response
+from .response_handler import ResponseHandler
 
 # Main HttpClient which is used by Api classes
 class HttpClient():
@@ -123,4 +128,8 @@ class HttpClient():
 
 	# Make dict keys all lowercase
 	def dict_key_lower(self, dic):
-		return dict(zip(map(string.lower, dic.keys()), dic.values()))
+		return dict(zip(map(self.key_lower, dic.keys()), dic.values()))
+
+	# Make a function for lowercase
+	def key_lower(self, key):
+		return key.lower()
