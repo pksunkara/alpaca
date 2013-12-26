@@ -81,6 +81,10 @@ client.post().empty_form({ 'request_type': 'form' })
 client.post().api_form('foo', 'bar', { 'request_type': 'form' })
 client.post().options_form({
   'request_type': 'form',
+  'body': { 'foo': 'bar' }
+})
+client.post().array_form({
+  'request_type': 'form',
   'body': { 'foo': ['bar', 'baz'] }
 })
 

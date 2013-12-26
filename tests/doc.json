@@ -68,6 +68,10 @@
 			"title": "Using options (form)",
 			"desc": "Set body using options"
 		},
+		"array_form": {
+			"title": "Encode array (form)",
+			"desc": "Form urlencode an array"
+		},
 		"empty_json": {
 			"title": "Empty body (json)",
 			"desc": "Do not give any body"

@@ -74,6 +74,10 @@
 				"path": "/post/options_form",
 				"method": "post"
 			},
+			"array_form": {
+				"path": "/post/array_form",
+				"method": "post"
+			},
 			"empty_json": {
 				"path": "/post/empty_json",
 				"method": "post"

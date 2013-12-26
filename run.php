@@ -92,6 +92,10 @@ $client->post()->emptyForm(array( 'request_type' => 'form' ));
 $client->post()->apiForm('foo', 'bar', array( 'request_type' => 'form' ));
 $client->post()->optionsForm(array(
   'request_type' => 'form',
+  'body' => array( 'foo' => 'bar' )
+));
+$client->post()->arrayForm(array(
+  'request_type' => 'form',
   'body' => array( 'foo' => array('bar', 'baz') )
 ));
 

@@ -158,6 +158,15 @@ tasks.push(function(callback) {
 
 tasks.push(function(callback) {
   client.post().optionsForm({
+    body: { foo: 'bar' },
+    request_type: 'form'
+  }, function() {
+    callback();
+  });
+});
+
+tasks.push(function(callback) {
+  client.post().arrayForm({
     body: { foo: ['bar', 'baz'] },
     request_type: 'form'
   }, function() {
