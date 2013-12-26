@@ -4,10 +4,14 @@
 # Build the api libs
 $ alpaca tests
 
+# Install dependencies
+$ go get
+
 # Run the server
 $ go run server.go &
 
-# Choose a language version
+# Choose a language version and install dependencies
+
 # Run the test file
 $ php run.php
 ```

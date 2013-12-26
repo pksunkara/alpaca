@@ -162,9 +162,11 @@ func main() {
 	})
 
 	app.Post("/v1/post/options_form.json", func(rw http.ResponseWriter, req *http.Request) {
-		if data, _ := ioutil.ReadAll(req.Body); string(data) == "foo%5B%5D=bar&foo%5B%5D=baz" {
-			Test("Setting form body using options works correctly")
-		}
+		req.ParseForm()
+		fmt.Println(req.Form)
+		// if data, _ := ioutil.ReadAll(req.Body); string(data) == "foo%5B%5D=bar&foo%5B%5D=baz" {
+		// 	Test("Setting form body using options works correctly")
+		// }
 	})
 
 	app.Post("/v1/post/empty_json.json", func(rw http.ResponseWriter, req *http.Request) {
