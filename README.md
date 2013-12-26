@@ -132,9 +132,13 @@ The format `html` is always true.
 
 Supported are `basic`, `header`, `oauth`
 
+## Testing
+
+Check [here](https://github.com/pksunkara/alpaca/tree/testing) to learn about testing.
+
 ## Contributors
 
-Here is a list of [Contributors](http://github.com/pksunkara/alpaca/contributors)
+Here is a list of [Contributors](https://github.com/pksunkara/alpaca/contributors)
 
 __I accept pull requests and guarantee a reply back within a day__
 
