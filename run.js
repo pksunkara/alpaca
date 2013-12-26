@@ -170,6 +170,18 @@ tasks.push(function(callback) {
 });
 
 tasks.push(function(callback) {
+  client.post().objectForm({
+    body: { foo: {
+      days: ['mon', 'tue'],
+      times: 'baz'
+    } },
+    request_type: 'form'
+  }, function() {
+    callback();
+  });
+});
+
+tasks.push(function(callback) {
   client.post().emptyJson({ request_type: 'json' }, function() {
     callback();
   });

@@ -174,6 +174,11 @@ func main() {
 		fmt.Println("\t ", req.Form)
 	})
 
+	app.Post("/v1/post/object_form.json", func(rw http.ResponseWriter, req *http.Request) {
+		req.ParseForm()
+		fmt.Println("\t ", req.Form)
+	})
+
 	app.Post("/v1/post/empty_json.json", func(rw http.ResponseWriter, req *http.Request) {
 		if data, _ := ioutil.ReadAll(req.Body); string(data) == "{}" {
 			Test("Empty json body works correctly")

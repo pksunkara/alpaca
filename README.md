@@ -4,15 +4,12 @@
 # Get everything ready
 $ make deps
 
-# Run the server
-$ go run server.go &
-
 # Choose a language version and install dependencies
 $ nvm use 0.10
-$ make node
+$ make node-deps
 
 # Run the test file
-$ node run.js
+$ make node
 ```
 
 ## Versions tested

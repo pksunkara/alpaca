@@ -79,9 +79,17 @@ client.post().options_form({
   'request_type': 'form',
   'body': { 'foo': 'bar' }
 })
+
 client.post().array_form({
   'request_type': 'form',
   'body': { 'foo': ['bar', 'baz'] }
+})
+client.post().object_form({
+  'request_type': 'form',
+  'body': { 'foo': {
+    'days': ['mon', 'tue'],
+    'times': 'baz'
+  } }
 })
 
 client.post().empty_json({ 'request_type': 'json' })

@@ -90,9 +90,17 @@ $client->post()->optionsForm(array(
   'request_type' => 'form',
   'body' => array( 'foo' => 'bar' )
 ));
+
 $client->post()->arrayForm(array(
   'request_type' => 'form',
   'body' => array( 'foo' => array('bar', 'baz') )
+));
+$client->post()->objectForm(array(
+  'request_type' => 'form',
+  'body' => array( 'foo' => array(
+    'days' => array('mon', 'tue'),
+    'times' => 'baz'
+  ) )
 ));
 
 $client->post()->emptyJson(array( 'request_type' => 'json' ));
