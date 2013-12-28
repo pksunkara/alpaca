@@ -12,8 +12,8 @@ module {{.Pkg.name}}
     end
 {{with $data := .}}{{range .Api.classes}}
     # {{index $data.Doc . "desc"}}
-    #{{with $class := .}}{{range $index, $element := (index $data.Doc $class "args")}}
-    # {{index $data.Api.class $class "args" $index}} - {{.}}{{end}}{{end}}
+    #{{with $class := .}}{{range $index, $element := (index $data.Api.class $class "args")}}
+    # {{.}} - {{index $data.Doc $class "args" $index "desc"}}{{end}}{{end}}
     def {{call $data.Fnc.underscore .}}({{call $data.Fnc.args.ruby (index $data.Api.class . "args") true}})
       {{$data.Pkg.name}}::Api::{{call $data.Fnc.camelize .}}.new {{call $data.Fnc.args.ruby (index $data.Api.class . "args")}}@http_client
     end

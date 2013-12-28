@@ -46,7 +46,9 @@ func WriteRuby(data *Data) {
 func FunctionsRuby(fnc map[string]interface{}) {
 	args := fnc["args"].(map[string]interface{})
 	path := fnc["path"].(map[string]interface{})
+	prnt := fnc["prnt"].(map[string]interface{})
 
 	args["ruby"] = ArgsFunctionMaker("", ", ")
 	path["ruby"] = PathFunctionMaker("#{@", "}")
+	prnt["ruby"] = PrntFunctionMaker(false, "  ", "\"", "\"", "[", "]", "{", "}", ":", " => ")
 }

@@ -61,8 +61,11 @@ func ModifyData(data *Data) {
 	data.Fnc["camelizeDownFirst"] = inflect.CamelizeDownFirst
 	data.Fnc["underscore"] = inflect.Underscore
 
+	data.Fnc["methods"] = MethodList
+
 	data.Fnc["args"] = make(map[string]interface{})
 	data.Fnc["path"] = make(map[string]interface{})
+	data.Fnc["prnt"] = make(map[string]interface{})
 
 	FunctionsNode(data.Fnc)
 	FunctionsPhp(data.Fnc)

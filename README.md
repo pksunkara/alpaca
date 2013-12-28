@@ -144,38 +144,49 @@ __I accept pull requests and guarantee a reply back within a day__
 
 ### TODO
 
+#### General
+
+ * Convert `make` into `Makefile`
+
 #### Responses
-- Add support for XML
-- Add support for CSV
+
+ * Add support for XML
+ * Add support for CSV
 
 #### Requests
-- HTTP Method Overloading
-- What about file uploads?
+
+ * HTTP Method Overloading
+ * What about file uploads?
 
 #### Api
-- Check returned status code
-- Special case for 204:true and 404:false
 
-#### General
-- Pagination support
-- Classes inside classes (so on..)
-- Validations for params/body in api methods
-- Allow customization of errors
-- Tests for libraries (lots and lots of tests)
+ * Check returned status code
+ * Special case for 204:true and 404:false
+
+#### Libraries
+
+ * Pagination support
+ * Classes inside classes (so on..)
+ * Validations for params/body in api methods
+ * Allow customization of errors
+ * Tests for libraries (lots and lots of tests)
 
 #### Readme
-- Examples in place of args/params
-- Return types of api calls
-- Options available
+
+ * Examples in place of args/params
+ * Return types of api calls
+ * Options available
 
 #### Comments
-- The descriptions should be wrapped
-- Align @param descriptions
+
+ * The descriptions should be wrapped
+ * Align @param descriptions
 
 #### Languages
-- Support Java, Go, Perl, Clojure, Scala, Obj-C
-- Build API docs (Resulting in bloated definitions?)
-- Build cli tool for APIs (bash? python? go?)
+
+ * Support Java, Go, Perl, Clojure, Scala, Obj-C
+ * Build API docs (Resulting in bloated definitions?)
+ * Build cli tool for APIs (bash? python? go?)
 
 ## License
 

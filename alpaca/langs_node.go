@@ -46,7 +46,9 @@ func WriteNode(data *Data) {
 func FunctionsNode(fnc map[string]interface{}) {
 	args := fnc["args"].(map[string]interface{})
 	path := fnc["path"].(map[string]interface{})
+	prnt := fnc["prnt"].(map[string]interface{})
 
 	args["node"] = ArgsFunctionMaker("", ", ")
 	path["node"] = PathFunctionMaker("' + this.", " + '")
+	prnt["node"] = PrntFunctionMaker(false, "  ", "\"", "\"", "[", "]", "{", "}", "", ": ")
 }

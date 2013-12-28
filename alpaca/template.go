@@ -10,7 +10,7 @@ import (
 func ReadTemplate(name string) *template.Template {
 	temp := string(templates.Data[name]())
 
-	return template.Must(template.New("temp").Parse(temp))
+	return template.Must(template.New(name).Parse(temp))
 }
 
 func WriteTemplate(temp *template.Template, out string, data interface{}) {

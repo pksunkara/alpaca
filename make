@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-rm $(find templates -type f -name "*.go")
+rm templates/*.go
 
 cat > templates/templates.go <<\EOF
 package templates

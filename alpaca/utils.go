@@ -1,8 +1,11 @@
 package alpaca
 
 import (
+	"bitbucket.org/pkg/inflect"
 	"os"
+	"reflect"
 	"regexp"
+	"strconv"
 )
 
 func MakeDir(name string) {
@@ -46,11 +49,15 @@ func MapKeysToStringArray(inter interface{}, exclude []string) []string {
 	return new
 }
 
+func MethodList(class interface{}) []string {
+	return MapKeysToStringArray(class, []string{"args"})
+}
+
 func ActiveClassInfo(name string, class interface{}) map[string]interface{} {
 	data := make(map[string]interface{})
 
 	data["name"] = name
-	data["methods"] = MapKeysToStringArray(class, []string{"args"})
+	data["methods"] = MethodList(class)
 	data["args"] = class.(map[string]interface{})["args"]
 
 	return data
@@ -89,4 +96,75 @@ func PathFunctionMaker(before, after string) interface{} {
 
 		return path
 	}
+}
+
+func PrntFunctionMaker(boolcap bool, tab, strbeg, strend, arrbeg, arrend, objbeg, objend, keybeg, keyend string) interface{} {
+	var prnt func(interface{}, ...int) string
+	var tabs func(int) string
+
+	arrmid, objmid, newline := ",", ",", "\n"
+
+	tabs = func(level int) string {
+		str := ""
+
+		for i := 0; i < level; i++ {
+			str += tab
+		}
+
+		return str
+	}
+
+	prnt = func(data interface{}, level ...int) string {
+		typ, lev := reflect.TypeOf(data).String(), 1
+
+		if len(level) == 1 {
+			lev = level[0]
+		}
+
+		if typ == "bool" {
+			str := strconv.FormatBool(data.(bool))
+
+			if boolcap {
+				str = inflect.Capitalize(str)
+			}
+
+			return str
+		}
+
+		if typ == "string" {
+			return strbeg + data.(string) + strend
+		}
+
+		if typ == "int" {
+			return strconv.Itoa(data.(int))
+		}
+
+		if typ == "float64" {
+			return strconv.FormatFloat(data.(float64), 'f', -1, 64)
+		}
+
+		if typ == "[]interface {}" {
+			str := arrbeg
+
+			for _, v := range data.([]interface{}) {
+				str += newline + tabs(lev) + prnt(v, lev+1) + arrmid
+			}
+
+			return str[0:len(str)-len(arrmid)] + newline + tabs(lev-1) + arrend
+		}
+
+		if typ == "map[string]interface {}" {
+			str := objbeg
+
+			for k, v := range data.(map[string]interface{}) {
+				str += newline + tabs(lev) + keybeg + k + keyend + prnt(v, lev+1) + objmid
+			}
+
+			return str[0:len(str)-len(objmid)] + newline + tabs(lev-1) + objend
+		}
+
+		return ""
+	}
+
+	return prnt
 }

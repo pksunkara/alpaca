@@ -122,19 +122,23 @@ body = {'user': 'pksunkara'};
 ### {{index $data.Doc . "title"}} api
 
 {{index $data.Doc . "desc"}}
+{{with $class := .}}{{range $index, $element := (index $data.Api.class . "args")}}
+ * `{{.}}` - {{index $data.Doc $class "args" $index "desc"}}{{end}}
 
 ```js
 var {{call $data.Fnc.camelizeDownFirst .}} = client.{{call $data.Fnc.camelizeDownFirst .}}({{call $data.Fnc.args.node (index $data.Api.class . "args") true}});
 ```
-{{with $class := .}}{{range $index, $element := (index $data.Api.class .)}}{{if (ne $index "args")}}
-##### {{index $data.Doc $class $index "title"}} ({{call $data.Fnc.upper (or (index $element "method") "get")}} {{index $element "path"}})
+{{range (call $data.Fnc.methods (index $data.Api.class .))}}
+##### {{index $data.Doc $class . "title"}} ({{call $data.Fnc.upper (or (index $data.Api.class $class . "method") "get")}} {{index $data.Api.class $class . "path"}})
 
-{{index $data.Doc $class $index "desc"}}
+{{index $data.Doc $class . "desc"}}
+{{with $method := .}}{{range $index, $element := (index $data.Api.class $class . "params")}}
+ * `{{.}}` - {{index $data.Doc $class $method "params" $index "desc"}}{{end}}{{end}}
 
 ```js
-{{call $data.Fnc.camelizeDownFirst $class}}.{{call $data.Fnc.camelizeDownFirst $index}}({{call $data.Fnc.args.node (index $element "params")}}options, callback);
+{{call $data.Fnc.camelizeDownFirst $class}}.{{call $data.Fnc.camelizeDownFirst .}}({{call $data.Fnc.args.node (index $data.Api.class $class . "params")}}options, callback);
 ```
-{{end}}{{end}}{{end}}{{end}}{{end}}
+{{end}}{{end}}{{end}}{{end}}
 ## Contributors
 Here is a list of [Contributors]((https://{{.Pkg.git.site}}/{{.Pkg.git.user}}/{{.Pkg.git.name}}-node/contributors)
 

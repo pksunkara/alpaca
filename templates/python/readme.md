@@ -115,19 +115,23 @@ body = {'user': 'pksunkara'}
 ### {{index $data.Doc . "title"}} api
 
 {{index $data.Doc . "desc"}}
+{{with $class := .}}{{range $index, $element := (index $data.Api.class . "args")}}
+ * `{{.}}` - {{index $data.Doc $class "args" $index "desc"}}{{end}}
 
 ```python
 {{call $data.Fnc.underscore .}} = client.{{call $data.Fnc.underscore .}}({{call $data.Fnc.args.python (index $data.Api.class . "args") true}})
 ```
-{{with $class := .}}{{range $index, $element := (index $data.Api.class .)}}{{if (ne $index "args")}}
-##### {{index $data.Doc $class $index "title"}} ({{call $data.Fnc.upper (or (index $element "method") "get")}} {{index $element "path"}})
+{{range (call $data.Fnc.methods (index $data.Api.class .))}}
+##### {{index $data.Doc $class . "title"}} ({{call $data.Fnc.upper (or (index $data.Api.class $class . "method") "get")}} {{index $data.Api.class $class . "path"}})
 
-{{index $data.Doc $class $index "desc"}}
+{{index $data.Doc $class . "desc"}}
+{{with $method := .}}{{range $index, $element := (index $data.Api.class $class . "params")}}
+ * `{{.}}` - {{index $data.Doc $class $method "params" $index "desc"}}{{end}}{{end}}
 
 ```python
-response = {{call $data.Fnc.underscore $class}}.{{call $data.Fnc.underscore $index}}({{call $data.Fnc.args.python (index $element "params")}}options)
+response = {{call $data.Fnc.underscore $class}}.{{call $data.Fnc.underscore .}}({{call $data.Fnc.args.python (index $data.Api.class $class . "params")}}options)
 ```
-{{end}}{{end}}{{end}}{{end}}{{end}}
+{{end}}{{end}}{{end}}{{end}}
 ## Contributors
 Here is a list of [Contributors]((https://{{.Pkg.git.site}}/{{.Pkg.git.user}}/{{.Pkg.git.name}}-node/contributors)
 
