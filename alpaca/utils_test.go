@@ -80,8 +80,9 @@ func TestPathFunctionMaker(t *testing.T) {
 func TestPrntFunctionMaker(t *testing.T) {
 	terst.Terst(t)
 
-	f := PrntFunctionMaker(true, "  ", "'", "'", "[", "]", "{", "}", ":", " => ").(func(interface{}, ...int) string)
+	f := PrntFunctionMaker(true, "  ", "'", "'", "[", "]", "{", "}", ":", " => ").(func(interface{}, string, bool) string)
 
+	args := make([]interface{}, 1)
 	vals := make(map[string]interface{})
 	orgs := make([]interface{}, 3)
 	hash := make(map[string]interface{})
@@ -101,12 +102,8 @@ func TestPrntFunctionMaker(t *testing.T) {
 	vals["hash"] = hash
 	vals["dump"] = make(map[string]string)
 
-	terst.Is(f(vals["msid"]), "3737")
-	terst.Is(f(vals["plan"]), "1.99")
-	terst.Is(f(vals["name"]), "'pksunkara'")
-	terst.Is(f(vals["hire"]), "True")
-	terst.Is(f(vals["orgs"]), "[\n  False,\n  'alpaca-api',\n  0\n]")
-	terst.Is(f(vals["hash"]), "{\n  :html => 'haml',\n  :rest => False\n}")
-	terst.Is(f(vals["dump"]), "")
-	terst.Is(f(vals), "{\n  :msid => 3737,\n  :plan => 1.99,\n  :name => 'pksunkara',\n  :hire => True,\n  :orgs => [\n    False,\n    'alpaca-api',\n    0\n  ],\n  :hash => {\n    :html => 'haml',\n    :rest => False\n  },\n  :dump => \n}")
+	args[0] = make(map[string]interface{})
+	args[0].(map[string]interface{})["value"] = vals
+
+	terst.Is(f(args, ", ", true), "{\n  :msid => 3737,\n  :plan => 1.99,\n  :name => 'pksunkara',\n  :hire => True,\n  :orgs => [\n    False,\n    'alpaca-api',\n    0\n  ],\n  :hash => {\n    :html => 'haml',\n    :rest => False\n  },\n  :dump => \n}, ")
 }

@@ -136,7 +136,7 @@ $body = array('user' => 'pksunkara');
  * `{{.}}` - {{index $data.Doc $class "args" $index "desc"}}{{end}}
 
 ```php
-${{call $data.Fnc.camelizeDownFirst .}} = $client->{{call $data.Fnc.camelizeDownFirst .}}({{call $data.Fnc.args.php (index $data.Api.class . "args") true}});
+${{call $data.Fnc.camelizeDownFirst .}} = $client->{{call $data.Fnc.camelizeDownFirst .}}({{call $data.Fnc.prnt.php (index $data.Doc . "args") ", " false}});
 ```
 {{range (call $data.Fnc.methods (index $data.Api.class .))}}
 ##### {{index $data.Doc $class . "title"}} ({{call $data.Fnc.upper (or (index $data.Api.class $class . "method") "get")}} {{index $data.Api.class $class . "path"}})
@@ -146,11 +146,11 @@ ${{call $data.Fnc.camelizeDownFirst .}} = $client->{{call $data.Fnc.camelizeDown
  * `{{.}}` - {{index $data.Doc $class $method "params" $index "desc"}}{{end}}{{end}}
 
 ```php
-$response = ${{call $data.Fnc.camelizeDownFirst $class}}->{{call $data.Fnc.camelizeDownFirst .}}({{call $data.Fnc.args.php (index $data.Api.class $class . "params")}}$options);
+$response = ${{call $data.Fnc.camelizeDownFirst $class}}->{{call $data.Fnc.camelizeDownFirst .}}({{call $data.Fnc.prnt.php (index $data.Doc $class . "params") ", " true}}$options);
 ```
 {{end}}{{end}}{{end}}{{end}}
 ## Contributors
-Here is a list of [Contributors]((https://{{.Pkg.git.site}}/{{.Pkg.git.user}}/{{.Pkg.git.name}}-node/contributors)
+Here is a list of [Contributors]((https://{{.Pkg.git.site}}/{{.Pkg.git.user}}/{{.Pkg.git.name}}-php/contributors)
 
 ### TODO
 
@@ -158,7 +158,7 @@ Here is a list of [Contributors]((https://{{.Pkg.git.site}}/{{.Pkg.git.user}}/{{
 {{.Pkg.license}}
 
 ## Bug Reports
-Report [here](https://{{.Pkg.git.site}}/{{.Pkg.git.user}}/{{.Pkg.git.name}}-node/issues).
+Report [here](https://{{.Pkg.git.site}}/{{.Pkg.git.user}}/{{.Pkg.git.name}}-php/issues).
 
 ## Contact
 {{.Pkg.author.name}} ({{.Pkg.author.email}})

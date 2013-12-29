@@ -99,7 +99,7 @@ func PathFunctionMaker(before, after string) interface{} {
 }
 
 func PrntFunctionMaker(boolcap bool, tab, strbeg, strend, arrbeg, arrend, objbeg, objend, keybeg, keyend string) interface{} {
-	var prnt func(interface{}, ...int) string
+	var vals func(interface{}, ...int) string
 	var tabs func(int) string
 
 	arrmid, objmid, newline := ",", ",", "\n"
@@ -114,7 +114,7 @@ func PrntFunctionMaker(boolcap bool, tab, strbeg, strend, arrbeg, arrend, objbeg
 		return str
 	}
 
-	prnt = func(data interface{}, level ...int) string {
+	vals = func(data interface{}, level ...int) string {
 		typ, lev := reflect.TypeOf(data).String(), 1
 
 		if len(level) == 1 {
@@ -147,7 +147,7 @@ func PrntFunctionMaker(boolcap bool, tab, strbeg, strend, arrbeg, arrend, objbeg
 			str := arrbeg
 
 			for _, v := range data.([]interface{}) {
-				str += newline + tabs(lev) + prnt(v, lev+1) + arrmid
+				str += newline + tabs(lev) + vals(v, lev+1) + arrmid
 			}
 
 			return str[0:len(str)-len(arrmid)] + newline + tabs(lev-1) + arrend
@@ -157,7 +157,7 @@ func PrntFunctionMaker(boolcap bool, tab, strbeg, strend, arrbeg, arrend, objbeg
 			str := objbeg
 
 			for k, v := range data.(map[string]interface{}) {
-				str += newline + tabs(lev) + keybeg + k + keyend + prnt(v, lev+1) + objmid
+				str += newline + tabs(lev) + keybeg + k + keyend + vals(v, lev+1) + objmid
 			}
 
 			return str[0:len(str)-len(objmid)] + newline + tabs(lev-1) + objend
@@ -166,5 +166,21 @@ func PrntFunctionMaker(boolcap bool, tab, strbeg, strend, arrbeg, arrend, objbeg
 		return ""
 	}
 
-	return prnt
+	return func(args interface{}, sep string, notLast bool) string {
+		str := ""
+
+		if args == nil {
+			return str
+		}
+
+		for _, v := range args.([]interface{}) {
+			str += vals(v.(map[string]interface{})["value"]) + sep
+		}
+
+		if !notLast {
+			return str[0 : len(str)-len(sep)]
+		} else {
+			return str
+		}
+	}
 }

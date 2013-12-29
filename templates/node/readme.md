@@ -126,7 +126,7 @@ body = {'user': 'pksunkara'};
  * `{{.}}` - {{index $data.Doc $class "args" $index "desc"}}{{end}}
 
 ```js
-var {{call $data.Fnc.camelizeDownFirst .}} = client.{{call $data.Fnc.camelizeDownFirst .}}({{call $data.Fnc.args.node (index $data.Api.class . "args") true}});
+var {{call $data.Fnc.camelizeDownFirst .}} = client.{{call $data.Fnc.camelizeDownFirst .}}({{call $data.Fnc.prnt.node (index $data.Doc . "args") ", " false}});
 ```
 {{range (call $data.Fnc.methods (index $data.Api.class .))}}
 ##### {{index $data.Doc $class . "title"}} ({{call $data.Fnc.upper (or (index $data.Api.class $class . "method") "get")}} {{index $data.Api.class $class . "path"}})
@@ -136,7 +136,7 @@ var {{call $data.Fnc.camelizeDownFirst .}} = client.{{call $data.Fnc.camelizeDow
  * `{{.}}` - {{index $data.Doc $class $method "params" $index "desc"}}{{end}}{{end}}
 
 ```js
-{{call $data.Fnc.camelizeDownFirst $class}}.{{call $data.Fnc.camelizeDownFirst .}}({{call $data.Fnc.args.node (index $data.Api.class $class . "params")}}options, callback);
+{{call $data.Fnc.camelizeDownFirst $class}}.{{call $data.Fnc.camelizeDownFirst .}}({{call $data.Fnc.prnt.node (index $data.Doc $class . "params") ", " true}}options, callback);
 ```
 {{end}}{{end}}{{end}}{{end}}
 ## Contributors

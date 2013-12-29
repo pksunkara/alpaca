@@ -119,7 +119,7 @@ body = {'user': 'pksunkara'}
  * `{{.}}` - {{index $data.Doc $class "args" $index "desc"}}{{end}}
 
 ```python
-{{call $data.Fnc.underscore .}} = client.{{call $data.Fnc.underscore .}}({{call $data.Fnc.args.python (index $data.Api.class . "args") true}})
+{{call $data.Fnc.underscore .}} = client.{{call $data.Fnc.underscore .}}({{call $data.Fnc.prnt.python (index $data.Doc . "args") ", " false}})
 ```
 {{range (call $data.Fnc.methods (index $data.Api.class .))}}
 ##### {{index $data.Doc $class . "title"}} ({{call $data.Fnc.upper (or (index $data.Api.class $class . "method") "get")}} {{index $data.Api.class $class . "path"}})
@@ -129,11 +129,11 @@ body = {'user': 'pksunkara'}
  * `{{.}}` - {{index $data.Doc $class $method "params" $index "desc"}}{{end}}{{end}}
 
 ```python
-response = {{call $data.Fnc.underscore $class}}.{{call $data.Fnc.underscore .}}({{call $data.Fnc.args.python (index $data.Api.class $class . "params")}}options)
+response = {{call $data.Fnc.underscore $class}}.{{call $data.Fnc.underscore .}}({{call $data.Fnc.prnt.python (index $data.Doc $class . "params") ", " true}}options)
 ```
 {{end}}{{end}}{{end}}{{end}}
 ## Contributors
-Here is a list of [Contributors]((https://{{.Pkg.git.site}}/{{.Pkg.git.user}}/{{.Pkg.git.name}}-node/contributors)
+Here is a list of [Contributors]((https://{{.Pkg.git.site}}/{{.Pkg.git.user}}/{{.Pkg.git.name}}-python/contributors)
 
 ### TODO
 
@@ -141,7 +141,7 @@ Here is a list of [Contributors]((https://{{.Pkg.git.site}}/{{.Pkg.git.user}}/{{
 {{.Pkg.license}}
 
 ## Bug Reports
-Report [here](https://{{.Pkg.git.site}}/{{.Pkg.git.user}}/{{.Pkg.git.name}}-node/issues).
+Report [here](https://{{.Pkg.git.site}}/{{.Pkg.git.user}}/{{.Pkg.git.name}}-python/issues).
 
 ## Contact
 {{.Pkg.author.name}} ({{.Pkg.author.email}})
