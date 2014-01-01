@@ -105,14 +105,40 @@ All the following fields are required unless mentioned.
     "message": "error" // The field to be used from the response body for error message
   },
   "class": { // The classes for the api
+    "users": { // Name of a class of the api
+      "args": ["login"], // Arguments required for the api class [optional]
+      "profile": { // Name of a method of the api
+        "path": "/users/:login/profile", // Url of the api method
+        "method": "post", // HTTP method of the api method [optional] (default: get)
+        "params": ["bio"] // Arguments required for the api method [optional]
+      }
+    }
   }
 }
 ```
 
 #### doc.json
 
+The following is filled according to the entries in `api.json`
+
 ```js
 {
+  "users": { // Name of a class of the api
+    "title": "Users", // Title of the api class
+    "desc": "Returns user api instance", // Description of the api class
+    "args": [{
+      "desc": "Username of the user", // Description of the argument
+      "value": "pksunkara" // Value of the argument in docs
+    }],
+    "profile": { // Name of a method of the api
+      "title": "Edit profile", // Title of the api method
+      "desc": "Edit the user's profile", // Description of the api method
+      "params": [{
+        "desc": "Short bio in profile", // Description of the argument
+        "value": "I am awesome!" // Value of the argument in docs
+      }]
+    }
+  }
 }
 ```
 

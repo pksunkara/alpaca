@@ -128,12 +128,35 @@ $body = array('user' => 'pksunkara');
 $body = array('user' => 'pksunkara');
 ```
 {{end}}
+### Client Options
+
+The following options are available while instantiating a client:
+
+ * __base__: Base url for the api
+ * __api_version__: Default version of the api (to be used in url)
+ * __user_agent__: Default user-agent for all requests
+ * __headers__: Default headers for all requests
+ * __request_type__: Default format of the request body{{if .Api.response.suffix}}
+ * __response_type__: Default format of the response (to be used in url suffix){{end}}
+
+### Method Options
+
+The following options are available while calling a method of an api:
+
+ * __api_version__: Version of the api (to be used in url)
+ * __headers__: Headers for the request
+ * __query__: Query parameters for the url
+ * __body__: Body of the request
+ * __request_type__: Format of the request body{{if .Api.response.suffix}}
+ * __response_type__: Format of the response (to be used in url suffix){{end}}
 {{with $data := .}}{{range .Api.classes}}
 ### {{index $data.Doc . "title"}} api
 
 {{index $data.Doc . "desc"}}
+{{with (index $data.Api.class . "args")}}
+The following arguments are required:{{end}}
 {{with $class := .}}{{range $index, $element := (index $data.Api.class . "args")}}
- * `{{.}}` - {{index $data.Doc $class "args" $index "desc"}}{{end}}
+ * __{{.}}__: {{index $data.Doc $class "args" $index "desc"}}{{end}}
 
 ```php
 ${{call $data.Fnc.camelizeDownFirst .}} = $client->{{call $data.Fnc.camelizeDownFirst .}}({{call $data.Fnc.prnt.php (index $data.Doc . "args") ", " false}});
@@ -142,8 +165,10 @@ ${{call $data.Fnc.camelizeDownFirst .}} = $client->{{call $data.Fnc.camelizeDown
 ##### {{index $data.Doc $class . "title"}} ({{call $data.Fnc.upper (or (index $data.Api.class $class . "method") "get")}} {{index $data.Api.class $class . "path"}})
 
 {{index $data.Doc $class . "desc"}}
+{{with (index $data.Api.class $class . "params")}}
+The following arguments are required:{{end}}
 {{with $method := .}}{{range $index, $element := (index $data.Api.class $class . "params")}}
- * `{{.}}` - {{index $data.Doc $class $method "params" $index "desc"}}{{end}}{{end}}
+ * __{{.}}__: {{index $data.Doc $class $method "params" $index "desc"}}{{end}}{{end}}
 
 ```php
 $response = ${{call $data.Fnc.camelizeDownFirst $class}}->{{call $data.Fnc.camelizeDownFirst .}}({{call $data.Fnc.prnt.php (index $data.Doc $class . "params") ", " true}}$options);
