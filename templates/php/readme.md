@@ -46,10 +46,10 @@ require_once 'vendor/autoload.php';
 ##### Without any authentication
 
 ```php
-$client = new \{{call .Fnc.camelize .Pkg.name}}\Client();
+$client = new {{call .Fnc.camelize .Pkg.name}}\Client();
 
 // If you need to send options
-$client = new \{{call .Fnc.camelize .Pkg.name}}\Client(array(), $options);
+$client = new {{call .Fnc.camelize .Pkg.name}}\Client(array(), $options);
 ```
 {{if .Api.authorization.basic}}
 ##### Basic authentication
@@ -57,19 +57,19 @@ $client = new \{{call .Fnc.camelize .Pkg.name}}\Client(array(), $options);
 ```php
 $auth = array('username' => 'pksunkara', 'password' => 'password');
 
-$client = new \{{call .Fnc.camelize .Pkg.name}}\Client($auth, $options);
+$client = new {{call .Fnc.camelize .Pkg.name}}\Client($auth, $options);
 ```
 {{end}}{{if .Api.authorization.header}}
 ##### Authorization header token
 
 ```php
-$client = new \{{call .Fnc.camelize .Pkg.name}}\Client({{if .Api.authorization.oauth}}array('http_header' => '1a2b3'){{else}}'1a2b3'{{end}}, $options);
+$client = new {{call .Fnc.camelize .Pkg.name}}\Client({{if .Api.authorization.oauth}}array('http_header' => '1a2b3'){{else}}'1a2b3'{{end}}, $options);
 ```
 {{end}}{{if .Api.authorization.oauth}}
 ##### Oauth acess token
 
 ```php
-$client = new \{{call .Fnc.camelize .Pkg.name}}\Client('1a2b3', $options);
+$client = new {{call .Fnc.camelize .Pkg.name}}\Client('1a2b3', $options);
 ```
 
 ##### Oauth client secret
@@ -77,7 +77,7 @@ $client = new \{{call .Fnc.camelize .Pkg.name}}\Client('1a2b3', $options);
 ```php
 $auth = array('client_id' => '09a8b7', 'client_secret' => '1a2b3');
 
-$client = new \{{call .Fnc.camelize .Pkg.name}}\Client($auth, $options);
+$client = new {{call .Fnc.camelize .Pkg.name}}\Client($auth, $options);
 ```
 {{end}}
 ### Response information

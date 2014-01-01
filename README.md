@@ -45,6 +45,12 @@ $ go get
 $ go install github.com/pksunkara/alpaca
 ```
 
+## Examples
+
+You can find some api definitions in the [examples](https://github.com/pksunkara/alpaca/tree/master/examples) directory. The api libraries generated are at [https://github.com/alpaca-api](https://github.com/alpaca-api)
+
+Completed api definitions are [buffer](https://github.com/pksunkara/alpaca/tree/master/examples/buffer).
+
 ## Usage
 
 ```bash
@@ -52,12 +58,6 @@ $ alpaca </path/to/dir>
 ```
 
 The path here should be a directory with `api.json`, `pkg.json`, `doc.json`
-
-### Examples
-
-You can find some api definitions in the [examples](https://github.com/pksunkara/alpaca/tree/master/examples) directory. The api libraries generated are at [https://github.com/alpaca-api](https://github.com/alpaca-api)
-
-Completed api definitions are [buffer](https://github.com/pksunkara/alpaca/tree/master/examples/buffer).
 
 #### pkg.json
 
