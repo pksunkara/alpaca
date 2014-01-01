@@ -1,67 +1,25 @@
 {
-  "endpoint": "https://api.twilio.com/2010-04-01",
-  "authorization": "basic",
-  "resources": {
-    "account": {
-      "id": "sid",
-      "properties": {
-        "sid": {
-          "type": "string"
-        },
-        "date_created": {
-          "type": "string"
-        },
-        "date_updated": {
-          "type": "string"
-        },
-        "friendly_name": {
-          "type": "string",
-          "maxLength": 64
-        },
-        "type": {
-          "type": "string"
-        },
-        "status": {
-          "type": "string",
-          "enum": ["active", "closed", "suspended"]
-        },
-        "uri": {
-          "type": "string"
-        },
-        "subresource_uris": {
-          "type": "object"
-        },
-        "owner_account_sid": {
-          "type": "string"
-        }
-      },
-      "functions": {
-        "get": {
-          "name": "Get an account",
-          "method": "GET",
-          "url": "/accounts/:account",
-          "return": "account"
-        },
-        "update": {
-          "name": "Update an account",
-          "method": "POST",
-          "url": "/accounts/:account",
-          "return": "account"
-        },
-        "list": {
-          "name": "Retrieve list of accounts",
-          "method": "GET",
-          "url": "/accounts",
-          "return": "__page__"
-        },
-        "create": {
-          "name": "Create a subaccount",
-          "method": "POST",
-          "url": "/accounts",
-          "single_param": "friendly_name",
-          "return": "account"
-        }
-      }
-    }
-  }
+	"base": "https://api.twilio.com",
+	"version": "2010-04-01"
+	"authorization": {
+		"basic" : true
+	},
+	"request": {
+		"formats": {
+			"default": "form"
+		}
+	},
+	"response": {
+		"formats": {
+			"default": "json",
+			"json": true
+		},
+		"suffix": true
+	},
+	"error": {
+		"message": "message"
+	},
+	"class": {
+		
+	}
 }

@@ -3,6 +3,7 @@
   "package": "twilio-alpaca",
   "version": "0.1.0",
   "url": "https://twilio.com",
+  "keywords": ["alpaca", "twilio", "api", "client", "library"],
   "official": false,
   "author": {
     "name": "Pavan Kumar Sunkara",
@@ -14,5 +15,11 @@
     "user": "alpaca-api",
     "name": "twilio"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "php": {
+    "vendor": "pksunkara"
+  },
+  "python": {
+    "license": "MIT License"
+  }
 }

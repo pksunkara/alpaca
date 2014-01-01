@@ -1,8 +1,9 @@
 {
-  "name": "Balanced Payments",
+  "name": "Balanced",
   "package": "balanced-alpaca",
   "version": "0.1.0",
   "url": "https://balancedpayments.com",
+  "keywords": ["alpaca", "balanced", "api", "client", "library"],
   "official": false,
   "author": {
     "name": "Pavan Kumar Sunkara",
@@ -14,5 +15,11 @@
     "user": "alpaca-api",
     "name": "balanced"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "php": {
+    "vendor": "pksunkara"
+  },
+  "python": {
+    "license": "MIT License"
+  }
 }

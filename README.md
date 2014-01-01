@@ -12,13 +12,23 @@ You are planning to build an API for your website and develop API libraries? _Th
 
 ---
 
-You define your API, **alpaca** builds the API libraries along with their documentation. All you have to do is publishing them to their respective package managers.
+You define your API according to the format given below, __alpaca__ builds the API libraries along with their documentation. All you have to do is publishing them to their respective package managers.
 
 Join us at [gitter](https://gitter.im/pksunkara/alpaca) if you need any help. Or at `#alpaca` on freenode IRC.
 
 ## Installation
 
-You can download the binary files.
+You can download the binaries
+
+ * Architecture i386 [ [linux](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.1.0_linux_386.tar.gz?direct) / [darwin](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.1.0_darwin_386.zip?direct) / [freebsd](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.1.0_freebsd_386.zip?direct) / [openbsd](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.1.0_openbsd_386.zip?direct) ]
+ * Architecture amd64 [ [linux](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.1.0_linux_amd64.tar.gz?direct) / [darwin](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.1.0_darwin_amd64.zip?direct) / [freebsd](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.1.0_freebsd_amd64.zip?direct) / [openbsd](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.1.0_openbsd_amd64.zip?direct) ]
+ * Architecture arm [ [linux](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.1.0_linux_arm.tar.gz?direct) / [freebsd](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.1.0_freebsd_arm.zip?direct) ]
+
+Or by using deb packages
+
+ * [i386.deb](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.1.0_i386.deb?direct)
+ * [amd64.deb](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.1.0_amd64.deb?direct)
+ * [armhf.deb](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.1.0_armhf.deb?direct)
 
 Or by using golang
 
@@ -42,6 +52,12 @@ $ alpaca </path/to/dir>
 ```
 
 The path here should be a directory with `api.json`, `pkg.json`, `doc.json`
+
+### Examples
+
+You can find some api definitions in the [examples](https://github.com/pksunkara/alpaca/tree/master/examples) directory. The api libraries generated are at [https://github.com/alpaca-api](https://github.com/alpaca-api)
+
+Completed api definitions are [buffer](https://github.com/pksunkara/alpaca/tree/master/examples/buffer).
 
 #### pkg.json
 
@@ -158,6 +174,13 @@ The format `html` is always true.
 
 Supported are `basic`, `header`, `oauth`
 
+### Package Managers
+
+ * __node__: [https://npmjs.org](https://npmjs.org)
+ * __php__: [https://packagist.org](https://packagist.org)
+ * __python__: [https://pypi.python.org](https://pypi.python.org)
+ * __ruby__: [https://rubygems.org](https://rubygems.org)
+
 ## Testing
 
 Check [here](https://github.com/pksunkara/alpaca/tree/testing) to learn about testing.
@@ -170,26 +193,26 @@ __I accept pull requests and guarantee a reply back within a day__
 
 ### TODO
 
-#### General
+##### General
 
  * Convert `make` into `Makefile`
 
-#### Responses
+##### Responses
 
  * Add support for XML
  * Add support for CSV
 
-#### Requests
+##### Requests
 
  * HTTP Method Overloading
  * What about file uploads?
 
-#### Api
+##### Api
 
  * Check returned status code
  * Special case for 204:true and 404:false
 
-#### Libraries
+##### Libraries
 
  * Pagination support
  * Classes inside classes (so on..)
@@ -197,18 +220,17 @@ __I accept pull requests and guarantee a reply back within a day__
  * Allow customization of errors
  * Tests for libraries (lots and lots of tests)
 
-#### Readme
+##### Readme
 
- * Examples in place of args/params
+ * Optional params available
  * Return types of api calls
- * Options available
 
-#### Comments
+##### Comments
 
  * The descriptions should be wrapped
  * Align @param descriptions
 
-#### Languages
+##### Languages
 
  * Support Java, Go, Perl, Clojure, Scala, Obj-C
  * Build API docs (Resulting in bloated definitions?)

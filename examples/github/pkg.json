@@ -3,6 +3,7 @@
   "package": "github-alpaca",
   "version": "0.1.0",
   "url": "https://github.com",
+  "keywords": ["alpaca", "github", "api", "client", "library"],
   "official": false,
   "author": {
     "name": "Pavan Kumar Sunkara",
@@ -14,5 +15,11 @@
     "user": "alpaca-api",
     "name": "github"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "php": {
+    "vendor": "pksunkara"
+  },
+  "python": {
+    "license": "MIT License"
+  }
 }
