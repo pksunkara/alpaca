@@ -175,7 +175,7 @@ $response = ${{call $data.Fnc.camelizeDownFirst $class}}->{{call $data.Fnc.camel
 ```
 {{end}}{{end}}{{end}}{{end}}
 ## Contributors
-Here is a list of [Contributors]((https://{{.Pkg.git.site}}/{{.Pkg.git.user}}/{{.Pkg.git.name}}-php/contributors)
+Here is a list of [Contributors](https://{{.Pkg.git.site}}/{{.Pkg.git.user}}/{{.Pkg.git.name}}-php/contributors)
 
 ### TODO
 
