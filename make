@@ -9,8 +9,8 @@ var Data = map[string] func() []byte {
 EOF
 
 for tmpl in $(find templates -type f); do
-	out=$(echo $tmpl | sed -r 's/templates\///g' | sed -r 's/\//z/g' | sed -r 's/\./zz/g')
-	file=$(echo $tmpl | sed -r 's/templates\///g')
+	out=$(echo $tmpl | sed 's/templates\///g' | sed 's/\//z/g' | sed 's/\./zz/g')
+	file=$(echo $tmpl | sed 's/templates\///g')
 
 	if [[ $out != "templateszzgo" ]]; then
 		echo "Building $file ...";

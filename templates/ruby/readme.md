@@ -158,7 +158,7 @@ response = {{call $data.Fnc.underscore $class}}.{{call $data.Fnc.underscore .}}(
 ```
 {{end}}{{end}}{{end}}{{end}}
 ## Contributors
-Here is a list of [Contributors]((https://{{.Pkg.git.site}}/{{.Pkg.git.user}}/{{.Pkg.git.name}}-ruby/contributors)
+Here is a list of [Contributors](https://{{.Pkg.git.site}}/{{.Pkg.git.user}}/{{.Pkg.git.name}}-ruby/contributors)
 
 ### TODO
 

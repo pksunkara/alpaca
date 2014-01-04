@@ -165,7 +165,7 @@ The following arguments are required:{{end}}
 ```
 {{end}}{{end}}{{end}}{{end}}
 ## Contributors
-Here is a list of [Contributors]((https://{{.Pkg.git.site}}/{{.Pkg.git.user}}/{{.Pkg.git.name}}-node/contributors)
+Here is a list of [Contributors](https://{{.Pkg.git.site}}/{{.Pkg.git.user}}/{{.Pkg.git.name}}-node/contributors)
 
 ### TODO
 
