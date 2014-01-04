@@ -35,14 +35,10 @@ Or by using golang
 ```bash
 # Clone the project into your golang workspace
 $ git clone git://github.com/pksunkara/alpaca
+$ cd alpaca
 
-# Compile templates
-$ go get github.com/jteeuwen/go-bindata
-$ cd alpaca && ./make
-
-# Install the program
-$ go get
-$ go install github.com/pksunkara/alpaca
+# Install program
+$ make && make install
 ```
 
 ## Examples
@@ -195,7 +191,7 @@ __I accept pull requests and guarantee a reply back within a day__
 
 ##### General
 
- * Convert `make` into `Makefile`
+ * Support YAML configuration
 
 ##### Responses
 
