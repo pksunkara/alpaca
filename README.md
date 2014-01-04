@@ -245,3 +245,7 @@ Report [here](http://github.com/pksunkara/alpaca/issues). __Guaranteed reply wit
 Pavan Kumar Sunkara (pavan.sss1991@gmail.com)
 
 Follow me on [github](https://github.com/users/follow?target=pksunkara), [twitter](http://twitter.com/pksunkara)
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/pksunkara/alpaca/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
