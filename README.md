@@ -1,4 +1,4 @@
-# alpaca [![Build Status](https://drone.io/github.com/pksunkara/alpaca/status.png)](https://drone.io/github.com/pksunkara/alpaca/latest)
+# alpaca [![Build Status](https://drone.io/github.com/pksunkara/alpaca/status.png)](https://drone.io/github.com/pksunkara/alpaca/latest) [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/pksunkara/alpaca/trend.png)](https://bitdeli.com/free)
 
 Api Libraries Powered And Created by Alpaca
 
