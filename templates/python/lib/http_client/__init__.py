@@ -76,6 +76,10 @@ class HttpClient():
 		kwargs['data'] = body
 		kwargs['allow_redirects'] = True
 
+{{if .Api.no_verify_ssl}}
+		kwargs['verify'] = False
+{{end}}
+
 		kwargs['params'] = kwargs['query'] if 'query' in kwargs else {}
 
 		if 'query' in kwargs:

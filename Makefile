@@ -10,6 +10,12 @@ remove_tmpl_dir = $(1:$(TEMPLATES_DIR)/%=%)
 
 SOURCES = $(filter-out %.go,$(shell find $(TEMPLATES_DIR)/* -type f))
 OBJECTS = $(addsuffix .go, $(foreach src, $(SOURCES), $(call func_name_from_file,$(src))))
+DEPS = \
+	github.com/jteeuwen/go-bindata \
+	github.com/robertkrimen/terst \
+	github.com/jessevdk/go-flags \
+	bitbucket.org/pkg/inflect
+
 
 all:deps templates
 
@@ -31,10 +37,7 @@ install:
 	go install github.com/pksunkara/alpaca
 
 deps:
-	go get github.com/jteeuwen/go-bindata
-	go get github.com/robertkrimen/terst
-	go get github.com/jessevdk/go-flags
-	go get bitbucket.org/pkg/inflect
+	go get $(DEPS)
 
 clean:
 	rm -f ${TEMPLATES_DIR}/*.go
