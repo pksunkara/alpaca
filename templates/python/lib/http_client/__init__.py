@@ -76,10 +76,6 @@ class HttpClient():
 		kwargs['data'] = body
 		kwargs['allow_redirects'] = True
 
-{{if .Api.no_verify_ssl}}
-		kwargs['verify'] = False
-{{end}}
-
 		kwargs['params'] = kwargs['query'] if 'query' in kwargs else {}
 
 		if 'query' in kwargs:
@@ -90,7 +86,9 @@ class HttpClient():
 
 		del kwargs['base']
 		del kwargs['user_agent']
-
+{{if .Api.no_verify_ssl}}
+		kwargs['verify'] = False
+{{end}}
 		if method != 'get':
 			kwargs = self.set_body(kwargs)
 

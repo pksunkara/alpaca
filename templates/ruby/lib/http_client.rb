@@ -13,6 +13,7 @@ module {{.Pkg.name}}
 
       attr_accessor :options, :headers
 
+      @conn_options = {}
       @headers = {}
 
       def initialize(auth = {}, options = {})
@@ -41,8 +42,10 @@ module {{.Pkg.name}}
           @headers.update Hash[@options[:headers].map { |k, v| [k.downcase, v] }]
           @options.delete :headers
         end
-
-        @client = Faraday.new @options[:base] do |conn|
+{{if .Api.no_verify_ssl}}
+        @conn_options[:ssl] = { :verify => false }
+{{end}}
+        @client = Faraday.new(@options[:base], @conn_options) do |conn|
           conn.use {{.Pkg.name}}::HttpClient::AuthHandler, auth
           conn.use {{.Pkg.name}}::HttpClient::ErrorHandler
 

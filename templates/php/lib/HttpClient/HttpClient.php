@@ -108,11 +108,9 @@ class HttpClient
 
         unset($options['base']);
         unset($options['user_agent']);
-
 {{if .Api.no_verify_ssl}}
         $options['verify'] = false;
 {{end}}
-
         $request = $this->createRequest($httpMethod, $path, null, $headers, $options);
 
         if ($httpMethod != 'GET') {

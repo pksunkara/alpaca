@@ -131,7 +131,9 @@ client.HttpClient.prototype.request = function (path, body, method, options, cal
 
   delete options['base'];
   delete options['user_agent'];
-
+{{if .Api.no_verify_ssl}}
+  reqobj['strictSSL'] = false;
+{{end}}
   if (method != 'GET') {
     reqobj = this.setBody(reqobj, body, options);
   }

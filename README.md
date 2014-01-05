@@ -95,6 +95,7 @@ All the following fields are required unless mentioned.
 {
   "base": "https://exampleapp.com", // Base URL of the api
   "version": "v1", // Default version for the api (https://api.example.com{/version}/users) [optional]
+  "no_verify_ssl": "true", // Do not verify SSL cert [optional] (default: false)
   "authorization": { // Authorization strategies
     "basic" : true, // Basic authentication [optional] (default: false)
     "header": true, // Token in authorization header [optional] (default: false)
