@@ -48,7 +48,7 @@ class HttpClient
         }
 
         $client = new GuzzleClient($this->options['base'], $this->options);
-        $this->client  = $client;
+        $this->client = $client;
 
         $listener = array(new ErrorHandler(), 'onRequestError');
         $this->client->getEventDispatcher()->addListener('request.error', $listener);

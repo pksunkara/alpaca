@@ -13,9 +13,6 @@ module {{.Pkg.name}}
 
       attr_accessor :options, :headers
 
-      @conn_options = {}
-      @headers = {}
-
       def initialize(auth = {}, options = {})
 {{if .Api.authorization.oauth}}
         if auth.is_a? String
@@ -43,10 +40,14 @@ module {{.Pkg.name}}
           @options.delete :headers
         end
 {{if .Api.no_verify_ssl}}
-        @conn_options[:ssl] = { :verify => false }
-{{end}}
+        @conn_options = {
+          :ssl => { :verify => false }
+        }
+
         @client = Faraday.new(@options[:base], @conn_options) do |conn|
-          conn.use {{.Pkg.name}}::HttpClient::AuthHandler, auth
+{{else}}
+        @client = Faraday.new @options[:base] do |conn|
+{{end}}          conn.use {{.Pkg.name}}::HttpClient::AuthHandler, auth
           conn.use {{.Pkg.name}}::HttpClient::ErrorHandler
 
           conn.adapter Faraday.default_adapter
