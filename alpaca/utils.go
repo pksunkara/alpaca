@@ -18,6 +18,10 @@ func MoveDir(name string) {
 }
 
 func ArrayInterfaceToString(inter interface{}) []string {
+	if inter == nil {
+		return []string{}
+	}
+
 	old := inter.([]interface{})
 	new := make([]string, len(old))
 
@@ -29,6 +33,10 @@ func ArrayInterfaceToString(inter interface{}) []string {
 }
 
 func MapKeysToStringArray(inter interface{}, exclude []string) []string {
+	if inter == nil {
+		return []string{}
+	}
+
 	old := inter.(map[string]interface{})
 	new := make([]string, 0, len(old))
 

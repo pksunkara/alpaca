@@ -18,13 +18,13 @@ Join us at [gitter](https://gitter.im/pksunkara/alpaca) if you need any help. Or
 
 ## Installation
 
-You can download the binaries
+You can download the binaries (v0.1.0)
 
  * Architecture i386 [ [linux](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.1.0_linux_386.tar.gz?direct) / [darwin](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.1.0_darwin_386.zip?direct) / [freebsd](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.1.0_freebsd_386.zip?direct) / [openbsd](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.1.0_openbsd_386.zip?direct) ]
  * Architecture amd64 [ [linux](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.1.0_linux_amd64.tar.gz?direct) / [darwin](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.1.0_darwin_amd64.zip?direct) / [freebsd](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.1.0_freebsd_amd64.zip?direct) / [openbsd](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.1.0_openbsd_amd64.zip?direct) ]
  * Architecture arm [ [linux](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.1.0_linux_arm.tar.gz?direct) / [freebsd](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.1.0_freebsd_arm.zip?direct) ]
 
-Or by using deb packages
+Or by using deb packages (v0.1.0)
 
  * [i386.deb](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.1.0_i386.deb?direct)
  * [amd64.deb](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.1.0_amd64.deb?direct)
