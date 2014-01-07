@@ -40,7 +40,7 @@ func MapKeysToStringArray(inter interface{}, exclude []string) []string {
 	old := inter.(map[string]interface{})
 	new := make([]string, 0, len(old))
 
-	for v, _ := range old {
+	for v := range old {
 		flag := true
 
 		for _, e := range exclude {
@@ -195,8 +195,8 @@ func PrntFunctionMaker(boolcap bool, tab, strbeg, strend, arrbeg, arrend, objbeg
 
 		if !notLast {
 			return str[0 : len(str)-len(sep)]
-		} else {
-			return str
 		}
+
+		return str
 	}
 }
