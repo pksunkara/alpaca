@@ -8,16 +8,21 @@ import (
 func TestArrayInterfaceToString(t *testing.T) {
 	terst.Terst(t)
 
+	var nul interface{}
+
 	old := make([]interface{}, 2)
 
 	old[0] = "hello"
 	old[1] = "world"
 
+	terst.Is(ArrayInterfaceToString(nul), []string{})
 	terst.Is(ArrayInterfaceToString(old), []string{"hello", "world"})
 }
 
 func TestMapKeysToStringArray(t *testing.T) {
 	terst.Terst(t)
+
+	var nul interface{}
 
 	old := make(map[string]interface{})
 
@@ -25,6 +30,7 @@ func TestMapKeysToStringArray(t *testing.T) {
 	old["b"] = "bbb"
 	old["c"] = "ccc"
 
+	terst.Is(MapKeysToStringArray(nul, []string{}), []string{})
 	terst.Is(MapKeysToStringArray(old, []string{"b"}), []string{"a", "c"})
 }
 
@@ -47,11 +53,22 @@ func TestActiveClassInfo(t *testing.T) {
 func TestArgsFunctionMaker(t *testing.T) {
 	terst.Terst(t)
 
+	var nul interface{}
+
 	f := ArgsFunctionMaker("$", ", ").(func(interface{}, ...bool) string)
-	args, noargs := make([]interface{}, 2), make([]interface{}, 0)
+
+	args := make([]interface{}, 2)
+	params := make([]interface{}, 2)
 
 	args[0] = "id"
 	args[1] = "url"
+
+	params[0] = make(map[string]interface{})
+	params[1] = make(map[string]interface{})
+
+	params[0].(map[string]interface{})["name"] = "id"
+	params[0].(map[string]interface{})["required"] = true
+	params[1].(map[string]interface{})["name"] = "url"
 
 	terst.Is(f(args), "$id, $url, ")
 	terst.Is(f(args, false), "$id, $url, ")
@@ -60,15 +77,20 @@ func TestArgsFunctionMaker(t *testing.T) {
 	terst.Is(f(args, true, true), ", $id, $url")
 	terst.Is(f(args, false, true), ", $id, $url, ")
 
-	terst.Is(f(noargs), "")
-	terst.Is(f(noargs, true), "")
-	terst.Is(f(noargs, false, true), "")
+	terst.Is(f(params), "$id, ")
+	terst.Is(f(params, true), "$id")
+	terst.Is(f(params, false, true), ", $id, ")
+
+	terst.Is(f(nul), "")
+	terst.Is(f(nul, true), "")
+	terst.Is(f(nul, false, true), "")
 }
 
 func TestPathFunctionMaker(t *testing.T) {
 	terst.Terst(t)
 
 	f := PathFunctionMaker("\"+@", "+\"").(func(string, interface{}) string)
+
 	args := make([]interface{}, 2)
 
 	args[0] = "id"
@@ -80,9 +102,11 @@ func TestPathFunctionMaker(t *testing.T) {
 func TestPrntFunctionMaker(t *testing.T) {
 	terst.Terst(t)
 
+	var nul interface{}
+
 	f := PrntFunctionMaker(true, "  ", "'", "'", "[", "]", "{", "}", ":", " => ").(func(interface{}, string, bool) string)
 
-	args := make([]interface{}, 1)
+	args := make(map[string]interface{})
 	vals := make(map[string]interface{})
 	orgs := make([]interface{}, 3)
 	hash := make(map[string]interface{})
@@ -102,8 +126,10 @@ func TestPrntFunctionMaker(t *testing.T) {
 	vals["hash"] = hash
 	vals["dump"] = make(map[string]string)
 
-	args[0] = make(map[string]interface{})
-	args[0].(map[string]interface{})["value"] = vals
+	args["id"] = make(map[string]interface{})
+	args["id"].(map[string]interface{})["value"] = vals
 
 	terst.Is(f(args, ", ", true), "{\n  :msid => 3737,\n  :plan => 1.99,\n  :name => 'pksunkara',\n  :hire => True,\n  :orgs => [\n    False,\n    'alpaca-api',\n    0\n  ],\n  :hash => {\n    :html => 'haml',\n    :rest => False\n  },\n  :dump => \n}, ")
+	terst.Is(f(args, ", ", false), "{\n  :msid => 3737,\n  :plan => 1.99,\n  :name => 'pksunkara',\n  :hire => True,\n  :orgs => [\n    False,\n    'alpaca-api',\n    0\n  ],\n  :hash => {\n    :html => 'haml',\n    :rest => False\n  },\n  :dump => \n}")
+	terst.Is(f(nul, ", ", true), "")
 }

@@ -36,13 +36,27 @@
 			"create_update": {
 				"path": "/updates/create",
 				"method": "post",
-				"params": ["text", "profile_ids"]
+				"params": [
+					{
+						"name": "text",
+						"required": true
+					},
+					{
+						"name": "profile_ids",
+						"required": true
+					}
+				]
 			}
 		},
 		"link": {
 			"shares": {
 				"path": "/link/shares",
-				"params": ["url"]
+				"params": [
+					{
+						"name": "url",
+						"required": true
+					}
+				]
 			}
 		},
 		"profile": {
@@ -61,7 +75,12 @@
 			"reorder": {
 				"path": "/profiles/:id/updates/reorder",
 				"method": "post",
-				"params": ["order"]
+				"params": [
+					{
+						"name": "order",
+						"required": true
+					}
+				]
 			},
 			"shuffle": {
 				"path": "/profiles/:id/updates/shuffle",
@@ -76,7 +95,12 @@
 			"update": {
 				"path": "/profiles/:id/schedules/update",
 				"method": "post",
-				"params": ["schedules"]
+				"params": [
+					{
+						"name": "schedules",
+						"required": true
+					}
+				]
 			}
 		},
 		"update": {
@@ -91,7 +115,12 @@
 			"update": {
 				"path": "/updates/:id/update",
 				"method": "post",
-				"params": ["text"]
+				"params": [
+					{
+						"name": "text",
+						"required": true
+					}
+				]
 			},
 			"share": {
 				"path": "/updates/:id/share",

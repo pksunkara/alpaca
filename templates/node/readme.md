@@ -145,8 +145,8 @@ The following options are available while calling a method of an api:
 {{index $data.Doc . "desc"}}
 {{with (index $data.Api.class . "args")}}
 The following arguments are required:{{end}}
-{{with $class := .}}{{range $index, $element := (index $data.Api.class . "args")}}
- * __{{.}}__: {{index $data.Doc $class "args" $index "desc"}}{{end}}
+{{with $class := .}}{{range (index $data.Api.class . "args")}}
+ * __{{.}}__: {{index $data.Doc $class "args" . "desc"}}{{end}}
 
 ```js
 var {{call $data.Fnc.camelizeDownFirst .}} = client.{{call $data.Fnc.camelizeDownFirst .}}({{call $data.Fnc.prnt.node (index $data.Doc . "args") ", " false}});
@@ -157,8 +157,8 @@ var {{call $data.Fnc.camelizeDownFirst .}} = client.{{call $data.Fnc.camelizeDow
 {{index $data.Doc $class . "desc"}}
 {{with (index $data.Api.class $class . "params")}}
 The following arguments are required:{{end}}
-{{with $method := .}}{{range $index, $element := (index $data.Api.class $class . "params")}}
- * __{{.}}__: {{index $data.Doc $class $method "params" $index "desc"}}{{end}}{{end}}
+{{with $method := .}}{{range (index $data.Api.class $class . "params")}}{{if .required}}
+ * __{{.name}}__: {{index $data.Doc $class $method "params" .name "desc"}}{{end}}{{end}}{{end}}
 
 ```js
 {{call $data.Fnc.camelizeDownFirst $class}}.{{call $data.Fnc.camelizeDownFirst .}}({{call $data.Fnc.prnt.node (index $data.Doc $class . "params") ", " true}}options, callback);

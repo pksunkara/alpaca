@@ -21,13 +21,16 @@
 		"create_update": {
 			"title": "Create a social update",
 			"desc": "Create one or more new status updates.",
-			"params": [{
-				"desc": "The status update text.",
-				"value": "This is an example update"
-			}, {
-				"desc": "An array of profile id's that the status update should be sent to. Invalid profile_id's will be silently ignored.",
-				"value": ["4eb854340acb04e870000010", "4eb9276e0acb04bb81000067"]
-			}]
+			"params": {
+				"text": {
+					"desc": "The status update text.",
+					"value": "This is an example update"
+				},
+				"profile_ids": {
+					"desc": "An array of profile id's that the status update should be sent to. Invalid profile_id's will be silently ignored.",
+					"value": ["4eb854340acb04e870000010", "4eb9276e0acb04bb81000067"]
+				}
+			}
 		}
 	},
 	"link": {
@@ -36,19 +39,23 @@
 		"shares": {
 			"title": "Amount of link shares",
 			"desc": "Returns an object with a the numbers of shares a link has had using Buffer.",
-			"params": [{
-				"desc": "URL of the page for which the number of shares is requested.",
-				"value": "http://bufferapp.com"
-			}]
+			"params": {
+				"url": {
+					"desc": "URL of the page for which the number of shares is requested.",
+					"value": "http://bufferapp.com"
+				}
+			}
 		}
 	},
 	"profile": {
 		"title": "Social profiles",
 		"desc": "Returns a social media profile api instance.",
-		"args": [{
-			"desc": "Identifier of a social media profile",
-			"value": "519fc3ca4d5e93901900002f"
-		}],
+		"args": {
+			"id": {
+				"desc": "Identifier of a social media profile",
+				"value": "519fc3ca4d5e93901900002f"
+			}
+		},
 		"show": {
 			"title": "Get this social profile",
 			"desc": "Returns details of the single specified social media profile."
@@ -64,10 +71,12 @@
 		"reorder": {
 			"title": "Edit profile's updates order",
 			"desc": "Edit the order at which statuses for the specified social media profile will be sent out of the buffer.",
-			"params": [{
-				"desc": "An ordered array of status update id's. This can be a partial array in combination with the offset parameter or a full array of every update in the profiles Buffer.",
-				"value": ["4eb854340acb04e870000010", "4eb9276e0acb04bb81000067", "4eb2567e0ade04ba51000001"]
-			}]
+			"params": {
+				"order": {
+					"desc": "An ordered array of status update id's. This can be a partial array in combination with the offset parameter or a full array of every update in the profiles Buffer.",
+					"value": ["4eb854340acb04e870000010", "4eb9276e0acb04bb81000067", "4eb2567e0ade04ba51000001"]
+				}
+			}
 		},
 		"shuffle": {
 			"title": "Shuffle profile's updates",
@@ -77,10 +86,12 @@
 	"schedule": {
 		"title": "Posting schedules",
 		"desc": "Returns scheduling api instance for social media profile.",
-		"args": [{
-			"desc": "Identifier of a social media profile",
-			"value": "519fc3ca4d5e93901900002f"
-		}],
+		"args": {
+			"id": {
+				"desc": "Identifier of a social media profile",
+				"value": "519fc3ca4d5e93901900002f"
+			}
+		},
 		"list": {
 			"title": "Get profile's posting schedules",
 			"desc": "Returns details of the posting schedules associated with a social media profile."
@@ -88,22 +99,26 @@
 		"update": {
 			"title": "Update profile's posting schedules",
 			"desc": "Set the posting schedules for the specified social media profile.",
-			"params": [{
-				"desc": "Each item in the array is an individual posting schedule which consists of days and times to match the format return by the above method.",
-				"value": [{
-					"days": ["mon", "tue", "thu"],
-					"times": ["12:45", "15:30", "17:43"]
-				}]
-			}]
+			"params": {
+				"schedules": {
+					"desc": "Each item in the array is an individual posting schedule which consists of days and times to match the format return by the above method.",
+					"value": [{
+						"days": ["mon", "tue", "thu"],
+						"times": ["12:45", "15:30", "17:43"]
+					}]
+				}
+			}
 		}
 	},
 	"update": {
 		"title": "Social updates",
 		"desc": "Returns a social media update api instance.",
-		"args": [{
-			"desc": "Identifier of a social media update",
-			"value": "4eb8565e0acb04bb82000004"
-		}],
+		"args": {
+			"id": {
+				"desc": "Identifier of a social media update",
+				"value": "4eb8565e0acb04bb82000004"
+			}
+		},
 		"show": {
 			"title": "Get this social update",
 			"desc": "Returns a single social media update."
@@ -115,10 +130,12 @@
 		"update": {
 			"title": "Edit this update",
 			"desc": "Edit an existing, individual status update.",
-			"params": [{
-				"desc": "The status update text.",
-				"value": "This is an edited update"
-			}]
+			"params": {
+				"text": {
+					"desc": "The status update text.",
+					"value": "This is an edited update"
+				}
+			}
 		},
 		"share": {
 			"title": "Share this update",
