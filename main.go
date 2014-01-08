@@ -7,10 +7,6 @@ import (
 	"os"
 )
 
-const (
-	Version = "0.1.0"
-)
-
 func main() {
 
 	// Options for flags package
@@ -35,7 +31,7 @@ func main() {
 
 	// Print version and exit
 	if opts.Version {
-		fmt.Println(Version)
+		fmt.Println(alpaca.Version)
 		os.Exit(0)
 	}
 

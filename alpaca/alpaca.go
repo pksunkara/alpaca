@@ -6,6 +6,10 @@ import (
 	"strings"
 )
 
+const (
+	Version = "0.1.0"
+)
+
 var (
 	LibraryRoot string
 )
@@ -51,6 +55,8 @@ func WriteLibraries(directory string, opts *LanguageOptions) {
 }
 
 func ModifyData(data *Data) {
+	data.Api["alpaca_version"] = Version
+
 	data.Pkg["keywords"] = ArrayInterfaceToString(data.Pkg["keywords"])
 	data.Api["classes"] = MapKeysToStringArray(data.Api["class"], []string{})
 

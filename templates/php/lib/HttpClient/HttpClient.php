@@ -20,7 +20,7 @@ class HttpClient
     protected $options = array(
         'base'    => '{{.Api.base}}',{{with .Api.version}}
         'api_version' => '{{.}}',{{end}}
-        'user_agent' => 'alpaca/0.1.0 (https://github.com/pksunkara/alpaca)'
+        'user_agent' => 'alpaca/{{.Api.alpaca_version}} (https://github.com/pksunkara/alpaca)'
     );
 
     protected $headers = array();
