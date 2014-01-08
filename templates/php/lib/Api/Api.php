@@ -6,8 +6,8 @@ use {{.Pkg.name}}\HttpClient\HttpClient;
 
 /**
  * {{index .Doc .Api.active.name "desc"}}
- *{{with $data := .}}{{range $index, $element := .Api.active.args}}
- * @param ${{.}} {{index $data.Doc $data.Api.active.name "args" $index "desc"}}{{end}}{{end}}
+ *{{with $data := .}}{{range .Api.active.args}}
+ * @param ${{.}} {{index $data.Doc $data.Api.active.name "args" . "desc"}}{{end}}{{end}}
  */
 class {{call .Fnc.camelize .Api.active.name}}
 {
@@ -24,13 +24,13 @@ class {{call .Fnc.camelize .Api.active.name}}
     /**
      * {{index $data.Doc $data.Api.active.name . "desc"}}
      * '{{index $data.Api.class $data.Api.active.name . "path"}}' {{call $data.Fnc.upper (or (index $data.Api.class $data.Api.active.name . "method") "get")}}
-     *{{with $method := .}}{{range $index, $element := (index $data.Api.class $data.Api.active.name $method "params")}}
-     * @param ${{.}} {{index $data.Doc $data.Api.active.name $method "params" $index "desc"}}{{end}}{{end}}
+     *{{with $method := .}}{{range (index $data.Api.class $data.Api.active.name $method "params")}}{{if .required}}
+     * @param ${{.name}} {{index $data.Doc $data.Api.active.name $method "params" .name "desc"}}{{end}}{{end}}{{end}}
      */
     public function {{call $data.Fnc.camelizeDownFirst .}}({{call $data.Fnc.args.php (index (index $data.Api.class $data.Api.active.name .) "params")}}array $options = array())
     {
-        $body = (isset($options['{{template "bodyorquery" (index $data.Api.class $data.Api.active.name .)}}']) ? $options['{{template "bodyorquery" (index $data.Api.class $data.Api.active.name .)}}'] : array());{{range (index $data.Api.class $data.Api.active.name . "params")}}
-        $body['{{.}}'] = ${{.}};{{end}}
+        $body = (isset($options['{{template "bodyorquery" (index $data.Api.class $data.Api.active.name .)}}']) ? $options['{{template "bodyorquery" (index $data.Api.class $data.Api.active.name .)}}'] : array());{{range (index $data.Api.class $data.Api.active.name . "params")}}{{if .required}}
+        $body['{{.name}}'] = ${{.name}};{{end}}{{end}}
 
         $response = $this->client->{{or (index $data.Api.class $data.Api.active.name . "method") "get"}}('{{call $data.Fnc.path.php (index $data.Api.class $data.Api.active.name . "path") $data.Api.active.args}}', $body, $options);
 

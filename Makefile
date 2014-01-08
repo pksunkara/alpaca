@@ -50,6 +50,10 @@ bintray:
 test:
 	go test github.com/pksunkara/alpaca/alpaca
 
+test-cover:
+	go test -coverprofile=coverage.out github.com/pksunkara/alpaca/alpaca
+	go tool cover -html=coverage.out
+
 install:
 	go install github.com/pksunkara/alpaca
 

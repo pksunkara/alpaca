@@ -138,8 +138,8 @@ The following options are available while calling a method of an api:
 {{index $data.Doc . "desc"}}
 {{with (index $data.Api.class . "args")}}
 The following arguments are required:{{end}}
-{{with $class := .}}{{range $index, $element := (index $data.Api.class . "args")}}
- * __{{.}}__: {{index $data.Doc $class "args" $index "desc"}}{{end}}
+{{with $class := .}}{{range (index $data.Api.class . "args")}}
+ * __{{.}}__: {{index $data.Doc $class "args" . "desc"}}{{end}}
 
 ```python
 {{call $data.Fnc.underscore .}} = client.{{call $data.Fnc.underscore .}}({{call $data.Fnc.prnt.python (index $data.Doc . "args") ", " false}})
@@ -150,8 +150,8 @@ The following arguments are required:{{end}}
 {{index $data.Doc $class . "desc"}}
 {{with (index $data.Api.class $class . "params")}}
 The following arguments are required:{{end}}
-{{with $method := .}}{{range $index, $element := (index $data.Api.class $class . "params")}}
- * __{{.}}__: {{index $data.Doc $class $method "params" $index "desc"}}{{end}}{{end}}
+{{with $method := .}}{{range (index $data.Api.class $class . "params")}}{{if .required}}
+ * __{{.name}}__: {{index $data.Doc $class $method "params" .name "desc"}}{{end}}{{end}}{{end}}
 
 ```python
 response = {{call $data.Fnc.underscore $class}}.{{call $data.Fnc.underscore .}}({{call $data.Fnc.prnt.python (index $data.Doc $class . "params") ", " true}}options)
