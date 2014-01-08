@@ -11,3 +11,5 @@ templates/*.go
 node_modules
 vendor
 composer.*
+build
+.goxc.local.json

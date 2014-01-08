@@ -46,7 +46,19 @@
 		"get": {
 			"api": {
 				"path": "/get/api",
-				"params": ["first", "second"]
+				"params": [
+					{
+						"name": "first",
+						"required": true
+					},
+					{
+						"name": "second",
+						"required": true
+					},
+					{
+						"name": "optional"
+					}
+				]
 			},
 			"options": {
 				"path": "/get/options"
@@ -68,7 +80,16 @@
 			"api_form": {
 				"path": "/post/api_form",
 				"method": "post",
-				"params": ["first", "second"]
+				"params": [
+					{
+						"name": "first",
+						"required": true
+					},
+					{
+						"name": "second",
+						"required": true
+					}
+				]
 			},
 			"options_form": {
 				"path": "/post/options_form",
@@ -89,7 +110,16 @@
 			"api_json": {
 				"path": "/post/api_json",
 				"method": "post",
-				"params": ["first", "second"]
+				"params": [
+					{
+						"name": "first",
+						"required": true
+					},
+					{
+						"name": "second",
+						"required": true
+					}
+				]
 			},
 			"options_json": {
 				"path": "/post/options_json",

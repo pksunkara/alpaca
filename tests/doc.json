@@ -37,13 +37,16 @@
 		"api": {
 			"title": "Using api",
 			"desc": "Set query params using api",
-			"params": [{
-				"desc": "Testing first param",
-				"value": "foo"
-			}, {
-				"desc": "Testing second param",
-				"value": "bar"
-			}]
+			"params": {
+				"first": {
+					"desc": "Testing first param",
+					"value": "foo"
+				},
+				"second": {
+					"desc": "Testing second param",
+					"value": "bar"
+				}
+			}
 		},
 		"options": {
 			"title": "Using options",
@@ -68,13 +71,16 @@
 		"api_form": {
 			"title": "Using api params (form)",
 			"desc": "Set body using params",
-			"params": [{
-				"desc": "Testing first param",
-				"value": "foo"
-			}, {
-				"desc": "Testing second param",
-				"value": "bar"
-			}]
+			"params": {
+				"first": {
+					"desc": "Testing first param",
+					"value": "foo"
+				},
+				"second": {
+					"desc": "Testing second param",
+					"value": "bar"
+				}
+			}
 		},
 		"options_form": {
 			"title": "Using options (form)",
@@ -95,13 +101,16 @@
 		"api_json": {
 			"title": "Using api params (json)",
 			"desc": "Set body using params",
-			"params": [{
-				"desc": "Testing first param",
-				"value": "foo"
-			}, {
-				"desc": "Testing second param",
-				"value": "bar"
-			}]
+			"params": {
+				"first": {
+					"desc": "Testing first param",
+					"value": "foo"
+				},
+				"second": {
+					"desc": "Testing second param",
+					"value": "bar"
+				}
+			}
 		},
 		"options_json": {
 			"title": "Using options (json)",
@@ -147,10 +156,12 @@
 	"paths": {
 		"title": "Api paths",
 		"desc": "Handling the testing of api paths and arg substitutions",
-		"args": [{
-			"desc": "Testing foo arg",
-			"value": "lol"
-		}],
+		"args": {
+			"foo": {
+				"desc": "Testing foo arg",
+				"value": "lol"
+			}
+		},
 		"basic": {
 			"title": "Basic path",
 			"desc": "Basic path substitution"
