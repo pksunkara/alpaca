@@ -38,9 +38,10 @@ ${TEMPLATES_FILE}:
 compile:templates goxc
 
 goxc:
-	$(shell echo '{\n "ArtifactsDest": "build",\n "BuildConstraints": "linux openbsd freebsd netbsd windows darwin",' > $(GOXC_FILE))
-	$(shell echo ' "ConfigVersion": "0.9",\n "PackageVersion": "$(VERSION)",\n "TaskSettings": {' >> $(GOXC_FILE))
-	$(shell echo '  "bintray": {\n   "apikey": "",\n   "package": "alpaca",\n   "repository": "utils",\n   "subject": "pksunkara"' >> $(GOXC_FILE))
+	$(shell echo '{\n "ArtifactsDest": "build",\n "ConfigVersion": "0.9",' > $(GOXC_FILE))
+	$(shell echo ' "PackageVersion": "$(VERSION)",\n "TaskSettings": {' >> $(GOXC_FILE))
+	$(shell echo '  "bintray": {\n   "apikey": "",\n   "package": "alpaca",' >> $(GOXC_FILE))
+	$(shell echo '   "repository": "utils",\n   "subject": "pksunkara"' >> $(GOXC_FILE))
 	$(shell echo '  }\n }\n}' >> $(GOXC_FILE))
 	$(GO_XC)
 
