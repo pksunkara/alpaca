@@ -18,17 +18,17 @@ Join us at [gitter](https://gitter.im/pksunkara/alpaca) if you need any help. Or
 
 ## Installation
 
-You can download the binaries (v0.1.0)
+You can download the binaries (v0.2.0)
 
- * Architecture i386 [ [linux](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.1.0_linux_386.tar.gz?direct) / [darwin](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.1.0_darwin_386.zip?direct) / [freebsd](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.1.0_freebsd_386.zip?direct) / [openbsd](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.1.0_openbsd_386.zip?direct) ]
- * Architecture amd64 [ [linux](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.1.0_linux_amd64.tar.gz?direct) / [darwin](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.1.0_darwin_amd64.zip?direct) / [freebsd](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.1.0_freebsd_amd64.zip?direct) / [openbsd](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.1.0_openbsd_amd64.zip?direct) ]
- * Architecture arm [ [linux](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.1.0_linux_arm.tar.gz?direct) / [freebsd](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.1.0_freebsd_arm.zip?direct) ]
+ * Architecture i386 [ [linux](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.0_linux_386.tar.gz?direct) / [darwin](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.0_darwin_386.zip?direct) / [freebsd](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.0_freebsd_386.zip?direct) / [openbsd](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.0_openbsd_386.zip?direct) ]
+ * Architecture amd64 [ [linux](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.0_linux_amd64.tar.gz?direct) / [darwin](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.0_darwin_amd64.zip?direct) / [freebsd](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.0_freebsd_amd64.zip?direct) / [openbsd](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.0_openbsd_amd64.zip?direct) ]
+ * Architecture arm [ [linux](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.0_linux_arm.tar.gz?direct) / [freebsd](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.0_freebsd_arm.zip?direct) ]
 
-Or by using deb packages (v0.1.0)
+Or by using deb packages (v0.2.0)
 
- * [i386.deb](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.1.0_i386.deb?direct)
- * [amd64.deb](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.1.0_amd64.deb?direct)
- * [armhf.deb](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.1.0_armhf.deb?direct)
+ * [i386.deb](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.0_i386.deb?direct)
+ * [amd64.deb](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.0_amd64.deb?direct)
+ * [armhf.deb](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.0_armhf.deb?direct)
 
 Or by using golang
 
@@ -54,6 +54,23 @@ $ alpaca </path/to/dir>
 ```
 
 The path here should be a directory with `api.json`, `pkg.json`, `doc.json`
+
+```
+Usage:
+  alpaca [options] <dir>
+
+Application Options:
+  -v, --version    Show version information
+
+Language Options:
+      --no-php     Do not write php library
+      --no-python  Do not write python library
+      --no-ruby    Do not write ruby library
+      --no-node    Do not write node library
+
+Help Options:
+  -h, --help       Show this help message
+```
 
 #### pkg.json
 
@@ -179,6 +196,15 @@ The format `html` is always true.
 ### Authorization strategies
 
 Supported are `basic`, `header`, `oauth`
+
+### Language Versions
+
+Supported programming language versions are:
+
+ * __node__: [ 0.8 / 0.9 / 0.10 / 0.11 ]
+ * __php__: [ 5.4 / 5.5 ]
+ * __python__: [ 2.6 / 2.7 / 3.2 / 3.3 ]
+ * __ruby__: [ 1.8.7 / 1.9.1 / 1.9.2 / 1.9.3 / 2.0.0 / 2.1.0 ]
 
 ### Package Managers
 
