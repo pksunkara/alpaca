@@ -26,9 +26,7 @@ You can download the binaries (v0.2.0)
 
 Or by using deb packages (v0.2.0)
 
- * [i386.deb](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.0_i386.deb?direct)
- * [amd64.deb](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.0_amd64.deb?direct)
- * [armhf.deb](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.0_armhf.deb?direct)
+ * [ [i386](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.0_i386.deb?direct) / [amd64](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.0_amd64.deb?direct) / [armhf](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.0_armhf.deb?direct) ]
 
 Or by using golang
 
@@ -112,7 +110,7 @@ All the following fields are required unless mentioned.
 {
   "base": "https://exampleapp.com", // Base URL of the api
   "version": "v1", // Default version for the api (https://api.example.com{/version}/users) [optional]
-  "no_verify_ssl": "true", // Do not verify SSL cert [optional] (default: false)
+  "no_verify_ssl": true, // Do not verify SSL cert [optional] (default: false)
   "authorization": { // Authorization strategies
     "basic" : true, // Basic authentication [optional] (default: false)
     "header": true, // Token in authorization header [optional] (default: false)
@@ -261,6 +259,12 @@ __I accept pull requests and guarantee a reply back within a day__
 
  * The descriptions should be wrapped
  * Align @param descriptions
+
+##### Formats
+
+ * Support WADL
+ * Support RAML
+ * Support API blueprint
 
 ##### Languages
 
