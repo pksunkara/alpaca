@@ -38,7 +38,7 @@ ${TEMPLATES_FILE}:
 compile:templates goxc
 
 goxc:
-	$(shell echo '{\n "ArtifactsDest": "build",\n "BuildConstraints": "linux openbsd freebsd darwin",' > $(GOXC_FILE))
+	$(shell echo '{\n "ArtifactsDest": "build",\n "BuildConstraints": "linux openbsd freebsd netbsd windows darwin",' > $(GOXC_FILE))
 	$(shell echo ' "ConfigVersion": "0.9",\n "PackageVersion": "$(VERSION)",\n "TaskSettings": {' >> $(GOXC_FILE))
 	$(shell echo '  "bintray": {\n   "apikey": "",\n   "package": "alpaca",\n   "repository": "utils",\n   "subject": "pksunkara"' >> $(GOXC_FILE))
 	$(shell echo '  }\n }\n}' >> $(GOXC_FILE))
@@ -58,7 +58,7 @@ install:
 	go install github.com/pksunkara/alpaca
 
 deps:
-	go get $(DEPS)
+	go get -u $(DEPS)
 
 clean:
 	rm -f ${TEMPLATES_DIR}/*.go
