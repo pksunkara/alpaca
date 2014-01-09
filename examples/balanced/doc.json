@@ -1,1 +1,42 @@
-{}
+{
+	"bank_account": {
+		"title": "Bank Accounts",
+		"desc": "",
+		"args": {
+			"bank_account_id": {
+				"desc": "Bank account id",
+				"value": "BAmMzDtNE7ia9FzVkx4llay"
+			}
+		},
+		"list": {
+			"title": "List all bank accounts",
+			"desc": ""
+		},
+		"create": {
+			"title": "Create a bank account",
+			"desc": "",
+			"params": {
+				"name": {
+					"desc": "Name on the bank account",
+					"value": "Johann Bernoulli"
+				},
+				"account_number": {
+					"desc": "Bank account number",
+					"value": "9900000001"
+				},
+				"routing_number": {
+					"desc": "Bank account code",
+					"value": "121000358"
+				}
+			}
+		},
+		"retrieve": {
+			"title": "Retrieve a bank account",
+			"desc": ""
+		},
+		"destroy": {
+			"title": "Delete a bank account",
+			"desc": ""
+		}
+	}
+}

@@ -1,4 +1,60 @@
 {
 	"base": "https://api.balancedpayments.com",
-	"version": "v1"
+	"version": "v1",
+	"authorization": {
+		"basic" : true
+	},
+	"request": {
+		"formats": {
+			"default": "form"
+		}
+	},
+	"response": {
+		"formats": {
+			"default": "json",
+			"json": true
+		}
+	},
+	"error": {
+		"message": "status"
+	},
+	"class": {
+		"bank_account": {
+			"args": ["bank_account_id"],
+			"list": {
+				"path": "/bank_accounts"
+			},
+			"create": {
+				"path": "/bank_accounts",
+				"method": "post",
+				"params": [
+					{
+						"name": "name",
+						"required": true
+					},
+					{
+						"name": "account_number",
+						"required": true
+					},
+					{
+						"name": "routing_number",
+						"required": true
+					},
+					{
+						"name": "type"
+					},
+					{
+						"name": "meta"
+					}
+				]
+			},
+			"retrieve": {
+				"path": "/bank_accounts/:bank_account_id"
+			},
+			"destroy": {
+				"path": "/bank_accounts/:bank_account_id",
+				"method": "delete"
+			}
+		}
+	}
 }
