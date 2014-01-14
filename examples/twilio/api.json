@@ -1,6 +1,6 @@
 {
 	"base": "https://api.twilio.com",
-	"version": "2010-04-01"
+	"version": "2010-04-01",
 	"authorization": {
 		"basic" : true
 	},
