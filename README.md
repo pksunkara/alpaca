@@ -70,6 +70,8 @@ Help Options:
   -h, --help       Show this help message
 ```
 
+_Please remove the comments when actually using these json files_
+
 #### pkg.json
 
 All the following fields are required unless mentioned.
