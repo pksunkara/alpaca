@@ -84,7 +84,7 @@ client.klass('args').method('args', function (err, response) {
 }
 ```
 
-##### HTML response
+##### HTML/TEXT response
 
 ```js
 response.body;

@@ -77,7 +77,8 @@ response.code
 response.headers
 # >>> {'content-type' => 'text/html'}
 ```
-##### HTML response
+
+##### HTML/TEXT response
 
 ```ruby
 response.body

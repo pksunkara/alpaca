@@ -94,7 +94,8 @@ $response->code;
 $response->headers;
 // >>> array('content-type' => 'text/html')
 ```
-##### HTML response
+
+##### HTML/TEXT response
 
 ```php
 $response->body;
