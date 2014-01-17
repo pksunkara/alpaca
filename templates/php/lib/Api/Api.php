@@ -1,8 +1,8 @@
 <?php
 {{define "bodyorquery"}}{{if (eq (or (index . "method") "get") "get")}}query{{else}}body{{end}}{{end}}
-namespace {{.Pkg.name}}\Api;
+namespace {{call .Fnc.camelize .Pkg.Name}}\Api;
 
-use {{.Pkg.name}}\HttpClient\HttpClient;
+use {{call .Fnc.camelize .Pkg.Name}}\HttpClient\HttpClient;
 
 /**
  * {{index .Doc .Api.active.name "desc"}}

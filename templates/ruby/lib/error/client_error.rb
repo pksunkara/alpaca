@@ -1,4 +1,4 @@
-module {{.Pkg.name}}
+module {{call .Fnc.camelize .Pkg.Name}}
 
   module Error
 

@@ -1,22 +1,22 @@
 {
-  "name": "{{.Pkg.package}}",
-  "version": "{{.Pkg.version}}",
-  "description": "{{if .Pkg.official}}Official {{end}}{{.Pkg.name}} API library client for node.js",
-  "author": "{{.Pkg.author.name}} <{{.Pkg.author.email}}> ({{.Pkg.author.url}})",
-  "homepage": "{{.Pkg.url}}",
-  "keywords": ["{{call .Fnc.join .Pkg.keywords "\", \""}}"],
+  "name": "{{.Pkg.Package}}",
+  "version": "{{.Pkg.Version}}",
+  "description": "{{if .Pkg.Official}}Official {{end}}{{.Pkg.Name}} API library client for node.js",
+  "author": "{{.Pkg.Author.Name}} <{{.Pkg.Author.Email}}> ({{.Pkg.Author.Url}})",
+  "homepage": "{{.Pkg.Url}}",
+  "keywords": ["{{call .Fnc.join .Pkg.Keywords "\", \""}}"],
   "repository": {
     "type": "git",
-    "url": "https://{{.Pkg.git.site}}/{{.Pkg.git.user}}/{{.Pkg.git.name}}-node"
+    "url": "https://{{.Pkg.Git.Site}}/{{.Pkg.Git.User}}/{{.Pkg.Git.Name}}-node"
   },
   "main": "./lib/index.js",
   "dependencies": {
     "request": "2.x.x"
   },
   "bugs": {
-    "url": "https://{{.Pkg.git.site}}/{{.Pkg.git.user}}/{{.Pkg.git.name}}-node/issues"
+    "url": "https://{{.Pkg.Git.Site}}/{{.Pkg.Git.User}}/{{.Pkg.Git.Name}}-node/issues"
   },
-  "license": "{{.Pkg.license}}",
+  "license": "{{.Pkg.License}}",
   "engines": {
     "node": ">= 0.8.0"
   }

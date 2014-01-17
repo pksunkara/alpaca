@@ -15,7 +15,7 @@ var (
 )
 
 type Data struct {
-	Pkg map[string]interface{}
+	Pkg PkgStruct
 	Api map[string]interface{}
 	Doc map[string]interface{}
 	Fnc map[string]interface{}
@@ -54,10 +54,20 @@ func WriteLibraries(directory string, opts *LanguageOptions) {
 	}
 }
 
+func ReadData() *Data {
+	var pkg PkgStruct
+	var api, doc map[string]interface{}
+
+	ReadJSON("pkg.json", &pkg)
+	ReadJSON("api.json", &api)
+	ReadJSON("doc.json", &doc)
+
+	return &Data{pkg, api, doc, make(map[string]interface{})}
+}
+
 func ModifyData(data *Data) {
 	data.Api["alpaca_version"] = Version
 
-	data.Pkg["keywords"] = ArrayInterfaceToString(data.Pkg["keywords"])
 	data.Api["classes"] = MapKeysToStringArray(data.Api["class"], []string{})
 
 	data.Fnc["join"] = strings.Join

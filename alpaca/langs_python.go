@@ -8,13 +8,11 @@ func WritePython(data *Data) {
 	MakeLibraryDir("python")
 	RunTemplate := ChooseTemplate("python")
 
-	name := data.Pkg["name"].(string)
-
 	RunTemplate("gitignore", ".gitignore", data)
 	RunTemplate("setup.py", "setup.py", data)
 	RunTemplate("readme.md", "README.md", data)
 
-	MakeDir(inflect.Underscore(name))
+	MakeDir(inflect.Underscore(data.Pkg.Name))
 	RunTemplate("lib/__init__.py", "__init__.py", data)
 	RunTemplate("lib/client.py", "client.py", data)
 

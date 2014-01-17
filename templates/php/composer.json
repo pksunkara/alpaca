@@ -1,19 +1,19 @@
 {
-	"name": "{{.Pkg.php.vendor}}/{{.Pkg.package}}",
-	"version": "{{.Pkg.version}}",
-	"description": "{{if .Pkg.official}}Official {{end}}{{.Pkg.name}} API library client for PHP",
-	"homepage": "{{.Pkg.url}}",
+	"name": "{{.Pkg.Php.Vendor}}/{{.Pkg.Package}}",
+	"version": "{{.Pkg.Version}}",
+	"description": "{{if .Pkg.Official}}Official {{end}}{{.Pkg.Name}} API library client for PHP",
+	"homepage": "{{.Pkg.Url}}",
 	"authors": [
 		{
-			"name": "{{.Pkg.author.name}}",
-			"email": "{{.Pkg.author.email}}",
-			"homepage": "{{.Pkg.author.url}}"
+			"name": "{{.Pkg.Author.Name}}",
+			"email": "{{.Pkg.Author.Email}}",
+			"homepage": "{{.Pkg.Author.Url}}"
 		}
 	],
-	"keywords": ["{{call .Fnc.join .Pkg.keywords "\", \""}}"],
+	"keywords": ["{{call .Fnc.join .Pkg.Keywords "\", \""}}"],
 	"autoload": {
 		"psr-0": {
-			"{{.Pkg.name}}\\": "lib/"
+			"{{.Pkg.Name}}\\": "lib/"
 		}
 	},
 	"require": {
@@ -21,7 +21,7 @@
 		"guzzle/guzzle": "3.7.*"
 	},
 	"support": {
-		"issues": "https://{{.Pkg.git.site}}/{{.Pkg.git.user}}/{{.Pkg.git.name}}-php/issues"
+		"issues": "https://{{.Pkg.Git.Site}}/{{.Pkg.Git.User}}/{{.Pkg.Git.Name}}-php/issues"
 	},
-	"license": "{{.Pkg.license}}"
+	"license": "{{.Pkg.License}}"
 }

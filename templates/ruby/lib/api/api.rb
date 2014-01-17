@@ -1,4 +1,4 @@
-module {{.Pkg.name}}
+module {{call .Fnc.camelize .Pkg.Name}}
 {{define "bodyorquery"}}{{if (eq (or (index . "method") "get") "get")}}query{{else}}body{{end}}{{end}}
   module Api
 

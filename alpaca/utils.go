@@ -2,11 +2,20 @@ package alpaca
 
 import (
 	"bitbucket.org/pkg/inflect"
+	"encoding/json"
 	"os"
+	"path"
 	"reflect"
 	"regexp"
 	"strconv"
 )
+
+func ReadJSON(name string, v interface{}) {
+	file, err := os.Open(path.Join(LibraryRoot, name))
+	HandleError(err)
+
+	HandleError(json.NewDecoder(file).Decode(v))
+}
 
 func MakeDir(name string) {
 	HandleError(os.Mkdir(name, 0755))

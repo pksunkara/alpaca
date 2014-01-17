@@ -8,16 +8,14 @@ func WriteRuby(data *Data) {
 	MakeLibraryDir("ruby")
 	RunTemplate := ChooseTemplate("ruby")
 
-	name := data.Pkg["name"].(string)
-
 	RunTemplate("gitignore", ".gitignore", data)
-	RunTemplate("gemspec", data.Pkg["package"].(string)+".gemspec", data)
+	RunTemplate("gemspec", data.Pkg.Package+".gemspec", data)
 	RunTemplate("readme.md", "README.md", data)
 
 	MakeDir("lib")
-	RunTemplate("lib/name.rb", data.Pkg["package"].(string)+".rb", data)
+	RunTemplate("lib/name.rb", data.Pkg.Package+".rb", data)
 
-	MakeDir(inflect.Underscore(name))
+	MakeDir(inflect.Underscore(data.Pkg.Name))
 	RunTemplate("lib/client.rb", "client.rb", data)
 	RunTemplate("lib/http_client.rb", "http_client.rb", data)
 	RunTemplate("lib/error.rb", "error.rb", data)

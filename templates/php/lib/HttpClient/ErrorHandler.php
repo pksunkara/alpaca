@@ -1,12 +1,12 @@
 <?php
 
-namespace {{.Pkg.name}}\HttpClient;
+namespace {{call .Fnc.camelize .Pkg.Name}}\HttpClient;
 
 use Guzzle\Common\Event;
 use Guzzle\Http\Message\Response;
 
-use {{.Pkg.name}}\HttpClient\ResponseHandler;
-use {{.Pkg.name}}\Exception\ClientException;
+use {{call .Fnc.camelize .Pkg.Name}}\HttpClient\ResponseHandler;
+use {{call .Fnc.camelize .Pkg.Name}}\Exception\ClientException;
 
 /**
  * ErrorHanlder takes care of selecting the error message from response body

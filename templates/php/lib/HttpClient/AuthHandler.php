@@ -1,6 +1,6 @@
 <?php
 
-namespace {{.Pkg.name}}\HttpClient;
+namespace {{call .Fnc.camelize .Pkg.Name}}\HttpClient;
 
 use Guzzle\Common\Event;
 

@@ -1,27 +1,39 @@
 package alpaca
 
 import (
-	"encoding/json"
 	"os"
 	"path"
 )
 
-func ReadData() *Data {
-	var pkg, api, doc map[string]interface{}
+type PkgStruct struct {
+	Name    string
+	Package string
+	Version string
+	Url     string
 
-	ReadJSON("pkg.json", &pkg)
-	ReadJSON("api.json", &api)
-	ReadJSON("doc.json", &doc)
+	Keywords []string
+	Official bool
+	License  string
 
-	return &Data{pkg, api, doc, make(map[string]interface{})}
-}
+	Author struct {
+		Name  string
+		Email string
+		Url   string
+	}
 
-func ReadJSON(name string, v interface{}) {
-	file, err := os.Open(path.Join(LibraryRoot, name))
-	defer file.Close()
-	HandleError(err)
+	Git struct {
+		Site string
+		User string
+		Name string
+	}
 
-	HandleError(json.NewDecoder(file).Decode(v))
+	Php struct {
+		Vendor string
+	}
+
+	Python struct {
+		License string
+	}
 }
 
 func MakeLibraryDir(name string) {

@@ -1,6 +1,6 @@
 <?php
 
-namespace {{.Pkg.name}}\Exception;
+namespace {{call .Fnc.camelize .Pkg.Name}}\Exception;
 
 interface ExceptionInterface
 {

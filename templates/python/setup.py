@@ -7,23 +7,23 @@ except ImportError:
     from distutils.core import setup
 
 setup(
-	name='{{.Pkg.package}}',
-	version='{{.Pkg.version}}',
-	description='{{if .Pkg.official}}Official {{end}}{{.Pkg.name}} API library client for python',
-	author='{{.Pkg.author.name}}',
-	author_email='{{.Pkg.author.email}}',
-	url='{{.Pkg.url}}',
-	license='{{.Pkg.license}}',
+	name='{{.Pkg.Package}}',
+	version='{{.Pkg.Version}}',
+	description='{{if .Pkg.Official}}Official {{end}}{{.Pkg.Name}} API library client for python',
+	author='{{.Pkg.Author.Name}}',
+	author_email='{{.Pkg.Author.Email}}',
+	url='{{.Pkg.Url}}',
+	license='{{.Pkg.License}}',
 	install_requires=[
 		'requests >= 2.1.0'
 	],
 	packages=[
-		'{{call .Fnc.underscore .Pkg.name}}'
+		'{{call .Fnc.underscore .Pkg.Name}}'
 	],
 	classifiers=[
 		'Development Status :: 5 - Production/Stable',
 		'Intended Audience :: Developers',
-		'License :: OSI Approved :: {{if .Pkg.python}}{{or .Pkg.python.license .Pkg.license}}{{end}}',
+		'License :: OSI Approved :: {{or .Pkg.Python.License .Pkg.License}}',
 		'Operating System :: OS Independent',
 		'Programming Language :: Python :: 2.6',
 		'Programming Language :: Python :: 2.7',

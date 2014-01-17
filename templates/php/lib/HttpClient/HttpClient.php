@@ -1,16 +1,16 @@
 <?php
 
-namespace {{.Pkg.name}}\HttpClient;
+namespace {{call .Fnc.camelize .Pkg.Name}}\HttpClient;
 
 use Guzzle\Http\Client as GuzzleClient;
 use Guzzle\Http\ClientInterface;
 use Guzzle\Http\Message\RequestInterface;
 
-use {{.Pkg.name}}\HttpClient\AuthHandler;
-use {{.Pkg.name}}\HttpClient\ErrorHandler;
-use {{.Pkg.name}}\HttpClient\RequestHandler;
-use {{.Pkg.name}}\HttpClient\Response;
-use {{.Pkg.name}}\HttpClient\ResponseHandler;
+use {{call .Fnc.camelize .Pkg.Name}}\HttpClient\AuthHandler;
+use {{call .Fnc.camelize .Pkg.Name}}\HttpClient\ErrorHandler;
+use {{call .Fnc.camelize .Pkg.Name}}\HttpClient\RequestHandler;
+use {{call .Fnc.camelize .Pkg.Name}}\HttpClient\Response;
+use {{call .Fnc.camelize .Pkg.Name}}\HttpClient\ResponseHandler;
 
 /**
  * Main HttpClient which is used by Api classes

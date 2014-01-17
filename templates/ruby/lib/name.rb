@@ -1,8 +1,8 @@
 require "rubygems"
 
-require "{{call .Fnc.underscore .Pkg.name}}/client"
-require "{{call .Fnc.underscore .Pkg.name}}/error"
-require "{{call .Fnc.underscore .Pkg.name}}/http_client"
+require "{{call .Fnc.underscore .Pkg.Name}}/client"
+require "{{call .Fnc.underscore .Pkg.Name}}/error"
+require "{{call .Fnc.underscore .Pkg.Name}}/http_client"
 
-module {{.Pkg.name}}
+module {{call .Fnc.camelize .Pkg.Name}}
 end

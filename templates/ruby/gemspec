@@ -1,15 +1,15 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |gem|
-  gem.name        = "{{.Pkg.package}}"
-  gem.version     = "{{.Pkg.version}}"
-  gem.description = "{{if .Pkg.official}}Official {{end}}{{.Pkg.name}} API library client for ruby"
-  gem.summary     = "{{if .Pkg.official}}Official {{end}}{{.Pkg.name}} API library client for ruby"
+  gem.name        = "{{.Pkg.Package}}"
+  gem.version     = "{{.Pkg.Version}}"
+  gem.description = "{{if .Pkg.Official}}Official {{end}}{{.Pkg.Name}} API library client for ruby"
+  gem.summary     = "{{if .Pkg.Official}}Official {{end}}{{.Pkg.Name}} API library client for ruby"
 
-  gem.author   = "{{.Pkg.author.name}}"
-  gem.email    = "{{.Pkg.author.email}}"
-  gem.homepage = "{{.Pkg.url}}"
-  gem.license  = "{{.Pkg.license}}"
+  gem.author   = "{{.Pkg.Author.Name}}"
+  gem.email    = "{{.Pkg.Author.Email}}"
+  gem.homepage = "{{.Pkg.Url}}"
+  gem.license  = "{{.Pkg.License}}"
 
   gem.require_paths = ['lib']
 

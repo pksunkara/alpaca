@@ -1,4 +1,4 @@
-module {{.Pkg.name}}
+module {{call .Fnc.camelize .Pkg.Name}}
 
   module HttpClient
 
@@ -16,9 +16,9 @@ module {{.Pkg.name}}
 
           case code
           when 500...599
-            raise {{.Pkg.name}}::Error::ClientError.new "Error #{code}", code
+            raise {{call .Fnc.camelize .Pkg.Name}}::Error::ClientError.new "Error #{code}", code
           when 400...499
-            body = {{.Pkg.name}}::HttpClient::ResponseHandler.get_body env[:response]
+            body = {{call .Fnc.camelize .Pkg.Name}}::HttpClient::ResponseHandler.get_body env[:response]
             message = ""
 
             # If HTML, whole body is taken
@@ -39,7 +39,7 @@ module {{.Pkg.name}}
               message = "Unable to understand the content type of response returned by request responsible for error"
             end
 
-            raise {{.Pkg.name}}::Error::ClientError.new message, code
+            raise {{call .Fnc.camelize .Pkg.Name}}::Error::ClientError.new message, code
           end
         end
       end

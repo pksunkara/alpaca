@@ -8,15 +8,13 @@ func WritePhp(data *Data) {
 	MakeLibraryDir("php")
 	RunTemplate := ChooseTemplate("php")
 
-	name := data.Pkg["name"].(string)
-
 	RunTemplate("gitignore", ".gitignore", data)
 	RunTemplate("composer.json", "composer.json", data)
 	RunTemplate("readme.md", "README.md", data)
 
 	MakeDir("lib")
 
-	MakeDir(name)
+	MakeDir(inflect.Camelize(data.Pkg.Name))
 	RunTemplate("lib/Client.php", "Client.php", data)
 
 	MakeDir("Exception")

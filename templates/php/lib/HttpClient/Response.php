@@ -1,6 +1,6 @@
 <?php
 
-namespace {{.Pkg.name}}\HttpClient;
+namespace {{call .Fnc.camelize .Pkg.Name}}\HttpClient;
 
 /*
  * Response object contains the response returned by the client

@@ -8,8 +8,6 @@ func WriteNode(data *Data) {
 	MakeLibraryDir("node")
 	RunTemplate := ChooseTemplate("node")
 
-	name := data.Pkg["name"].(string)
-
 	RunTemplate("gitignore", ".gitignore", data)
 	RunTemplate("package.json", "package.json", data)
 	RunTemplate("readme.md", "README.md", data)
@@ -17,7 +15,7 @@ func WriteNode(data *Data) {
 	MakeDir("lib")
 	RunTemplate("lib/index.js", "index.js", data)
 
-	MakeDir(inflect.CamelizeDownFirst(name))
+	MakeDir(inflect.CamelizeDownFirst(data.Pkg.Name))
 	RunTemplate("lib/client.js", "client.js", data)
 
 	MakeDir("error")

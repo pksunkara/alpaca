@@ -1,8 +1,8 @@
 <?php
 
-namespace {{.Pkg.name}};
+namespace {{call .Fnc.camelize .Pkg.Name}};
 
-use {{.Pkg.name}}\HttpClient\HttpClient;
+use {{call .Fnc.camelize .Pkg.Name}}\HttpClient\HttpClient;
 
 class Client
 {
