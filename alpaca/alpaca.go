@@ -38,25 +38,25 @@ func WriteLibraries(directory string, opts *LanguageOptions) {
 	ModifyData(data)
 
 	if !opts.Php {
-		CheckPhp(data)
+		HandleError(CheckPhp(data))
 		FunctionsPhp(data.Fnc)
 		WritePhp(data)
 	}
 
 	if !opts.Python {
-		CheckPython(data)
+		HandleError(CheckPython(data))
 		FunctionsPython(data.Fnc)
 		WritePython(data)
 	}
 
 	if !opts.Ruby {
-		CheckRuby(data)
+		HandleError(CheckRuby(data))
 		FunctionsRuby(data.Fnc)
 		WriteRuby(data)
 	}
 
 	if !opts.Node {
-		CheckNode(data)
+		HandleError(CheckNode(data))
 		FunctionsNode(data.Fnc)
 		WriteNode(data)
 	}

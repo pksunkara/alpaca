@@ -51,4 +51,6 @@ func FunctionsNode(fnc map[string]interface{}) {
 	prnt["node"] = PrntFunctionMaker(false, "  ", "\"", "\"", "[", "]", "{", "}", "", ": ")
 }
 
-func CheckNode(data *Data) {}
+func CheckNode(data *Data) error {
+	return nil
+}

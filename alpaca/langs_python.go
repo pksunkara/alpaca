@@ -50,4 +50,6 @@ func FunctionsPython(fnc map[string]interface{}) {
 	prnt["python"] = PrntFunctionMaker(true, "\t", "\"", "\"", "[", "]", "{", "}", "'", "': ")
 }
 
-func CheckPython(data *Data) {}
+func CheckPython(data *Data) error {
+	return nil
+}

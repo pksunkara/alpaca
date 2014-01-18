@@ -51,8 +51,10 @@ func FunctionsPhp(fnc map[string]interface{}) {
 	prnt["php"] = PrntFunctionMaker(false, "    ", "\"", "\"", "array(", ")", "array(", ")", "'", "' => ")
 }
 
-func CheckPhp(data *Data) {
+func CheckPhp(data *Data) error {
 	if data.Pkg.Php.Vendor == "" {
-		HandleError(errors.New("php.vendor is needed in pkg.json for generating php library"))
+		return errors.New("php.vendor is needed in pkg.json for generating php library")
 	}
+
+	return nil
 }

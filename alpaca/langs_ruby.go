@@ -51,4 +51,6 @@ func FunctionsRuby(fnc map[string]interface{}) {
 	prnt["ruby"] = PrntFunctionMaker(false, "  ", "\"", "\"", "[", "]", "{", "}", ":", " => ")
 }
 
-func CheckRuby(data *Data) {}
+func CheckRuby(data *Data) error {
+	return nil
+}
