@@ -2,6 +2,7 @@ package alpaca
 
 import (
 	"bitbucket.org/pkg/inflect"
+	"errors"
 )
 
 func WritePhp(data *Data) {
@@ -48,4 +49,10 @@ func FunctionsPhp(fnc map[string]interface{}) {
 	args["php"] = ArgsFunctionMaker("$", ", ")
 	path["php"] = PathFunctionMaker("'.rawurlencode($$this->", ").'")
 	prnt["php"] = PrntFunctionMaker(false, "    ", "\"", "\"", "array(", ")", "array(", ")", "'", "' => ")
+}
+
+func CheckPhp(data *Data) {
+	if data.Pkg.Php.Vendor == "" {
+		HandleError(errors.New("php.vendor is needed in pkg.json for generating php library"))
+	}
 }

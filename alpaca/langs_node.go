@@ -50,3 +50,5 @@ func FunctionsNode(fnc map[string]interface{}) {
 	path["node"] = PathFunctionMaker("' + this.", " + '")
 	prnt["node"] = PrntFunctionMaker(false, "  ", "\"", "\"", "[", "]", "{", "}", "", ": ")
 }
+
+func CheckNode(data *Data) {}

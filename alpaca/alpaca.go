@@ -38,18 +38,26 @@ func WriteLibraries(directory string, opts *LanguageOptions) {
 	ModifyData(data)
 
 	if !opts.Php {
+		CheckPhp(data)
+		FunctionsPhp(data.Fnc)
 		WritePhp(data)
 	}
 
 	if !opts.Python {
+		CheckPython(data)
+		FunctionsPython(data.Fnc)
 		WritePython(data)
 	}
 
 	if !opts.Ruby {
+		CheckRuby(data)
+		FunctionsRuby(data.Fnc)
 		WriteRuby(data)
 	}
 
 	if !opts.Node {
+		CheckNode(data)
+		FunctionsNode(data.Fnc)
 		WriteNode(data)
 	}
 }
@@ -82,9 +90,4 @@ func ModifyData(data *Data) {
 	data.Fnc["args"] = make(map[string]interface{})
 	data.Fnc["path"] = make(map[string]interface{})
 	data.Fnc["prnt"] = make(map[string]interface{})
-
-	FunctionsNode(data.Fnc)
-	FunctionsPhp(data.Fnc)
-	FunctionsPython(data.Fnc)
-	FunctionsRuby(data.Fnc)
 }

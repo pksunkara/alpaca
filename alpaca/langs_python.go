@@ -49,3 +49,5 @@ func FunctionsPython(fnc map[string]interface{}) {
 	path["python"] = PathFunctionMaker("' + self.", " + '")
 	prnt["python"] = PrntFunctionMaker(true, "\t", "\"", "\"", "[", "]", "{", "}", "'", "': ")
 }
+
+func CheckPython(data *Data) {}

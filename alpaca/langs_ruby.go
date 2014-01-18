@@ -50,3 +50,5 @@ func FunctionsRuby(fnc map[string]interface{}) {
 	path["ruby"] = PathFunctionMaker("#{@", "}")
 	prnt["ruby"] = PrntFunctionMaker(false, "  ", "\"", "\"", "[", "]", "{", "}", ":", " => ")
 }
+
+func CheckRuby(data *Data) {}

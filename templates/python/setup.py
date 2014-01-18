@@ -22,8 +22,8 @@ setup(
 	],
 	classifiers=[
 		'Development Status :: 5 - Production/Stable',
-		'Intended Audience :: Developers',
-		'License :: OSI Approved :: {{or .Pkg.Python.License .Pkg.License}}',
+		'Intended Audience :: Developers',{{if .Pkg.Python.License}}
+		'License :: OSI Approved :: {{.Pkg.Python.License}}',{{end}}
 		'Operating System :: OS Independent',
 		'Programming Language :: Python :: 2.6',
 		'Programming Language :: Python :: 2.7',
