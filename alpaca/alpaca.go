@@ -2,6 +2,8 @@ package alpaca
 
 import (
 	"bitbucket.org/pkg/inflect"
+	"fmt"
+	"os"
 	"path/filepath"
 	"strings"
 )
@@ -12,6 +14,7 @@ const (
 
 var (
 	LibraryRoot string
+	FormatList  []string
 )
 
 type Data struct {
@@ -28,12 +31,32 @@ type LanguageOptions struct {
 	Node   bool `long:"no-node" description:"Do not write node library"`
 }
 
-func WriteLibraries(directory string, opts *LanguageOptions) {
+func LoadLibraryPath(directory string) {
 	var err error
 
 	LibraryRoot, err = filepath.Abs(directory)
 	HandleError(err)
+}
 
+func ConvertFormat(format string) {
+	acceptable := false
+
+	FormatList = []string{"blueprint"}
+
+	for _, v := range FormatList {
+		if v == format {
+			acceptable = true
+		}
+	}
+
+	if !acceptable {
+		fmt.Println("The given format is not allowed. Please choose one from the following:\n")
+		fmt.Println(strings.Join(FormatList, ", ") + "\n")
+		os.Exit(0)
+	}
+}
+
+func WriteLibraries(opts *LanguageOptions) {
 	data := ReadData()
 	ModifyData(data)
 

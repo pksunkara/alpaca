@@ -13,6 +13,8 @@ func main() {
 	var opts struct {
 		Version bool `short:"v" long:"version" description:"Show version information"`
 
+		Format string `short:"f" long:"format" description:"API description format" value-name:"FORMAT"`
+
 		Langs alpaca.LanguageOptions `group:"Language Options"`
 	}
 
@@ -41,5 +43,11 @@ func main() {
 		os.Exit(0)
 	}
 
-	alpaca.WriteLibraries(args[0], &opts.Langs)
+	alpaca.LoadLibraryPath(args[0])
+
+	if opts.Format != "" {
+		alpaca.ConvertFormat(opts.Format)
+	}
+
+	alpaca.WriteLibraries(&opts.Langs)
 }
