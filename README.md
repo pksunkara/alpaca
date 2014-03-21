@@ -162,7 +162,7 @@ The following is filled according to the entries in `api.json`
     "title": "Users", // Title of the api class
     "desc": "Returns user api instance", // Description of the api class
     "args": { // Arguments of the api class
-      "id": { // Name of the argument
+      "login": { // Name of the argument
         "desc": "Username of the user", // Description of the argument
         "value": "pksunkara" // Value of the argument in docs
       }
