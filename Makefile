@@ -1,7 +1,5 @@
 VERSION = 0.2.0
 
-TEMPLATES_FILE = alpaca/back-templates.rice-box.go
-
 GO_RICE = rice
 GO_FMT = gofmt -w
 GO_XC = goxc
@@ -16,9 +14,7 @@ DEPS = \
 
 all:deps templates
 
-templates:clean ${TEMPLATES_FILE}
-
-%.go:
+templates:clean
 	$(GO_RICE) --import-path github.com/pksunkara/alpaca/alpaca embed
 
 compile:templates goxc
@@ -48,4 +44,4 @@ deps:
 	go get -u $(DEPS)
 
 clean:
-	rm -f ${TEMPLATES_FILE}
+	$(GO_RICE) --import-path github.com/pksunkara/alpaca/alpaca clean
