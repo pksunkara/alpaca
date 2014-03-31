@@ -9,7 +9,7 @@ GO_XC = goxc
 GOXC_FILE = .goxc.local.json
 
 DEPS = \
-	github.com/GeertJohan/go.rice \
+	github.com/GeertJohan/go.rice/rice \
 	github.com/robertkrimen/terst \
 	github.com/jessevdk/go-flags \
 	bitbucket.org/pkg/inflect
