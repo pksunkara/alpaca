@@ -38,7 +38,7 @@ test-cover:
 	go tool cover -html=coverage.out
 
 install:
-	go install github.com/pksunkara/alpaca
+	go install -a github.com/pksunkara/alpaca
 
 deps:
 	go get -u $(DEPS)
