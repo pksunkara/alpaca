@@ -1,5 +1,5 @@
-# ClientException is used when the api returns an error
 class ClientError(Exception):
+    """ClientException is used when the API returns an error"""
 
     def __init__(self, message, code):
         super(ClientError, self).__init__()

@@ -1,5 +1,5 @@
-# Response object contains the response returned by the client
-class Response():
+class Response(object):
+    """Response object contains the response returned by the client"""
 
     def __init__(self, body, code, headers):
         self.body = body

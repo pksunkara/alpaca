@@ -1,8 +1,9 @@
 import urllib
 import json
 
-# RequestHandler takes care of encoding the request body into format given by options
-class RequestHandler():
+
+class RequestHandler(object):
+    """RequestHandler takes care of encoding the request body into format given by options"""
 
     @staticmethod
     def renderKey(parents):
