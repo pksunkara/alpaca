@@ -3,7 +3,7 @@
 # {{.}} - {{index $data.Doc $data.Api.active.name "args" . "desc"}}{{end}}{{end}}
 
 
-class {{call .Fnc.camelize .Api.active.name}}():
+class {{call .Fnc.camelize .Api.active.name}}(object):
 {{define "bodyorquery"}}{{if (eq (or (index . "method") "get") "get")}}query{{else}}body{{end}}{{end}}
     def __init__(self, {{call .Fnc.args.python .Api.active.args}}client):{{range .Api.active.args}}
         self.{{.}} = {{.}}{{end}}

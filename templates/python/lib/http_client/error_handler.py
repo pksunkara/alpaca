@@ -3,7 +3,7 @@ from .response_handler import ResponseHandler
 
 
 # ErrorHanlder takes care of selecting the error message from response body
-class ErrorHandler():
+class ErrorHandler(object):
 
     @staticmethod
     def check_error(response, *args, **kwargs):

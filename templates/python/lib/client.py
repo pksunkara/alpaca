@@ -4,7 +4,7 @@ from .http_client import HttpClient
 from .api.{{call $data.Fnc.underscore .}} import {{call $data.Fnc.camelize .}}{{end}}{{end}}
 
 
-class Client():
+class Client(object):
 
     def __init__(self, auth={}, options={}):
         self.http_client = HttpClient(auth, options)
