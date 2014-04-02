@@ -1,5 +1,5 @@
-# ResponseHandler takes care of decoding the response body into suitable type
 class ResponseHandler(object):
+    """ResponseHandler takes care of decoding the response body into suitable type"""
 
     @staticmethod
     def get_body(response):

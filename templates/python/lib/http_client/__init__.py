@@ -13,8 +13,8 @@ from .response import Response
 from .response_handler import ResponseHandler
 
 
-# Main HttpClient which is used by Api classes
 class HttpClient(object):
+    """Main HttpClient which is used by API classes"""
 
     def __init__(self, auth, options):
 {{if .Api.authorization.oauth}}
@@ -60,12 +60,13 @@ class HttpClient(object):
     def put(self, path, body={}, options={}):
         return self.request(path, body, 'put', options)
 
-    # Intermediate function which does three main things
-    #
-    # - Transforms the body of request into correct format
-    # - Creates the requests with give parameters
-    # - Returns response body after parsing it into correct format
     def request(self, path, body, method, options):
+        """Intermediate function which does three main things
+
+        - Transforms the body of request into correct format
+        - Creates the requests with give parameters
+        - Returns response body after parsing it into correct format
+        """
         kwargs = copy.deepcopy(self.options)
         kwargs.update(options)
 
@@ -101,10 +102,11 @@ class HttpClient(object):
 
         return Response(self.get_body(response), response.status_code, response.headers)
 
-    # Creating a request with the given arguments
-    #
-    # If api_version is set, appends it immediately after host
     def create_request(self, method, path, options):
+        """Creating a request with the given arguments
+
+        If api_version is set, appends it immediately after host
+        """
         version = '/' + options['api_version'] if 'api_version' in options else ''
 {{if .Api.response.suffix}}
         # Adds a suffix (ex: ".html", ".json") to url
@@ -121,18 +123,18 @@ class HttpClient(object):
 
         return requests.request(method, path, **options)
 
-    # Get response body in correct format
     def get_body(self, response):
+        """Get response body in correct format"""
         return ResponseHandler.get_body(response)
 
-    # Set request body in correct format
     def set_body(self, request):
+        """Set request body in correct format"""
         return RequestHandler.set_body(request)
 
-    # Make dict keys all lowercase
     def dict_key_lower(self, dic):
+        """Make dict keys all lower case"""
         return dict(zip(map(self.key_lower, dic.keys()), dic.values()))
 
-    # Make a function for lowercase
     def key_lower(self, key):
+        """Make a function for lower case"""
         return key.lower()
