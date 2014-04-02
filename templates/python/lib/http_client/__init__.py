@@ -100,7 +100,9 @@ class HttpClient(object):
 
         response = self.create_request(method, path, kwargs)
 
-        return Response(self.get_body(response), response.status_code, response.headers)
+        return Response(
+            self.get_body(response), response.status_code, response.headers
+        )
 
     def create_request(self, method, path, options):
         """Creating a request with the given arguments
