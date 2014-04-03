@@ -20,8 +20,8 @@ node: run
 	node run.js
 
 node-deps:
-	npm install request 2.x.x
-	npm install async 0.2.x
+	npm install request@2.x.x
+	npm install async@0.2.x
 
 php: run
 	php run.php
