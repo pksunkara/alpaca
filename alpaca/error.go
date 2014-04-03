@@ -11,6 +11,6 @@ func HandleError(e error) {
 		fmt.Println(e)
 		fmt.Println("\nIf you are unable to solve it, please report at")
 		fmt.Println("https://github.com/pksunkara/alpaca/issues")
-		os.Exit(0)
+		os.Exit(1)
 	}
 }

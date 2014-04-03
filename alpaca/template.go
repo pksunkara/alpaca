@@ -1,14 +1,17 @@
 package alpaca
 
 import (
-	"github.com/pksunkara/alpaca/templates"
+	"github.com/GeertJohan/go.rice"
 	"os"
 	"path"
 	"text/template"
 )
 
 func ReadTemplate(name string) *template.Template {
-	temp := string(templates.Data[name]())
+	templateBox := rice.MustFindBox("../templates")
+
+	temp, err := templateBox.String(name)
+	HandleError(err)
 
 	return template.Must(template.New(name).Parse(temp))
 }
