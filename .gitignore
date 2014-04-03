@@ -1,5 +1,4 @@
 alpaca/back-templates.rice-box.go
-templates/*.go
 examples/*/php
 examples/*/node
 examples/*/ruby

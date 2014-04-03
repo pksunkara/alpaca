@@ -1,4 +1,4 @@
-# alpaca [![Build Status](https://drone.io/github.com/pksunkara/alpaca/status.png)](https://drone.io/github.com/pksunkara/alpaca/latest)
+# alpaca [![Build Status](https://drone.io/github.com/pksunkara/alpaca/status.png)](https://drone.io/github.com/pksunkara/alpaca/latest) [![Gitter chat](https://badges.gitter.im/pksunkara/alpaca.png)](https://gitter.im/pksunkara/alpaca)
 
 Api Libraries Powered And Created by Alpaca
 
@@ -14,7 +14,7 @@ You are planning to build an API for your website and develop API libraries? _Th
 
 You define your API according to the format given below, __alpaca__ builds the API libraries along with their documentation. All you have to do is publishing them to their respective package managers.
 
-Join us at [gitter](https://gitter.im/pksunkara/alpaca) if you need any help. Or at `#alpaca` on freenode IRC.
+Join us at [gitter](https://gitter.im/pksunkara/alpaca) if you need any help.
 
 ## Installation
 
