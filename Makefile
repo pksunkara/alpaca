@@ -10,6 +10,7 @@ DEPS = \
 	github.com/GeertJohan/go.rice/rice \
 	github.com/robertkrimen/terst \
 	github.com/jessevdk/go-flags \
+	bitbucket.org/kardianos/osext \
 	bitbucket.org/pkg/inflect
 
 all:deps templates
