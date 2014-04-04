@@ -241,7 +241,7 @@ func main() {
 	})
 
 	app.Get("/v1/auth/header.json", func(rw http.ResponseWriter, req *http.Request) {
-		if req.Header.Get("Authorization") == "token passwordtoken" {
+		if req.Header.Get("Authorization") == "l00mPa passwordtoken" {
 			Test("Header http authentication works correctly")
 		}
 	})

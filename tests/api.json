@@ -4,6 +4,7 @@
 	"authorization": {
 		"basic" : true,
 		"header": true,
+		"header_prefix": "l00mPa",
 		"oauth" : true
 	},
 	"request": {

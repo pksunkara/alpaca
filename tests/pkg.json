@@ -1,25 +1,25 @@
 {
-  "name": "Testing",
-  "package": "testing-alpaca",
-  "version": "0.1.0",
-  "url": "https://github.com/pksunkara/alpaca",
-  "keywords": ["alpaca", "test", "api", "client", "library"],
-  "official": true,
-  "author": {
-    "name": "Pavan Kumar Sunkara",
-    "email": "pavan.sss1991@gmail.com",
-    "url": "http://github.com/pksunkara"
-  },
-  "git": {
-    "site": "github.com",
-    "user": "alpaca-api",
-    "name": "testing"
-  },
-  "license": "MIT",
-  "php": {
-    "vendor": "pksunkara"
-  },
-  "python": {
-    "license": "MIT License"
-  }
+	"name": "Testing",
+	"package": "testing-alpaca",
+	"version": "0.1.0",
+	"url": "https://github.com/pksunkara/alpaca",
+	"keywords": ["alpaca", "test", "api", "client", "library"],
+	"official": true,
+	"author": {
+		"name": "Pavan Kumar Sunkara",
+		"email": "pavan.sss1991@gmail.com",
+		"url": "http://github.com/pksunkara"
+	},
+	"git": {
+		"site": "github.com",
+		"user": "alpaca-api",
+		"name": "testing"
+	},
+	"license": "MIT",
+	"php": {
+		"vendor": "pksunkara"
+	},
+	"python": {
+		"license": "MIT License"
+	}
 }
