@@ -90,7 +90,7 @@ Auth.prototype.httpPassword = function(request) {
  * Authorization with HTTP header
  */
 Auth.prototype.httpHeader = function(request) {
-  request['headers']['Authorization'] = 'token ' + this.auth['http_header'];
+  request['headers']['Authorization'] = '{{or .Api.authorization.header_prefix "token"}} ' + this.auth['http_header'];
 
   return request;
 };

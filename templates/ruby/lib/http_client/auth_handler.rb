@@ -85,7 +85,7 @@ module {{call .Fnc.camelize .Pkg.Name}}
 {{end}}{{if .Api.authorization.header}}
       # Authorization with HTTP header
       def http_header(env)
-        env[:request_headers]["Authorization"] = "token #{@auth[:http_header]}"
+        env[:request_headers]["Authorization"] = "{{or .Api.authorization.header_prefix "token"}} #{@auth[:http_header]}"
 
         return env
       end

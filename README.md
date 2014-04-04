@@ -116,6 +116,7 @@ All the following fields are required unless mentioned.
   "authorization": { // Authorization strategies
     "basic" : true, // Basic authentication [optional] (default: false)
     "header": true, // Token in authorization header [optional] (default: false)
+    "header_prefix": "oompaloompa", // The first word in header if using token auth header [optional] (default: token)
     "oauth" : true // OAUTH authorization [optional] (default: false)
   },
   "request": { // Settings for requests to the api

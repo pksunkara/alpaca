@@ -95,7 +95,7 @@ class AuthHandler
      */
     public function httpHeader(Event $event)
     {
-        $event['request']->setHeader('Authorization', sprintf('token %s', $this->auth['http_header']));
+        $event['request']->setHeader('Authorization', sprintf('{{or .Api.authorization.header_prefix "token"}} %s', $this->auth['http_header']));
     }
 {{end}}{{if .Api.authorization.oauth}}
     /**

@@ -63,7 +63,7 @@ class AuthHandler(object):
 {{end}}{{if .Api.authorization.header}}
     def http_header(self, request):
         """Authorization with HTTP header"""
-        request['headers']['Authorization'] = 'token ' + self.auth['http_header']
+        request['headers']['Authorization'] = '{{or .Api.authorization.header_prefix "token"}} ' + self.auth['http_header']
         return request
 {{end}}{{if .Api.authorization.oauth}}
     def url_secret(self, request):
