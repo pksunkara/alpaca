@@ -1,25 +1,25 @@
 {
-  "name": "Twilio",
-  "package": "twilio-alpaca",
-  "version": "0.1.0",
-  "url": "https://twilio.com",
-  "keywords": ["alpaca", "twilio", "api", "client", "library"],
-  "official": false,
-  "author": {
-    "name": "Pavan Kumar Sunkara",
-    "email": "pavan.sss1991@gmail.com",
-    "url": "http://github.com/pksunkara"
-  },
-  "git": {
-    "site": "github.com",
-    "user": "alpaca-api",
-    "name": "twilio"
-  },
-  "license": "MIT",
-  "php": {
-    "vendor": "pksunkara"
-  },
-  "python": {
-    "license": "MIT License"
-  }
+	"name": "Twilio",
+	"package": "twilio-alpaca",
+	"version": "0.1.0",
+	"url": "https://twilio.com",
+	"keywords": ["alpaca", "twilio", "api", "client", "library"],
+	"official": false,
+	"author": {
+		"name": "Pavan Kumar Sunkara",
+		"email": "pavan.sss1991@gmail.com",
+		"url": "http://github.com/pksunkara"
+	},
+	"git": {
+		"site": "github.com",
+		"user": "alpaca-api",
+		"name": "twilio"
+	},
+	"license": "MIT",
+	"php": {
+		"vendor": "pksunkara"
+	},
+	"python": {
+		"license": "MIT License"
+	}
 }

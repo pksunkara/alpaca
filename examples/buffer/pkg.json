@@ -1,25 +1,25 @@
 {
-  "name": "Buffer",
-  "package": "buffer-alpaca",
-  "version": "0.1.0",
-  "url": "https://bufferapp.com",
-  "keywords": ["alpaca", "buffer", "api", "client", "library"],
-  "official": false,
-  "author": {
-    "name": "Pavan Kumar Sunkara",
-    "email": "pavan.sss1991@gmail.com",
-    "url": "http://github.com/pksunkara"
-  },
-  "git": {
-    "site": "github.com",
-    "user": "alpaca-api",
-    "name": "buffer"
-  },
-  "license": "MIT",
-  "php": {
-    "vendor": "pksunkara"
-  },
-  "python": {
-    "license": "MIT License"
-  }
+	"name": "Buffer",
+	"package": "buffer-alpaca",
+	"version": "0.1.0",
+	"url": "https://bufferapp.com",
+	"keywords": ["alpaca", "buffer", "api", "client", "library"],
+	"official": false,
+	"author": {
+		"name": "Pavan Kumar Sunkara",
+		"email": "pavan.sss1991@gmail.com",
+		"url": "http://github.com/pksunkara"
+	},
+	"git": {
+		"site": "github.com",
+		"user": "alpaca-api",
+		"name": "buffer"
+	},
+	"license": "MIT",
+	"php": {
+		"vendor": "pksunkara"
+	},
+	"python": {
+		"license": "MIT License"
+	}
 }
