@@ -1,8 +1,9 @@
 from ..error import ClientError
 from .response_handler import ResponseHandler
 
-# ErrorHanlder takes care of selecting the error message from response body
-class ErrorHandler():
+
+class ErrorHandler(object):
+    """ErrorHandler takes care of getting the error message from response body"""
 
     @staticmethod
     def check_error(response, *args, **kwargs):
