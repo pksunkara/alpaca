@@ -8,8 +8,8 @@ var Client = function(auth, options) {
 };
 {{with $data := .}}{{range .Api.classes}}
 /**
- * {{index $data.Doc . "desc"}}
- *{{with $class := .}}{{range (index $data.Api.class $class "args")}}
+ * {{index $data.Doc . "desc"}}{{with (index $data.Api.class . "args")}}
+ *{{end}}{{with $class := .}}{{range (index $data.Api.class $class "args")}}
  * @param "{{.}}" {{index $data.Doc $class "args" . "desc"}}{{end}}{{end}}
  */
 Client.prototype.{{call $data.Fnc.camelizeDownFirst .}} = function ({{call $data.Fnc.args.node (index $data.Api.class . "args") true}}) {

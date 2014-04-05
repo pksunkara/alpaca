@@ -10,9 +10,9 @@ class Client(object):
         self.http_client = HttpClient(auth, options)
 {{with $data := .}}{{range .Api.classes}}
     def {{call $data.Fnc.underscore .}}(self{{call $data.Fnc.args.python (index $data.Api.class . "args") true true}}):
-        """{{index $data.Doc . "desc"}}
+        """{{index $data.Doc . "desc"}}{{with (index $data.Api.class . "args")}}
 
-        Args:{{with $class := .}}{{range (index $data.Api.class $class "args")}}
+        Args:{{end}}{{with $class := .}}{{range (index $data.Api.class $class "args")}}
             {{.}}: {{index $data.Doc $class "args" . "desc"}}{{end}}{{end}}
         """
         return {{call $data.Fnc.camelize .}}({{call $data.Fnc.args.python (index $data.Api.class . "args")}}self.http_client)

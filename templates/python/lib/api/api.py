@@ -1,7 +1,7 @@
 class {{call .Fnc.camelize .Api.active.name}}(object):
-    """{{index .Doc .Api.active.name "desc"}}
+    """{{index .Doc .Api.active.name "desc"}}{{with (index .Doc .Api.active.name "args")}}
 
-    Args:{{with $data := .}}{{range .Api.active.args}}
+    Args:{{end}}{{with $data := .}}{{range .Api.active.args}}
         {{.}}: {{index $data.Doc $data.Api.active.name "args" . "desc"}}{{end}}{{end}}
     """
 {{define "bodyorquery"}}{{if (eq (or (index . "method") "get") "get")}}query{{else}}body{{end}}{{end}}
@@ -12,9 +12,9 @@ class {{call .Fnc.camelize .Api.active.name}}(object):
     def {{call $data.Fnc.underscore .}}(self, {{call $data.Fnc.args.python (index (index $data.Api.class $data.Api.active.name .) "params")}}options={}):
         """{{index $data.Doc $data.Api.active.name . "desc"}}
 
-        '{{index $data.Api.class $data.Api.active.name . "path"}}' {{call $data.Fnc.upper (or (index $data.Api.class $data.Api.active.name . "method") "get")}}
+        '{{index $data.Api.class $data.Api.active.name . "path"}}' {{call $data.Fnc.upper (or (index $data.Api.class $data.Api.active.name . "method") "get")}}{{with (index $data.Doc $data.Api.active.name . "params")}}
 
-        Args:{{with $method := .}}{{range (index $data.Api.class $data.Api.active.name $method "params")}}{{if .required}}
+        Args:{{end}}{{with $method := .}}{{range (index $data.Api.class $data.Api.active.name $method "params")}}{{if .required}}
             {{.name}}: {{index $data.Doc $data.Api.active.name $method "params" .name "desc"}}{{end}}{{end}}{{end}}
         """
         body = options['{{template "bodyorquery" (index $data.Api.class $data.Api.active.name .)}}'] if '{{template "bodyorquery" (index $data.Api.class $data.Api.active.name .)}}' in options else {}{{range (index $data.Api.class $data.Api.active.name . "params")}}{{if .required}}

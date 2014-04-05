@@ -14,8 +14,8 @@ class Client
     }
 {{with $data := .}}{{range .Api.classes}}
     /**
-     * {{index $data.Doc . "desc"}}
-     *{{with $class := .}}{{range (index $data.Api.class $class "args")}}
+     * {{index $data.Doc . "desc"}}{{with (index $data.Api.class . "args")}}
+     *{{end}}{{with $class := .}}{{range (index $data.Api.class $class "args")}}
      * @param ${{.}} {{index $data.Doc $class "args" . "desc"}}{{end}}{{end}}
      */
     public function {{call $data.Fnc.camelizeDownFirst .}}({{call $data.Fnc.args.php (index $data.Api.class . "args") true}})

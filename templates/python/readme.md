@@ -138,10 +138,10 @@ The following options are available while calling a method of an api:
 {{with $data := .}}{{range .Api.classes}}
 ### {{index $data.Doc . "title"}} api
 
-{{index $data.Doc . "desc"}}
-{{with (index $data.Api.class . "args")}}
-The following arguments are required:{{end}}
-{{with $class := .}}{{range (index $data.Api.class . "args")}}
+{{index $data.Doc . "desc"}}{{with (index $data.Api.class . "args")}}
+
+The following arguments are required:
+{{end}}{{with $class := .}}{{range (index $data.Api.class . "args")}}
  * __{{.}}__: {{index $data.Doc $class "args" . "desc"}}{{end}}
 
 ```python
@@ -150,10 +150,10 @@ The following arguments are required:{{end}}
 {{range (call $data.Fnc.methods (index $data.Api.class .))}}
 ##### {{index $data.Doc $class . "title"}} ({{call $data.Fnc.upper (or (index $data.Api.class $class . "method") "get")}} {{index $data.Api.class $class . "path"}})
 
-{{index $data.Doc $class . "desc"}}
-{{with (index $data.Api.class $class . "params")}}
-The following arguments are required:{{end}}
-{{with $method := .}}{{range (index $data.Api.class $class . "params")}}{{if .required}}
+{{index $data.Doc $class . "desc"}}{{with (index $data.Api.class $class . "params")}}
+
+The following arguments are required:
+{{end}}{{with $method := .}}{{range (index $data.Api.class $class . "params")}}{{if .required}}
  * __{{.name}}__: {{index $data.Doc $class $method "params" .name "desc"}}{{end}}{{end}}{{end}}
 
 ```python
