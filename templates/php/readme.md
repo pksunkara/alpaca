@@ -43,7 +43,7 @@ require_once 'vendor/autoload.php';
 
 ### Build a client
 {{if .Api.authorization.need_auth}}
-**Using this api without authentication gives an error**
+__Using this api without authentication gives an error__
 {{else}}
 ##### Without any authentication
 
@@ -82,22 +82,34 @@ $auth = array('client_id' => '09a8b7', 'client_secret' => '1a2b3');
 $client = new {{call .Fnc.camelize .Pkg.Name}}\Client($auth, $options);
 ```
 {{end}}
+### Client Options
+
+The following options are available while instantiating a client:
+
+ * __base__: Base url for the api
+ * __api_version__: Default version of the api (to be used in url)
+ * __user_agent__: Default user-agent for all requests
+ * __headers__: Default headers for all requests
+ * __request_type__: Default format of the request body{{if .Api.response.suffix}}
+ * __response_type__: Default format of the response (to be used in url suffix){{end}}
+
 ### Response information
+
+__All the callbacks provided to an api call will recieve the response as shown below__
 
 ```php
 $response = $client->klass('args')->method('args');
-
-$response->body;
-// >>> 'Hello world!'
 
 $response->code;
 // >>> 200
 
 $response->headers;
-// >>> array('content-type' => 'text/html')
+// >>> array('x-server' => 'apache')
 ```
 {{if .Api.response.formats.html}}
 ##### HTML/TEXT response
+
+When the response sent by server is either __html__ or __text__, it is not changed in any way
 
 ```php
 $response->body;
@@ -105,6 +117,8 @@ $response->body;
 ```
 {{end}}{{if .Api.response.formats.json}}
 ##### JSON response
+
+When the response sent by server is __json__, it is decoded into an array
 
 ```php
 $response->body;
@@ -131,17 +145,6 @@ $body = array('user' => 'pksunkara');
 $body = array('user' => 'pksunkara');
 ```
 {{end}}
-### Client Options
-
-The following options are available while instantiating a client:
-
- * __base__: Base url for the api
- * __api_version__: Default version of the api (to be used in url)
- * __user_agent__: Default user-agent for all requests
- * __headers__: Default headers for all requests
- * __request_type__: Default format of the request body{{if .Api.response.suffix}}
- * __response_type__: Default format of the response (to be used in url suffix){{end}}
-
 ### Method Options
 
 The following options are available while calling a method of an api:
