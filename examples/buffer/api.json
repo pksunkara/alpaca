@@ -2,12 +2,12 @@
 	"base": "https://api.bufferapp.com",
 	"version": "1",
 	"authorization": {
-		"oauth" : true
+		"need_auth": true,
+		"oauth": true
 	},
 	"request": {
 		"formats": {
-			"default": "form",
-			"json": false
+			"default": "form"
 		}
 	},
 	"response": {

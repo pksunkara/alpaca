@@ -96,14 +96,14 @@ $response->code;
 $response->headers;
 // >>> array('content-type' => 'text/html')
 ```
-
+{{if .Api.response.formats.html}}
 ##### HTML/TEXT response
 
 ```php
 $response->body;
 // >>> 'The username is pksunkara!'
 ```
-{{if .Api.response.formats.json}}
+{{end}}{{if .Api.response.formats.json}}
 ##### JSON response
 
 ```php

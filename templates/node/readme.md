@@ -85,14 +85,14 @@ client.klass('args').method('args', function (err, response) {
     // >>> {'content-type': 'text/html'}
 }
 ```
-
+{{if .Api.response.formats.html}}
 ##### HTML/TEXT response
 
 ```js
 response.body;
 // >>> 'The username is pksunkara!'
 ```
-{{if .Api.response.formats.json}}
+{{end}}{{if .Api.response.formats.json}}
 ##### JSON response
 
 ```js

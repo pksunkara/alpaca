@@ -112,7 +112,7 @@ class HttpClient(object):
         version = '/' + options['api_version'] if 'api_version' in options else ''
 {{if .Api.response.suffix}}
         # Adds a suffix (ex: ".html", ".json") to url
-        suffix = options['response_type'] if 'response_type' in options else '{{or .Api.response.formats.default "html"}}'
+        suffix = options['response_type'] if 'response_type' in options else '{{.Api.response.formats.default}}'
         path = path + '.' + suffix
 {{end}}
         path = urlparse.urljoin(self.base, version + path)

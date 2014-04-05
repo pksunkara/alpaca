@@ -127,11 +127,12 @@ All the following fields are required unless mentioned.
     }
   },
   "response": { // Settings for responses from the api
-    "formats": { // Format of the response body
-      "default": "json", // Default response format. Used when 'suffix' is true [optional] (default: html) 
-      "json": true // Support json? [optional] (default: false)
-    },
     "suffix": true // Should the urls be suffixed with response format? [optional] (default: false)
+    "formats": { // Format of the response body
+      "default": "json", // Default response format. Used when 'suffix' is 'true'
+      "html": true // Support html? [optional] (default: false)
+      "json": true // Support json? [optional] (default: false)
+    }
   },
   "error": { // Required if response format is 'json'
     "message": "error" // The field to be used from the response body for error message
@@ -192,8 +193,6 @@ The formats `raw` and `form` are always true.
 ### Response formats
 
 Supported response formats are `html`, `json`.
-
-The format `html` is always true.
 
 ### Authorization strategies
 

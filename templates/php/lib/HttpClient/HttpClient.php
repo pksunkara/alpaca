@@ -138,7 +138,7 @@ class HttpClient
         $version = (isset($options['api_version']) ? "/".$options['api_version'] : "");
 {{if .Api.response.suffix}}
         // Adds a suffix (ex: ".html", ".json") to url
-        $suffix = (isset($options['response_type']) ? $options['response_type'] : "{{or .Api.response.formats.default "html"}}");
+        $suffix = (isset($options['response_type']) ? $options['response_type'] : "{{.Api.response.formats.default}}");
         $path = $path.".".$suffix;
 {{end}}
         $path    = $version.$path;
