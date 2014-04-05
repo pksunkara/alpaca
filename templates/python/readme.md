@@ -25,7 +25,9 @@ import {{call .Fnc.underscore .Pkg.Name}}
 ```
 
 ### Build a client
-
+{{if .Api.authorization.need_auth}}
+**Using this api without authentication gives an error**
+{{else}}
 ##### Without any authentication
 
 ```python
@@ -34,7 +36,7 @@ client = {{call .Fnc.underscore .Pkg.Name}}.Client()
 # If you need to send options
 client = {{call .Fnc.underscore .Pkg.Name}}.Client({}, options)
 ```
-{{if .Api.authorization.basic}}
+{{end}}{{if .Api.authorization.basic}}
 ##### Basic authentication
 
 ```python

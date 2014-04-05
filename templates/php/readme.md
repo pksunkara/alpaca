@@ -42,7 +42,9 @@ require_once 'vendor/autoload.php';
 ```
 
 ### Build a client
-
+{{if .Api.authorization.need_auth}}
+**Using this api without authentication gives an error**
+{{else}}
 ##### Without any authentication
 
 ```php
@@ -51,7 +53,7 @@ $client = new {{call .Fnc.camelize .Pkg.Name}}\Client();
 // If you need to send options
 $client = new {{call .Fnc.camelize .Pkg.Name}}\Client(array(), $options);
 ```
-{{if .Api.authorization.basic}}
+{{end}}{{if .Api.authorization.basic}}
 ##### Basic authentication
 
 ```php

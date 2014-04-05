@@ -43,10 +43,11 @@ Auth.prototype.getAuthType = function () {
  *
  * This should throw error because this should be caught while in development
  */
-Auth.prototype.set = function (request) {
+Auth.prototype.set = function (request, callback) {
   if (Object.keys(this.auth).length == 0) {
-    return request;
-  }
+    return callback({{if .Api.authorization.need_auth}}new Error('Server requires authentication to proceed further. Please check'));
+  {{else}}null, request);
+  {{end}}}
 
   var auth = this.getAuthType(), flag = false;
 {{if .Api.authorization.basic}}
@@ -71,10 +72,10 @@ Auth.prototype.set = function (request) {
   }
 {{end}}
   if (!flag) {
-      throw new Error('Unable to calculate authorization method. Please check.');
+      return callback(new Error('Unable to calculate authorization method. Please check.'));
   }
 
-  return request;
+  callback(null, request);
 };
 {{if .Api.authorization.basic}}
 /**

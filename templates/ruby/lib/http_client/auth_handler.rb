@@ -46,7 +46,9 @@ module {{call .Fnc.camelize .Pkg.Name}}
 {{end}}
           if !flag
             raise StandardError.new "Unable to calculate authorization method. Please check"
-          end
+          end{{if .Api.authorization.need_auth}}
+        else
+          raise StandardError.new "Server requires authentication to proceed further. Please check"{{end}}
         end
 
         @app.call(env)

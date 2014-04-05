@@ -29,8 +29,9 @@ class AuthHandler(object):
         return -1
 
     def set(self, request):
-        if len(self.auth.keys()) == 0:
-            return request
+        if len(self.auth.keys()) == 0:{{if .Api.authorization.need_auth}}
+            raise StandardError("Server requires authentication to proceed further. Please check"){{else}}
+            return request{{end}}
 
         auth = self.get_auth_type()
         flag = False

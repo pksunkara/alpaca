@@ -138,24 +138,28 @@ client.HttpClient.prototype.request = function (path, body, method, options, cal
     reqobj = this.setBody(reqobj, body, options);
   }
 
-  reqobj = this.auth.set(reqobj);
-
-  reqobj = this.createRequest(reqobj, options, function(err, response, body) {
+  this.auth.set(reqobj, function (err, reqobj) {
     if (err) {
       return callback(err);
     }
 
-    self.getBody(response, body, function(err, response, body) {
+    self.createRequest(reqobj, options, function(err, response, body) {
       if (err) {
         return callback(err);
       }
 
-      client.ErrorHandler(response, body, function(err, response, body) {
+      self.getBody(response, body, function(err, response, body) {
         if (err) {
           return callback(err);
         }
 
-        callback(null, new client.Response(body, response.statusCode, response.headers));
+        client.ErrorHandler(response, body, function(err, response, body) {
+          if (err) {
+            return callback(err);
+          }
+
+          callback(null, new client.Response(body, response.statusCode, response.headers));
+        });
       });
     });
   });

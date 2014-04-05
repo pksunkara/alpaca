@@ -25,7 +25,9 @@ var {{call .Fnc.underscore .Pkg.Name}} = require('{{.Pkg.Package}}');
 ```
 
 ### Build a client
-
+{{if .Api.authorization.need_auth}}
+**Using this api without authentication gives an error**
+{{else}}
 ##### Without any authentication
 
 ```js
@@ -34,7 +36,7 @@ var client = {{call .Fnc.underscore .Pkg.Name}}.client();
 // If you need to send options
 var client = {{call .Fnc.underscore .Pkg.Name}}.client({}, options);
 ```
-{{if .Api.authorization.basic}}
+{{end}}{{if .Api.authorization.basic}}
 ##### Basic authentication
 
 ```js

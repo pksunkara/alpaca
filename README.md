@@ -114,6 +114,7 @@ All the following fields are required unless mentioned.
   "version": "v1", // Default version for the api (https://api.example.com{/version}/users) [optional]
   "no_verify_ssl": true, // Do not verify SSL cert [optional] (default: false)
   "authorization": { // Authorization strategies
+    "need_auth": true, // Authentication is compulsory [optional] (default: false)
     "basic" : true, // Basic authentication [optional] (default: false)
     "header": true, // Token in authorization header [optional] (default: false)
     "header_prefix": "oompaloompa", // The first word in header if using token auth header [optional] (default: token)

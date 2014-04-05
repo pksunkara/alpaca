@@ -25,7 +25,9 @@ require "{{.Pkg.Package}}"
 ```
 
 ### Build a client
-
+{{if .Api.authorization.need_auth}}
+**Using this api without authentication gives an error**
+{{else}}
 ##### Without any authentication
 
 ```ruby
@@ -34,7 +36,7 @@ client = {{call .Fnc.camelize .Pkg.Name}}::Client.new
 # If you need to send options
 client = {{call .Fnc.camelize .Pkg.Name}}::Client.new({}, options)
 ```
-{{if .Api.authorization.basic}}
+{{end}}{{if .Api.authorization.basic}}
 ##### Basic authentication
 
 ```ruby
