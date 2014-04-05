@@ -15,7 +15,7 @@ func WriteNode(data *Data) {
 	MakeDir("lib")
 	RunTemplate("lib/index.js", "index.js", data)
 
-	MakeDir(inflect.CamelizeDownFirst(data.Pkg.Name))
+	MakeDir(inflect.Underscore(data.Pkg.Name))
 	RunTemplate("lib/client.js", "client.js", data)
 
 	MakeDir("error")
@@ -36,7 +36,7 @@ func WriteNode(data *Data) {
 
 	for k, v := range data.Api["class"].(map[string]interface{}) {
 		data.Api["active"] = ActiveClassInfo(k, v)
-		RunTemplate("lib/api/api.js", inflect.CamelizeDownFirst(k)+".js", data)
+		RunTemplate("lib/api/api.js", inflect.Underscore(k)+".js", data)
 		delete(data.Api, "active")
 	}
 }

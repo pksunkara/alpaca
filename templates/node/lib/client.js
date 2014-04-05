@@ -13,7 +13,7 @@ var Client = function(auth, options) {
  * @param "{{.}}" {{index $data.Doc $class "args" . "desc"}}{{end}}{{end}}
  */
 Client.prototype.{{call $data.Fnc.camelizeDownFirst .}} = function ({{call $data.Fnc.args.node (index $data.Api.class . "args") true}}) {
-    return new (require('./api/{{call $data.Fnc.camelizeDownFirst .}}'))({{call $data.Fnc.args.node (index $data.Api.class . "args")}}this.httpClient);
+    return new (require('./api/{{call $data.Fnc.underscore .}}'))({{call $data.Fnc.args.node (index $data.Api.class . "args")}}this.httpClient);
 };
 {{end}}{{end}}
 // Export module

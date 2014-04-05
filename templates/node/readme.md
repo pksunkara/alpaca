@@ -19,7 +19,7 @@ Works with [ 0.8 / 0.9 / 0.10 / 0.11 ]
 ## Usage
 
 ```js
-var {{call .Fnc.underscore .Pkg.Name}} = require('{{.Pkg.Package}}');
+var {{call .Fnc.camelizeDownFirst .Pkg.Name}} = require('{{.Pkg.Package}}');
 
 // Then we instantiate a client (as shown below)
 ```
@@ -31,16 +31,16 @@ var {{call .Fnc.underscore .Pkg.Name}} = require('{{.Pkg.Package}}');
 ##### Without any authentication
 
 ```js
-var client = {{call .Fnc.underscore .Pkg.Name}}.client();
+var client = {{call .Fnc.camelizeDownFirst .Pkg.Name}}.client();
 
 // If you need to send options
-var client = {{call .Fnc.underscore .Pkg.Name}}.client({}, options);
+var client = {{call .Fnc.camelizeDownFirst .Pkg.Name}}.client({}, options);
 ```
 {{end}}{{if .Api.authorization.basic}}
 ##### Basic authentication
 
 ```js
-var client = {{call .Fnc.underscore .Pkg.Name}}.client({
+var client = {{call .Fnc.camelizeDownFirst .Pkg.Name}}.client({
     username: 'pksunkara',
     password: 'password'
 }, options);
@@ -49,19 +49,19 @@ var client = {{call .Fnc.underscore .Pkg.Name}}.client({
 ##### Authorization header token
 
 ```js
-var client = {{call .Fnc.underscore .Pkg.Name}}.client({{if .Api.authorization.oauth}}{ http_header: '1a2b3' }{{else}}'1a2b3'{{end}}, options);
+var client = {{call .Fnc.camelizeDownFirst .Pkg.Name}}.client({{if .Api.authorization.oauth}}{ http_header: '1a2b3' }{{else}}'1a2b3'{{end}}, options);
 ```
 {{end}}{{if .Api.authorization.oauth}}
 ##### Oauth acess token
 
 ```js
-var client = {{call .Fnc.underscore .Pkg.Name}}.client('1a2b3', options);
+var client = {{call .Fnc.camelizeDownFirst .Pkg.Name}}.client('1a2b3', options);
 ```
 
 ##### Oauth client secret
 
 ```js
-var client = {{call .Fnc.underscore .Pkg.Name}}.client({
+var client = {{call .Fnc.camelizeDownFirst .Pkg.Name}}.client({
     client_id: '09a8b7',
     client_secret: '1a2b3'
 }, options);

@@ -47,7 +47,7 @@ func FunctionsPython(fnc map[string]interface{}) {
 
 	args["python"] = ArgsFunctionMaker("", ", ")
 	path["python"] = PathFunctionMaker("' + self.", " + '")
-	prnt["python"] = PrntFunctionMaker(true, "\t", "\"", "\"", "[", "]", "{", "}", "'", "': ")
+	prnt["python"] = PrntFunctionMaker(true, "    ", "\"", "\"", "[", "]", "{", "}", "'", "': ")
 }
 
 func CheckPython(data *Data) error {
