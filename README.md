@@ -28,7 +28,7 @@ Or by using deb packages (v0.2.0)
 
  * [ [i386](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.0_i386.deb?direct) / [amd64](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.0_amd64.deb?direct) / [armhf](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.0_armhf.deb?direct) ]
 
-Or by using golang
+Or by using golang (v1.2)
 
 ```bash
 # Clone the project into your golang workspace
@@ -123,6 +123,7 @@ All the following fields are required unless mentioned.
   "request": { // Settings for requests to the api
     "formats": { // Format of the request body
       "default": "form", // Default format for the request body [optional] (default: raw)
+      "form": true // Support form-url-encoded? [optional] (default: false)
       "json": true // Support json? [optional] (default: false)
     }
   },
@@ -186,9 +187,11 @@ The following is filled according to the entries in `api.json`
 
 ### Request formats
 
-Supported request formats are `raw`, `form`, `json`.
+Supported request formats are `raw`, `form`, `json`. The format `raw` is always true.
 
-The formats `raw` and `form` are always true.
+This means, the `body` set in the options when calling an API method will be able to be encoded according to the respective `request_type`
+
+__If set to `raw`, body is not modified at all__
 
 ### Response formats
 

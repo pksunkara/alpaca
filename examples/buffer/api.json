@@ -7,7 +7,8 @@
 	},
 	"request": {
 		"formats": {
-			"default": "form"
+			"default": "form",
+			"form": true
 		}
 	},
 	"response": {

@@ -17,13 +17,15 @@ class RequestHandler {
         // Encoding request body into JSON format
         if ($type == 'json') {
             $body = ((count($body) === 0) ? '{}' : json_encode($body, empty($body) ? JSON_FORCE_OBJECT : 0));
-            $header = 'application/json';
+            return $request->setBody($body, 'application/json');
         }
-{{end}}
+{{end}}{{if .Api.request.formats.form}}
         if ($type == 'form') {
             // Encoding body into form-urlencoded format
             return $request->addPostFields($body);
-        } else {
+        }
+{{end}}
+        if ($type == 'raw') {
             // Raw body
             return $request->setBody($body, $header);
         }

@@ -51,7 +51,7 @@ __Using this api without authentication gives an error__
 $client = new {{call .Fnc.camelize .Pkg.Name}}\Client();
 
 // If you need to send options
-$client = new {{call .Fnc.camelize .Pkg.Name}}\Client(array(), $options);
+$client = new {{call .Fnc.camelize .Pkg.Name}}\Client(array(), $clientOptions);
 ```
 {{end}}{{if .Api.authorization.basic}}
 ##### Basic authentication
@@ -59,19 +59,19 @@ $client = new {{call .Fnc.camelize .Pkg.Name}}\Client(array(), $options);
 ```php
 $auth = array('username' => 'pksunkara', 'password' => 'password');
 
-$client = new {{call .Fnc.camelize .Pkg.Name}}\Client($auth, $options);
+$client = new {{call .Fnc.camelize .Pkg.Name}}\Client($auth, $clientOptions);
 ```
 {{end}}{{if .Api.authorization.header}}
 ##### Authorization header token
 
 ```php
-$client = new {{call .Fnc.camelize .Pkg.Name}}\Client({{if .Api.authorization.oauth}}array('http_header' => '1a2b3'){{else}}'1a2b3'{{end}}, $options);
+$client = new {{call .Fnc.camelize .Pkg.Name}}\Client({{if .Api.authorization.oauth}}array('http_header' => '1a2b3'){{else}}'1a2b3'{{end}}, $clientOptions);
 ```
 {{end}}{{if .Api.authorization.oauth}}
 ##### Oauth acess token
 
 ```php
-$client = new {{call .Fnc.camelize .Pkg.Name}}\Client('1a2b3', $options);
+$client = new {{call .Fnc.camelize .Pkg.Name}}\Client('1a2b3', $clientOptions);
 ```
 
 ##### Oauth client secret
@@ -79,7 +79,7 @@ $client = new {{call .Fnc.camelize .Pkg.Name}}\Client('1a2b3', $options);
 ```php
 $auth = array('client_id' => '09a8b7', 'client_secret' => '1a2b3');
 
-$client = new {{call .Fnc.camelize .Pkg.Name}}\Client($auth, $options);
+$client = new {{call .Fnc.camelize .Pkg.Name}}\Client($auth, $clientOptions);
 ```
 {{end}}
 ### Client Options
@@ -98,7 +98,7 @@ The following options are available while instantiating a client:
 __All the callbacks provided to an api call will recieve the response as shown below__
 
 ```php
-$response = $client->klass('args')->method('args');
+$response = $client->klass('args')->method('args', $methodOptions);
 
 $response->code;
 // >>> 200
@@ -125,26 +125,6 @@ $response->body;
 // >>> array('user' => 'pksunkara')
 ```
 {{end}}
-### Request body information
-
-##### RAW request
-
-```php
-$body = 'username=pksunkara';
-```
-
-##### FORM request
-
-```php
-$body = array('user' => 'pksunkara');
-```
-{{if .Api.request.formats.json}}
-##### JSON request
-
-```php
-$body = array('user' => 'pksunkara');
-```
-{{end}}
 ### Method Options
 
 The following options are available while calling a method of an api:
@@ -155,7 +135,38 @@ The following options are available while calling a method of an api:
  * __body__: Body of the request
  * __request_type__: Format of the request body{{if .Api.response.suffix}}
  * __response_type__: Format of the response (to be used in url suffix){{end}}
-{{with $data := .}}{{range .Api.classes}}
+
+### Request body information
+
+Set __request_type__ in options to modify the body accordingly
+
+##### RAW request
+
+When the value is set to __raw__, don't modify the body at all.
+
+```php
+$body = 'username=pksunkara';
+// >>> 'username=pksunkara'
+```
+{{if .Api.request.formats.form}}
+##### FORM request
+
+When the value is set to __form__, urlencode the body.
+
+```php
+$body = array('user' => 'pksunkara');
+// >>> 'user=pksunkara'
+```
+{{end}}{{if .Api.request.formats.json}}
+##### JSON request
+
+When the value is set to __json__, JSON encode the body.
+
+```php
+$body = array('user' => 'pksunkara');
+// >>> '{"user": "pksunkara"}'
+```
+{{end}}{{with $data := .}}{{range .Api.classes}}
 ### {{index $data.Doc . "title"}} api
 
 {{index $data.Doc . "desc"}}{{with (index $data.Api.class . "args")}}

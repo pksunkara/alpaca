@@ -34,7 +34,7 @@ __Using this api without authentication gives an error__
 var client = {{call .Fnc.camelizeDownFirst .Pkg.Name}}.client();
 
 // If you need to send options
-var client = {{call .Fnc.camelizeDownFirst .Pkg.Name}}.client({}, options);
+var client = {{call .Fnc.camelizeDownFirst .Pkg.Name}}.client({}, clientOptions);
 ```
 {{end}}{{if .Api.authorization.basic}}
 ##### Basic authentication
@@ -43,19 +43,19 @@ var client = {{call .Fnc.camelizeDownFirst .Pkg.Name}}.client({}, options);
 var client = {{call .Fnc.camelizeDownFirst .Pkg.Name}}.client({
     username: 'pksunkara',
     password: 'password'
-}, options);
+}, clientOptions);
 ```
 {{end}}{{if .Api.authorization.header}}
 ##### Authorization header token
 
 ```js
-var client = {{call .Fnc.camelizeDownFirst .Pkg.Name}}.client({{if .Api.authorization.oauth}}{ http_header: '1a2b3' }{{else}}'1a2b3'{{end}}, options);
+var client = {{call .Fnc.camelizeDownFirst .Pkg.Name}}.client({{if .Api.authorization.oauth}}{ http_header: '1a2b3' }{{else}}'1a2b3'{{end}}, clientOptions);
 ```
 {{end}}{{if .Api.authorization.oauth}}
 ##### Oauth acess token
 
 ```js
-var client = {{call .Fnc.camelizeDownFirst .Pkg.Name}}.client('1a2b3', options);
+var client = {{call .Fnc.camelizeDownFirst .Pkg.Name}}.client('1a2b3', clientOptions);
 ```
 
 ##### Oauth client secret
@@ -64,7 +64,7 @@ var client = {{call .Fnc.camelizeDownFirst .Pkg.Name}}.client('1a2b3', options);
 var client = {{call .Fnc.camelizeDownFirst .Pkg.Name}}.client({
     client_id: '09a8b7',
     client_secret: '1a2b3'
-}, options);
+}, clientOptions);
 ```
 {{end}}
 ### Client Options
@@ -83,7 +83,8 @@ The following options are available while instantiating a client:
 __All the callbacks provided to an api call will recieve the response as shown below__
 
 ```js
-client.klass('args').method('args', function (err, response) {
+// You can also omit the 'methodOptions' param below
+client.klass('args').method('args', methodOptions, function (err, response) {
     if (err) console.log(err);
 
     response.code;
@@ -112,26 +113,6 @@ response.body;
 // >>> {'user': 'pksunkara'}
 ```
 {{end}}
-### Request body information
-
-##### RAW request
-
-```js
-body = 'username=pksunkara';
-```
-
-##### FORM request
-
-```js
-body = {'user': 'pksunkara'};
-```
-{{if .Api.request.formats.json}}
-##### JSON request
-
-```js
-body = {'user': 'pksunkara'};
-```
-{{end}}
 ### Method Options
 
 The following options are available while calling a method of an api:
@@ -142,7 +123,38 @@ The following options are available while calling a method of an api:
  * __body__: Body of the request
  * __request_type__: Format of the request body{{if .Api.response.suffix}}
  * __response_type__: Format of the response (to be used in url suffix){{end}}
-{{with $data := .}}{{range .Api.classes}}
+
+### Request body information
+
+Set __request_type__ in options to modify the body accordingly
+
+##### RAW request
+
+When the value is set to __raw__, don't modify the body at all.
+
+```js
+body = 'username=pksunkara';
+// >>> 'username=pksunkara'
+```
+{{if .Api.request.formats.form}}
+##### FORM request
+
+When the value is set to __form__, urlencode the body.
+
+```js
+body = {'user': 'pksunkara'};
+// >>> 'user=pksunkara'
+```
+{{end}}{{if .Api.request.formats.json}}
+##### JSON request
+
+When the value is set to __json__, JSON encode the body.
+
+```js
+body = {'user': 'pksunkara'};
+// >>> '{"user": "pksunkara"}'
+```
+{{end}}{{with $data := .}}{{range .Api.classes}}
 ### {{index $data.Doc . "title"}} api
 
 {{index $data.Doc . "desc"}}{{with (index $data.Api.class . "args")}}

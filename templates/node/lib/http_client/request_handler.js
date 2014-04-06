@@ -11,12 +11,12 @@ request.setBody = function(reqobj, body, options) {
   if (type == 'json') {
     reqobj['json'] = body;
   }
-{{end}}
+{{end}}{{if .Api.request.formats.form}}
   // Encoding body into form-urlencoded format
   if (type == 'form') {
     reqobj['form'] = body;
   }
-
+{{end}}
   // Raw body
   if (type == 'raw') {
     reqobj['body'] = body;

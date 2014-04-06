@@ -34,7 +34,7 @@ __Using this api without authentication gives an error__
 client = {{call .Fnc.underscore .Pkg.Name}}.Client()
 
 # If you need to send options
-client = {{call .Fnc.underscore .Pkg.Name}}.Client({}, options)
+client = {{call .Fnc.underscore .Pkg.Name}}.Client({}, client_options)
 ```
 {{end}}{{if .Api.authorization.basic}}
 ##### Basic authentication
@@ -42,19 +42,19 @@ client = {{call .Fnc.underscore .Pkg.Name}}.Client({}, options)
 ```python
 auth = { 'username': 'pksunkara', 'password': 'password' }
 
-client = {{call .Fnc.underscore .Pkg.Name}}.Client(auth, options)
+client = {{call .Fnc.underscore .Pkg.Name}}.Client(auth, client_options)
 ```
 {{end}}{{if .Api.authorization.header}}
 ##### Authorization header token
 
 ```python
-client = {{call .Fnc.underscore .Pkg.Name}}.Client({{if .Api.authorization.oauth}}{'http_header': '1a2b3'}{{else}}'1a2b3'{{end}}, options)
+client = {{call .Fnc.underscore .Pkg.Name}}.Client({{if .Api.authorization.oauth}}{'http_header': '1a2b3'}{{else}}'1a2b3'{{end}}, client_options)
 ```
 {{end}}{{if .Api.authorization.oauth}}
 ##### Oauth acess token
 
 ```python
-client = {{call .Fnc.underscore .Pkg.Name}}.Client('1a2b3', options)
+client = {{call .Fnc.underscore .Pkg.Name}}.Client('1a2b3', client_options)
 ```
 
 ##### Oauth client secret
@@ -62,7 +62,7 @@ client = {{call .Fnc.underscore .Pkg.Name}}.Client('1a2b3', options)
 ```python
 auth = { 'client_id': '09a8b7', 'client_secret': '1a2b3' }
 
-client = {{call .Fnc.underscore .Pkg.Name}}.Client(auth, options)
+client = {{call .Fnc.underscore .Pkg.Name}}.Client(auth, client_options)
 ```
 {{end}}
 ### Client Options
@@ -81,7 +81,7 @@ The following options are available while instantiating a client:
 __All the callbacks provided to an api call will recieve the response as shown below__
 
 ```python
-response = client.klass('args').method('args')
+response = client.klass('args').method('args', method_options)
 
 response.code
 # >>> 200
@@ -108,26 +108,6 @@ response.body
 # >>> {'user': 'pksunkara'}
 ```
 {{end}}
-### Request body information
-
-##### RAW request
-
-```python
-body = 'username=pksunkara'
-```
-
-##### FORM request
-
-```python
-body = {'user': 'pksunkara'}
-```
-{{if .Api.request.formats.json}}
-##### JSON request
-
-```python
-body = {'user': 'pksunkara'}
-```
-{{end}}
 ### Method Options
 
 The following options are available while calling a method of an api:
@@ -138,7 +118,38 @@ The following options are available while calling a method of an api:
  * __body__: Body of the request
  * __request_type__: Format of the request body{{if .Api.response.suffix}}
  * __response_type__: Format of the response (to be used in url suffix){{end}}
-{{with $data := .}}{{range .Api.classes}}
+
+### Request body information
+
+Set __request_type__ in options to modify the body accordingly
+
+##### RAW request
+
+When the value is set to __raw__, don't modify the body at all.
+
+```python
+body = 'username=pksunkara'
+# >>> 'username=pksunkara'
+```
+{{if .Api.request.formats.form}}
+##### FORM request
+
+When the value is set to __form__, urlencode the body.
+
+```python
+body = {'user': 'pksunkara'}
+# >>> 'user=pksunkara'
+```
+{{end}}{{if .Api.request.formats.json}}
+##### JSON request
+
+When the value is set to __json__, JSON encode the body.
+
+```python
+body = {'user': 'pksunkara'}
+# >>> '{"user": "pksunkara"}'
+```
+{{end}}{{with $data := .}}{{range .Api.classes}}
 ### {{index $data.Doc . "title"}} api
 
 {{index $data.Doc . "desc"}}{{with (index $data.Api.class . "args")}}

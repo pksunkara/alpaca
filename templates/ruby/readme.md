@@ -34,7 +34,7 @@ __Using this api without authentication gives an error__
 client = {{call .Fnc.camelize .Pkg.Name}}::Client.new
 
 # If you need to send options
-client = {{call .Fnc.camelize .Pkg.Name}}::Client.new({}, options)
+client = {{call .Fnc.camelize .Pkg.Name}}::Client.new({}, client_options)
 ```
 {{end}}{{if .Api.authorization.basic}}
 ##### Basic authentication
@@ -42,19 +42,19 @@ client = {{call .Fnc.camelize .Pkg.Name}}::Client.new({}, options)
 ```ruby
 auth = { :username => 'pksunkara', :password => 'password' }
 
-client = {{call .Fnc.camelize .Pkg.Name}}::Client.new(auth, options)
+client = {{call .Fnc.camelize .Pkg.Name}}::Client.new(auth, client_options)
 ```
 {{end}}{{if .Api.authorization.header}}
 ##### Authorization header token
 
 ```ruby
-client = {{call .Fnc.camelize .Pkg.Name}}::Client.new({{if .Api.authorization.oauth}}{:http_header => '1a2b3'}{{else}}'1a2b3'{{end}}, options)
+client = {{call .Fnc.camelize .Pkg.Name}}::Client.new({{if .Api.authorization.oauth}}{:http_header => '1a2b3'}{{else}}'1a2b3'{{end}}, client_options)
 ```
 {{end}}{{if .Api.authorization.oauth}}
 ##### Oauth acess token
 
 ```ruby
-client = {{call .Fnc.camelize .Pkg.Name}}::Client.new('1a2b3', options)
+client = {{call .Fnc.camelize .Pkg.Name}}::Client.new('1a2b3', client_options)
 ```
 
 ##### Oauth client secret
@@ -62,7 +62,7 @@ client = {{call .Fnc.camelize .Pkg.Name}}::Client.new('1a2b3', options)
 ```ruby
 auth = { :client_id => '09a8b7', :client_secret => '1a2b3' }
 
-client = {{call .Fnc.camelize .Pkg.Name}}::Client.new(auth, options)
+client = {{call .Fnc.camelize .Pkg.Name}}::Client.new(auth, client_options)
 ```
 {{end}}
 ### Client Options
@@ -81,7 +81,7 @@ The following options are available while instantiating a client:
 __All the callbacks provided to an api call will recieve the response as shown below__
 
 ```ruby
-response = client.klass('args').method 'args'
+response = client.klass('args').method('args', method_options)
 
 response.code
 # >>> 200
@@ -108,26 +108,6 @@ response.body
 # >>> {'user' => 'pksunkara'}
 ```
 {{end}}
-### Request body information
-
-##### RAW request
-
-```ruby
-body = 'username=pksunkara'
-```
-
-##### FORM request
-
-```ruby
-body = {'user' => 'pksunkara'}
-```
-{{if .Api.request.formats.json}}
-##### JSON request
-
-```ruby
-body = {'user' => 'pksunkara'}
-```
-{{end}}
 ### Method Options
 
 The following options are available while calling a method of an api:
@@ -138,7 +118,38 @@ The following options are available while calling a method of an api:
  * __body__: Body of the request
  * __request_type__: Format of the request body{{if .Api.response.suffix}}
  * __response_type__: Format of the response (to be used in url suffix){{end}}
-{{with $data := .}}{{range .Api.classes}}
+
+### Request body information
+
+Set __request_type__ in options to modify the body accordingly
+
+##### RAW request
+
+When the value is set to __raw__, don't modify the body at all.
+
+```ruby
+body = 'username=pksunkara'
+# >>> 'username=pksunkara'
+```
+{{if .Api.request.formats.form}}
+##### FORM request
+
+When the value is set to __form__, urlencode the body.
+
+```ruby
+body = {'user' => 'pksunkara'}
+# >>> 'user=pksunkara'
+```
+{{end}}{{if .Api.request.formats.json}}
+##### JSON request
+
+When the value is set to __json__, JSON encode the body.
+
+```ruby
+body = {'user' => 'pksunkara'}
+# >>> '{"user": "pksunkara"}'
+```
+{{end}}{{with $data := .}}{{range .Api.classes}}
 ### {{index $data.Doc . "title"}} api
 
 {{index $data.Doc . "desc"}}{{with (index $data.Api.class . "args")}}

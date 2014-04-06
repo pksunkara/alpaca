@@ -7,7 +7,7 @@ class RequestHandler(object):
     """RequestHandler takes care of encoding the request body into format given by options"""
 
     @staticmethod
-    def renderKey(parents):
+    def render_key(parents):
         depth, new = 0, ''
 
         for x in parents:
@@ -32,7 +32,7 @@ class RequestHandler(object):
             for key, value in enumerate(data):
                 RequestHandler.urlencode(value, parents + [key], pairs)
         else:
-            pairs[RequestHandler.renderKey(parents)] = data
+            pairs[RequestHandler.render_key(parents)] = data
 
         return pairs
 
@@ -44,12 +44,12 @@ class RequestHandler(object):
         if typ == 'json':
             request['data'] = json.dumps(request['data'])
             request['headers']['content-type'] = 'application/json'
-{{end}}
+{{end}}{{if .Api.request.formats.form}}
         # Encoding body into form-urlencoded format
         if typ == 'form':
             request['data'] = RequestHandler.urlencode(request['data'])
             request['headers']['content-type'] = 'application/x-www-form-urlencoded'
-
+{{end}}
         if typ == 'raw':
             if 'content-type' in request['headers']:
                 del request['headers']['content-type']

@@ -13,13 +13,13 @@ module {{call .Fnc.camelize .Pkg.Name}}
           options[:body] = options[:body].to_json
           options[:headers]["content-type"] = "application/json"
         end
-{{end}}
+{{end}}{{if .Api.request.formats.form}}
         # Encoding body into form-urlencoded format
         if type == "form"
           options[:body] = Faraday::Utils::ParamsHash[options[:body]].to_query
           options[:headers]["content-type"] = "application/x-www-form-urlencoded"
         end
-
+{{end}}
         # Raw body
         if type == "raw"
           options[:body] = options[:body].is_a?(Hash) ? "" : options[:body]
