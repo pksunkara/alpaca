@@ -14,6 +14,7 @@ from .response_handler import ResponseHandler
 
 
 class HttpClient(object):
+
     """Main HttpClient which is used by API classes"""
 
     def __init__(self, auth, options):

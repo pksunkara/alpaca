@@ -1,4 +1,5 @@
 class AuthHandler(object):
+
     """AuthHandler takes care of devising the auth type and using it"""
 {{if .Api.authorization.basic}}
     HTTP_PASSWORD = 0

@@ -1,4 +1,5 @@
 class ResponseHandler(object):
+
     """ResponseHandler takes care of decoding the response body into suitable type"""
 
     @staticmethod

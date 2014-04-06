@@ -3,6 +3,7 @@ import json
 
 
 class RequestHandler(object):
+
     """RequestHandler takes care of encoding the request body into format given by options"""
 
     @staticmethod
@@ -10,7 +11,7 @@ class RequestHandler(object):
         depth, new = 0, ''
 
         for x in parents:
-            old = "[%s]" if depth > 0 else "%s"
+            old = '[%s]' if depth > 0 else '%s'
             new += old % x
             depth += 1
 
