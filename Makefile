@@ -1,9 +1,13 @@
+DEPS = \
+	github.com/wsxiaoys/terminal \
+	github.com/codegangsta/martini
+
+
 all:
 	alpaca tests
 
 deps: all
-	go get github.com/wsxiaoys/terminal
-	go get github.com/codegangsta/martini
+	go get -u $(DEPS)
 
 run:
 	go run server.go &

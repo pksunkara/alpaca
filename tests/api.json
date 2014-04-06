@@ -9,12 +9,14 @@
 	},
 	"request": {
 		"formats": {
+			"form": true,
 			"json": true
 		}
 	},
 	"response": {
 		"formats": {
 			"default": "json",
+			"html": true,
 			"json": true
 		},
 		"suffix": true
