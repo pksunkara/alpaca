@@ -1,5 +1,6 @@
 class AuthHandler(object):
-    """AuthHandler takes care of devising the auth type and using it"""
+
+    """AuthHandler takes care of devising the auth type and using it."""
 {{if .Api.authorization.basic}}
     HTTP_PASSWORD = 0
 {{end}}{{if .Api.authorization.header}}
@@ -12,7 +13,7 @@ class AuthHandler(object):
         self.auth = auth
 
     def get_auth_type(self):
-        """Calculating the Authentication Type"""
+        """Calculating the Authentication Type."""
 {{if .Api.authorization.basic}}
         if 'username' in self.auth and 'password' in self.auth:
             return self.HTTP_PASSWORD
@@ -58,23 +59,23 @@ class AuthHandler(object):
         return request
 {{if .Api.authorization.basic}}
     def http_password(self, request):
-        """Basic Authorization with username and password"""
+        """Basic Authorization with username and password."""
         request['auth'] = (self.auth['username'], self.auth['password'])
         return request
 {{end}}{{if .Api.authorization.header}}
     def http_header(self, request):
-        """Authorization with HTTP header"""
+        """Authorization with HTTP header."""
         request['headers']['Authorization'] = '{{or .Api.authorization.header_prefix "token"}} ' + self.auth['http_header']
         return request
 {{end}}{{if .Api.authorization.oauth}}
     def url_secret(self, request):
-        """OAUTH2 Authorization with client secret"""
+        """OAUTH2 Authorization with client secret."""
         request['params']['client_id'] = self.auth['client_id']
         request['params']['client_secret'] = self.auth['client_secret']
         return request
 
     def url_token(self, request):
-        """OAUTH2 Authorization with access token"""
+        """OAUTH2 Authorization with access token."""
         request['params']['access_token'] = self.auth['access_token']
         return request
 {{end}}

@@ -1,4 +1,5 @@
 class {{call .Fnc.camelize .Api.active.name}}(object):
+
     """{{index .Doc .Api.active.name "desc"}}{{with (index .Doc .Api.active.name "args")}}
 
     Args:{{end}}{{with $data := .}}{{range .Api.active.args}}

@@ -14,7 +14,8 @@ from .response_handler import ResponseHandler
 
 
 class HttpClient(object):
-    """Main HttpClient which is used by API classes"""
+
+    """Main HttpClient which is used by API classes."""
 
     def __init__(self, auth, options):
 {{if .Api.authorization.oauth}}
@@ -61,8 +62,9 @@ class HttpClient(object):
         return self.request(path, body, 'put', options)
 
     def request(self, path, body, method, options):
-        """Intermediate function which does three main things
+        """Request handle making requests and parsing responses.
 
+        Intermediate function which does three main things:
         - Transforms the body of request into correct format
         - Creates the requests with given parameters
         - Returns response body after parsing it into correct format
@@ -105,9 +107,9 @@ class HttpClient(object):
         )
 
     def create_request(self, method, path, options):
-        """Creating a request with the given arguments
+        """Creating a request with the given arguments.
 
-        If api_version is set, appends it immediately after host
+        If api_version is set, appends it immediately after host.
         """
         version = '/' + options['api_version'] if 'api_version' in options else ''
 {{if .Api.response.suffix}}
@@ -126,17 +128,17 @@ class HttpClient(object):
         return requests.request(method, path, **options)
 
     def get_body(self, response):
-        """Get response body in correct format"""
+        """Get response body in correct format."""
         return ResponseHandler.get_body(response)
 
     def set_body(self, request):
-        """Set request body in correct format"""
+        """Set request body in correct format."""
         return RequestHandler.set_body(request)
 
     def dict_key_lower(self, dic):
-        """Make dict keys all lower case"""
+        """Make dict keys all lower case."""
         return dict(zip(map(self.key_lower, dic.keys()), dic.values()))
 
     def key_lower(self, key):
-        """Make a function for lower case"""
+        """Make a function for lower case."""
         return key.lower()
