@@ -7,7 +7,7 @@ response.getBody = function(res, body, callback) {
   var type = res.headers['content-type'], error = null;
 {{if .Api.response.formats.json}}
   // Response body is in JSON
-  if (type.indexOf('json') != -1) {
+  if (type.indexOf('json') != -1 && typeof(body) != 'object') {
     try {
       body = JSON.parse(body || '{}');
     } catch (err) {
