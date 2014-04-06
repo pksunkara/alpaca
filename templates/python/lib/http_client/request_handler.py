@@ -3,21 +3,22 @@ import json
 
 
 class RequestHandler(object):
-    """RequestHandler takes care of encoding the request body into format given by options"""
+
+    """RequestHandler takes care of encoding the request body into format given by options."""
 
     @staticmethod
-    def renderKey(parents):
+    def render_key(parents):
         depth, new = 0, ''
 
         for x in parents:
-            old = "[%s]" if depth > 0 else "%s"
+            old = '[%s]' if depth > 0 else '%s'
             new += old % x
             depth += 1
 
         return new
 
     @staticmethod
-    def urlencode(data, parents=None, pairs=None):
+    def url_encode(data, parents=None, pairs=None):
         if pairs is None:
             pairs = {}
 
