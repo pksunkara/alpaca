@@ -17,11 +17,11 @@ module {{call .Fnc.camelize .Pkg.Name}}
       # '{{index $data.Api.class $data.Api.active.name . "path"}}' {{call $data.Fnc.upper (or (index $data.Api.class $data.Api.active.name . "method") "get")}}{{with (index $data.Doc $data.Api.active.name . "params")}}
       #{{end}}{{with $method := .}}{{range (index $data.Api.class $data.Api.active.name $method "params")}}{{if .required}}
       # {{.name}} - {{index $data.Doc $data.Api.active.name $method "params" .name "desc"}}{{end}}{{end}}{{end}}
-      def {{call $data.Fnc.underscore .}}({{call $data.Fnc.args.ruby (index (index $data.Api.class $data.Api.active.name .) "params")}}options = {})
+      def {{call $data.Fnc.underscore .}}({{call $data.Fnc.args.ruby (index $data.Api.class $data.Api.active.name . "params")}}options = {})
         body = options.has_key?(:{{template "bodyorquery" (index $data.Api.class $data.Api.active.name .)}}) ? options[:{{template "bodyorquery" (index $data.Api.class $data.Api.active.name .)}}] : {}{{range (index $data.Api.class $data.Api.active.name . "params")}}{{if .required}}
         body[:{{.name}}] = {{.name}}{{end}}{{end}}
 
-        response = @client.{{or (index $data.Api.class $data.Api.active.name . "method") "get"}} "{{call $data.Fnc.path.ruby (index $data.Api.class $data.Api.active.name . "path") $data.Api.active.args}}", body, options
+        response = @client.{{or (index $data.Api.class $data.Api.active.name . "method") "get"}}("{{call $data.Fnc.path.ruby (index $data.Api.class $data.Api.active.name . "path") $data.Api.active.args (index $data.Api.class $data.Api.active.name . "params")}}", body, options)
 
         return response
       end

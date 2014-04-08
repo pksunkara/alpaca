@@ -10,13 +10,15 @@ func TestArrayInterfaceToString(t *testing.T) {
 
 	var nul interface{}
 
-	old := make([]interface{}, 2)
-
-	old[0] = "hello"
-	old[1] = "world"
-
 	terst.Is(ArrayInterfaceToString(nul), []string{})
-	terst.Is(ArrayInterfaceToString(old), []string{"hello", "world"})
+}
+
+func TestArrayInterfaceInterfaceToString(t *testing.T) {
+	terst.Terst(t)
+
+	var nul interface{}
+
+	terst.Is(ArrayInterfaceInterfaceToString(nul, "stuff"), []string{})
 }
 
 func TestMapKeysToStringArray(t *testing.T) {
@@ -89,14 +91,18 @@ func TestArgsFunctionMaker(t *testing.T) {
 func TestPathFunctionMaker(t *testing.T) {
 	terst.Terst(t)
 
-	f := PathFunctionMaker("\"+@", "+\"").(func(string, interface{}) string)
+	f := PathFunctionMaker("\"+", "@", "+\"").(func(string, interface{}, interface{}) string)
 
-	args := make([]interface{}, 2)
+	cargs := make([]interface{}, 2)
+	margs := make([]interface{}, 1)
 
-	args[0] = "id"
-	args[1] = "url"
+	cargs[0] = "id"
+	cargs[1] = "url"
 
-	terst.Is(f("/user/:id/:not/:url/wow", args), "/user/\"+@id+\"/:not/\"+@url+\"/wow")
+	margs[0] = make(map[string]interface{})
+	margs[0].(map[string]interface{})["name"] = "one"
+
+	terst.Is(f("/user/:id/:not/:url/wow:one", cargs, margs), "/user/\"+@id+\"/:not/\"+@url+\"/wow\"+one+\"")
 }
 
 func TestPrntFunctionMaker(t *testing.T) {

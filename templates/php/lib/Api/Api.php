@@ -28,12 +28,12 @@ class {{call .Fnc.camelize .Api.active.name}}
      *{{end}}{{with $method := .}}{{range (index $data.Api.class $data.Api.active.name $method "params")}}{{if .required}}
      * @param ${{.name}} {{index $data.Doc $data.Api.active.name $method "params" .name "desc"}}{{end}}{{end}}{{end}}
      */
-    public function {{call $data.Fnc.camelizeDownFirst .}}({{call $data.Fnc.args.php (index (index $data.Api.class $data.Api.active.name .) "params")}}array $options = array())
+    public function {{call $data.Fnc.camelizeDownFirst .}}({{call $data.Fnc.args.php (index $data.Api.class $data.Api.active.name . "params")}}array $options = array())
     {
         $body = (isset($options['{{template "bodyorquery" (index $data.Api.class $data.Api.active.name .)}}']) ? $options['{{template "bodyorquery" (index $data.Api.class $data.Api.active.name .)}}'] : array());{{range (index $data.Api.class $data.Api.active.name . "params")}}{{if .required}}
         $body['{{.name}}'] = ${{.name}};{{end}}{{end}}
 
-        $response = $this->client->{{or (index $data.Api.class $data.Api.active.name . "method") "get"}}('{{call $data.Fnc.path.php (index $data.Api.class $data.Api.active.name . "path") $data.Api.active.args}}', $body, $options);
+        $response = $this->client->{{or (index $data.Api.class $data.Api.active.name . "method") "get"}}('{{call $data.Fnc.path.php (index $data.Api.class $data.Api.active.name . "path") $data.Api.active.args (index $data.Api.class $data.Api.active.name . "params")}}', $body, $options);
 
         return $response;
     }

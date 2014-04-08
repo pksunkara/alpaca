@@ -46,7 +46,7 @@ func FunctionsPython(fnc map[string]interface{}) {
 	prnt := fnc["prnt"].(map[string]interface{})
 
 	args["python"] = ArgsFunctionMaker("", ", ")
-	path["python"] = PathFunctionMaker("' + self.", " + '")
+	path["python"] = PathFunctionMaker("' + ", "self.", " + '")
 	prnt["python"] = PrntFunctionMaker(true, "    ", "\"", "\"", "[", "]", "{", "}", "'", "': ")
 }
 

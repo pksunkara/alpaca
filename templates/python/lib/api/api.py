@@ -10,7 +10,7 @@ class {{call .Fnc.camelize .Api.active.name}}(object):
         self.{{.}} = {{.}}{{end}}
         self.client = client
 {{with $data := .}}{{range .Api.active.methods}}
-    def {{call $data.Fnc.underscore .}}(self, {{call $data.Fnc.args.python (index (index $data.Api.class $data.Api.active.name .) "params")}}options={}):
+    def {{call $data.Fnc.underscore .}}(self, {{call $data.Fnc.args.python (index $data.Api.class $data.Api.active.name . "params")}}options={}):
         """{{index $data.Doc $data.Api.active.name . "desc"}}
 
         '{{index $data.Api.class $data.Api.active.name . "path"}}' {{call $data.Fnc.upper (or (index $data.Api.class $data.Api.active.name . "method") "get")}}{{with (index $data.Doc $data.Api.active.name . "params")}}
@@ -21,7 +21,7 @@ class {{call .Fnc.camelize .Api.active.name}}(object):
         body = options['{{template "bodyorquery" (index $data.Api.class $data.Api.active.name .)}}'] if '{{template "bodyorquery" (index $data.Api.class $data.Api.active.name .)}}' in options else {}{{range (index $data.Api.class $data.Api.active.name . "params")}}{{if .required}}
         body['{{.name}}'] = {{.name}}{{end}}{{end}}
 
-        response = self.client.{{or (index $data.Api.class $data.Api.active.name . "method") "get"}}('{{call $data.Fnc.path.python (index $data.Api.class $data.Api.active.name . "path") $data.Api.active.args}}', body, options)
+        response = self.client.{{or (index $data.Api.class $data.Api.active.name . "method") "get"}}('{{call $data.Fnc.path.python (index $data.Api.class $data.Api.active.name . "path") $data.Api.active.args (index $data.Api.class $data.Api.active.name . "params")}}', body, options)
 
         return response
 {{end}}{{end}}

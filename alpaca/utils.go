@@ -41,6 +41,21 @@ func ArrayInterfaceToString(inter interface{}) []string {
 	return new
 }
 
+func ArrayInterfaceInterfaceToString(inter interface{}, key string) []string {
+	if inter == nil {
+		return []string{}
+	}
+
+	old := inter.([]interface{})
+	new := make([]string, len(old))
+
+	for i, v := range old {
+		new[i] = v.(map[string]interface{})[key].(string)
+	}
+
+	return new
+}
+
 func MapKeysToStringArray(inter interface{}, exclude []string) []string {
 	if inter == nil {
 		return []string{}
@@ -110,10 +125,17 @@ func ArgsFunctionMaker(before, after string) interface{} {
 	}
 }
 
-func PathFunctionMaker(before, after string) interface{} {
-	return func(path string, args interface{}) string {
-		if args != nil {
-			for _, v := range ArrayInterfaceToString(args) {
+func PathFunctionMaker(before, this, after string) interface{} {
+	return func(path string, cargs, margs interface{}) string {
+		if cargs != nil {
+			for _, v := range ArrayInterfaceToString(cargs) {
+				reg := regexp.MustCompile(":(" + v + ")")
+				path = reg.ReplaceAllString(path, before+this+"$1"+after)
+			}
+		}
+
+		if margs != nil {
+			for _, v := range ArrayInterfaceInterfaceToString(margs, "name") {
 				reg := regexp.MustCompile(":(" + v + ")")
 				path = reg.ReplaceAllString(path, before+"$1"+after)
 			}

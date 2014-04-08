@@ -47,7 +47,7 @@ func FunctionsRuby(fnc map[string]interface{}) {
 	prnt := fnc["prnt"].(map[string]interface{})
 
 	args["ruby"] = ArgsFunctionMaker("", ", ")
-	path["ruby"] = PathFunctionMaker("#{@", "}")
+	path["ruby"] = PathFunctionMaker("#{", "@", "}")
 	prnt["ruby"] = PrntFunctionMaker(false, "  ", "\"", "\"", "[", "]", "{", "}", ":", " => ")
 }
 
