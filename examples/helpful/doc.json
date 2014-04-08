@@ -1,0 +1,30 @@
+{
+	"conversations": {
+		"title": "Conversations",
+		"desc": "API to work with conversations",
+		"list": {
+			"title": "List all conversations",
+			"desc": "List all conversations"
+		},
+		"get": {
+			"title": "Retrieve a conversation",
+			"desc": "Retrieve a conversation",
+			"params": {
+				"id": {
+					"desc": "ID of the conversation",
+					"value": "10ce24de-23f6-433f-9a71-255cffffa96f"
+				}
+			}
+		},
+		"update": {
+			"title": "Update a conversation",
+			"desc": "Update a conversation",
+			"params": {
+				"id": {
+					"desc": "ID of the conversation",
+					"value": "10ce24de-23f6-433f-9a71-255cffffa96f"
+				}
+			}
+		}
+	}
+}

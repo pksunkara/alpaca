@@ -1,0 +1,25 @@
+{
+	"name": "Helpful",
+	"package": "helpful",
+	"version": "0.1.0",
+	"url": "https://helpful.io",
+	"keywords": ["alpaca", "helpful", "assemblymade", "api", "client", "library"],
+	"official": true,
+	"author": {
+		"name": "Pavan Kumar Sunkara",
+		"email": "pavan.sss1991@gmail.com",
+		"url": "http://assemblymade.com/helpful"
+	},
+	"git": {
+		"site": "github.com",
+		"user": "asm-helpful",
+		"name": "helpful"
+	},
+	"license": "MIT",
+	"php": {
+		"vendor": "helpful"
+	},
+	"python": {
+		"license": "MIT License"
+	}
+}

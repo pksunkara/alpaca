@@ -1,0 +1,48 @@
+{
+	"base": "https://helpful.io/api",
+	"authorization": {
+		"need_auth": true,
+		"oauth": true
+	},
+	"request": {
+		"formats": {
+			"default": "json",
+			"json": true
+		}
+	},
+	"response": {
+		"formats": {
+			"default": "json",
+			"json": true
+		}
+	},
+	"error": {
+		"message": "error"
+	},
+	"class": {
+		"conversations": {
+			"list": {
+				"path": "/conversations"
+			},
+			"get": {
+				"path": "/conversations/:id",
+				"params": [
+					{
+						"name": "id",
+						"required": true
+					}
+				]
+			},
+			"update": {
+				"path": "/conversations/:id",
+				"method": "patch",
+				"params": [
+					{
+						"name": "id",
+						"required": true
+					}
+				]
+			}
+		}
+	}
+}
