@@ -31,10 +31,10 @@ __Using this api without authentication gives an error__
 ##### Without any authentication
 
 ```ruby
-client = {{call .Fnc.camelize .Pkg.Name}}::Client.new
+client = {{call .Fnc.camelize .Pkg.Name}}::Client.new{{if .Api.base_as_arg}}('{{.Api.base}}'){{end}}
 
 # If you need to send options
-client = {{call .Fnc.camelize .Pkg.Name}}::Client.new({}, client_options)
+client = {{call .Fnc.camelize .Pkg.Name}}::Client.new({{if .Api.base_as_arg}}'{{.Api.base}}', {{end}}{}, client_options)
 ```
 {{end}}{{if .Api.authorization.basic}}
 ##### Basic authentication
@@ -42,19 +42,19 @@ client = {{call .Fnc.camelize .Pkg.Name}}::Client.new({}, client_options)
 ```ruby
 auth = { :username => 'pksunkara', :password => 'password' }
 
-client = {{call .Fnc.camelize .Pkg.Name}}::Client.new(auth, client_options)
+client = {{call .Fnc.camelize .Pkg.Name}}::Client.new({{if .Api.base_as_arg}}'{{.Api.base}}', {{end}}auth, client_options)
 ```
 {{end}}{{if .Api.authorization.header}}
 ##### Authorization header token
 
 ```ruby
-client = {{call .Fnc.camelize .Pkg.Name}}::Client.new({{if .Api.authorization.oauth}}{:http_header => '1a2b3'}{{else}}'1a2b3'{{end}}, client_options)
+client = {{call .Fnc.camelize .Pkg.Name}}::Client.new({{if .Api.base_as_arg}}'{{.Api.base}}', {{end}}{{if .Api.authorization.oauth}}{:http_header => '1a2b3'}{{else}}'1a2b3'{{end}}, client_options)
 ```
 {{end}}{{if .Api.authorization.oauth}}
 ##### Oauth acess token
 
 ```ruby
-client = {{call .Fnc.camelize .Pkg.Name}}::Client.new('1a2b3', client_options)
+client = {{call .Fnc.camelize .Pkg.Name}}::Client.new({{if .Api.base_as_arg}}'{{.Api.base}}', {{end}}'1a2b3', client_options)
 ```
 
 ##### Oauth client secret
@@ -62,7 +62,7 @@ client = {{call .Fnc.camelize .Pkg.Name}}::Client.new('1a2b3', client_options)
 ```ruby
 auth = { :client_id => '09a8b7', :client_secret => '1a2b3' }
 
-client = {{call .Fnc.camelize .Pkg.Name}}::Client.new(auth, client_options)
+client = {{call .Fnc.camelize .Pkg.Name}}::Client.new({{if .Api.base_as_arg}}'{{.Api.base}}', {{end}}auth, client_options)
 ```
 {{end}}
 ### Client Options

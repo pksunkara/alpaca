@@ -7,8 +7,8 @@ module {{call .Fnc.camelize .Pkg.Name}}
 
   class Client
 
-    def initialize(auth = {}, options = {})
-      @http_client = {{call .Fnc.camelize .Pkg.Name}}::HttpClient::HttpClient.new auth, options
+    def initialize({{if .Api.base_as_arg}}base_url, {{end}}auth = {}, options = {})
+      @http_client = {{call .Fnc.camelize .Pkg.Name}}::HttpClient::HttpClient.new({{if .Api.base_as_arg}}base_url, {{end}}auth, options)
     end
 {{with $data := .}}{{range .Api.classes}}
     # {{index $data.Doc . "desc"}}{{with (index $data.Api.class . "args")}}

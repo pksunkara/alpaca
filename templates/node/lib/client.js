@@ -1,8 +1,8 @@
 /**
  * Main client for the module
  */
-var Client = function(auth, options) {
-  this.httpClient = new (require('./http_client').HttpClient)(auth, options);
+var Client = function({{if .Api.base_as_arg}}baseUrl, {{end}}auth, options) {
+  this.httpClient = new (require('./http_client').HttpClient)({{if .Api.base_as_arg}}baseUrl, {{end}}auth, options);
 
   return this;
 };

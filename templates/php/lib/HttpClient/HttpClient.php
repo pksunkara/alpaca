@@ -25,9 +25,10 @@ class HttpClient
 
     protected $headers = array();
 
-    public function __construct($auth = array(), array $options = array())
+    public function __construct({{if .Api.base_as_arg}}$baseUrl, {{end}}$auth = array(), array $options = array())
     {
-{{if .Api.authorization.oauth}}
+{{if .Api.base_as_arg}}        $this->options['base'] = $baseUrl;
+{{end}}{{if .Api.authorization.oauth}}
         if (gettype($auth) == 'string') {
             $auth = array('access_token' => $auth);
         }

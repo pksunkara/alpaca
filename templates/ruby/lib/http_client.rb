@@ -13,7 +13,7 @@ module {{call .Fnc.camelize .Pkg.Name}}
 
       attr_accessor :options, :headers
 
-      def initialize(auth = {}, options = {})
+      def initialize({{if .Api.base_as_arg}}base_url, {{end}}auth = {}, options = {})
 {{if .Api.authorization.oauth}}
         if auth.is_a? String
           auth = { :access_token => auth }
@@ -24,7 +24,7 @@ module {{call .Fnc.camelize .Pkg.Name}}
         end
 {{end}}{{end}}
         @options = {
-          :base => "{{.Api.base}}",{{with .Api.version}}
+          :base => {{if .Api.base_as_arg}}base_url{{else}}"{{.Api.base}}"{{end}},{{with .Api.version}}
           :api_version => "{{.}}",{{end}}
           :user_agent => "alpaca/{{.Api.alpaca_version}} (https://github.com/pksunkara/alpaca)"
         }

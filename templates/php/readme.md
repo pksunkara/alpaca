@@ -48,10 +48,10 @@ __Using this api without authentication gives an error__
 ##### Without any authentication
 
 ```php
-$client = new {{call .Fnc.camelize .Pkg.Name}}\Client();
+$client = new {{call .Fnc.camelize .Pkg.Name}}\Client({{if .Api.base_as_arg}}'{{.Api.base}}'{{end}});
 
 // If you need to send options
-$client = new {{call .Fnc.camelize .Pkg.Name}}\Client(array(), $clientOptions);
+$client = new {{call .Fnc.camelize .Pkg.Name}}\Client({{if .Api.base_as_arg}}'{{.Api.base}}', {{end}}array(), $clientOptions);
 ```
 {{end}}{{if .Api.authorization.basic}}
 ##### Basic authentication
@@ -59,19 +59,19 @@ $client = new {{call .Fnc.camelize .Pkg.Name}}\Client(array(), $clientOptions);
 ```php
 $auth = array('username' => 'pksunkara', 'password' => 'password');
 
-$client = new {{call .Fnc.camelize .Pkg.Name}}\Client($auth, $clientOptions);
+$client = new {{call .Fnc.camelize .Pkg.Name}}\Client({{if .Api.base_as_arg}}'{{.Api.base}}', {{end}}$auth, $clientOptions);
 ```
 {{end}}{{if .Api.authorization.header}}
 ##### Authorization header token
 
 ```php
-$client = new {{call .Fnc.camelize .Pkg.Name}}\Client({{if .Api.authorization.oauth}}array('http_header' => '1a2b3'){{else}}'1a2b3'{{end}}, $clientOptions);
+$client = new {{call .Fnc.camelize .Pkg.Name}}\Client({{if .Api.base_as_arg}}'{{.Api.base}}', {{end}}{{if .Api.authorization.oauth}}array('http_header' => '1a2b3'){{else}}'1a2b3'{{end}}, $clientOptions);
 ```
 {{end}}{{if .Api.authorization.oauth}}
 ##### Oauth acess token
 
 ```php
-$client = new {{call .Fnc.camelize .Pkg.Name}}\Client('1a2b3', $clientOptions);
+$client = new {{call .Fnc.camelize .Pkg.Name}}\Client({{if .Api.base_as_arg}}'{{.Api.base}}', {{end}}'1a2b3', $clientOptions);
 ```
 
 ##### Oauth client secret
@@ -79,7 +79,7 @@ $client = new {{call .Fnc.camelize .Pkg.Name}}\Client('1a2b3', $clientOptions);
 ```php
 $auth = array('client_id' => '09a8b7', 'client_secret' => '1a2b3');
 
-$client = new {{call .Fnc.camelize .Pkg.Name}}\Client($auth, $clientOptions);
+$client = new {{call .Fnc.camelize .Pkg.Name}}\Client({{if .Api.base_as_arg}}'{{.Api.base}}', {{end}}$auth, $clientOptions);
 ```
 {{end}}
 ### Client Options

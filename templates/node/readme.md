@@ -31,16 +31,16 @@ __Using this api without authentication gives an error__
 ##### Without any authentication
 
 ```js
-var client = {{call .Fnc.camelizeDownFirst .Pkg.Name}}.client();
+var client = {{call .Fnc.camelizeDownFirst .Pkg.Name}}.client({{if .Api.base_as_arg}}'{{.Api.base}}'{{end}});
 
 // If you need to send options
-var client = {{call .Fnc.camelizeDownFirst .Pkg.Name}}.client({}, clientOptions);
+var client = {{call .Fnc.camelizeDownFirst .Pkg.Name}}.client({{if .Api.base_as_arg}}'{{.Api.base}}', {{end}}{}, clientOptions);
 ```
 {{end}}{{if .Api.authorization.basic}}
 ##### Basic authentication
 
 ```js
-var client = {{call .Fnc.camelizeDownFirst .Pkg.Name}}.client({
+var client = {{call .Fnc.camelizeDownFirst .Pkg.Name}}.client({{if .Api.base_as_arg}}'{{.Api.base}}', {{end}}{
     username: 'pksunkara',
     password: 'password'
 }, clientOptions);
@@ -49,19 +49,19 @@ var client = {{call .Fnc.camelizeDownFirst .Pkg.Name}}.client({
 ##### Authorization header token
 
 ```js
-var client = {{call .Fnc.camelizeDownFirst .Pkg.Name}}.client({{if .Api.authorization.oauth}}{ http_header: '1a2b3' }{{else}}'1a2b3'{{end}}, clientOptions);
+var client = {{call .Fnc.camelizeDownFirst .Pkg.Name}}.client({{if .Api.base_as_arg}}'{{.Api.base}}', {{end}}{{if .Api.authorization.oauth}}{ http_header: '1a2b3' }{{else}}'1a2b3'{{end}}, clientOptions);
 ```
 {{end}}{{if .Api.authorization.oauth}}
 ##### Oauth acess token
 
 ```js
-var client = {{call .Fnc.camelizeDownFirst .Pkg.Name}}.client('1a2b3', clientOptions);
+var client = {{call .Fnc.camelizeDownFirst .Pkg.Name}}.client({{if .Api.base_as_arg}}'{{.Api.base}}', {{end}}'1a2b3', clientOptions);
 ```
 
 ##### Oauth client secret
 
 ```js
-var client = {{call .Fnc.camelizeDownFirst .Pkg.Name}}.client({
+var client = {{call .Fnc.camelizeDownFirst .Pkg.Name}}.client({{if .Api.base_as_arg}}'{{.Api.base}}', {{end}}{
     client_id: '09a8b7',
     client_secret: '1a2b3'
 }, clientOptions);
