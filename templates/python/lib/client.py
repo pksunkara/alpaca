@@ -6,8 +6,8 @@ from .api.{{call $data.Fnc.underscore .}} import {{call $data.Fnc.camelize .}}{{
 
 class Client(object):
 
-    def __init__(self, auth={}, options={}):
-        self.http_client = HttpClient(auth, options)
+    def __init__(self, {{if .Api.base_as_arg}}base_url, {{end}}auth={}, options={}):
+        self.http_client = HttpClient({{if .Api.base_as_arg}}base_url, {{end}}auth, options)
 {{with $data := .}}{{range .Api.classes}}
     def {{call $data.Fnc.underscore .}}(self{{call $data.Fnc.args.python (index $data.Api.class . "args") true true}}):
         """{{index $data.Doc . "desc"}}{{with (index $data.Api.class . "args")}}

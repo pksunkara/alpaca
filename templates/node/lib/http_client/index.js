@@ -14,7 +14,7 @@ client.Response = require('./response.js');
 /**
  * Main HttpClient which is used by Api classes
  */
-client.HttpClient = function (auth, options) {
+client.HttpClient = function ({{if .Api.base_as_arg}}baseUrl, {{end}}auth, options) {
   if (!options) {
     options = {};
   }
@@ -33,7 +33,7 @@ client.HttpClient = function (auth, options) {
   }
 {{end}}{{end}}
   this.options = {
-    'base': '{{.Api.base}}',{{with .Api.version}}
+    'base': {{if .Api.base_as_arg}}baseUrl{{else}}'{{.Api.base}}'{{end}},{{with .Api.version}}
     'api_version': '{{.}}',{{end}}
     'user_agent': 'alpaca/{{.Api.alpaca_version}} (https://github.com/pksunkara/alpaca)'
   };

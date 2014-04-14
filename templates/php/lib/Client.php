@@ -8,9 +8,9 @@ class Client
 {
     private $httpClient;
 
-    public function __construct($auth = array(), array $options = array())
+    public function __construct({{if .Api.base_as_arg}}$baseUrl, {{end}}$auth = array(), array $options = array())
     {
-        $this->httpClient = new HttpClient($auth, $options);
+        $this->httpClient = new HttpClient({{if .Api.base_as_arg}}$baseUrl, {{end}}$auth, $options);
     }
 {{with $data := .}}{{range .Api.classes}}
     /**

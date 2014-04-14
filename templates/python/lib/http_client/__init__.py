@@ -17,7 +17,7 @@ class HttpClient(object):
 
     """Main HttpClient which is used by API classes"""
 
-    def __init__(self, auth, options):
+    def __init__(self, {{if .Api.base_as_arg}}base_url, {{end}}auth, options):
 {{if .Api.authorization.oauth}}
         if isinstance(auth, str):
             auth = {'access_token': auth}
@@ -26,7 +26,7 @@ class HttpClient(object):
             auth = {'http_header': auth}
 {{end}}{{end}}
         self.options = {
-            'base': '{{.Api.base}}',{{with .Api.version}}
+            'base': {{if .Api.base_as_arg}}base_url{{else}}'{{.Api.base}}'{{end}},{{with .Api.version}}
             'api_version': '{{.}}',{{end}}
             'user_agent': 'alpaca/{{.Api.alpaca_version}} (https://github.com/pksunkara/alpaca)'
         }
