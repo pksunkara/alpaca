@@ -16,19 +16,19 @@ module {{call .Fnc.camelize .Pkg.Name}}
 
           case code
           when 500...599
-            raise {{call .Fnc.camelize .Pkg.Name}}::Error::ClientError.new "Error #{code}", code
+            raise {{call .Fnc.camelize .Pkg.Name}}::Error::ClientError.new("Error #{code}", code)
           when 400...499
-            body = {{call .Fnc.camelize .Pkg.Name}}::HttpClient::ResponseHandler.get_body env[:response]
+            body = {{call .Fnc.camelize .Pkg.Name}}::HttpClient::ResponseHandler.get_body(env[:response])
             message = ""
 
             # If HTML, whole body is taken
-            if body.is_a? String
+            if body.is_a?(String)
               message = body
             end
 {{if .Api.response.formats.json}}
             # If JSON, a particular field is taken and used
             if type.include?("json") and body.is_a?(Hash)
-              if body.has_key? "{{.Api.error.message}}"
+              if body.has_key?("{{.Api.error.message}}")
                 message = body["{{.Api.error.message}}"]
               else
                 message = "Unable to select error message from json returned by request responsible for error"

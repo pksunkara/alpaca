@@ -15,7 +15,7 @@ module {{call .Fnc.camelize .Pkg.Name}}
     #{{end}}{{with $class := .}}{{range (index $data.Api.class $class "args")}}
     # {{.}} - {{index $data.Doc $class "args" . "desc"}}{{end}}{{end}}
     def {{call $data.Fnc.underscore .}}({{call $data.Fnc.args.ruby (index $data.Api.class . "args") true}})
-      {{call $data.Fnc.camelize $data.Pkg.Name}}::Api::{{call $data.Fnc.camelize .}}.new {{call $data.Fnc.args.ruby (index $data.Api.class . "args")}}@http_client
+      {{call $data.Fnc.camelize $data.Pkg.Name}}::Api::{{call $data.Fnc.camelize .}}.new({{call $data.Fnc.args.ruby (index $data.Api.class . "args")}}@http_client)
     end
 {{end}}{{end}}
   end

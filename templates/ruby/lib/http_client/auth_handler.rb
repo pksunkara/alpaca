@@ -25,22 +25,22 @@ module {{call .Fnc.camelize .Pkg.Name}}
           flag = false
 {{if .Api.authorization.basic}}
           if auth == HTTP_PASSWORD
-            env = http_password env
+            env = http_password(env)
             flag = true
           end
 {{end}}{{if .Api.authorization.header}}
           if auth == HTTP_HEADER
-            env = http_header env
+            env = http_header(env)
             flag = true
           end
 {{end}}{{if .Api.authorization.oauth}}
           if auth == URL_SECRET
-            env = url_secret env
+            env = url_secret(env)
             flag = true
           end
 
           if auth == URL_TOKEN
-            env = url_token env
+            env = url_token(env)
             flag = true
           end
 {{end}}
@@ -99,28 +99,28 @@ module {{call .Fnc.camelize .Pkg.Name}}
           :client_secret => @auth[:client_secret]
         }
 
-        merge_query env, query
+        merge_query(env, query)
       end
 
       # OAUTH2 Authorization with access token
       def url_token(env)
         query = { :access_token => @auth[:access_token] }
 
-        merge_query env, query
+        merge_query(env, query)
       end
 {{end}}
       def query_params(url)
         if url.query.nil? or url.query.empty?
           {}
         else
-          Faraday::Utils.parse_query url.query
+          Faraday::Utils.parse_query(url.query)
         end
       end
 
       def merge_query(env, query)
         query = query.update query_params(env[:url])
 
-        env[:url].query = Faraday::Utils.build_query query
+        env[:url].query = Faraday::Utils.build_query(query)
 
         return env
       end

@@ -10,11 +10,11 @@ module {{call .Fnc.camelize .Pkg.Name}}
         body = response.body
 {{if .Api.response.formats.json}}
         # Response body is in JSON
-        if type.include? "json"
+        if type.include?("json")
           body = JSON.parse body
         end
 {{end}}
-        body
+        return body
       end
 
     end

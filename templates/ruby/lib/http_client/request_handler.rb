@@ -6,7 +6,7 @@ module {{call .Fnc.camelize .Pkg.Name}}
     class RequestHandler
 
       def self.set_body(options)
-        type = options.has_key?(:request_type) ? options[:request_type] : "{{or .Api.request.formats.default "raw"}}"
+        type = options.fetch(:request_type, "{{or .Api.request.formats.default "raw"}}")
 {{if .Api.request.formats.json}}
         # Encoding request body into JSON format
         if type == "json"
@@ -23,7 +23,7 @@ module {{call .Fnc.camelize .Pkg.Name}}
         # Raw body
         if type == "raw"
           options[:body] = options[:body].is_a?(Hash) ? "" : options[:body]
-          options[:headers].delete "content-type"
+          options[:headers].delete("content-type")
         end
 
         return options

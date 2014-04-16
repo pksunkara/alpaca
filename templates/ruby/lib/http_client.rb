@@ -15,11 +15,11 @@ module {{call .Fnc.camelize .Pkg.Name}}
 
       def initialize({{if .Api.base_as_arg}}base_url, {{end}}auth = {}, options = {})
 {{if .Api.authorization.oauth}}
-        if auth.is_a? String
+        if auth.is_a?(String)
           auth = { :access_token => auth }
         end
 {{else}}{{if .Api.authorization.header}}
-        if auth.is_a? String
+        if auth.is_a?(String)
           auth = { :http_header => auth }
         end
 {{end}}{{end}}
@@ -29,15 +29,15 @@ module {{call .Fnc.camelize .Pkg.Name}}
           :user_agent => "alpaca/{{.Api.alpaca_version}} (https://github.com/pksunkara/alpaca)"
         }
 
-        @options.update options
+        @options.update(options)
 
         @headers = {
           "user-agent" => @options[:user_agent]
         }
 
-        if @options.has_key? :headers
-          @headers.update Hash[@options[:headers].map { |k, v| [k.downcase, v] }]
-          @options.delete :headers
+        if @options.has_key?(:headers)
+          @headers.update(Hash[@options[:headers].map { |k, v| [k.downcase, v] }])
+          @options.delete(:headers)
         end
 {{if .Api.no_verify_ssl}}
         @conn_options = {
@@ -46,32 +46,32 @@ module {{call .Fnc.camelize .Pkg.Name}}
 
         @client = Faraday.new(@options[:base], @conn_options) do |conn|
 {{else}}
-        @client = Faraday.new @options[:base] do |conn|
-{{end}}          conn.use {{call .Fnc.camelize .Pkg.Name}}::HttpClient::AuthHandler, auth
-          conn.use {{call .Fnc.camelize .Pkg.Name}}::HttpClient::ErrorHandler
+        @client = Faraday.new(@options[:base]) do |conn|
+{{end}}          conn.use({{call .Fnc.camelize .Pkg.Name}}::HttpClient::AuthHandler, auth)
+          conn.use({{call .Fnc.camelize .Pkg.Name}}::HttpClient::ErrorHandler)
 
-          conn.adapter Faraday.default_adapter
+          conn.adapter(Faraday.default_adapter)
         end
       end
 
       def get(path, params = {}, options = {})
-        request path, nil, "get", options.merge({ :query => params })
+        request(path, nil, "get", options.merge({ :query => params }))
       end
 
       def post(path, body = {}, options = {})
-        request path, body, "post", options
+        request(path, body, "post", options)
       end
 
       def patch(path, body = {}, options = {})
-        request path, body, "patch", options
+        request(path, body, "patch", options)
       end
 
       def delete(path, body = {}, options = {})
-        request path, body, "delete", options
+        request(path, body, "delete", options)
       end
 
       def put(path, body = {}, options = {})
-        request path, body, "put", options
+        request(path, body, "put", options)
       end
 
       # Intermediate function which does three main things
@@ -80,23 +80,23 @@ module {{call .Fnc.camelize .Pkg.Name}}
       # - Creates the requests with give parameters
       # - Returns response body after parsing it into correct format
       def request(path, body, method, options)
-        options = @options.merge options
+        options = @options.merge(options)
 
         options[:headers] = options[:headers] || {}
-        options[:headers] = @headers.merge Hash[options[:headers].map { |k, v| [k.downcase, v] }]
+        options[:headers] = @headers.merge(Hash[options[:headers].map { |k, v| [k.downcase, v] }])
 
         options[:body] = body
 
         if method != "get"
           options[:body] = options[:body] || {}
-          options = set_body options
+          options = set_body(options)
         end
 
-        response = create_request method, path, options
+        response = create_request(method, path, options)
 
-        body = get_body response
+        body = get_body(response)
 
-        {{call .Fnc.camelize .Pkg.Name}}::HttpClient::Response.new body, response.status, response.headers
+        {{call .Fnc.camelize .Pkg.Name}}::HttpClient::Response.new(body, response.status, response.headers)
       end
 
       # Creating a request with the given arguments
@@ -112,7 +112,7 @@ module {{call .Fnc.camelize .Pkg.Name}}
         path = "#{version}#{path}"
 
         instance_eval <<-RUBY, __FILE__, __LINE__ + 1
-          @client.#{method} path do |req|
+          @client.#{method}(path) do |req|
             req.body = options[:body]
             req.headers.update(options[:headers])
             req.params.update(options[:query]) if options[:query]
@@ -122,12 +122,12 @@ module {{call .Fnc.camelize .Pkg.Name}}
 
       # Get response body in correct format
       def get_body(response)
-        {{call .Fnc.camelize .Pkg.Name}}::HttpClient::ResponseHandler.get_body response
+        {{call .Fnc.camelize .Pkg.Name}}::HttpClient::ResponseHandler.get_body(response)
       end
 
       # Set request body in correct format
       def set_body(options)
-        {{call .Fnc.camelize .Pkg.Name}}::HttpClient::RequestHandler.set_body options
+        {{call .Fnc.camelize .Pkg.Name}}::HttpClient::RequestHandler.set_body(options)
       end
 
     end
