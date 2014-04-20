@@ -18,8 +18,8 @@ class {{call .Fnc.camelize .Api.active.name}}(object):
         Args:{{end}}{{with $method := .}}{{range (index $data.Api.class $data.Api.active.name $method "params")}}{{if .required}}
             {{.name}}: {{index $data.Doc $data.Api.active.name $method "params" .name "desc"}}{{end}}{{end}}{{end}}
         """
-        body = options['{{template "bodyorquery" (index $data.Api.class $data.Api.active.name .)}}'] if '{{template "bodyorquery" (index $data.Api.class $data.Api.active.name .)}}' in options else {}{{range (index $data.Api.class $data.Api.active.name . "params")}}{{if .required}}
-        body['{{.name}}'] = {{.name}}{{end}}{{end}}
+        body = options['{{template "bodyorquery" (index $data.Api.class $data.Api.active.name .)}}'] if '{{template "bodyorquery" (index $data.Api.class $data.Api.active.name .)}}' in options else {}{{range (index $data.Api.class $data.Api.active.name . "params")}}{{if .required}}{{if (not .url_use)}}
+        body['{{.name}}'] = {{.name}}{{end}}{{end}}{{end}}
 
         response = self.client.{{or (index $data.Api.class $data.Api.active.name . "method") "get"}}('{{call $data.Fnc.path.python (index $data.Api.class $data.Api.active.name . "path") $data.Api.active.args (index $data.Api.class $data.Api.active.name . "params")}}', body, options)
 

@@ -18,8 +18,8 @@ module {{call .Fnc.camelize .Pkg.Name}}
       #{{end}}{{with $method := .}}{{range (index $data.Api.class $data.Api.active.name $method "params")}}{{if .required}}
       # {{.name}} - {{index $data.Doc $data.Api.active.name $method "params" .name "desc"}}{{end}}{{end}}{{end}}
       def {{call $data.Fnc.underscore .}}({{call $data.Fnc.args.ruby (index $data.Api.class $data.Api.active.name . "params")}}options = {})
-        body = options.fetch(:{{template "bodyorquery" (index $data.Api.class $data.Api.active.name .)}}, {}){{range (index $data.Api.class $data.Api.active.name . "params")}}{{if .required}}
-        body[:{{.name}}] = {{.name}}{{end}}{{end}}
+        body = options.fetch(:{{template "bodyorquery" (index $data.Api.class $data.Api.active.name .)}}, {}){{range (index $data.Api.class $data.Api.active.name . "params")}}{{if .required}}{{if (not .url_use)}}
+        body[:{{.name}}] = {{.name}}{{end}}{{end}}{{end}}
 
         @client.{{or (index $data.Api.class $data.Api.active.name . "method") "get"}}("{{call $data.Fnc.path.ruby (index $data.Api.class $data.Api.active.name . "path") $data.Api.active.args (index $data.Api.class $data.Api.active.name . "params")}}", body, options)
       end

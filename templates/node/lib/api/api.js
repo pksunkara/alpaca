@@ -23,8 +23,8 @@ var {{call .Fnc.camelize .Api.active.name}} = function({{call .Fnc.args.node .Ap
     options = {};
   }
 
-  var body = (options['{{template "bodyorquery" (index $data.Api.class $data.Api.active.name .)}}'] ? options['{{template "bodyorquery" (index $data.Api.class $data.Api.active.name .)}}'] : {});{{range (index $data.Api.class $data.Api.active.name . "params")}}{{if .required}}
-  body['{{.name}}'] = {{.name}};{{end}}{{end}}
+  var body = (options['{{template "bodyorquery" (index $data.Api.class $data.Api.active.name .)}}'] ? options['{{template "bodyorquery" (index $data.Api.class $data.Api.active.name .)}}'] : {});{{range (index $data.Api.class $data.Api.active.name . "params")}}{{if .required}}{{if (not .url_use)}}
+  body['{{.name}}'] = {{.name}};{{end}}{{end}}{{end}}
 
   this.client.{{or (index $data.Api.class $data.Api.active.name . "method") "get"}}('{{call $data.Fnc.path.node (index $data.Api.class $data.Api.active.name . "path") $data.Api.active.args (index $data.Api.class $data.Api.active.name . "params")}}', body, options, function(err, response) {
     if (err) {
