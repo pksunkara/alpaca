@@ -1,7 +1,9 @@
 {
-	"base": "https://helpful.io/api",
+	"base": "https://helpful.io",
+	"version": "api",
 	"authorization": {
 		"need_auth": true,
+		"basic": true,
 		"oauth": true
 	},
 	"request": {
@@ -20,26 +22,88 @@
 		"message": "error"
 	},
 	"class": {
-		"conversations": {
+		"accounts": {
 			"list": {
-				"path": "/conversations"
+				"path": "/accounts"
 			},
 			"get": {
-				"path": "/conversations/:id",
+				"path": "/accounts/:account_id",
 				"params": [
 					{
-						"name": "id",
-						"required": true
+						"name": "account_id",
+						"required": true,
+						"url_use": true
 					}
 				]
 			},
 			"update": {
-				"path": "/conversations/:id",
+				"path": "/accounts/:account_id",
 				"method": "patch",
 				"params": [
 					{
-						"name": "id",
-						"required": true
+						"name": "account_id",
+						"required": true,
+						"url_use": true
+					}
+				]
+			}
+		},
+		"people": {
+			"list": {
+				"path": "/accounts/:account_id/people",
+				"params": [
+					{
+						"name": "account_id",
+						"required": true,
+						"url_use": true
+					}
+				]
+			}
+		},
+		"conversations": {
+			"list": {
+				"path": "/accounts/:account_id/conversations",
+				"params": [
+					{
+						"name": "account_id",
+						"required": true,
+						"url_use": true
+					},
+					{
+						"name": "archived"
+					}
+				]
+			},
+			"create": {
+				"path": "/accounts/:account_id/conversations",
+				"method": "post",
+				"params": [
+					{
+						"name": "account_id",
+						"required": true,
+						"url_use": true
+					}
+				]
+			},
+			"get": {
+				"path": "/conversations/:conversation_id",
+				"params": [
+					{
+						"name": "conversation_id",
+						"required": true,
+						"url_use": true
+					}
+				]
+			}
+		},
+		"messages": {
+			"get": {
+				"path": "/messages/:message_id",
+				"params": [
+					{
+						"name": "message_id",
+						"required": true,
+						"url_use": true
 					}
 				]
 			}
