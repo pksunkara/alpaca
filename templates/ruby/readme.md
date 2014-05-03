@@ -51,7 +51,7 @@ client = {{call .Fnc.camelize .Pkg.Name}}::Client.new({{if .Api.base_as_arg}}'{{
 client = {{call .Fnc.camelize .Pkg.Name}}::Client.new({{if .Api.base_as_arg}}'{{.Api.base}}', {{end}}{{if .Api.authorization.oauth}}{:http_header => '1a2b3'}{{else}}'1a2b3'{{end}}, client_options)
 ```
 {{end}}{{if .Api.authorization.oauth}}
-##### Oauth acess token
+##### Oauth access token
 
 ```ruby
 client = {{call .Fnc.camelize .Pkg.Name}}::Client.new({{if .Api.base_as_arg}}'{{.Api.base}}', {{end}}'1a2b3', client_options)
@@ -78,7 +78,7 @@ The following options are available while instantiating a client:
 
 ### Response information
 
-__All the callbacks provided to an api call will recieve the response as shown below__
+__All the callbacks provided to an api call will receive the response as shown below__
 
 ```ruby
 response = client.klass('args').method('args', method_options)

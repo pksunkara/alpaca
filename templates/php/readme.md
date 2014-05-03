@@ -68,7 +68,7 @@ $client = new {{call .Fnc.camelize .Pkg.Name}}\Client({{if .Api.base_as_arg}}'{{
 $client = new {{call .Fnc.camelize .Pkg.Name}}\Client({{if .Api.base_as_arg}}'{{.Api.base}}', {{end}}{{if .Api.authorization.oauth}}array('http_header' => '1a2b3'){{else}}'1a2b3'{{end}}, $clientOptions);
 ```
 {{end}}{{if .Api.authorization.oauth}}
-##### Oauth acess token
+##### Oauth access token
 
 ```php
 $client = new {{call .Fnc.camelize .Pkg.Name}}\Client({{if .Api.base_as_arg}}'{{.Api.base}}', {{end}}'1a2b3', $clientOptions);
@@ -95,7 +95,7 @@ The following options are available while instantiating a client:
 
 ### Response information
 
-__All the callbacks provided to an api call will recieve the response as shown below__
+__All the callbacks provided to an api call will receive the response as shown below__
 
 ```php
 $response = $client->klass('args')->method('args', $methodOptions);
