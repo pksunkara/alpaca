@@ -52,7 +52,7 @@ var client = {{call .Fnc.camelizeDownFirst .Pkg.Name}}.client({{if .Api.base_as_
 var client = {{call .Fnc.camelizeDownFirst .Pkg.Name}}.client({{if .Api.base_as_arg}}'{{.Api.base}}', {{end}}{{if .Api.authorization.oauth}}{ http_header: '1a2b3' }{{else}}'1a2b3'{{end}}, clientOptions);
 ```
 {{end}}{{if .Api.authorization.oauth}}
-##### Oauth acess token
+##### Oauth access token
 
 ```js
 var client = {{call .Fnc.camelizeDownFirst .Pkg.Name}}.client({{if .Api.base_as_arg}}'{{.Api.base}}', {{end}}'1a2b3', clientOptions);
@@ -80,7 +80,7 @@ The following options are available while instantiating a client:
 
 ### Response information
 
-__All the callbacks provided to an api call will recieve the response as shown below__
+__All the callbacks provided to an api call will receive the response as shown below__
 
 ```js
 // You can also omit the 'methodOptions' param below
