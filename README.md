@@ -18,15 +18,15 @@ Join us at [gitter](https://gitter.im/pksunkara/alpaca) if you need any help.
 
 ## Installation
 
-You can download the binaries (v0.2.0)
+You can download the binaries (v0.2.1)
 
- * Architecture i386 [ [linux](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.0_linux_386.tar.gz?direct) / [windows](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.0_windows_386.zip?direct) / [darwin](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.0_darwin_386.zip?direct) / [freebsd](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.0_freebsd_386.zip?direct) / [openbsd](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.0_openbsd_386.zip?direct) / [netbsd](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.0_netbsd_386.zip?direct) / [plan9](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.0_plan9_386.zip?direct) ]
- * Architecture amd64 [ [linux](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.0_linux_amd64.tar.gz?direct) / [windows](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.0_windows_amd64.zip?direct) / [darwin](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.0_darwin_amd64.zip?direct) / [freebsd](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.0_freebsd_amd64.zip?direct) / [openbsd](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.0_openbsd_amd64.zip?direct) / [netbsd](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.0_netbsd_amd64.zip?direct) ]
- * Architecture arm [ [linux](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.0_linux_arm.tar.gz?direct) / [freebsd](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.0_freebsd_arm.zip?direct) / [netbsd](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.0_netbsd_arm.zip?direct) ]
+ * Architecture i386 [ [linux](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.1_linux_386.tar.gz?direct) / [windows](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.1_windows_386.zip?direct) / [darwin](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.1_darwin_386.zip?direct) / [freebsd](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.1_freebsd_386.zip?direct) / [openbsd](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.1_openbsd_386.zip?direct) / [netbsd](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.1_netbsd_386.zip?direct) / [plan9](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.1_plan9_386.zip?direct) ]
+ * Architecture amd64 [ [linux](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.1_linux_amd64.tar.gz?direct) / [windows](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.1_windows_amd64.zip?direct) / [darwin](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.1_darwin_amd64.zip?direct) / [freebsd](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.1_freebsd_amd64.zip?direct) / [openbsd](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.1_openbsd_amd64.zip?direct) / [netbsd](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.1_netbsd_amd64.zip?direct) ]
+ * Architecture arm [ [linux](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.1_linux_arm.tar.gz?direct) / [freebsd](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.1_freebsd_arm.zip?direct) / [netbsd](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.1_netbsd_arm.zip?direct) ]
 
-Or by using deb packages (v0.2.0)
+Or by using deb packages (v0.2.1)
 
- * [ [i386](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.0_i386.deb?direct) / [amd64](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.0_amd64.deb?direct) / [armhf](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.0_armhf.deb?direct) ]
+ * [ [i386](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.1_i386.deb?direct) / [amd64](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.1_amd64.deb?direct) / [armhf](https://dl.bintray.com//content/pksunkara/utils/alpaca_0.2.1_armhf.deb?direct) ]
 
 Or by using golang (v1.2)
 
@@ -111,6 +111,7 @@ All the following fields are required unless mentioned.
 ```js
 {
   "base": "https://exampleapp.com", // Base URL of the api
+  "base_as_arg": true, // Force Base URL to be an argument in generated clients [optional] (default: false)
   "version": "v1", // Default version for the api (https://api.example.com{/version}/users) [optional]
   "no_verify_ssl": true, // Do not verify SSL cert [optional] (default: false)
   "authorization": { // Authorization strategies
@@ -142,12 +143,17 @@ All the following fields are required unless mentioned.
     "users": { // Name of a class of the api
       "args": ["login"], // Arguments required for the api class [optional]
       "profile": { // Name of a method of the api
-        "path": "/users/:login/profile", // Url of the api method
+        "path": "/users/:login/:type", // URL of the api method
         "method": "post", // HTTP method of the api method [optional] (default: get)
         "params": [ // Parameters for the api method [optional]
           {
-            "name": "bio", // Name of the parameter
-            "required": true // The parameter will become an argument of api method
+            "name": "type", // Name of the parameter
+            "required": true // The parameter will become an argument of api method [optional] (default: false)
+            "url_use": true // This parameter is only used to build url [optional] (default: false)
+          },
+          {
+            "name": "bio",
+            "required": true
           }
         ]
       }
