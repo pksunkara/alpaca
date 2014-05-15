@@ -40,10 +40,9 @@ var client = {{call .Fnc.camelizeDownFirst .Pkg.Name}}.client({{if .Api.base_as_
 ##### Basic authentication
 
 ```js
-var client = {{call .Fnc.camelizeDownFirst .Pkg.Name}}.client({{if .Api.base_as_arg}}'{{.Api.base}}', {{end}}{
-    username: 'pksunkara',
-    password: 'password'
-}, clientOptions);
+var auth = { username: 'pksunkara', password: 'password' };
+
+var client = {{call .Fnc.camelizeDownFirst .Pkg.Name}}.client({{if .Api.base_as_arg}}'{{.Api.base}}', {{end}}auth, clientOptions);
 ```
 {{end}}{{if .Api.authorization.header}}
 ##### Authorization header token
