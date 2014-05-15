@@ -184,6 +184,10 @@ The following is filled according to the entries in `api.json`
         "bio": { // Name of the parameter
           "desc": "Short bio in profile", // Description of the parameter
           "value": "I am awesome!" // Value of the parameter in docs
+        },
+        "type": {
+          "desc": "Circle of the profile",
+          "value": "friends"
         }
       }
     }
