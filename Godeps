@@ -4,8 +4,8 @@
 	"Deps": [
 		{
 			"ImportPath": "bitbucket.org/kardianos/osext",
-			"Comment": "null-9",
-			"Rev": "364fb577de68fb646c4cb39cc0e09c887ee16376"
+			"Comment": "null-11",
+			"Rev": "6836bbd915dac0c3115ca7febb32af9ce74eb1d6"
 		},
 		{
 			"ImportPath": "bitbucket.org/pkg/inflect",
@@ -22,8 +22,8 @@
 		},
 		{
 			"ImportPath": "github.com/jessevdk/go-flags",
-			"Comment": "v1-154-gcee4db9",
-			"Rev": "cee4db96aec1f7382a0b09d8249c09a8bb8d160b"
+			"Comment": "v1-167-g8454d73",
+			"Rev": "8454d731db1463469818d7004cbb34fdd52d13bb"
 		}
 	]
 }
