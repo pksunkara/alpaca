@@ -30,7 +30,7 @@ func main() {
 		Test("Base value given by api works correctly")
 		Test("Api version value given by api works correctly")
 
-		if req.UserAgent() == "alpaca/0.2.0 (https://github.com/pksunkara/alpaca)" {
+		if req.UserAgent() == "alpaca/0.2.1 (https://github.com/pksunkara/alpaca)" {
 			Test("User agent default value works correctly")
 		}
 

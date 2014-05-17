@@ -17,7 +17,7 @@ ruby: run
 	ruby run.rb
 
 ruby-deps:
-	gem install faraday -v 0.8.8 --no-ri --no-rdoc
+	gem install faraday -v 0.9.0 --no-ri --no-rdoc
 	gem install json -v 1.7.7 --no-ri --no-rdoc
 
 node: run
