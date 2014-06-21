@@ -21,120 +21,156 @@
 	"error": {
 		"message": "error"
 	},
-	"class": {
-		"info": {
-			"show": {
-				"path": "/info/configuration"
-			}
+	"classes": [
+		{
+			"name": "info",
+			"functions": [
+				{
+					"name": "show",
+					"path": "/info/configuration"
+				}
+			]
 		},
-		"user": {
-			"show": {
-				"path": "/user"
-			},
-			"profiles": {
-				"path": "/profiles"
-			},
-			"create_update": {
-				"path": "/updates/create",
-				"method": "post",
-				"params": [
-					{
-						"name": "text",
-						"required": true
-					},
-					{
-						"name": "profile_ids",
-						"required": true
-					}
-				]
-			}
+		{
+			"name": "user",
+			"functions": [
+				{
+					"name": "show",
+					"path": "/user"
+				},
+				{
+					"name": "profiles",
+					"path": "/profiles"
+				},
+				{
+					"name": "create_update",
+					"path": "/updates/create",
+					"method": "post",
+					"params": [
+						{
+							"name": "text",
+							"required": true
+						},
+						{
+							"name": "profile_ids",
+							"required": true
+						}
+					]
+				}
+			]
 		},
-		"link": {
-			"shares": {
-				"path": "/link/shares",
-				"params": [
-					{
-						"name": "url",
-						"required": true
-					}
-				]
-			}
+		{
+			"name": "link",
+			"functions": [
+				{
+					"name": "shares",
+					"path": "/link/shares",
+					"params": [
+						{
+							"name": "url",
+							"required": true
+						}
+					]
+				}
+			]
 		},
-		"profile": {
+		{
+			"name": "profile",
 			"args": ["id"],
-			"show": {
-				"path": "/profiles/:id"
-			},
-			"pending": {
-				"path": "/profiles/:id/updates/pending",
-				"paginate": true
-			},
-			"sent": {
-				"path": "/profiles/:id/updates/sent",
-				"paginate": true
-			},
-			"reorder": {
-				"path": "/profiles/:id/updates/reorder",
-				"method": "post",
-				"params": [
-					{
-						"name": "order",
-						"required": true
-					}
-				]
-			},
-			"shuffle": {
-				"path": "/profiles/:id/updates/shuffle",
-				"method": "post"
-			}
+			"functions": [
+				{
+					"name": "show",
+					"path": "/profiles/:id"
+				},
+				{
+					"name": "pending",
+					"path": "/profiles/:id/updates/pending",
+					"paginate": true
+				},
+				{
+					"name": "sent",
+					"path": "/profiles/:id/updates/sent",
+					"paginate": true
+				},
+				{
+					"name": "reorder",
+					"path": "/profiles/:id/updates/reorder",
+					"method": "post",
+					"params": [
+						{
+							"name": "order",
+							"required": true
+						}
+					]
+				},
+				{
+					"name": "shuffle",
+					"path": "/profiles/:id/updates/shuffle",
+					"method": "post"
+				}
+			]
 		},
-		"schedule": {
+		{
+			"name": "schedule",
 			"args": ["id"],
-			"list": {
-				"path": "/profiles/:id/schedules"
-			},
-			"update": {
-				"path": "/profiles/:id/schedules/update",
-				"method": "post",
-				"params": [
-					{
-						"name": "schedules",
-						"required": true
-					}
-				]
-			}
+			"functions": [
+				{
+					"name": "list",
+					"path": "/profiles/:id/schedules"
+				},
+				{
+					"name": "update",
+					"path": "/profiles/:id/schedules/update",
+					"method": "post",
+					"params": [
+						{
+							"name": "schedules",
+							"required": true
+						}
+					]
+				}
+			]
 		},
-		"update": {
+		{
+			"name": "update",
 			"args": ["id"],
-			"show": {
-				"path": "/updates/:id"
-			},
-			"interactions": {
-				"path": "/updates/:id/interactions",
-				"paginate": true
-			},
-			"update": {
-				"path": "/updates/:id/update",
-				"method": "post",
-				"params": [
-					{
-						"name": "text",
-						"required": true
-					}
-				]
-			},
-			"share": {
-				"path": "/updates/:id/share",
-				"method": "post"
-			},
-			"destroy": {
-				"path": "/updates/:id/destroy",
-				"method": "post"
-			},
-			"top": {
-				"path": "/updates/:id/move_to_top",
-				"method": "post"
-			}
+			"functions": [
+				{
+					"name": "show",
+					"path": "/updates/:id"
+				},
+				{
+					"name": "interactions",
+					"path": "/updates/:id/interactions",
+					"paginate": true
+				},
+				{
+					"name": "update",
+					"path": "/updates/:id/update",
+					"method": "post",
+					"params": [
+						{
+							"name": "text",
+							"required": true
+						}
+					]
+				},
+				{
+					"name": "share",
+					"path": "/updates/:id/share",
+					"method": "post"
+				},
+				{
+					"name": "destroy",
+					"path": "/updates/:id/destroy",
+					"method": "post"
+				},
+				{
+					"name": "top",
+					"path": "/updates/:id/move_to_top",
+					"method": "post"
+				}
+			]
 		}
 	}
 }
