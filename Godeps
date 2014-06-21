@@ -1,11 +1,11 @@
 {
 	"ImportPath": "github.com/pksunkara/alpaca",
-	"GoVersion": "go1.2",
+	"GoVersion": "go1.3",
 	"Deps": [
 		{
 			"ImportPath": "bitbucket.org/kardianos/osext",
-			"Comment": "null-11",
-			"Rev": "6836bbd915dac0c3115ca7febb32af9ce74eb1d6"
+			"Comment": "null-13",
+			"Rev": "5d3ddcf53a508cc2f7404eaebf546ef2cb5cdb6e"
 		},
 		{
 			"ImportPath": "bitbucket.org/pkg/inflect",
@@ -14,7 +14,7 @@
 		},
 		{
 			"ImportPath": "github.com/GeertJohan/go.rice",
-			"Rev": "387fd3d63f391b3155205bdc6cc089b0741273df"
+			"Rev": "a4d0b5624c673fef4b517f350272136ced6bb5b1"
 		},
 		{
 			"ImportPath": "github.com/daaku/go.zipexe",
@@ -22,8 +22,8 @@
 		},
 		{
 			"ImportPath": "github.com/jessevdk/go-flags",
-			"Comment": "v1-167-g8454d73",
-			"Rev": "8454d731db1463469818d7004cbb34fdd52d13bb"
+			"Comment": "v1-202-g4f0ca1e",
+			"Rev": "4f0ca1e2d1349e9662b633ea1b8b8d48e8a32533"
 		}
 	]
 }
