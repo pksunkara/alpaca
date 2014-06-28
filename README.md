@@ -139,26 +139,30 @@ All the following fields are required unless mentioned.
   "error": { // Required if response format is 'json'
     "message": "error" // The field to be used from the response body for error message
   },
-  "class": { // The classes for the api
-    "users": { // Name of a class of the api
+  "classes": [ // The classes for the api
+    {
+      "name": "users", // Name of a class of the api
       "args": ["login"], // Arguments required for the api class [optional]
-      "profile": { // Name of a method of the api
-        "path": "/users/:login/:type", // URL of the api method
-        "method": "post", // HTTP method of the api method [optional] (default: get)
-        "params": [ // Parameters for the api method [optional]
-          {
-            "name": "type", // Name of the parameter
-            "required": true // The parameter will become an argument of api method [optional] (default: false)
-            "url_use": true // This parameter is only used to build url [optional] (default: false)
-          },
-          {
-            "name": "bio",
-            "required": true
-          }
-        ]
-      }
+      "functions": [ // Array of function methods in the class
+        {
+          "name": "profile", // Name of a method of the api
+          "path": "/users/:login/:type", // URL of the api method
+          "method": "post", // HTTP method of the api method [optional] (default: get)
+          "params": [ // Parameters for the api method [optional]
+            {
+              "name": "type", // Name of the parameter
+              "required": true // The parameter will become an argument of api method [optional] (default: false)
+              "url_use": true // This parameter is only used to build url [optional] (default: false)
+            },
+            {
+              "name": "bio",
+              "required": true
+            }
+          ]
+        }
+      ]
     }
-  }
+  ]
 }
 ```
 
@@ -177,17 +181,19 @@ The following is filled according to the entries in `api.json`
         "value": "pksunkara" // Value of the argument in docs
       }
     },
-    "profile": { // Name of a method of the api
-      "title": "Edit profile", // Title of the api method
-      "desc": "Edit the user's profile", // Description of the api method
-      "params": { // Parameter of the api class
-        "bio": { // Name of the parameter
-          "desc": "Short bio in profile", // Description of the parameter
-          "value": "I am awesome!" // Value of the parameter in docs
-        },
-        "type": {
-          "desc": "Circle of the profile",
-          "value": "friends"
+    "functions": { // Function methods of the class
+      "profile": { // Name of a method of the api
+        "title": "Edit profile", // Title of the api method
+        "desc": "Edit the user's profile", // Description of the api method
+        "params": { // Parameter of the api class
+          "bio": { // Name of the parameter
+            "desc": "Short bio in profile", // Description of the parameter
+            "value": "I am awesome!" // Value of the parameter in docs
+          },
+          "type": {
+            "desc": "Circle of the profile",
+            "value": "friends"
+          }
         }
       }
     }
