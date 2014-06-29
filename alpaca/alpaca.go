@@ -19,7 +19,7 @@ var (
 
 type Data struct {
 	Pkg PkgStruct
-	Api map[string]interface{}
+	Api ApiStruct
 	Doc map[string]interface{}
 	Fnc map[string]interface{}
 }
@@ -58,36 +58,38 @@ func ConvertFormat(format string) {
 
 func WriteLibraries(opts *LanguageOptions) {
 	data := ReadData()
-	ModifyData(data)
+	fmt.Println(data.Api.Classes[1].Functions[2].Params[1].Name)
+	// ModifyData(data)
 
-	if !opts.Php {
-		HandleError(CheckPhp(data))
-		FunctionsPhp(data.Fnc)
-		WritePhp(data)
-	}
+	// if !opts.Php {
+	// 	HandleError(CheckPhp(data))
+	// 	FunctionsPhp(data.Fnc)
+	// 	WritePhp(data)
+	// }
 
-	if !opts.Python {
-		HandleError(CheckPython(data))
-		FunctionsPython(data.Fnc)
-		WritePython(data)
-	}
+	// if !opts.Python {
+	// 	HandleError(CheckPython(data))
+	// 	FunctionsPython(data.Fnc)
+	// 	WritePython(data)
+	// }
 
-	if !opts.Ruby {
-		HandleError(CheckRuby(data))
-		FunctionsRuby(data.Fnc)
-		WriteRuby(data)
-	}
+	// if !opts.Ruby {
+	// 	HandleError(CheckRuby(data))
+	// 	FunctionsRuby(data.Fnc)
+	// 	WriteRuby(data)
+	// }
 
-	if !opts.Node {
-		HandleError(CheckNode(data))
-		FunctionsNode(data.Fnc)
-		WriteNode(data)
-	}
+	// if !opts.Node {
+	// 	HandleError(CheckNode(data))
+	// 	FunctionsNode(data.Fnc)
+	// 	WriteNode(data)
+	// }
 }
 
 func ReadData() *Data {
 	var pkg PkgStruct
-	var api, doc map[string]interface{}
+	var api ApiStruct
+	var doc map[string]interface{}
 
 	ReadJSON("pkg.json", &pkg)
 	ReadJSON("api.json", &api)
@@ -97,9 +99,9 @@ func ReadData() *Data {
 }
 
 func ModifyData(data *Data) {
-	data.Api["alpaca_version"] = Version
+	// data.Api["alpaca_version"] = Version
 
-	data.Api["classes"] = MapKeysToStringArray(data.Api["class"], []string{})
+	// data.Api["classes"] = MapKeysToStringArray(data.Api["class"], []string{})
 
 	data.Fnc["join"] = strings.Join
 	data.Fnc["upper"] = strings.ToUpper

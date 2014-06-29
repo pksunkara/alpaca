@@ -112,7 +112,7 @@ All the following fields are required unless mentioned.
 {
   "base": "https://exampleapp.com", // Base URL of the api
   "base_as_arg": true, // Force Base URL to be an argument in generated clients [optional] (default: false)
-  "version": "v1", // Default version for the api (https://api.example.com{/version}/users) [optional]
+  "version": "v1", // Default version for the api (https://api.example.com{/version}/users) [optional] (default: '')
   "no_verify_ssl": true, // Do not verify SSL cert [optional] (default: false)
   "authorization": { // Authorization strategies
     "need_auth": true, // Authentication is compulsory [optional] (default: false)

@@ -34,11 +34,11 @@ func WriteRuby(data *Data) {
 
 	MakeDir("api")
 
-	for k, v := range data.Api["class"].(map[string]interface{}) {
-		data.Api["active"] = ActiveClassInfo(k, v)
-		RunTemplate("lib/api/api.rb", inflect.Underscore(k)+".rb", data)
-		delete(data.Api, "active")
-	}
+	// for k, v := range data.Api["class"].(map[string]interface{}) {
+	// 	data.Api["active"] = ActiveClassInfo(k, v)
+	// 	RunTemplate("lib/api/api.rb", inflect.Underscore(k)+".rb", data)
+	// 	delete(data.Api, "active")
+	// }
 }
 
 func FunctionsRuby(fnc map[string]interface{}) {

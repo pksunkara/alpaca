@@ -34,11 +34,11 @@ func WritePhp(data *Data) {
 
 	MakeDir("Api")
 
-	for k, v := range data.Api["class"].(map[string]interface{}) {
-		data.Api["active"] = ActiveClassInfo(k, v)
-		RunTemplate("lib/Api/Api.php", inflect.Camelize(k)+".php", data)
-		delete(data.Api, "active")
-	}
+	// for k, v := range data.Api["class"].(map[string]interface{}) {
+	// 	data.Api["active"] = ActiveClassInfo(k, v)
+	// 	RunTemplate("lib/Api/Api.php", inflect.Camelize(k)+".php", data)
+	// 	delete(data.Api, "active")
+	// }
 }
 
 func FunctionsPhp(fnc map[string]interface{}) {
