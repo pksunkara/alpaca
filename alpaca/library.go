@@ -36,7 +36,7 @@ type PkgStruct struct {
 	}
 }
 
-type ApiFunctionParam struct {
+type ApiParam struct {
 	Name     string
 	Required bool
 	UrlUse   bool `json:"url_use"`
@@ -47,7 +47,7 @@ type ApiFunction struct {
 	Path   string
 	Method string
 
-	Params []ApiFunctionParam
+	Params []ApiParam
 }
 
 type ApiClass struct {
@@ -98,6 +98,26 @@ type ApiStruct struct {
 	}
 
 	Classes []ApiClass
+}
+
+type DocParam struct {
+	Desc  string
+	Value interface{}
+}
+
+type DocFunction struct {
+	Title string
+	Desc  string
+
+	Params map[string]DocParam
+}
+
+type DocClass struct {
+	Title string
+	Desc  string
+
+	Args      map[string]DocParam
+	Functions map[string]DocFunction
 }
 
 func MakeLibraryDir(name string) {

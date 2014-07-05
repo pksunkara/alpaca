@@ -20,7 +20,7 @@ var (
 type Data struct {
 	Pkg PkgStruct
 	Api ApiStruct
-	Doc map[string]interface{}
+	Doc map[string]DocClass
 	Fnc map[string]interface{}
 }
 
@@ -58,8 +58,7 @@ func ConvertFormat(format string) {
 
 func WriteLibraries(opts *LanguageOptions) {
 	data := ReadData()
-	fmt.Println(data.Api.Classes[1].Functions[2].Params[1].Name)
-	// ModifyData(data)
+	ModifyData(data)
 
 	// if !opts.Php {
 	// 	HandleError(CheckPhp(data))
@@ -89,7 +88,7 @@ func WriteLibraries(opts *LanguageOptions) {
 func ReadData() *Data {
 	var pkg PkgStruct
 	var api ApiStruct
-	var doc map[string]interface{}
+	var doc map[string]DocClass
 
 	ReadJSON("pkg.json", &pkg)
 	ReadJSON("api.json", &api)
