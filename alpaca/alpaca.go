@@ -21,7 +21,11 @@ type Data struct {
 	Pkg PkgStruct
 	Api ApiStruct
 	Doc map[string]DocClass
+
 	Fnc map[string]interface{}
+
+	Version string    /* Alpaca version to be used in user_agent */
+	Active  *ApiClass /* Current class info needed to keep context */
 }
 
 type LanguageOptions struct {
@@ -41,7 +45,7 @@ func LoadLibraryPath(directory string) {
 func ConvertFormat(format string) {
 	acceptable := false
 
-	FormatList = []string{"blueprint"}
+	FormatList = []string{}
 
 	for _, v := range FormatList {
 		if v == format {
@@ -60,29 +64,29 @@ func WriteLibraries(opts *LanguageOptions) {
 	data := ReadData()
 	ModifyData(data)
 
-	// if !opts.Php {
-	// 	HandleError(CheckPhp(data))
-	// 	FunctionsPhp(data.Fnc)
-	// 	WritePhp(data)
-	// }
+	if !opts.Php {
+		HandleError(CheckPhp(data))
+		FunctionsPhp(data.Fnc)
+		// WritePhp(data)
+	}
 
-	// if !opts.Python {
-	// 	HandleError(CheckPython(data))
-	// 	FunctionsPython(data.Fnc)
-	// 	WritePython(data)
-	// }
+	if !opts.Python {
+		HandleError(CheckPython(data))
+		FunctionsPython(data.Fnc)
+		// WritePython(data)
+	}
 
-	// if !opts.Ruby {
-	// 	HandleError(CheckRuby(data))
-	// 	FunctionsRuby(data.Fnc)
-	// 	WriteRuby(data)
-	// }
+	if !opts.Ruby {
+		HandleError(CheckRuby(data))
+		FunctionsRuby(data.Fnc)
+		// WriteRuby(data)
+	}
 
-	// if !opts.Node {
-	// 	HandleError(CheckNode(data))
-	// 	FunctionsNode(data.Fnc)
-	// 	WriteNode(data)
-	// }
+	if !opts.Node {
+		HandleError(CheckNode(data))
+		FunctionsNode(data.Fnc)
+		// WriteNode(data)
+	}
 }
 
 func ReadData() *Data {
@@ -94,12 +98,10 @@ func ReadData() *Data {
 	ReadJSON("api.json", &api)
 	ReadJSON("doc.json", &doc)
 
-	return &Data{pkg, api, doc, make(map[string]interface{})}
+	return &Data{pkg, api, doc, make(map[string]interface{}), Version, nil}
 }
 
 func ModifyData(data *Data) {
-	// data.Api["alpaca_version"] = Version
-
 	// data.Api["classes"] = MapKeysToStringArray(data.Api["class"], []string{})
 
 	data.Fnc["join"] = strings.Join
