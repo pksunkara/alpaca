@@ -42,36 +42,36 @@ require_once 'vendor/autoload.php';
 ```
 
 ### Build a client
-{{if .Api.authorization.need_auth}}
+{{if .Api.Authorization.NeedAuth}}
 __Using this api without authentication gives an error__
 {{else}}
 ##### Without any authentication
 
 ```php
-$client = new {{call .Fnc.camelize .Pkg.Name}}\Client({{if .Api.base_as_arg}}'{{.Api.base}}'{{end}});
+$client = new {{call .Fnc.camelize .Pkg.Name}}\Client({{if .Api.BaseAsArg}}'{{.Api.Base}}'{{end}});
 
 // If you need to send options
-$client = new {{call .Fnc.camelize .Pkg.Name}}\Client({{if .Api.base_as_arg}}'{{.Api.base}}', {{end}}array(), $clientOptions);
+$client = new {{call .Fnc.camelize .Pkg.Name}}\Client({{if .Api.BaseAsArg}}'{{.Api.Base}}', {{end}}array(), $clientOptions);
 ```
-{{end}}{{if .Api.authorization.basic}}
+{{end}}{{if .Api.Authorization.Basic}}
 ##### Basic authentication
 
 ```php
 $auth = array('username' => 'pksunkara', 'password' => 'password');
 
-$client = new {{call .Fnc.camelize .Pkg.Name}}\Client({{if .Api.base_as_arg}}'{{.Api.base}}', {{end}}$auth, $clientOptions);
+$client = new {{call .Fnc.camelize .Pkg.Name}}\Client({{if .Api.BaseAsArg}}'{{.Api.Base}}', {{end}}$auth, $clientOptions);
 ```
-{{end}}{{if .Api.authorization.header}}
+{{end}}{{if .Api.Authorization.Header}}
 ##### Authorization header token
 
 ```php
-$client = new {{call .Fnc.camelize .Pkg.Name}}\Client({{if .Api.base_as_arg}}'{{.Api.base}}', {{end}}{{if .Api.authorization.oauth}}array('http_header' => '1a2b3'){{else}}'1a2b3'{{end}}, $clientOptions);
+$client = new {{call .Fnc.camelize .Pkg.Name}}\Client({{if .Api.BaseAsArg}}'{{.Api.Base}}', {{end}}{{if .Api.Authorization.Oauth}}array('http_header' => '1a2b3'){{else}}'1a2b3'{{end}}, $clientOptions);
 ```
-{{end}}{{if .Api.authorization.oauth}}
+{{end}}{{if .Api.Authorization.Oauth}}
 ##### Oauth access token
 
 ```php
-$client = new {{call .Fnc.camelize .Pkg.Name}}\Client({{if .Api.base_as_arg}}'{{.Api.base}}', {{end}}'1a2b3', $clientOptions);
+$client = new {{call .Fnc.camelize .Pkg.Name}}\Client({{if .Api.BaseAsArg}}'{{.Api.Base}}', {{end}}'1a2b3', $clientOptions);
 ```
 
 ##### Oauth client secret
@@ -79,7 +79,7 @@ $client = new {{call .Fnc.camelize .Pkg.Name}}\Client({{if .Api.base_as_arg}}'{{
 ```php
 $auth = array('client_id' => '09a8b7', 'client_secret' => '1a2b3');
 
-$client = new {{call .Fnc.camelize .Pkg.Name}}\Client({{if .Api.base_as_arg}}'{{.Api.base}}', {{end}}$auth, $clientOptions);
+$client = new {{call .Fnc.camelize .Pkg.Name}}\Client({{if .Api.BaseAsArg}}'{{.Api.Base}}', {{end}}$auth, $clientOptions);
 ```
 {{end}}
 ### Client Options
@@ -90,7 +90,7 @@ The following options are available while instantiating a client:
  * __api_version__: Default version of the api (to be used in url)
  * __user_agent__: Default user-agent for all requests
  * __headers__: Default headers for all requests
- * __request_type__: Default format of the request body{{if .Api.response.suffix}}
+ * __request_type__: Default format of the request body{{if .Api.Response.Suffix}}
  * __response_type__: Default format of the response (to be used in url suffix){{end}}
 
 ### Response information
@@ -106,7 +106,7 @@ $response->code;
 $response->headers;
 // >>> array('x-server' => 'apache')
 ```
-{{if .Api.response.formats.html}}
+{{if .Api.Response.Formats.Html}}
 ##### HTML/TEXT response
 
 When the response sent by server is either __html__ or __text__, it is not changed in any way
@@ -115,7 +115,7 @@ When the response sent by server is either __html__ or __text__, it is not chang
 $response->body;
 // >>> 'The username is pksunkara!'
 ```
-{{end}}{{if .Api.response.formats.json}}
+{{end}}{{if .Api.Response.Formats.Json}}
 ##### JSON response
 
 When the response sent by server is __json__, it is decoded into an array
@@ -133,7 +133,7 @@ The following options are available while calling a method of an api:
  * __headers__: Headers for the request
  * __query__: Query parameters for the url
  * __body__: Body of the request
- * __request_type__: Format of the request body{{if .Api.response.suffix}}
+ * __request_type__: Format of the request body{{if .Api.Response.Suffix}}
  * __response_type__: Format of the response (to be used in url suffix){{end}}
 
 ### Request body information
@@ -148,7 +148,7 @@ When the value is set to __raw__, don't modify the body at all.
 $body = 'username=pksunkara';
 // >>> 'username=pksunkara'
 ```
-{{if .Api.request.formats.form}}
+{{if .Api.Request.Formats.Form}}
 ##### FORM request
 
 When the value is set to __form__, urlencode the body.
@@ -157,7 +157,7 @@ When the value is set to __form__, urlencode the body.
 $body = array('user' => 'pksunkara');
 // >>> 'user=pksunkara'
 ```
-{{end}}{{if .Api.request.formats.json}}
+{{end}}{{if .Api.Request.Formats.Json}}
 ##### JSON request
 
 When the value is set to __json__, JSON encode the body.
@@ -166,29 +166,29 @@ When the value is set to __json__, JSON encode the body.
 $body = array('user' => 'pksunkara');
 // >>> '{"user": "pksunkara"}'
 ```
-{{end}}{{with $data := .}}{{range .Api.classes}}
-### {{index $data.Doc . "title"}} api
+{{end}}{{with $data := .}}{{range .Api.Classes}}
+### {{(index $data.Doc .Name).Title}} api
 
-{{index $data.Doc . "desc"}}{{with (index $data.Api.class . "args")}}
+{{(index $data.Doc .Name).Desc}}{{with .Args}}
 
 The following arguments are required:
-{{end}}{{with $class := .}}{{range (index $data.Api.class . "args")}}
- * __{{.}}__: {{index $data.Doc $class "args" . "desc"}}{{end}}
+{{end}}{{with $class := .}}{{range .Args}}
+ * __{{.}}__: {{(index ((index $data.Doc $class.Name).Args) .).Desc}}{{end}}
 
 ```php
-${{call $data.Fnc.camelizeDownFirst .}} = $client->{{call $data.Fnc.camelizeDownFirst .}}({{call $data.Fnc.prnt.php (index $data.Doc . "args") ", " false}});
+${{call $data.Fnc.camelizeDownFirst $class.Name}} = $client->{{call $data.Fnc.camelizeDownFirst $class.Name}}({{call $data.Fnc.prnt.php ((index $data.Doc $class.Name).Args) ", " false}});
 ```
-{{range (call $data.Fnc.methods (index $data.Api.class .))}}
-##### {{index $data.Doc $class . "title"}} ({{call $data.Fnc.upper (or (index $data.Api.class $class . "method") "get")}} {{index $data.Api.class $class . "path"}})
+{{range $class.Functions}}
+##### {{(index ((index $data.Doc $class.Name).Functions) .Name).Title}} ({{call $data.Fnc.upper (or .Method "get")}} {{.Path}})
 
-{{index $data.Doc $class . "desc"}}{{with (index $data.Api.class $class . "params")}}
+{{(index ((index $data.Doc $class.Name).Functions) .Name).Desc}}{{with .Params}}
 
 The following arguments are required:
-{{end}}{{with $method := .}}{{range (index $data.Api.class $class . "params")}}{{if .required}}
- * __{{.name}}__: {{index $data.Doc $class $method "params" .name "desc"}}{{end}}{{end}}{{end}}
+{{end}}{{with $method := .}}{{range .Params}}{{if .Required}}
+ * __{{.Name}}__: {{(index ((index ((index $data.Doc $class.Name).Functions) $method.Name).Params) .Name).Desc}}{{end}}{{end}}{{end}}
 
 ```php
-$response = ${{call $data.Fnc.camelizeDownFirst $class}}->{{call $data.Fnc.camelizeDownFirst .}}({{call $data.Fnc.prnt.php (index $data.Doc $class . "params") ", " true}}$options);
+$response = ${{call $data.Fnc.camelizeDownFirst $class.Name}}->{{call $data.Fnc.camelizeDownFirst .Name}}({{call $data.Fnc.prnt.php ((index ((index $data.Doc $class.Name).Functions) .Name).Params) ", " true}}$options);
 ```
 {{end}}{{end}}{{end}}{{end}}
 ## Contributors

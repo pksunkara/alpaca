@@ -12,7 +12,7 @@ class ResponseHandler {
     public static function getBody(GuzzleResponse $response)
     {
         $body = $response->getBody(true);
-{{if .Api.response.formats.json}}
+{{if .Api.Response.Formats.Json}}
         // Response body is in JSON
         if ($response->isContentType('json')) {
             $tmp = json_decode($body, true);

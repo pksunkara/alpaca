@@ -67,7 +67,7 @@ func WriteLibraries(opts *LanguageOptions) {
 	if !opts.Php {
 		HandleError(CheckPhp(data))
 		FunctionsPhp(data.Fnc)
-		// WritePhp(data)
+		WritePhp(data)
 	}
 
 	if !opts.Python {
@@ -102,16 +102,12 @@ func ReadData() *Data {
 }
 
 func ModifyData(data *Data) {
-	// data.Api["classes"] = MapKeysToStringArray(data.Api["class"], []string{})
-
 	data.Fnc["join"] = strings.Join
 	data.Fnc["upper"] = strings.ToUpper
 
 	data.Fnc["camelize"] = inflect.Camelize
 	data.Fnc["camelizeDownFirst"] = inflect.CamelizeDownFirst
 	data.Fnc["underscore"] = inflect.Underscore
-
-	data.Fnc["methods"] = MethodList
 
 	data.Fnc["args"] = make(map[string]interface{})
 	data.Fnc["path"] = make(map[string]interface{})

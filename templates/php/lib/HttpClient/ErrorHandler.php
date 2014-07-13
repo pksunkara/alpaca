@@ -32,11 +32,11 @@ class ErrorHandler
             if (gettype($body) == 'string') {
                 $message = $body;
             }
-{{if .Api.response.formats.json}}
+{{if .Api.Response.Formats.Json}}
             // If JSON, a particular field is taken and used
             if ($response->isContentType('json') && is_array($body)) {
-                if (isset($body['{{.Api.error.message}}'])) {
-                    $message = $body['{{.Api.error.message}}'];
+                if (isset($body['{{.Api.Error.Message}}'])) {
+                    $message = $body['{{.Api.Error.Message}}'];
                 } else {
                     $message = 'Unable to select error message from json returned by request responsible for error';
                 }
