@@ -47,7 +47,7 @@ func FunctionsPhp(fnc map[string]interface{}) {
 	prnt := fnc["prnt"].(map[string]interface{})
 
 	args["php"] = ArgsFunctionMaker("$", ", ")
-	path["php"] = PathFunctionMaker("'.rawurlencode(", "$$this->", ").'")
+	path["php"] = PathFunctionMaker("'.rawurlencode($$", "this->", ").'")
 	prnt["php"] = PrntFunctionMaker(false, "    ", "\"", "\"", "array(", ")", "array(", ")", "'", "' => ")
 }
 
