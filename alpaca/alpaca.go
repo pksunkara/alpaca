@@ -85,7 +85,7 @@ func WriteLibraries(opts *LanguageOptions) {
 	if !opts.Node {
 		HandleError(CheckNode(data))
 		FunctionsNode(data.Fnc)
-		// WriteNode(data)
+		WriteNode(data)
 	}
 }
 

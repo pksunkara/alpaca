@@ -16,11 +16,11 @@ module.exports = function(response, body, callback) {
     if (typeof body == 'string') {
       message = body;
     }
-{{if .Api.response.formats.json}}
+{{if .Api.Response.Formats.Json}}
     // If JSON, a particular field is taken and used
     if (type.indexOf('json') != -1 && typeof body == 'object') {
-      if (body['{{.Api.error.message}}']) {
-        message = body['{{.Api.error.message}}'];
+      if (body['{{.Api.Error.Message}}']) {
+        message = body['{{.Api.Error.Message}}'];
       } else {
         message = 'Unable to select error message from json returned by request responsible for error';
       }
