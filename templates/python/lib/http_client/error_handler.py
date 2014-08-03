@@ -20,11 +20,11 @@ class ErrorHandler(object):
             # If HTML, whole body is taken
             if isinstance(body, str):
                 message = body
-{{if .Api.response.formats.json}}
+{{if .Api.Response.Formats.Json}}
             # If JSON, a particular field is taken and used
             if typ.find('json') != -1 and isinstance(body, dict):
-                if '{{.Api.error.message}}' in body:
-                    message = body['{{.Api.error.message}}']
+                if '{{.Api.Error.Message}}' in body:
+                    message = body['{{.Api.Error.Message}}']
                 else:
                     message = 'Unable to select error message from json returned by request responsible for error'
 {{end}}

@@ -1,27 +1,27 @@
-class {{call .Fnc.camelize .Api.active.name}}(object):
+{{define "boq"}}{{if (eq (or .Method "get") "get")}}query{{else}}body{{end}}{{end}}class {{call .Fnc.camelize .Active.Name}}(object):
 
-    """{{index .Doc .Api.active.name "desc"}}{{with (index .Doc .Api.active.name "args")}}
+    """{{(index .Doc .Active.Name).Desc}}{{with (index .Doc .Active.Name).Args}}
 
-    Args:{{end}}{{with $data := .}}{{range .Api.active.args}}
-        {{.}}: {{index $data.Doc $data.Api.active.name "args" . "desc"}}{{end}}{{end}}
+    Args:{{end}}{{with $data := .}}{{range .Active.Args}}
+        {{.}}: {{(index ((index $data.Doc $data.Active.Name).Args) .).Desc}}{{end}}{{end}}
     """
-{{define "bodyorquery"}}{{if (eq (or (index . "method") "get") "get")}}query{{else}}body{{end}}{{end}}
-    def __init__(self, {{call .Fnc.args.python .Api.active.args}}client):{{range .Api.active.args}}
+
+    def __init__(self, {{call .Fnc.args.python .Active.Args}}client):{{range .Active.Args}}
         self.{{.}} = {{.}}{{end}}
         self.client = client
-{{with $data := .}}{{range .Api.active.methods}}
-    def {{call $data.Fnc.underscore .}}(self, {{call $data.Fnc.args.python (index $data.Api.class $data.Api.active.name . "params")}}options={}):
-        """{{index $data.Doc $data.Api.active.name . "desc"}}
+{{with $data := .}}{{range .Active.Functions}}
+    def {{call $data.Fnc.underscore .Name}}(self, {{call $data.Fnc.args.python .Params}}options={}):
+        """{{(index ((index $data.Doc $data.Active.Name).Functions) .Name).Desc}}
 
-        '{{index $data.Api.class $data.Api.active.name . "path"}}' {{call $data.Fnc.upper (or (index $data.Api.class $data.Api.active.name . "method") "get")}}{{with (index $data.Doc $data.Api.active.name . "params")}}
+        '{{.Path}}' {{call $data.Fnc.upper (or .Method "get")}}{{with .Params}}
 
-        Args:{{end}}{{with $method := .}}{{range (index $data.Api.class $data.Api.active.name $method "params")}}{{if .required}}
-            {{.name}}: {{index $data.Doc $data.Api.active.name $method "params" .name "desc"}}{{end}}{{end}}{{end}}
+        Args:{{end}}{{with $method := .}}{{range .Params}}{{if .Required}}
+            {{.Name}}: {{(index ((index ((index $data.Doc $data.Active.Name).Functions) $method.Name).Params) .Name).Desc}}{{end}}{{end}}{{end}}
         """
-        body = options['{{template "bodyorquery" (index $data.Api.class $data.Api.active.name .)}}'] if '{{template "bodyorquery" (index $data.Api.class $data.Api.active.name .)}}' in options else {}{{range (index $data.Api.class $data.Api.active.name . "params")}}{{if .required}}{{if (not .url_use)}}
-        body['{{.name}}'] = {{.name}}{{end}}{{end}}{{end}}
+        body = options['{{template "boq" .}}'] if '{{template "boq" .}}' in options else {}{{range .Params}}{{if .Required}}{{if (not .UrlUse)}}
+        body['{{.Name}}'] = {{.Name}}{{end}}{{end}}{{end}}
 
-        response = self.client.{{or (index $data.Api.class $data.Api.active.name . "method") "get"}}('{{call $data.Fnc.path.python (index $data.Api.class $data.Api.active.name . "path") $data.Api.active.args (index $data.Api.class $data.Api.active.name . "params")}}', body, options)
+        response = self.client.{{or .Method "get"}}('{{call $data.Fnc.path.python .Path $data.Active.Args .Params}}', body, options)
 
         return response
 {{end}}{{end}}
