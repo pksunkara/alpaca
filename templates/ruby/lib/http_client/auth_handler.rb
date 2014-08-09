@@ -6,11 +6,11 @@ module {{call .Fnc.camelize .Pkg.Name}}
 
     # AuthHandler takes care of devising the auth type and using it
     class AuthHandler < Faraday::Middleware
-{{if .Api.authorization.basic}}
+{{if .Api.Authorization.Basic}}
       HTTP_PASSWORD = 0
-{{end}}{{if .Api.authorization.header}}
+{{end}}{{if .Api.Authorization.Header}}
       HTTP_HEADER = 1
-{{end}}{{if .Api.authorization.oauth}}
+{{end}}{{if .Api.Authorization.Oauth}}
       URL_SECRET = 2
       URL_TOKEN = 3
 {{end}}
@@ -23,17 +23,17 @@ module {{call .Fnc.camelize .Pkg.Name}}
         if !@auth.empty?
           auth = get_auth_type
           flag = false
-{{if .Api.authorization.basic}}
+{{if .Api.Authorization.Basic}}
           if auth == HTTP_PASSWORD
             env = http_password(env)
             flag = true
           end
-{{end}}{{if .Api.authorization.header}}
+{{end}}{{if .Api.Authorization.Header}}
           if auth == HTTP_HEADER
             env = http_header(env)
             flag = true
           end
-{{end}}{{if .Api.authorization.oauth}}
+{{end}}{{if .Api.Authorization.Oauth}}
           if auth == URL_SECRET
             env = url_secret(env)
             flag = true
@@ -46,7 +46,7 @@ module {{call .Fnc.camelize .Pkg.Name}}
 {{end}}
           if !flag
             raise StandardError.new "Unable to calculate authorization method. Please check"
-          end{{if .Api.authorization.need_auth}}
+          end{{if .Api.Authorization.NeedAuth}}
         else
           raise StandardError.new "Server requires authentication to proceed further. Please check"{{end}}
         end
@@ -56,15 +56,15 @@ module {{call .Fnc.camelize .Pkg.Name}}
 
       # Calculating the Authentication Type
       def get_auth_type()
-{{if .Api.authorization.basic}}
+{{if .Api.Authorization.Basic}}
         if @auth.has_key?(:username) and @auth.has_key?(:password)
           return HTTP_PASSWORD
         end
-{{end}}{{if .Api.authorization.header}}
+{{end}}{{if .Api.Authorization.Header}}
         if @auth.has_key?(:http_header)
           return HTTP_HEADER
         end
-{{end}}{{if .Api.authorization.oauth}}
+{{end}}{{if .Api.Authorization.Oauth}}
         if @auth.has_key?(:client_id) and @auth.has_key?(:client_secret)
           return URL_SECRET
         end
@@ -75,7 +75,7 @@ module {{call .Fnc.camelize .Pkg.Name}}
 {{end}}
         return -1
       end
-{{if .Api.authorization.basic}}
+{{if .Api.Authorization.Basic}}
       # Basic Authorization with username and password
       def http_password(env)
         code = Base64.encode64 "#{@auth[:username]}:#{@auth[:password]}"
@@ -84,14 +84,14 @@ module {{call .Fnc.camelize .Pkg.Name}}
 
         return env
       end
-{{end}}{{if .Api.authorization.header}}
+{{end}}{{if .Api.Authorization.Header}}
       # Authorization with HTTP header
       def http_header(env)
-        env[:request_headers]["Authorization"] = "{{or .Api.authorization.header_prefix "token"}} #{@auth[:http_header]}"
+        env[:request_headers]["Authorization"] = "{{or .Api.Authorization.HeaderPrefix "token"}} #{@auth[:http_header]}"
 
         return env
       end
-{{end}}{{if .Api.authorization.oauth}}
+{{end}}{{if .Api.Authorization.Oauth}}
       # OAUTH2 Authorization with client secret
       def url_secret(env)
         query = {

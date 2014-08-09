@@ -13,20 +13,20 @@ module {{call .Fnc.camelize .Pkg.Name}}
 
       attr_accessor :options, :headers
 
-      def initialize({{if .Api.base_as_arg}}base_url, {{end}}auth = {}, options = {})
-{{if .Api.authorization.oauth}}
+      def initialize({{if .Api.BaseAsArg}}base_url, {{end}}auth = {}, options = {})
+{{if .Api.Authorization.Oauth}}
         if auth.is_a?(String)
           auth = { :access_token => auth }
         end
-{{else}}{{if .Api.authorization.header}}
+{{else}}{{if .Api.Authorization.Header}}
         if auth.is_a?(String)
           auth = { :http_header => auth }
         end
 {{end}}{{end}}
         @options = {
-          :base => {{if .Api.base_as_arg}}base_url{{else}}"{{.Api.base}}"{{end}},{{with .Api.version}}
+          :base => {{if .Api.BaseAsArg}}base_url{{else}}"{{.Api.Base}}"{{end}},{{with .Api.Version}}
           :api_version => "{{.}}",{{end}}
-          :user_agent => "alpaca/{{.Api.alpaca_version}} (https://github.com/pksunkara/alpaca)"
+          :user_agent => "alpaca/{{.Version}} (https://github.com/pksunkara/alpaca)"
         }
 
         @options.update(options)
@@ -39,7 +39,7 @@ module {{call .Fnc.camelize .Pkg.Name}}
           @headers.update(Hash[@options[:headers].map { |k, v| [k.downcase, v] }])
           @options.delete(:headers)
         end
-{{if .Api.no_verify_ssl}}
+{{if .Api.NoVerifySSL}}
         @conn_options = {
           :ssl => { :verify => false }
         }
@@ -104,9 +104,9 @@ module {{call .Fnc.camelize .Pkg.Name}}
       # If api_version is set, appends it immediately after host
       def create_request(method, path, options)
         version = options.has_key?(:api_version) ? "/#{options[:api_version]}" : ""
-{{if .Api.response.suffix}}
+{{if .Api.Response.Suffix}}
         # Adds a suffix (ex: ".html", ".json") to url
-        suffix = options.has_key?(:response_type) ? options[:response_type] : "{{.Api.response.formats.default}}"
+        suffix = options.has_key?(:response_type) ? options[:response_type] : "{{.Api.Response.Formats.Default}}"
         path = "#{path}.#{suffix}"
 {{end}}
         path = "#{version}#{path}"

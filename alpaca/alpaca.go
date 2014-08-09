@@ -79,7 +79,7 @@ func WriteLibraries(opts *LanguageOptions) {
 	if !opts.Ruby {
 		HandleError(CheckRuby(data))
 		FunctionsRuby(data.Fnc)
-		// WriteRuby(data)
+		WriteRuby(data)
 	}
 
 	if !opts.Node {
