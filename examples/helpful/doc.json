@@ -2,27 +2,29 @@
 	"accounts": {
 		"title": "Accounts",
 		"desc": "These are like organizations which use Helpful.",
-		"list": {
-			"title": "List all accounts",
-			"desc": "All the accounts the user has access to"
-		},
-		"get": {
-			"title": "Retrieve an account",
-			"desc": "Get an account the user has access to",
-			"params": {
-				"account_id": {
-					"desc": "Identifier of the account",
-					"value": "b3ebe711-755e-4a91-b8d2-0cc028827bcf"
+		"functions": {
+			"list": {
+				"title": "List all accounts",
+				"desc": "All the accounts the user has access to"
+			},
+			"get": {
+				"title": "Retrieve an account",
+				"desc": "Get an account the user has access to",
+				"params": {
+					"account_id": {
+						"desc": "Identifier of the account",
+						"value": "b3ebe711-755e-4a91-b8d2-0cc028827bcf"
+					}
 				}
-			}
-		},
-		"update": {
-			"title": "Update an account",
-			"desc": "Update an account the user has access to",
-			"params": {
-				"account_id": {
-					"desc": "Identifier of the account",
-					"value": "b3ebe711-755e-4a91-b8d2-0cc028827bcf"
+			},
+			"update": {
+				"title": "Update an account",
+				"desc": "Update an account the user has access to",
+				"params": {
+					"account_id": {
+						"desc": "Identifier of the account",
+						"value": "b3ebe711-755e-4a91-b8d2-0cc028827bcf"
+					}
 				}
 			}
 		}
@@ -30,13 +32,15 @@
 	"people": {
 		"title": "People",
 		"desc": "People who operate or interacted with the account",
-		"list": {
-			"title": "List all people",
-			"desc": "List all people in the account the user has access to",
-			"params": {
-				"account_id": {
-					"desc": "Identifier of the account",
-					"value": "b3ebe711-755e-4a91-b8d2-0cc028827bcf"
+		"functions": {
+			"list": {
+				"title": "List all people",
+				"desc": "List all people in the account the user has access to",
+				"params": {
+					"account_id": {
+						"desc": "Identifier of the account",
+						"value": "b3ebe711-755e-4a91-b8d2-0cc028827bcf"
+					}
 				}
 			}
 		}
@@ -44,37 +48,39 @@
 	"conversations": {
 		"title": "Conversations",
 		"desc": "Conversations in an account",
-		"list": {
-			"title": "List all conversations",
-			"desc": "List all conversations in an account the user has access to",
-			"params": {
-				"account_id": {
-					"desc": "Identifier of the account",
-					"value": "b3ebe711-755e-4a91-b8d2-0cc028827bcf"
-				},
-				"archived": {
-					"desc": "Archived if true, not if false",
-					"value": "false"
+		"functions": {
+			"list": {
+				"title": "List all conversations",
+				"desc": "List all conversations in an account the user has access to",
+				"params": {
+					"account_id": {
+						"desc": "Identifier of the account",
+						"value": "b3ebe711-755e-4a91-b8d2-0cc028827bcf"
+					},
+					"archived": {
+						"desc": "Archived if true, not if false",
+						"value": "false"
+					}
 				}
-			}
-		},
-		"create": {
-			"title": "Create a conversation",
-			"desc": "Create an empty conversation in account the user has access to",
-			"params": {
-				"account_id": {
-					"desc": "Identifier of the account",
-					"value": "b3ebe711-755e-4a91-b8d2-0cc028827bcf"
+			},
+			"create": {
+				"title": "Create a conversation",
+				"desc": "Create an empty conversation in account the user has access to",
+				"params": {
+					"account_id": {
+						"desc": "Identifier of the account",
+						"value": "b3ebe711-755e-4a91-b8d2-0cc028827bcf"
+					}
 				}
-			}
-		},
-		"get": {
-			"title": "Retrieve a conversation",
-			"desc": "Get a conversation the user has access to",
-			"params": {
-				"conversation_id": {
-					"desc": "Identifier of the conversation",
-					"value": "10ce24de-23f6-433f-9a71-255cffffa96f"
+			},
+			"get": {
+				"title": "Retrieve a conversation",
+				"desc": "Get a conversation the user has access to",
+				"params": {
+					"conversation_id": {
+						"desc": "Identifier of the conversation",
+						"value": "10ce24de-23f6-433f-9a71-255cffffa96f"
+					}
 				}
 			}
 		}
@@ -82,13 +88,15 @@
 	"messages": {
 		"title": "Messages",
 		"desc": "Messages in a conversation",
-		"get": {
-			"title": "Retrieve a message",
-			"desc": "Get a message the user has access to",
-			"params": {
-				"message_id": {
-					"desc": "Identifier of the message",
-					"value": "33314e4e-baf5-4b33-be72-112ed86701fd"
+		"functions": {
+			"get": {
+				"title": "Retrieve a message",
+				"desc": "Get a message the user has access to",
+				"params": {
+					"message_id": {
+						"desc": "Identifier of the message",
+						"value": "33314e4e-baf5-4b33-be72-112ed86701fd"
+					}
 				}
 			}
 		}
