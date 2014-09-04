@@ -18,7 +18,10 @@ setup(
         'requests >= 2.1.0'
     ],
     packages=[
-        '{{call .Fnc.underscore .Pkg.Name}}'
+        '{{call .Fnc.underscore .Pkg.Name}}',
+        '{{call .Fnc.underscore .Pkg.Name}}.api',
+        '{{call .Fnc.underscore .Pkg.Name}}.error',
+        '{{call .Fnc.underscore .Pkg.Name}}.http_client'
     ],
     classifiers=[
         'Development Status :: 5 - Production/Stable',
