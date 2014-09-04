@@ -9,7 +9,7 @@ class ErrorHandler(object):
     @staticmethod
     def check_error(response, *args, **kwargs):
         code = response.status_code
-        typ = response.headers.get('content-type')
+        typ = response.headers.get('content-type', '')
 
         if code in range(500, 600):
             raise ClientError('Error ' + str(code), code)
