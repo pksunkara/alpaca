@@ -176,7 +176,7 @@ The following arguments are required:
  * __{{.}}__: {{(index ((index $data.Doc $class.Name).Args) .).Desc}}{{end}}
 
 ```php
-${{call $data.Fnc.camelizeDownFirst $class.Name}} = $client->{{call $data.Fnc.camelizeDownFirst $class.Name}}({{call $data.Fnc.prnt.php ((index $data.Doc $class.Name).Args) ", " false}});
+${{call $data.Fnc.camelizeDownFirst $class.Name}} = $client->{{call $data.Fnc.camelizeDownFirst $class.Name}}({{call $data.Fnc.prnt.php .Args ((index $data.Doc $class.Name).Args) ", " false}});
 ```
 {{range $class.Functions}}
 ##### {{(index ((index $data.Doc $class.Name).Functions) .Name).Title}} ({{call $data.Fnc.upper (or .Method "get")}} {{.Path}})
@@ -188,7 +188,7 @@ The following arguments are required:
  * __{{.Name}}__: {{(index ((index ((index $data.Doc $class.Name).Functions) $method.Name).Params) .Name).Desc}}{{end}}{{end}}{{end}}
 
 ```php
-$response = ${{call $data.Fnc.camelizeDownFirst $class.Name}}->{{call $data.Fnc.camelizeDownFirst .Name}}({{call $data.Fnc.prnt.php ((index ((index $data.Doc $class.Name).Functions) .Name).Params) ", " true}}$options);
+$response = ${{call $data.Fnc.camelizeDownFirst $class.Name}}->{{call $data.Fnc.camelizeDownFirst .Name}}({{call $data.Fnc.prnt.php .Params ((index ((index $data.Doc $class.Name).Functions) .Name).Params) ", " true}}$options);
 ```
 {{end}}{{end}}{{end}}{{end}}
 ## Contributors

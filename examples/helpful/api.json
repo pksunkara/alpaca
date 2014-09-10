@@ -26,7 +26,7 @@
 			"name": "accounts",
 			"functions": [
 				{
-					"name": "list",
+					"name": "all",
 					"path": "/accounts"
 				},
 				{
@@ -58,7 +58,7 @@
 			"name": "people",
 			"functions": [
 				{
-					"name": "list",
+					"name": "all",
 					"path": "/accounts/:account_id/people",
 					"params": [
 						{
@@ -74,7 +74,7 @@
 			"name": "conversations",
 			"functions": [
 				{
-					"name": "list",
+					"name": "all",
 					"path": "/accounts/:account_id/conversations",
 					"params": [
 						{

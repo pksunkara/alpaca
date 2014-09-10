@@ -55,9 +55,11 @@ func TestPathFunctionMaker(t *testing.T) {
 func TestPrntFunctionMaker(t *testing.T) {
 	terst.Terst(t)
 
-	f := PrntFunctionMaker(true, "  ", "'", "'", "[", "]", "{", "}", ":", " => ").(func(map[string]DocParam, string, bool) string)
+	f := PrntFunctionMaker(true, "  ", "'", "'", "[", "]", "{", "}", ":", " => ").(func(interface{}, map[string]DocParam, string, bool) string)
 
-	args := make(map[string]DocParam)
+	apis := []string{"id"}
+	apip := make([]ApiParam, 1)
+	docs := make(map[string]DocParam)
 	vals := make(map[string]interface{})
 	orgs := make([]interface{}, 3)
 	null := make(map[string]string)
@@ -66,29 +68,39 @@ func TestPrntFunctionMaker(t *testing.T) {
 	orgs[1] = "alpaca-api"
 	orgs[2] = 00
 
-	terst.Is(f(make(map[string]DocParam), ", ", true), "")
+	apip[0] = ApiParam{"id", true, false}
+
+	terst.Is(f([]string{}, make(map[string]DocParam), ", ", true), "")
+	terst.Is(f([]ApiParam{}, make(map[string]DocParam), ", ", true), "")
+	terst.Is(f([]int{}, make(map[string]DocParam), ", ", true), "")
 
 	vals["key"] = 3737
-	args["id"] = DocParam{"", vals}
-	terst.Is(f(args, ", ", true), "{\n  :key => 3737\n}, ")
+	docs["id"] = DocParam{"", vals}
+	terst.Is(f(apis, docs, ", ", true), "{\n  :key => 3737\n}, ")
+	terst.Is(f(apip, docs, ", ", true), "{\n  :key => 3737\n}, ")
 
 	vals["key"] = 1.99
-	args["id"] = DocParam{"", vals}
-	terst.Is(f(args, ", ", false), "{\n  :key => 1.99\n}")
+	docs["id"] = DocParam{"", vals}
+	terst.Is(f(apis, docs, ", ", false), "{\n  :key => 1.99\n}")
+	terst.Is(f(apip, docs, ", ", false), "{\n  :key => 1.99\n}")
 
 	vals["key"] = "pksunkara"
-	args["id"] = DocParam{"", vals}
-	terst.Is(f(args, ", ", false), "{\n  :key => 'pksunkara'\n}")
+	docs["id"] = DocParam{"", vals}
+	terst.Is(f(apis, docs, ", ", false), "{\n  :key => 'pksunkara'\n}")
+	terst.Is(f(apip, docs, ", ", false), "{\n  :key => 'pksunkara'\n}")
 
 	vals["key"] = true
-	args["id"] = DocParam{"", vals}
-	terst.Is(f(args, ", ", false), "{\n  :key => True\n}")
+	docs["id"] = DocParam{"", vals}
+	terst.Is(f(apis, docs, ", ", false), "{\n  :key => True\n}")
+	terst.Is(f(apip, docs, ", ", false), "{\n  :key => True\n}")
 
 	vals["key"] = orgs
-	args["id"] = DocParam{"", vals}
-	terst.Is(f(args, ", ", false), "{\n  :key => [\n    False,\n    'alpaca-api',\n    0\n  ]\n}")
+	docs["id"] = DocParam{"", vals}
+	terst.Is(f(apis, docs, ", ", false), "{\n  :key => [\n    False,\n    'alpaca-api',\n    0\n  ]\n}")
+	terst.Is(f(apip, docs, ", ", false), "{\n  :key => [\n    False,\n    'alpaca-api',\n    0\n  ]\n}")
 
 	vals["key"] = null
-	args["id"] = DocParam{"", vals}
-	terst.Is(f(args, ", ", false), "{\n  :key => \n}")
+	docs["id"] = DocParam{"", vals}
+	terst.Is(f(apis, docs, ", ", false), "{\n  :key => \n}")
+	terst.Is(f(apip, docs, ", ", false), "{\n  :key => \n}")
 }

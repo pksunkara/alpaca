@@ -163,7 +163,7 @@ The following arguments are required:
  * __{{.}}__: {{(index ((index $data.Doc $class.Name).Args) .).Desc}}{{end}}
 
 ```js
-var {{call $data.Fnc.camelizeDownFirst $class.Name}} = client.{{call $data.Fnc.camelizeDownFirst $class.Name}}({{call $data.Fnc.prnt.node ((index $data.Doc $class.Name).Args) ", " false}});
+var {{call $data.Fnc.camelizeDownFirst $class.Name}} = client.{{call $data.Fnc.camelizeDownFirst $class.Name}}({{call $data.Fnc.prnt.node .Args ((index $data.Doc $class.Name).Args) ", " false}});
 ```
 {{range $class.Functions}}
 ##### {{(index ((index $data.Doc $class.Name).Functions) .Name).Title}} ({{call $data.Fnc.upper (or .Method "get")}} {{.Path}})
@@ -175,7 +175,7 @@ The following arguments are required:
  * __{{.Name}}__: {{(index ((index ((index $data.Doc $class.Name).Functions) $method.Name).Params) .Name).Desc}}{{end}}{{end}}{{end}}
 
 ```js
-{{call $data.Fnc.camelizeDownFirst $class.Name}}.{{call $data.Fnc.camelizeDownFirst .Name}}({{call $data.Fnc.prnt.node ((index ((index $data.Doc $class.Name).Functions) .Name).Params) ", " true}}options, callback);
+{{call $data.Fnc.camelizeDownFirst $class.Name}}.{{call $data.Fnc.camelizeDownFirst .Name}}({{call $data.Fnc.prnt.node .Params ((index ((index $data.Doc $class.Name).Functions) .Name).Params) ", " true}}options, callback);
 ```
 {{end}}{{end}}{{end}}{{end}}
 ## Contributors

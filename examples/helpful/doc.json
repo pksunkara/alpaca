@@ -3,7 +3,7 @@
 		"title": "Accounts",
 		"desc": "These are like organizations which use Helpful.",
 		"functions": {
-			"list": {
+			"all": {
 				"title": "List all accounts",
 				"desc": "All the accounts the user has access to"
 			},
@@ -33,7 +33,7 @@
 		"title": "People",
 		"desc": "People who operate or interacted with the account",
 		"functions": {
-			"list": {
+			"all": {
 				"title": "List all people",
 				"desc": "List all people in the account the user has access to",
 				"params": {
@@ -49,7 +49,7 @@
 		"title": "Conversations",
 		"desc": "Conversations in an account",
 		"functions": {
-			"list": {
+			"all": {
 				"title": "List all conversations",
 				"desc": "List all conversations in an account the user has access to",
 				"params": {

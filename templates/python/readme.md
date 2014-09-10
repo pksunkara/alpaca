@@ -159,7 +159,7 @@ The following arguments are required:
  * __{{.}}__: {{(index ((index $data.Doc $class.Name).Args) .).Desc}}{{end}}
 
 ```python
-{{call $data.Fnc.underscore $class.Name}} = client.{{call $data.Fnc.underscore $class.Name}}({{call $data.Fnc.prnt.python ((index $data.Doc $class.Name).Args) ", " false}})
+{{call $data.Fnc.underscore $class.Name}} = client.{{call $data.Fnc.underscore $class.Name}}({{call $data.Fnc.prnt.python .Args ((index $data.Doc $class.Name).Args) ", " false}})
 ```
 {{range $class.Functions}}
 ##### {{(index ((index $data.Doc $class.Name).Functions) .Name).Title}} ({{call $data.Fnc.upper (or .Method "get")}} {{.Path}})
@@ -171,7 +171,7 @@ The following arguments are required:
  * __{{.Name}}__: {{(index ((index ((index $data.Doc $class.Name).Functions) $method.Name).Params) .Name).Desc}}{{end}}{{end}}{{end}}
 
 ```python
-response = {{call $data.Fnc.underscore $class.Name}}.{{call $data.Fnc.underscore .Name}}({{call $data.Fnc.prnt.python ((index ((index $data.Doc $class.Name).Functions) .Name).Params) ", " true}}options)
+response = {{call $data.Fnc.underscore $class.Name}}.{{call $data.Fnc.underscore .Name}}({{call $data.Fnc.prnt.python .Params ((index ((index $data.Doc $class.Name).Functions) .Name).Params) ", " true}}options)
 ```
 {{end}}{{end}}{{end}}{{end}}
 ## Contributors

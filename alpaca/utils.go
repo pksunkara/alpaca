@@ -140,15 +140,27 @@ func PrntFunctionMaker(boolcap bool, tab, strbeg, strend, arrbeg, arrend, objbeg
 		return ""
 	}
 
-	return func(args map[string]DocParam, sep string, notLast bool) string {
-		str := ""
+	return func(api interface{}, doc map[string]DocParam, sep string, notLast bool) string {
+		str, typ := "", reflect.TypeOf(api).String()
 
-		if len(args) == 0 {
+		if typ == "[]string" {
+			if len(api.([]string)) == 0 {
+				return str
+			}
+
+			for _, v := range api.([]string) {
+				str += vals(doc[v].Value) + sep
+			}
+		} else if typ == "[]alpaca.ApiParam" {
+			if len(api.([]ApiParam)) == 0 {
+				return str
+			}
+
+			for _, v := range api.([]ApiParam) {
+				str += vals(doc[v.Name].Value) + sep
+			}
+		} else {
 			return str
-		}
-
-		for _, v := range args {
-			str += vals(v.Value) + sep
 		}
 
 		if !notLast {

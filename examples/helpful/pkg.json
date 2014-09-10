@@ -1,7 +1,7 @@
 {
 	"name": "Helpful",
-	"package": "helpful",
-	"version": "0.1.0",
+	"package": "helpful-client",
+	"version": "1.0.0",
 	"url": "https://helpful.io",
 	"keywords": ["alpaca", "helpful", "assemblymade", "api", "client", "library"],
 	"official": true,
