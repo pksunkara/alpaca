@@ -1,0 +1,523 @@
+{
+	"account": {
+    "args": {
+      "user_id": {
+        "desc": "user_id of account which is doing API call",
+        "value": "u-account_id_in_bandwidth"
+      }
+    },
+		"title": "account information",
+		"desc": "Retrieve current balance, transaction list, account type and all elements related to your platform account.",
+		"show": {
+			"title": "Get information about your account",
+			"desc": "Get information about your account: balance, accountType."
+		},
+		"transactions": {
+			"title": "Get a list of the transactions made to your account",
+			"desc": "Get the transactions from the user's Account.."
+		}
+	},
+  "availableNumbers": {
+    "args": {
+      "user_id": {
+        "desc": "user_id of account which is doing API call",
+        "value": "u-account_id_in_bandwidth"
+      }
+    },
+		"title": "Find and Buy available numbers",
+    "desc": "The Available Numbers resource lets you search for numbers that are available for use with your application.",
+    "searchLocal": {
+      "title": "Search an available local number",
+      "desc": "Search and available local number that we can buy",
+      "params": {
+        "city": {
+          "desc": "A city name",
+          "value": "San Jose"
+        },
+        "state": {
+          "desc": "A two-letter US state abbreviation ('CA' for California)",
+          "value": "CA"
+        },
+        "zip": {
+          "desc": "A 5-digit US ZIP code",
+          "value": 95111
+        },
+        "areaCode": {
+          "desc": "A 3-digit telephone area code",
+          "value": 408
+        },
+        "localNumber": {
+          "desc": "It is defined as the first digits of a telephone number inside an area code for filtering the results. It must contain from 3 to 4 digits",
+          "value": "4083"
+        },
+        "inLocalCallingArea": {
+          "desc": "Boolean value to indicate that the search for available numbers must consider overlayed areas. Only applied for localNumber searching",
+          "value": true
+        },
+        "quantity": {
+          "desc": "The maximum number of numbers to return (default 10, maximum 5000)",
+          "value": 10
+        },
+        "pattern": {
+          "desc": "A number pattern that may include letters, digits, and the following wildcard characters: ? : matches any single digit. * : matches zero or more digits.Don't forget to encode wildcard characters in the requested URL.",
+          "value": "*2%3F9"
+        }
+      }
+    },
+    "createLocal": {
+      "title": "Buy a local number",
+      "desc": "Search and order available local numbers",
+      "params": {
+        "city": {
+          "desc": "A city name",
+          "value": "San Jose"
+        },
+        "state": {
+          "desc": "A two-letter US state abbreviation ('CA' for California)",
+          "value": "CA"
+        },
+        "zip": {
+          "desc": "A 5-digit US ZIP code",
+          "value": 95111
+        },
+        "areaCode": {
+          "desc": "A 3-digit telephone area code",
+          "value": 408
+        },
+        "localNumber": {
+          "desc": "It is defined as the first digits of a telephone number inside an area code for filtering the results. It must contain from 3 to 4 digits",
+          "value": "4083"
+        },
+        "inLocalCallingArea": {
+          "desc": "Boolean value to indicate that the search for available numbers must consider overlayed areas. Only applied for localNumber searching",
+          "value": true
+        },
+        "quantity": {
+          "desc": "The maximum number of numbers to return (default 10, maximum 5000)",
+          "value": 10
+        }
+      }
+    },
+
+    "searchTollFree": {
+      "title": "Search for available toll free numbers",
+      "desc": "Search for available toll free numbers"
+    },
+    "createTollFree": {
+      "title": "Search and order available toll free numbers",
+      "desc": "Search and order available toll free numbers"
+    }
+  },
+  "messages": {
+    "args": {
+      "user_id": {
+        "desc": "user_id of account which is doing API call",
+        "value": "u-account_id_in_bandwidth"
+      }
+    },
+		"title": "message resources",
+    "desc": "Lets you send SMS text messages and view messages that were previously sent or received",
+    "fetch": {
+      "title": "Get a list of previous messages that were sent or received",
+      "desc": "Get a list of previous messages that were sent or received"
+    },
+    "create": {
+      "title": "Send text messages",
+      "desc": "Send text messages"
+    },
+    "show": {
+      "title": "Read a message",
+      "desc": "Get information about a message that was sent or received",
+      "params": {
+        "id": {
+          "desc": "message id",
+          "value": "111111"
+        }
+      }
+    }
+  },
+  
+  "calls": {
+    "args": {
+      "user_id": {
+        "desc": "user_id of account which is doing API call",
+        "value": "u-account_id_in_bandwidth"
+      }
+    },
+		"title": "Manipulation calls",
+    "desc": "The Calls resource lets you make phone calls and view information about previous inbound and outbound calls.",
+    "fetch": {
+      "title": "Gets a list of active and historic calls you made or received",
+      "desc": "Gets a list of active and historic calls you made or received"
+    },
+    "create": {
+      "title": "Makes a phone call.",
+      "desc": "Makes a phone call.",
+      "params": {
+        "from": {
+          "desc": "number which we call from",
+          "value": "4081112244"
+        },
+        "to": {
+          "desc": "number which we call to",
+          "value": "6501112222"
+        }
+      }
+    },
+    "show": {
+      "title": "Gets information about an active or completed call",
+      "desc": "Gets information about an active or completed call. No query parameters are supported",
+      "params": {
+        "call_id": {
+          "desc": "call id",
+          "value": "111111"
+        }
+      }
+
+    },
+
+    "update": {
+      "title": "Changes properties of an active phone call",
+      "desc": "Changes properties of an active phone call",
+      "params": {
+        "call_id": {
+          "desc": "call id",
+          "value": "111111"
+        }
+      }
+    },
+
+    "audio": {
+      "title": "Play an audio or speak a sentence in a call",
+      "desc": "Play an audio or speak a sentence in a call",
+      "params": {
+        "call_id": {
+          "desc": "call id",
+          "value": "111111"
+        }
+      }
+    },
+
+    "dtmf": {
+      "title": "Send DTMF",
+      "desc": "Send DTMF to a call",
+      "params": {
+        "call_id": {
+          "desc": "call id",
+          "value": "111111"
+        }
+      }
+    },
+
+    "recordings": {
+      "title": "Retrieve all recordings related to the call",
+      "desc": "Retrieve all recordings related to the call",
+      "params": {
+        "call_id": {
+          "desc": "call id",
+          "value": "111111"
+        }
+      }
+    },
+
+    "createGather": {
+      "title": "Gather the DTMF digits pressed",
+      "desc": "Gather the DTMF digits pressed by the user.",
+      "params": {
+        "call_id": {
+          "desc": "call id",
+          "value": "111111"
+        }
+      }
+    },
+    "gather": {
+      "title": "Get the gather DTMF parameters and results",
+      "desc": "Get the gather DTMF parameters and results",
+      "params": {
+        "call_id": {
+          "desc": "call id",
+          "value": "111111"
+        },
+        "gather_id": {
+          "desc": "gather id",
+          "value": "222222"
+        }
+      }
+    },
+    "updateGather": {
+      "title": "Update the gather DTMF (Stop Gather)",
+      "desc": "Update the gather DTMF (Stop Gather)",
+      "params": {
+        "call_id": {
+          "desc": "call id",
+          "value": "111111"
+        },
+        "gather_id": {
+          "desc": "gather id",
+          "value": "222222"
+        }
+      }
+    }
+
+  },
+
+  "numberInfo": {
+    "title": "This resource provides a CNAM number info",
+    "desc": "CNAM is an acronym which stands for Caller ID Name. CNAM can be used to display the calling party's name alongside the phone number, to help users easily identify a caller. CNAM API allows the user to get the CNAM information of a particular number",
+    "args": {
+      "number": {
+        "desc": "phone number to get the info",
+        "value": "14084442222 //or 408444222 is ok"
+      }
+    },
+    "show": {
+      "title": "Get the CNAM of the number",
+      "desc": "Get the CNAM of the number"
+    }
+  },
+
+  "phoneNumbers": {
+    "args": {
+      "user_id": {
+        "desc": "user_id of account which is doing API call",
+        "value": "u-account_id_in_bandwidth"
+      }
+    },
+		"title": "The Phone Numbers resource lets you get phone numbers for use with your programs and manage numbers you already have",
+    "desc": "The Phone Numbers resource lets you get phone numbers for use with your programs and manage numbers you already have",
+
+    "fetch": {
+      "title": "Gets a list of your numbers. ",
+      "desc": "Gets a list of your numbers. "
+    },
+
+    "create": {
+      "title": "Allocates a number so you can use it to make and receive calls and send and receive messages",
+      "desc": "Allocates a number so you can use it to make and receive calls and send and receive messages",
+      "params": {
+        "number": {
+          "desc": "An available telephone number you want to use (must be in E.164 format, like +19195551212)",
+          "value": "+19195551212"
+        },
+        "applicationId": {
+          "desc": "The ID of an Application you want to associate with this number",
+          "value": "u-hdsadasdsad7-sample-app-id"
+        },
+        "name": {
+          "desc": "A name you choose for this number",
+          "value": "Customer Name"
+        },
+        "fallbackNumber": {
+          "desc": "Number to transfer an incoming call when the callback/fallback events can't be delivered",
+          "value": "Default NC Number"
+        }
+      }
+    },
+
+    "showById": {
+      "title": "Gets information about one of your numbers using the number's ID",
+      "desc": "Gets information about one of your numbers using the number's ID",
+      "params": {
+        "number_id": {
+          "desc": "Number ID inside Bandwidth system",
+          "value": "sample_number_id"
+        }
+      }
+    },
+    "showByNumber": {
+      "title": "Gets information about one of your numbers using the number itself",
+      "desc": "Gets information about one of your numbers using the E.164 number string, like +19195551212. Remember to URL encode the plus sign prefix",
+      "params": {
+        "number": {
+          "desc": "phone number",
+          "value": "+14083872696"
+        }
+      }
+    },
+
+    "update": {
+      "title": "Make changes to a number you have",
+      "desc": "Makes changes to a number you have. POST a new JSON representation with the property values you desire to the URL that you got back in the \"Location\" header when you first allocated it. Properties you don't send will remain unchanged.",
+      "params": {
+        "number_id": {
+          "desc": "id of phone number in twilio system. The ID of a number can be found by showByNumber",
+          "value": "n-111111"
+        }
+      }
+    },
+
+    "destroy": {
+      "title": "Remove a number from your account",
+      "desc": "emoves a number from your account so you can no longer make or receive calls, or send or receive messages with it. When you remove a number from your account, it will not immediately become available for re-use, so be careful.",
+      "params": {
+        "number_id": {
+          "desc": "id of phone number in twilio system. The ID of a number can be found by showByNumber",
+          "value": "n-111111"
+        }
+      }
+
+    }
+  },
+
+  "conferences": {
+    "args": {
+      "user_id": {
+        "desc": "user_id of account which is doing API call",
+        "value": "u-account_id_in_bandwidth"
+      }
+    },
+
+    "title": "Conference resouce",
+    "desc": "The Conference resource allows you create conferences, add members to it, play audio, speak text, mute/unmute members, hold/unhold members and other things related to conferencing.",
+    
+    "create": {
+      "title": "Create a conference.",
+      "desc": "Creates a conference.",
+      "params": {
+        "from": {
+          "desc": "the phone number which conferences will be created on it",
+          "value": "+14081112323"
+        }  
+      }
+    },
+
+    "createMember": {
+      "title": "Add a member to a conference.",
+      "desc": "Add a member to a conference.",
+      "params": {
+        "conference_id": {
+          "desc": "Conference ID",
+          "value": "conf-2jir46wjc5puqpiwthqma5y"
+        },
+
+        "callId": {
+          "desc": "Call ID to join into conference",
+          "value": "c-m2vrf4lpryjlvwgvsnf6ery"
+        }
+      }
+    },
+
+    "audio": {
+      "title": "Play an audio/speak a sentence in the conference.",
+      "desc": "Play an audio/speak a sentence in the conference.",
+      "params": {
+        "conference_id": {
+          "desc": "Conference ID",
+          "value": "conf-2jir46wjc5puqpiwthqma5y"
+        }
+      }
+    }
+
+  },
+
+  "bridges": {
+    "args": {
+      "user_id": {
+        "desc": "user_id of account which is doing API call",
+        "value": "u-account_id_in_bandwidth"
+      }
+    },
+    "title": "Bridges resource",
+    "desc": "Bridges resource. Bridge two calls allowing two way audio between them.",
+    "create": {
+      "title": "Create a bridge",
+      "desc": "Create a bridge",
+      "params": {
+        "bridgeAudio": {
+          "desc": "Enable/Disable two way audio path (default = true)",
+          "value": "true"
+        },
+        "callIds": {
+          "desc": "The list of call ids in the bridge. If the list of call ids is not provided the bridge is logically created and it can be used to place calls later.",
+          "value": "c-m2vrf4lpryjlvwgvsnf6ery"
+        }
+      }
+    },
+
+    "audio": {
+      "title":"Play an audio or speak a sentence in a bridge",
+      "desc": "Play an audio or speak a sentence in a bridge",
+      "params": {
+        "bridge_id": {
+          "desc": "Bridge ID",
+          "value": "b_bridge_id_in_bandwidth"
+        }
+      }
+    },
+
+    "listCall": {
+      "title": "Get the list of calls that are on the bridge",
+      "desc": "Get the list of calls that are on the bridge",
+      "params": {
+        "bridge_id": {
+          "desc": "Bridge ID",
+          "value": "b_bridge_id_in_bandwidth"
+        }
+      }
+    },
+
+    "update": {
+      "title": "Change calls in a bridge and bridge/unbridge the audio",
+      "desc": "Change calls in a bridge and bridge/unbridge the audio",
+
+      "params": {
+        "bridge_id": {
+          "desc": "Bridge ID",
+          "value": "b_bridge_id_in_bandwidth"
+        }
+      }
+    }
+  
+  },
+
+  "recordings": {
+    "args": {
+      "user_id": {
+        "desc": "user_id of account which is doing API call",
+        "value": "u-account_id_in_bandwidth"
+      }
+    },
+    "title": "Retrieve call recordings, filtering by Id, user and/or calls",
+    "desc": "Retrieve call recordings, filtering by Id, user and/or calls. Learn how record a Call The recording information retrieved by GET method contains only textual data related to call recording as described on Properties section. To properly work with recorded media content such as download and removal of media file, please access Media documentation",
+    "show": {
+      "title": "Retrieve a specific call recording information, identified by recordingId",
+      "desc":  "Retrieve a specific call recording information, identified by recordingId",
+      "params": {
+        "recording_id": {
+          "desc": "Recording ID",
+          "value": "r_recoridng_id_in_bandwidth"
+        }
+      }
+    },
+    "fetch": {
+      "title": "List a user's call recordings",
+      "desc": "List a user's call recordings"
+    }
+  
+  },
+  "errors": {
+    "args": {
+      "user_id": {
+        "desc": "user_id of account which is doing API call",
+        "value": "u-account_id_in_bandwidth"
+      }
+    },
+    "title": "User Errors",
+    "desc": " The User Errors resource lets you see information about errors that happened in your API calls and during applications callbacks. This error information can be very helpful when you're debugging an application.  Because error information can be large, and errors in the distant past are less useful than new ones, Bandwidth API limits the number of user errors it keeps. ",
+    "show": {
+      "title": "Gets information about one user error",
+      "desc":  "Gets information about one user error",
+      "params": {
+        "error_id": {
+          "desc": "Error ID",
+          "value": "error_id"
+        }
+      }
+    },
+    "fetch": {
+      "title": "Gets all the user errors for a user",
+      "desc": "Gets all the user errors for a user"
+    }
+  }
+
+}

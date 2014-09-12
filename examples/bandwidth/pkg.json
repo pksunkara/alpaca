@@ -1,0 +1,25 @@
+{
+	"name": "Bandwidth",
+	"package": "bandwidth-alpaca",
+	"version": "1.4.0",
+	"url": "https://bandwidth.com",
+	"keywords": ["alpaca", "bandwidth", "api", "client", "library"],
+	"official": false,
+	"author": {
+		"name": "kureikain",
+		"email": "kurei@axcoto.com",
+		"url": "http://github.com/kureikain"
+	},
+	"git": {
+		"site": "github.com",
+		"user": "kureikain",
+		"name": "bandwidth"
+	},
+	"license": "MIT",
+	"php": {
+		"vendor": "kureikain"
+	},
+	"python": {
+		"license": "MIT License"
+	}
+}
