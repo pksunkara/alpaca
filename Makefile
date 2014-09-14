@@ -2,7 +2,6 @@ DEPS = \
 	github.com/wsxiaoys/terminal \
 	github.com/codegangsta/martini
 
-
 all:
 	alpaca tests
 

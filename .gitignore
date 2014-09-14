@@ -13,3 +13,4 @@ vendor
 composer.*
 build
 .goxc.local.json
+coverage.out

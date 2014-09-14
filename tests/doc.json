@@ -2,155 +2,169 @@
 	"test": {
 		"title": "Testing helpers",
 		"desc": "Some useful testing helpers",
-		"equal": {
-			"title": "Testing equality",
-			"desc": "Testing equality of values"
-		},
-		"end": {
-			"title": "End testing",
-			"desc": "End the testing"
+		"functions": {
+			"equal": {
+				"title": "Testing equality",
+				"desc": "Testing equality of values"
+			},
+			"end": {
+				"title": "End testing",
+				"desc": "End the testing"
+			}
 		}
 	},
 	"client_options": {
 		"title": "Client Options",
 		"desc": "Handles the options used or instantiated when building the client",
-		"basic": {
-			"title": "Basic options",
-			"desc": "Making sure client options work"
+		"functions": {
+			"basic": {
+				"title": "Basic options",
+				"desc": "Making sure client options work"
+			}
 		}
 	},
 	"request_options": {
 		"title": "Request Options",
 		"desc": "Handles the options used when sending requests",
-		"basic": {
-			"title": "Basic options",
-			"desc": "Making sure request options work"
-		},
-		"suffix": {
-			"title": "Response type option for suffix",
-			"desc": "Making sure response_type option work"
+		"functions": {
+			"basic": {
+				"title": "Basic options",
+				"desc": "Making sure request options work"
+			},
+			"suffix": {
+				"title": "Response type option for suffix",
+				"desc": "Making sure response_type option work"
+			}
 		}
 	},
 	"get": {
 		"title": "GET request",
 		"desc": "Handles different aspects about get request",
-		"api": {
-			"title": "Using api",
-			"desc": "Set query params using api",
-			"params": {
-				"first": {
-					"desc": "Testing first param",
-					"value": "foo"
-				},
-				"second": {
-					"desc": "Testing second param",
-					"value": "bar"
+		"functions": {
+			"api": {
+				"title": "Using api",
+				"desc": "Set query params using api",
+				"params": {
+					"first": {
+						"desc": "Testing first param",
+						"value": "foo"
+					},
+					"second": {
+						"desc": "Testing second param",
+						"value": "bar"
+					}
 				}
+			},
+			"options": {
+				"title": "Using options",
+				"desc": "Set query params using options"
 			}
-		},
-		"options": {
-			"title": "Using options",
-			"desc": "Set query params using options"
 		}
 	},
 	"post": {
 		"title": "POST request",
 		"desc": "Handles different aspects about post request",
-		"empty_raw": {
-			"title": "Empty body (raw)",
-			"desc": "Do not give any body"
-		},
-		"options_raw": {
-			"title": "Using options (raw)",
-			"desc": "Set body using options"
-		},
-		"empty_form": {
-			"title": "Empty body (form)",
-			"desc": "Do not give any body"
-		},
-		"api_form": {
-			"title": "Using api params (form)",
-			"desc": "Set body using params",
-			"params": {
-				"first": {
-					"desc": "Testing first param",
-					"value": "foo"
-				},
-				"second": {
-					"desc": "Testing second param",
-					"value": "bar"
+		"functions": {
+			"empty_raw": {
+				"title": "Empty body (raw)",
+				"desc": "Do not give any body"
+			},
+			"options_raw": {
+				"title": "Using options (raw)",
+				"desc": "Set body using options"
+			},
+			"empty_form": {
+				"title": "Empty body (form)",
+				"desc": "Do not give any body"
+			},
+			"api_form": {
+				"title": "Using api params (form)",
+				"desc": "Set body using params",
+				"params": {
+					"first": {
+						"desc": "Testing first param",
+						"value": "foo"
+					},
+					"second": {
+						"desc": "Testing second param",
+						"value": "bar"
+					}
 				}
-			}
-		},
-		"options_form": {
-			"title": "Using options (form)",
-			"desc": "Set body using options"
-		},
-		"array_form": {
-			"title": "Encode array (form)",
-			"desc": "Form urlencode an array"
-		},
-		"object_form": {
-			"title": "Encode object (form)",
-			"desc": "Form urlencode an object"
-		},
-		"empty_json": {
-			"title": "Empty body (json)",
-			"desc": "Do not give any body"
-		},
-		"api_json": {
-			"title": "Using api params (json)",
-			"desc": "Set body using params",
-			"params": {
-				"first": {
-					"desc": "Testing first param",
-					"value": "foo"
-				},
-				"second": {
-					"desc": "Testing second param",
-					"value": "bar"
+			},
+			"options_form": {
+				"title": "Using options (form)",
+				"desc": "Set body using options"
+			},
+			"array_form": {
+				"title": "Encode array (form)",
+				"desc": "Form urlencode an array"
+			},
+			"object_form": {
+				"title": "Encode object (form)",
+				"desc": "Form urlencode an object"
+			},
+			"empty_json": {
+				"title": "Empty body (json)",
+				"desc": "Do not give any body"
+			},
+			"api_json": {
+				"title": "Using api params (json)",
+				"desc": "Set body using params",
+				"params": {
+					"first": {
+						"desc": "Testing first param",
+						"value": "foo"
+					},
+					"second": {
+						"desc": "Testing second param",
+						"value": "bar"
+					}
 				}
+			},
+			"options_json": {
+				"title": "Using options (json)",
+				"desc": "Set body using options"
 			}
-		},
-		"options_json": {
-			"title": "Using options (json)",
-			"desc": "Set body using options"
 		}
 	},
 	"methods": {
 		"title": "HTTP methods",
 		"desc": "Checking other http methods",
-		"patch": {
-			"title": "PATCH Request",
-			"desc": "Testing PATCH method request"
-		},
-		"put": {
-			"title": "PUT Request",
-			"desc": "Testing PUT method request"
-		},
-		"delete": {
-			"title": "DELETE Request",
-			"desc": "Testing DELETE method request"
+		"functions": {
+			"patch": {
+				"title": "PATCH Request",
+				"desc": "Testing PATCH method request"
+			},
+			"put": {
+				"title": "PUT Request",
+				"desc": "Testing PUT method request"
+			},
+			"delete": {
+				"title": "DELETE Request",
+				"desc": "Testing DELETE method request"
+			}
 		}
 	},
 	"response": {
 		"title": "Response formats",
 		"desc": "Handles testing of different response formats",
-		"basic": {
-			"title": "Basic Response",
-			"desc": "Testing response basic attributes"
-		},
-		"header": {
-			"title": "Response headers",
-			"desc": "Testing response headers"
-		},
-		"html": {
-			"title": "HTML response",
-			"desc": "Testing html response format"
-		},
-		"json": {
-			"title": "JSON response",
-			"desc": "Testing json response format"
+		"functions": {
+			"basic": {
+				"title": "Basic Response",
+				"desc": "Testing response basic attributes"
+			},
+			"header": {
+				"title": "Response headers",
+				"desc": "Testing response headers"
+			},
+			"html": {
+				"title": "HTML response",
+				"desc": "Testing html response format"
+			},
+			"json": {
+				"title": "JSON response",
+				"desc": "Testing json response format"
+			}
 		}
 	},
 	"paths": {
@@ -162,33 +176,37 @@
 				"value": "lol"
 			}
 		},
-		"basic": {
-			"title": "Basic path",
-			"desc": "Basic path substitution"
-		},
-		"no_arg": {
-			"title": "Arg not found",
-			"desc": "Path substitution when arg not found"
+		"functions": {
+			"basic": {
+				"title": "Basic path",
+				"desc": "Basic path substitution"
+			},
+			"no_arg": {
+				"title": "Arg not found",
+				"desc": "Path substitution when arg not found"
+			}
 		}
 	},
 	"auth": {
 		"title": "Authorizations",
 		"desc": "Handles all kinds of authorizations",
-		"basic": {
-			"title": "Authorization basic",
-			"desc": "Testing authorization strategy basic"
-		},
-		"header": {
-			"title": "Authorization header",
-			"desc": "Testing authorization strategy header"
-		},
-		"oauth_secret": {
-			"title": "Authorization oauth_secret",
-			"desc": "Testing authorization strategy oauth_secret"
-		},
-		"oauth_token": {
-			"title": "Authorization oauth_token",
-			"desc": "Testing authorization strategy oauth_token"
+		"functions": {
+			"basic": {
+				"title": "Authorization basic",
+				"desc": "Testing authorization strategy basic"
+			},
+			"header": {
+				"title": "Authorization header",
+				"desc": "Testing authorization strategy header"
+			},
+			"oauth_secret": {
+				"title": "Authorization oauth_secret",
+				"desc": "Testing authorization strategy oauth_secret"
+			},
+			"oauth_token": {
+				"title": "Authorization oauth_token",
+				"desc": "Testing authorization strategy oauth_token"
+			}
 		}
 	}
 }

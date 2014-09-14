@@ -24,161 +24,218 @@
 	"error": {
 		"message": "error"
 	},
-	"class": {
-		"test": {
-			"equal": {
-				"path": "/test/equal"
-			},
-			"end": {
-				"path": "/test/end"
-			}
+	"classes": [
+		{
+			"name": "test",
+			"functions": [
+				{
+					"name": "equal",
+					"path": "/test/equal"
+				},
+				{
+					"name": "end",
+					"path": "/test/end"
+				}
+			]
 		},
-		"client_options": {
-			"basic": {
-				"path": "/index"
-			}
+		{
+			"name": "client_options",
+			"functions": [
+				{
+					"name": "basic",
+					"path": "/index"
+				}
+			]
 		},
-		"request_options": {
-			"basic": {
-				"path": "/index"
-			},
-			"suffix": {
-				"path": "/suffix"
-			}
+		{
+			"name": "request_options",
+			"functions": [
+				{
+					"name": "basic",
+					"path": "/index"
+				},
+				{
+					"name": "suffix",
+					"path": "/suffix"
+				}
+			]
 		},
-		"get": {
-			"api": {
-				"path": "/get/api",
-				"params": [
-					{
-						"name": "first",
-						"required": true
-					},
-					{
-						"name": "second",
-						"required": true
-					},
-					{
-						"name": "optional"
-					}
-				]
-			},
-			"options": {
-				"path": "/get/options"
-			}
+		{
+			"name": "get",
+			"functions": [
+				{
+					"name": "api",
+					"path": "/get/api",
+					"params": [
+						{
+							"name": "first",
+							"required": true
+						},
+						{
+							"name": "second",
+							"required": true
+						},
+						{
+							"name": "optional"
+						}
+					]
+				},
+				{
+					"name": "options",
+					"path": "/get/options"
+				}
+			]
 		},
-		"post": {
-			"empty_raw": {
-				"path": "/post/empty_raw",
-				"method": "post"
-			},
-			"options_raw": {
-				"path": "/post/options_raw",
-				"method": "post"
-			},
-			"empty_form": {
-				"path": "/post/empty_form",
-				"method": "post"
-			},
-			"api_form": {
-				"path": "/post/api_form",
-				"method": "post",
-				"params": [
-					{
-						"name": "first",
-						"required": true
-					},
-					{
-						"name": "second",
-						"required": true
-					}
-				]
-			},
-			"options_form": {
-				"path": "/post/options_form",
-				"method": "post"
-			},
-			"array_form": {
-				"path": "/post/array_form",
-				"method": "post"
-			},
-			"object_form": {
-				"path": "/post/object_form",
-				"method": "post"
-			},
-			"empty_json": {
-				"path": "/post/empty_json",
-				"method": "post"
-			},
-			"api_json": {
-				"path": "/post/api_json",
-				"method": "post",
-				"params": [
-					{
-						"name": "first",
-						"required": true
-					},
-					{
-						"name": "second",
-						"required": true
-					}
-				]
-			},
-			"options_json": {
-				"path": "/post/options_json",
-				"method": "post"
-			}
+		{
+			"name": "post",
+			"functions": [
+				{
+					"name": "empty_raw",
+					"path": "/post/empty_raw",
+					"method": "post"
+				},
+				{
+					"name": "options_raw",
+					"path": "/post/options_raw",
+					"method": "post"
+				},
+				{
+					"name": "empty_form",
+					"path": "/post/empty_form",
+					"method": "post"
+				},
+				{
+					"name": "api_form",
+					"path": "/post/api_form",
+					"method": "post",
+					"params": [
+						{
+							"name": "first",
+							"required": true
+						},
+						{
+							"name": "second",
+							"required": true
+						}
+					]
+				},
+				{
+					"name": "options_form",
+					"path": "/post/options_form",
+					"method": "post"
+				},
+				{
+					"name": "array_form",
+					"path": "/post/array_form",
+					"method": "post"
+				},
+				{
+					"name": "object_form",
+					"path": "/post/object_form",
+					"method": "post"
+				},
+				{
+					"name": "empty_json",
+					"path": "/post/empty_json",
+					"method": "post"
+				},
+				{
+					"name": "api_json",
+					"path": "/post/api_json",
+					"method": "post",
+					"params": [
+						{
+							"name": "first",
+							"required": true
+						},
+						{
+							"name": "second",
+							"required": true
+						}
+					]
+				},
+				{
+					"name": "options_json",
+					"path": "/post/options_json",
+					"method": "post"
+				}
+			]
 		},
-		"methods": {
-			"patch": {
-				"path": "/methods/patch",
-				"method": "patch"
-			},
-			"put": {
-				"path": "/methods/put",
-				"method": "put"
-			},
-			"delete": {
-				"path": "/methods/delete",
-				"method": "delete"
-			}
+		{
+			"name": "methods",
+			"functions": [
+				{
+					"name": "patch",
+					"path": "/methods/patch",
+					"method": "patch"
+				},
+				{
+					"name": "put",
+					"path": "/methods/put",
+					"method": "put"
+				},
+				{
+					"name": "delete",
+					"path": "/methods/delete",
+					"method": "delete"
+				}
+			]
 		},
-		"response": {
-			"basic": {
-				"path": "/response/basic"
-			},
-			"header": {
-				"path": "/response/header"
-			},
-			"html": {
-				"path": "/response/html"
-			},
-			"json": {
-				"path": "/response/json"
-			}
+		{
+			"name": "response",
+			"functions": [
+				{
+					"name": "basic",
+					"path": "/response/basic"
+				},
+				{
+					"name": "header",
+					"path": "/response/header"
+				},
+				{
+					"name": "html",
+					"path": "/response/html"
+				},
+				{
+					"name": "json",
+					"path": "/response/json"
+				}
+			]
 		},
-		"paths": {
+		{
+			"name": "paths",
 			"args": ["foo"],
-			"basic": {
-				"path": "/paths/:foo/bar"
-			},
-			"no_arg": {
-				"path": "/paths/:id/:foo/7/rank"
-			}
+			"functions": [
+				{
+					"name": "basic",
+					"path": "/paths/:foo/bar"
+				},
+				{
+					"name": "no_arg",
+					"path": "/paths/:id/:foo/7/rank"
+				}
+			]
 		},
-		"auth": {
-			"basic": {
-				"path": "/auth/basic"
-			},
-			"header": {
-				"path": "/auth/header"
-			},
-			"oauth_secret": {
-				"path": "/auth/oauth_secret"
-			},
-			"oauth_token": {
-				"path": "/auth/oauth_token"
-			}
+		{
+			"name": "auth",
+			"functions": [
+				{
+					"name": "basic",
+					"path": "/auth/basic"
+				},
+				{
+					"name": "header",
+					"path": "/auth/header"
+				},
+				{
+					"name": "oauth_secret",
+					"path": "/auth/oauth_secret"
+				},
+				{
+					"name": "oauth_token",
+					"path": "/auth/oauth_token"
+				}
+			]
 		}
-	}
+	]
 }
