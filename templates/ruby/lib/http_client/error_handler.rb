@@ -25,11 +25,11 @@ module {{call .Fnc.camelize .Pkg.Name}}
             if body.is_a?(String)
               message = body
             end
-{{if .Api.response.formats.json}}
+{{if .Api.Response.Formats.Json}}
             # If JSON, a particular field is taken and used
             if type.include?("json") and body.is_a?(Hash)
-              if body.has_key?("{{.Api.error.message}}")
-                message = body["{{.Api.error.message}}"]
+              if body.has_key?("{{.Api.Error.Message}}")
+                message = body["{{.Api.Error.Message}}"]
               else
                 message = "Unable to select error message from json returned by request responsible for error"
               end

@@ -21,92 +21,112 @@
 	"error": {
 		"message": "error"
 	},
-	"class": {
-		"accounts": {
-			"list": {
-				"path": "/accounts"
-			},
-			"get": {
-				"path": "/accounts/:account_id",
-				"params": [
-					{
-						"name": "account_id",
-						"required": true,
-						"url_use": true
-					}
-				]
-			},
-			"update": {
-				"path": "/accounts/:account_id",
-				"method": "patch",
-				"params": [
-					{
-						"name": "account_id",
-						"required": true,
-						"url_use": true
-					}
-				]
-			}
+	"classes": [
+		{
+			"name": "accounts",
+			"functions": [
+				{
+					"name": "list",
+					"path": "/accounts"
+				},
+				{
+					"name": "get",
+					"path": "/accounts/:account_id",
+					"params": [
+						{
+							"name": "account_id",
+							"required": true,
+							"url_use": true
+						}
+					]
+				},
+				{
+					"name": "update",
+					"path": "/accounts/:account_id",
+					"method": "patch",
+					"params": [
+						{
+							"name": "account_id",
+							"required": true,
+							"url_use": true
+						}
+					]
+				}
+			]
 		},
-		"people": {
-			"list": {
-				"path": "/accounts/:account_id/people",
-				"params": [
-					{
-						"name": "account_id",
-						"required": true,
-						"url_use": true
-					}
-				]
-			}
+		{
+			"name": "people",
+			"functions": [
+				{
+					"name": "list",
+					"path": "/accounts/:account_id/people",
+					"params": [
+						{
+							"name": "account_id",
+							"required": true,
+							"url_use": true
+						}
+					]
+				}
+			]
 		},
-		"conversations": {
-			"list": {
-				"path": "/accounts/:account_id/conversations",
-				"params": [
-					{
-						"name": "account_id",
-						"required": true,
-						"url_use": true
-					},
-					{
-						"name": "archived"
-					}
-				]
-			},
-			"create": {
-				"path": "/accounts/:account_id/conversations",
-				"method": "post",
-				"params": [
-					{
-						"name": "account_id",
-						"required": true,
-						"url_use": true
-					}
-				]
-			},
-			"get": {
-				"path": "/conversations/:conversation_id",
-				"params": [
-					{
-						"name": "conversation_id",
-						"required": true,
-						"url_use": true
-					}
-				]
-			}
+		{
+			"name": "conversations",
+			"functions": [
+				{
+					"name": "list",
+					"path": "/accounts/:account_id/conversations",
+					"params": [
+						{
+							"name": "account_id",
+							"required": true,
+							"url_use": true
+						},
+						{
+							"name": "archived"
+						}
+					]
+				},
+				{
+					"name": "create",
+					"path": "/accounts/:account_id/conversations",
+					"method": "post",
+					"params": [
+						{
+							"name": "account_id",
+							"required": true,
+							"url_use": true
+						}
+					]
+				},
+				{
+					"name": "get",
+					"path": "/conversations/:conversation_id",
+					"params": [
+						{
+							"name": "conversation_id",
+							"required": true,
+							"url_use": true
+						}
+					]
+				}
+			]
 		},
-		"messages": {
-			"get": {
-				"path": "/messages/:message_id",
-				"params": [
-					{
-						"name": "message_id",
-						"required": true,
-						"url_use": true
-					}
-				]
-			}
+		{
+			"name": "messages",
+			"functions": [
+				{
+					"name": "get",
+					"path": "/messages/:message_id",
+					"params": [
+						{
+							"name": "message_id",
+							"required": true,
+							"url_use": true
+						}
+					]
+				}
+			]
 		}
-	}
+	]
 }

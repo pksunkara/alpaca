@@ -2,33 +2,37 @@
 	"info": {
 		"title": "Information",
 		"desc": "Returns api instance to get auxilary information about Buffer useful when creating your app.",
-		"show": {
-			"title": "Services and configuration",
-			"desc": "Returns an object with the current configuration that Buffer is using, including supported services, their icons and the varying limits of character and schedules."
+		"functions": {
+			"show": {
+				"title": "Services and configuration",
+				"desc": "Returns an object with the current configuration that Buffer is using, including supported services, their icons and the varying limits of character and schedules."
+			}
 		}
 	},
 	"user": {
 		"title": "Authenticated user",
 		"desc": "Returns authenticated user api instance.",
-		"show": {
-			"title": "User information",
-			"desc": "Returns information about the authenticated user."
-		},
-		"profiles": {
-			"title": "List of user's social profiles",
-			"desc": "Returns an array of social media profiles connected to the authenticated users account."
-		},
-		"create_update": {
-			"title": "Create a social update",
-			"desc": "Create one or more new status updates.",
-			"params": {
-				"text": {
-					"desc": "The status update text.",
-					"value": "This is an example update"
-				},
-				"profile_ids": {
-					"desc": "An array of profile id's that the status update should be sent to. Invalid profile_id's will be silently ignored.",
-					"value": ["4eb854340acb04e870000010", "4eb9276e0acb04bb81000067"]
+		"functions": {
+			"show": {
+				"title": "User information",
+				"desc": "Returns information about the authenticated user."
+			},
+			"profiles": {
+				"title": "List of user's social profiles",
+				"desc": "Returns an array of social media profiles connected to the authenticated users account."
+			},
+			"create_update": {
+				"title": "Create a social update",
+				"desc": "Create one or more new status updates.",
+				"params": {
+					"text": {
+						"desc": "The status update text.",
+						"value": "This is an example update"
+					},
+					"profile_ids": {
+						"desc": "An array of profile id's that the status update should be sent to. Invalid profile_id's will be silently ignored.",
+						"value": ["4eb854340acb04e870000010", "4eb9276e0acb04bb81000067"]
+					}
 				}
 			}
 		}
@@ -36,13 +40,15 @@
 	"link": {
 		"title": "Links",
 		"desc": "Returns api instance to get information about links shared through Buffer.",
-		"shares": {
-			"title": "Amount of link shares",
-			"desc": "Returns an object with a the numbers of shares a link has had using Buffer.",
-			"params": {
-				"url": {
-					"desc": "URL of the page for which the number of shares is requested.",
-					"value": "http://bufferapp.com"
+		"functions": {
+			"shares": {
+				"title": "Amount of link shares",
+				"desc": "Returns an object with a the numbers of shares a link has had using Buffer.",
+				"params": {
+					"url": {
+						"desc": "URL of the page for which the number of shares is requested.",
+						"value": "http://bufferapp.com"
+					}
 				}
 			}
 		}
@@ -56,31 +62,33 @@
 				"value": "519fc3ca4d5e93901900002f"
 			}
 		},
-		"show": {
-			"title": "Get this social profile",
-			"desc": "Returns details of the single specified social media profile."
-		},
-		"pending": {
-			"title": "List profile's pending updates",
-			"desc": "Returns an array of updates that are currently in the buffer for an individual social media profile."
-		},
-		"sent": {
-			"title": "List profile's sent updates",
-			"desc": "Returns an array of updates that have been sent from the buffer for an individual social media profile."
-		},
-		"reorder": {
-			"title": "Edit profile's updates order",
-			"desc": "Edit the order at which statuses for the specified social media profile will be sent out of the buffer.",
-			"params": {
-				"order": {
-					"desc": "An ordered array of status update id's. This can be a partial array in combination with the offset parameter or a full array of every update in the profiles Buffer.",
-					"value": ["4eb854340acb04e870000010", "4eb9276e0acb04bb81000067", "4eb2567e0ade04ba51000001"]
+		"functions": {
+			"show": {
+				"title": "Get this social profile",
+				"desc": "Returns details of the single specified social media profile."
+			},
+			"pending": {
+				"title": "List profile's pending updates",
+				"desc": "Returns an array of updates that are currently in the buffer for an individual social media profile."
+			},
+			"sent": {
+				"title": "List profile's sent updates",
+				"desc": "Returns an array of updates that have been sent from the buffer for an individual social media profile."
+			},
+			"reorder": {
+				"title": "Edit profile's updates order",
+				"desc": "Edit the order at which statuses for the specified social media profile will be sent out of the buffer.",
+				"params": {
+					"order": {
+						"desc": "An ordered array of status update id's. This can be a partial array in combination with the offset parameter or a full array of every update in the profiles Buffer.",
+						"value": ["4eb854340acb04e870000010", "4eb9276e0acb04bb81000067", "4eb2567e0ade04ba51000001"]
+					}
 				}
+			},	
+			"shuffle": {
+				"title": "Shuffle profile's updates",
+				"desc": "Randomize the order at which statuses for the specified social media profile will be sent out of the buffer."
 			}
-		},
-		"shuffle": {
-			"title": "Shuffle profile's updates",
-			"desc": "Randomize the order at which statuses for the specified social media profile will be sent out of the buffer."
 		}
 	},
 	"schedule": {
@@ -92,20 +100,22 @@
 				"value": "519fc3ca4d5e93901900002f"
 			}
 		},
-		"list": {
-			"title": "Get profile's posting schedules",
-			"desc": "Returns details of the posting schedules associated with a social media profile."
-		},
-		"update": {
-			"title": "Update profile's posting schedules",
-			"desc": "Set the posting schedules for the specified social media profile.",
-			"params": {
-				"schedules": {
-					"desc": "Each item in the array is an individual posting schedule which consists of days and times to match the format return by the above method.",
-					"value": [{
-						"days": ["mon", "tue", "thu"],
-						"times": ["12:45", "15:30", "17:43"]
-					}]
+		"functions": {
+			"list": {
+				"title": "Get profile's posting schedules",
+				"desc": "Returns details of the posting schedules associated with a social media profile."
+			},
+			"update": {
+				"title": "Update profile's posting schedules",
+				"desc": "Set the posting schedules for the specified social media profile.",
+				"params": {
+					"schedules": {
+						"desc": "Each item in the array is an individual posting schedule which consists of days and times to match the format return by the above method.",
+						"value": [{
+							"days": ["mon", "tue", "thu"],
+							"times": ["12:45", "15:30", "17:43"]
+						}]
+					}
 				}
 			}
 		}
@@ -119,35 +129,37 @@
 				"value": "4eb8565e0acb04bb82000004"
 			}
 		},
-		"show": {
-			"title": "Get this social update",
-			"desc": "Returns a single social media update."
-		},
-		"interactions": {
-			"title": "List interactions of the update",
-			"desc": "Returns the detailed information on individual interactions with the social media update such as favorites, retweets and likes."
-		},
-		"update": {
-			"title": "Edit this update",
-			"desc": "Edit an existing, individual status update.",
-			"params": {
-				"text": {
-					"desc": "The status update text.",
-					"value": "This is an edited update"
+		"functions": {
+			"show": {
+				"title": "Get this social update",
+				"desc": "Returns a single social media update."
+			},
+			"interactions": {
+				"title": "List interactions of the update",
+				"desc": "Returns the detailed information on individual interactions with the social media update such as favorites, retweets and likes."
+			},
+			"update": {
+				"title": "Edit this update",
+				"desc": "Edit an existing, individual status update.",
+				"params": {
+					"text": {
+						"desc": "The status update text.",
+						"value": "This is an edited update"
+					}
 				}
+			},
+			"share": {
+				"title": "Share this update",
+				"desc": "Immediately shares a single pending update and recalculates times for updates remaining in the queue."
+			},
+			"destroy": {
+				"title": "Delete this update",
+				"desc": "Permanently delete an existing status update."
+			},
+			"top": {
+				"title": "Move this update to top",
+				"desc": "Move an existing status update to the top of the queue and recalculate times for all updates in the queue. Returns the update with its new posting time."
 			}
-		},
-		"share": {
-			"title": "Share this update",
-			"desc": "Immediately shares a single pending update and recalculates times for updates remaining in the queue."
-		},
-		"destroy": {
-			"title": "Delete this update",
-			"desc": "Permanently delete an existing status update."
-		},
-		"top": {
-			"title": "Move this update to top",
-			"desc": "Move an existing status update to the top of the queue and recalculate times for all updates in the queue. Returns the update with its new posting time."
 		}
 	}
 }

@@ -26,92 +26,23 @@ func MoveDir(name string) {
 	HandleError(os.Chdir(name))
 }
 
-func ArrayInterfaceToString(inter interface{}) []string {
-	if inter == nil {
-		return []string{}
-	}
-
-	old := inter.([]interface{})
-	new := make([]string, len(old))
-
-	for i, v := range old {
-		new[i] = v.(string)
-	}
-
-	return new
-}
-
-func ArrayInterfaceInterfaceToString(inter interface{}, key string) []string {
-	if inter == nil {
-		return []string{}
-	}
-
-	old := inter.([]interface{})
-	new := make([]string, len(old))
-
-	for i, v := range old {
-		new[i] = v.(map[string]interface{})[key].(string)
-	}
-
-	return new
-}
-
-func MapKeysToStringArray(inter interface{}, exclude []string) []string {
-	if inter == nil {
-		return []string{}
-	}
-
-	old := inter.(map[string]interface{})
-	new := make([]string, 0, len(old))
-
-	for v := range old {
-		flag := true
-
-		for _, e := range exclude {
-			if e == v {
-				flag = false
-			}
-		}
-
-		if flag {
-			new = append(new, v)
-		}
-	}
-
-	return new
-}
-
-func MethodList(class interface{}) []string {
-	return MapKeysToStringArray(class, []string{"args"})
-}
-
-func ActiveClassInfo(name string, class interface{}) map[string]interface{} {
-	data := make(map[string]interface{})
-
-	data["name"] = name
-	data["methods"] = MethodList(class)
-	data["args"] = class.(map[string]interface{})["args"]
-
-	return data
-}
-
 func ArgsFunctionMaker(before, after string) interface{} {
 	return func(args interface{}, options ...bool) string {
 		str := ""
 
-		if args != nil {
-			for _, v := range args.([]interface{}) {
-				if reflect.TypeOf(v).String() == "string" {
-					str += before + v.(string) + after
-				} else {
-					val := v.(map[string]interface{})
-
-					if val["required"] != nil && val["required"].(bool) {
-						str += before + val["name"].(string) + after
-					}
+		if reflect.TypeOf(args).String() == "[]string" {
+			for _, v := range args.([]string) {
+				str += before + v + after
+			}
+		} else {
+			for _, v := range args.([]ApiParam) {
+				if v.Required {
+					str += before + v.Name + after
 				}
 			}
+		}
 
+		if str != "" {
 			if len(options) > 0 && options[0] {
 				str = str[0 : len(str)-len(after)]
 			}
@@ -126,19 +57,15 @@ func ArgsFunctionMaker(before, after string) interface{} {
 }
 
 func PathFunctionMaker(before, this, after string) interface{} {
-	return func(path string, cargs, margs interface{}) string {
-		if cargs != nil {
-			for _, v := range ArrayInterfaceToString(cargs) {
-				reg := regexp.MustCompile(":(" + v + ")")
-				path = reg.ReplaceAllString(path, before+this+"$1"+after)
-			}
+	return func(path string, cargs []string, margs []ApiParam) string {
+		for _, v := range cargs {
+			reg := regexp.MustCompile(":(" + v + ")")
+			path = reg.ReplaceAllString(path, before+this+"$1"+after)
 		}
 
-		if margs != nil {
-			for _, v := range ArrayInterfaceInterfaceToString(margs, "name") {
-				reg := regexp.MustCompile(":(" + v + ")")
-				path = reg.ReplaceAllString(path, before+"$1"+after)
-			}
+		for _, v := range margs {
+			reg := regexp.MustCompile(":(" + v.Name + ")")
+			path = reg.ReplaceAllString(path, before+"$1"+after)
 		}
 
 		return path
@@ -213,15 +140,15 @@ func PrntFunctionMaker(boolcap bool, tab, strbeg, strend, arrbeg, arrend, objbeg
 		return ""
 	}
 
-	return func(args interface{}, sep string, notLast bool) string {
+	return func(args map[string]DocParam, sep string, notLast bool) string {
 		str := ""
 
-		if args == nil {
+		if len(args) == 0 {
 			return str
 		}
 
-		for _, v := range args.(map[string]interface{}) {
-			str += vals(v.(map[string]interface{})["value"]) + sep
+		for _, v := range args {
+			str += vals(v.Value) + sep
 		}
 
 		if !notLast {

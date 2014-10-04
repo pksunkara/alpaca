@@ -17,18 +17,18 @@ class HttpClient(object):
 
     """Main HttpClient which is used by API classes"""
 
-    def __init__(self, {{if .Api.base_as_arg}}base_url, {{end}}auth, options):
-{{if .Api.authorization.oauth}}
+    def __init__(self, {{if .Api.BaseAsArg}}base_url, {{end}}auth, options):
+{{if .Api.Authorization.Oauth}}
         if isinstance(auth, str):
             auth = {'access_token': auth}
-{{else}}{{if .Api.authorization.header}}
+{{else}}{{if .Api.Authorization.Header}}
         if isinstance(auth, str):
             auth = {'http_header': auth}
 {{end}}{{end}}
         self.options = {
-            'base': {{if .Api.base_as_arg}}base_url{{else}}'{{.Api.base}}'{{end}},{{with .Api.version}}
+            'base': {{if .Api.BaseAsArg}}base_url{{else}}'{{.Api.Base}}'{{end}},{{with .Api.Version}}
             'api_version': '{{.}}',{{end}}
-            'user_agent': 'alpaca/{{.Api.alpaca_version}} (https://github.com/pksunkara/alpaca)'
+            'user_agent': 'alpaca/{{.Version}} (https://github.com/pksunkara/alpaca)'
         }
 
         self.options.update(options)
@@ -89,7 +89,7 @@ class HttpClient(object):
 
         del kwargs['base']
         del kwargs['user_agent']
-{{if .Api.no_verify_ssl}}
+{{if .Api.NoVerifySSL}}
         kwargs['verify'] = False
 {{end}}
         if method != 'get':
@@ -111,9 +111,9 @@ class HttpClient(object):
         If api_version is set, appends it immediately after host
         """
         version = '/' + options['api_version'] if 'api_version' in options else ''
-{{if .Api.response.suffix}}
+{{if .Api.Response.Suffix}}
         # Adds a suffix (ex: ".html", ".json") to url
-        suffix = options['response_type'] if 'response_type' in options else '{{.Api.response.formats.default}}'
+        suffix = options['response_type'] if 'response_type' in options else '{{.Api.Response.Formats.Default}}'
         path = path + '.' + suffix
 {{end}}
         path = urlparse.urljoin(self.base, version + path)

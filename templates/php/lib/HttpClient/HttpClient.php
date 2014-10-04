@@ -18,21 +18,21 @@ use {{call .Fnc.camelize .Pkg.Name}}\HttpClient\ResponseHandler;
 class HttpClient
 {
     protected $options = array(
-        'base'    => '{{.Api.base}}',{{with .Api.version}}
+        'base'    => '{{.Api.Base}}',{{with .Api.Version}}
         'api_version' => '{{.}}',{{end}}
-        'user_agent' => 'alpaca/{{.Api.alpaca_version}} (https://github.com/pksunkara/alpaca)'
+        'user_agent' => 'alpaca/{{.Version}} (https://github.com/pksunkara/alpaca)'
     );
 
     protected $headers = array();
 
-    public function __construct({{if .Api.base_as_arg}}$baseUrl, {{end}}$auth = array(), array $options = array())
+    public function __construct({{if .Api.BaseAsArg}}$baseUrl, {{end}}$auth = array(), array $options = array())
     {
-{{if .Api.base_as_arg}}        $this->options['base'] = $baseUrl;
-{{end}}{{if .Api.authorization.oauth}}
+{{if .Api.BaseAsArg}}        $this->options['base'] = $baseUrl;
+{{end}}{{if .Api.Authorization.Oauth}}
         if (gettype($auth) == 'string') {
             $auth = array('access_token' => $auth);
         }
-{{else}}{{if .Api.authorization.header}}
+{{else}}{{if .Api.Authorization.Header}}
         if (gettype($auth) == 'string') {
             $auth = array('http_header' => $auth);
         }
@@ -109,7 +109,7 @@ class HttpClient
 
         unset($options['base']);
         unset($options['user_agent']);
-{{if .Api.no_verify_ssl}}
+{{if .Api.NoVerifySSL}}
         $options['verify'] = false;
 {{end}}
         $request = $this->createRequest($httpMethod, $path, null, $headers, $options);
@@ -137,9 +137,9 @@ class HttpClient
     public function createRequest($httpMethod, $path, $body = null, array $headers = array(), array $options = array())
     {
         $version = (isset($options['api_version']) ? "/".$options['api_version'] : "");
-{{if .Api.response.suffix}}
+{{if .Api.Response.Suffix}}
         // Adds a suffix (ex: ".html", ".json") to url
-        $suffix = (isset($options['response_type']) ? $options['response_type'] : "{{.Api.response.formats.default}}");
+        $suffix = (isset($options['response_type']) ? $options['response_type'] : "{{.Api.Response.Formats.Default}}");
         $path = $path.".".$suffix;
 {{end}}
         $path    = $version.$path;

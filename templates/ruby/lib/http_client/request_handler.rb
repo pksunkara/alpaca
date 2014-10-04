@@ -6,14 +6,14 @@ module {{call .Fnc.camelize .Pkg.Name}}
     class RequestHandler
 
       def self.set_body(options)
-        type = options.fetch(:request_type, "{{or .Api.request.formats.default "raw"}}")
-{{if .Api.request.formats.json}}
+        type = options.fetch(:request_type, "{{or .Api.Request.Formats.Default "raw"}}")
+{{if .Api.Request.Formats.Json}}
         # Encoding request body into JSON format
         if type == "json"
           options[:body] = options[:body].to_json
           options[:headers]["content-type"] = "application/json"
         end
-{{end}}{{if .Api.request.formats.form}}
+{{end}}{{if .Api.Request.Formats.Form}}
         # Encoding body into form-urlencoded format
         if type == "form"
           options[:body] = Faraday::Utils::ParamsHash[options[:body]].to_query

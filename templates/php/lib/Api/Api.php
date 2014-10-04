@@ -1,39 +1,39 @@
 <?php
-{{define "bodyorquery"}}{{if (eq (or (index . "method") "get") "get")}}query{{else}}body{{end}}{{end}}
+{{define "boq"}}{{if (eq (or .Method "get") "get")}}query{{else}}body{{end}}{{end}}
 namespace {{call .Fnc.camelize .Pkg.Name}}\Api;
 
 use {{call .Fnc.camelize .Pkg.Name}}\HttpClient\HttpClient;
 
 /**
- * {{index .Doc .Api.active.name "desc"}}{{with (index .Doc .Api.active.name "args")}}
- *{{end}}{{with $data := .}}{{range .Api.active.args}}
- * @param ${{.}} {{index $data.Doc $data.Api.active.name "args" . "desc"}}{{end}}{{end}}
+ * {{(index .Doc .Active.Name).Desc}}{{with (index .Doc .Active.Name).Args}}
+ *{{end}}{{with $data := .}}{{range .Active.Args}}
+ * @param ${{.}} {{(index ((index $data.Doc $data.Active.Name).Args) .).Desc}}{{end}}{{end}}
  */
-class {{call .Fnc.camelize .Api.active.name}}
+class {{call .Fnc.camelize .Active.Name}}
 {
 
-{{range .Api.active.args}}    private ${{.}};
+{{range .Active.Args}}    private ${{.}};
 {{end}}    private $client;
 
-    public function __construct({{call .Fnc.args.php .Api.active.args}}HttpClient $client)
+    public function __construct({{call .Fnc.args.php .Active.Args}}HttpClient $client)
     {
-{{range .Api.active.args}}        $this->{{.}} = ${{.}};
+{{range .Active.Args}}        $this->{{.}} = ${{.}};
 {{end}}        $this->client = $client;
     }
-{{with $data := .}}{{range .Api.active.methods}}
+{{with $data := .}}{{range .Active.Functions}}
     /**
-     * {{index $data.Doc $data.Api.active.name . "desc"}}
+     * {{(index ((index $data.Doc $data.Active.Name).Functions) .Name).Desc}}
      *
-     * '{{index $data.Api.class $data.Api.active.name . "path"}}' {{call $data.Fnc.upper (or (index $data.Api.class $data.Api.active.name . "method") "get")}}{{with (index $data.Doc $data.Api.active.name . "params")}}
-     *{{end}}{{with $method := .}}{{range (index $data.Api.class $data.Api.active.name $method "params")}}{{if .required}}
-     * @param ${{.name}} {{index $data.Doc $data.Api.active.name $method "params" .name "desc"}}{{end}}{{end}}{{end}}
+     * '{{.Path}}' {{call $data.Fnc.upper (or .Method "get")}}{{with .Params}}
+     *{{end}}{{with $method := .}}{{range .Params}}{{if .Required}}
+     * @param ${{.Name}} {{(index ((index ((index $data.Doc $data.Active.Name).Functions) $method.Name).Params) .Name).Desc}}{{end}}{{end}}{{end}}
      */
-    public function {{call $data.Fnc.camelizeDownFirst .}}({{call $data.Fnc.args.php (index $data.Api.class $data.Api.active.name . "params")}}array $options = array())
+    public function {{call $data.Fnc.camelizeDownFirst .Name}}({{call $data.Fnc.args.php .Params}}array $options = array())
     {
-        $body = (isset($options['{{template "bodyorquery" (index $data.Api.class $data.Api.active.name .)}}']) ? $options['{{template "bodyorquery" (index $data.Api.class $data.Api.active.name .)}}'] : array());{{range (index $data.Api.class $data.Api.active.name . "params")}}{{if .required}}{{if (not .url_use)}}
-        $body['{{.name}}'] = ${{.name}};{{end}}{{end}}{{end}}
+        $body = (isset($options['{{template "boq" .}}']) ? $options['{{template "boq" .}}'] : array());{{range .Params}}{{if .Required}}{{if (not .UrlUse)}}
+        $body['{{.Name}}'] = ${{.Name}};{{end}}{{end}}{{end}}
 
-        $response = $this->client->{{or (index $data.Api.class $data.Api.active.name . "method") "get"}}('{{call $data.Fnc.path.php (index $data.Api.class $data.Api.active.name . "path") $data.Api.active.args (index $data.Api.class $data.Api.active.name . "params")}}', $body, $options);
+        $response = $this->client->{{or .Method "get"}}('{{call $data.Fnc.path.php .Path $data.Active.Args .Params}}', $body, $options);
 
         return $response;
     }

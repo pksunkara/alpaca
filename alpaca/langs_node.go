@@ -34,10 +34,10 @@ func WriteNode(data *Data) {
 
 	MakeDir("api")
 
-	for k, v := range data.Api["class"].(map[string]interface{}) {
-		data.Api["active"] = ActiveClassInfo(k, v)
-		RunTemplate("lib/api/api.js", inflect.Underscore(k)+".js", data)
-		delete(data.Api, "active")
+	for _, v := range data.Api.Classes {
+		data.Active = &v
+		RunTemplate("lib/api/api.js", inflect.Underscore(v.Name)+".js", data)
+		data.Active = nil
 	}
 }
 

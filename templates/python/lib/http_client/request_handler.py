@@ -38,13 +38,13 @@ class RequestHandler(object):
 
     @staticmethod
     def set_body(request):
-        typ = request['request_type'] if 'request_type' in request else '{{or .Api.request.formats.default "raw"}}'
-{{if .Api.request.formats.json}}
+        typ = request['request_type'] if 'request_type' in request else '{{or .Api.Request.Formats.Default "raw"}}'
+{{if .Api.Request.Formats.Json}}
         # Encoding request body into JSON format
         if typ == 'json':
             request['data'] = json.dumps(request['data'])
             request['headers']['content-type'] = 'application/json'
-{{end}}{{if .Api.request.formats.form}}
+{{end}}{{if .Api.Request.Formats.Form}}
         # Encoding body into form-urlencoded format
         if typ == 'form':
             request['data'] = RequestHandler.urlencode(request['data'])

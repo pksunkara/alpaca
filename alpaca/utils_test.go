@@ -5,72 +5,19 @@ import (
 	"testing"
 )
 
-func TestArrayInterfaceToString(t *testing.T) {
-	terst.Terst(t)
-
-	var nul interface{}
-
-	terst.Is(ArrayInterfaceToString(nul), []string{})
-}
-
-func TestArrayInterfaceInterfaceToString(t *testing.T) {
-	terst.Terst(t)
-
-	var nul interface{}
-
-	terst.Is(ArrayInterfaceInterfaceToString(nul, "stuff"), []string{})
-}
-
-func TestMapKeysToStringArray(t *testing.T) {
-	terst.Terst(t)
-
-	var nul interface{}
-
-	old := make(map[string]interface{})
-
-	old["a"] = "aaa"
-	old["b"] = "bbb"
-	old["c"] = "ccc"
-
-	terst.Is(MapKeysToStringArray(nul, []string{}), []string{})
-	terst.Is(MapKeysToStringArray(old, []string{"b"}), []string{"a", "c"})
-}
-
-func TestActiveClassInfo(t *testing.T) {
-	terst.Terst(t)
-
-	old := make(map[string]interface{})
-
-	old["args"] = []string{"id", "url"}
-	old["create"] = make(map[string]interface{})
-	old["update"] = make(map[string]interface{})
-
-	v := ActiveClassInfo("test", old)
-
-	terst.Is(v["name"], "test")
-	terst.Is(v["args"].([]string), []string{"id", "url"})
-	terst.Is(v["methods"].([]string), []string{"create", "update"})
-}
-
 func TestArgsFunctionMaker(t *testing.T) {
 	terst.Terst(t)
 
-	var nul interface{}
-
 	f := ArgsFunctionMaker("$", ", ").(func(interface{}, ...bool) string)
 
-	args := make([]interface{}, 2)
-	params := make([]interface{}, 2)
+	args := []string{"id", "url"}
+	params := make([]ApiParam, 2)
 
-	args[0] = "id"
-	args[1] = "url"
+	nulArgs := []string{}
+	nulParams := make([]ApiParam, 0)
 
-	params[0] = make(map[string]interface{})
-	params[1] = make(map[string]interface{})
-
-	params[0].(map[string]interface{})["name"] = "id"
-	params[0].(map[string]interface{})["required"] = true
-	params[1].(map[string]interface{})["name"] = "url"
+	params[0] = ApiParam{"id", true, false}
+	params[1] = ApiParam{"url", false, false}
 
 	terst.Is(f(args), "$id, $url, ")
 	terst.Is(f(args, false), "$id, $url, ")
@@ -83,24 +30,24 @@ func TestArgsFunctionMaker(t *testing.T) {
 	terst.Is(f(params, true), "$id")
 	terst.Is(f(params, false, true), ", $id, ")
 
-	terst.Is(f(nul), "")
-	terst.Is(f(nul, true), "")
-	terst.Is(f(nul, false, true), "")
+	terst.Is(f(nulArgs), "")
+	terst.Is(f(nulArgs, true), "")
+	terst.Is(f(nulArgs, false, true), "")
+
+	terst.Is(f(nulParams), "")
+	terst.Is(f(nulParams, true), "")
+	terst.Is(f(nulParams, false, true), "")
 }
 
 func TestPathFunctionMaker(t *testing.T) {
 	terst.Terst(t)
 
-	f := PathFunctionMaker("\"+", "@", "+\"").(func(string, interface{}, interface{}) string)
+	f := PathFunctionMaker("\"+", "@", "+\"").(func(string, []string, []ApiParam) string)
 
-	cargs := make([]interface{}, 2)
-	margs := make([]interface{}, 1)
+	cargs := []string{"id", "url"}
+	margs := make([]ApiParam, 1)
 
-	cargs[0] = "id"
-	cargs[1] = "url"
-
-	margs[0] = make(map[string]interface{})
-	margs[0].(map[string]interface{})["name"] = "one"
+	margs[0] = ApiParam{"one", false, false}
 
 	terst.Is(f("/user/:id/:not/:url/wow:one", cargs, margs), "/user/\"+@id+\"/:not/\"+@url+\"/wow\"+one+\"")
 }
@@ -108,34 +55,40 @@ func TestPathFunctionMaker(t *testing.T) {
 func TestPrntFunctionMaker(t *testing.T) {
 	terst.Terst(t)
 
-	var nul interface{}
+	f := PrntFunctionMaker(true, "  ", "'", "'", "[", "]", "{", "}", ":", " => ").(func(map[string]DocParam, string, bool) string)
 
-	f := PrntFunctionMaker(true, "  ", "'", "'", "[", "]", "{", "}", ":", " => ").(func(interface{}, string, bool) string)
-
-	args := make(map[string]interface{})
+	args := make(map[string]DocParam)
 	vals := make(map[string]interface{})
 	orgs := make([]interface{}, 3)
-	hash := make(map[string]interface{})
+	null := make(map[string]string)
 
 	orgs[0] = false
 	orgs[1] = "alpaca-api"
 	orgs[2] = 00
 
-	hash["html"] = "haml"
-	hash["rest"] = false
+	terst.Is(f(make(map[string]DocParam), ", ", true), "")
 
-	vals["msid"] = 3737
-	vals["plan"] = 1.99
-	vals["name"] = "pksunkara"
-	vals["hire"] = true
-	vals["orgs"] = orgs
-	vals["hash"] = hash
-	vals["dump"] = make(map[string]string)
+	vals["key"] = 3737
+	args["id"] = DocParam{"", vals}
+	terst.Is(f(args, ", ", true), "{\n  :key => 3737\n}, ")
 
-	args["id"] = make(map[string]interface{})
-	args["id"].(map[string]interface{})["value"] = vals
+	vals["key"] = 1.99
+	args["id"] = DocParam{"", vals}
+	terst.Is(f(args, ", ", false), "{\n  :key => 1.99\n}")
 
-	terst.Is(f(args, ", ", true), "{\n  :msid => 3737,\n  :plan => 1.99,\n  :name => 'pksunkara',\n  :hire => True,\n  :orgs => [\n    False,\n    'alpaca-api',\n    0\n  ],\n  :hash => {\n    :html => 'haml',\n    :rest => False\n  },\n  :dump => \n}, ")
-	terst.Is(f(args, ", ", false), "{\n  :msid => 3737,\n  :plan => 1.99,\n  :name => 'pksunkara',\n  :hire => True,\n  :orgs => [\n    False,\n    'alpaca-api',\n    0\n  ],\n  :hash => {\n    :html => 'haml',\n    :rest => False\n  },\n  :dump => \n}")
-	terst.Is(f(nul, ", ", true), "")
+	vals["key"] = "pksunkara"
+	args["id"] = DocParam{"", vals}
+	terst.Is(f(args, ", ", false), "{\n  :key => 'pksunkara'\n}")
+
+	vals["key"] = true
+	args["id"] = DocParam{"", vals}
+	terst.Is(f(args, ", ", false), "{\n  :key => True\n}")
+
+	vals["key"] = orgs
+	args["id"] = DocParam{"", vals}
+	terst.Is(f(args, ", ", false), "{\n  :key => [\n    False,\n    'alpaca-api',\n    0\n  ]\n}")
+
+	vals["key"] = null
+	args["id"] = DocParam{"", vals}
+	terst.Is(f(args, ", ", false), "{\n  :key => \n}")
 }

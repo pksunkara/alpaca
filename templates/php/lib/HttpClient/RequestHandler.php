@@ -11,15 +11,15 @@ class RequestHandler {
 
     public static function setBody(RequestInterface $request, $body, $options)
     {
-        $type = isset($options['request_type']) ? $options['request_type'] : '{{or .Api.request.formats.default "raw"}}';
+        $type = isset($options['request_type']) ? $options['request_type'] : '{{or .Api.Request.Formats.Default "raw"}}';
         $header = null;
-{{if .Api.request.formats.json}}
+{{if .Api.Request.Formats.Json}}
         // Encoding request body into JSON format
         if ($type == 'json') {
             $body = ((count($body) === 0) ? '{}' : json_encode($body, empty($body) ? JSON_FORCE_OBJECT : 0));
             return $request->setBody($body, 'application/json');
         }
-{{end}}{{if .Api.request.formats.form}}
+{{end}}{{if .Api.Request.Formats.Form}}
         if ($type == 'form') {
             // Encoding body into form-urlencoded format
             return $request->addPostFields($body);

@@ -19,9 +19,13 @@ var (
 
 type Data struct {
 	Pkg PkgStruct
-	Api map[string]interface{}
-	Doc map[string]interface{}
+	Api ApiStruct
+	Doc map[string]DocClass
+
 	Fnc map[string]interface{}
+
+	Version string    /* Alpaca version to be used in user_agent */
+	Active  *ApiClass /* Current class info needed to keep context */
 }
 
 type LanguageOptions struct {
@@ -41,7 +45,7 @@ func LoadLibraryPath(directory string) {
 func ConvertFormat(format string) {
 	acceptable := false
 
-	FormatList = []string{"blueprint"}
+	FormatList = []string{}
 
 	for _, v := range FormatList {
 		if v == format {
@@ -87,28 +91,23 @@ func WriteLibraries(opts *LanguageOptions) {
 
 func ReadData() *Data {
 	var pkg PkgStruct
-	var api, doc map[string]interface{}
+	var api ApiStruct
+	var doc map[string]DocClass
 
 	ReadJSON("pkg.json", &pkg)
 	ReadJSON("api.json", &api)
 	ReadJSON("doc.json", &doc)
 
-	return &Data{pkg, api, doc, make(map[string]interface{})}
+	return &Data{pkg, api, doc, make(map[string]interface{}), Version, nil}
 }
 
 func ModifyData(data *Data) {
-	data.Api["alpaca_version"] = Version
-
-	data.Api["classes"] = MapKeysToStringArray(data.Api["class"], []string{})
-
 	data.Fnc["join"] = strings.Join
 	data.Fnc["upper"] = strings.ToUpper
 
 	data.Fnc["camelize"] = inflect.Camelize
 	data.Fnc["camelizeDownFirst"] = inflect.CamelizeDownFirst
 	data.Fnc["underscore"] = inflect.Underscore
-
-	data.Fnc["methods"] = MethodList
 
 	data.Fnc["args"] = make(map[string]interface{})
 	data.Fnc["path"] = make(map[string]interface{})

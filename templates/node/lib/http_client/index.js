@@ -14,7 +14,7 @@ client.Response = require('./response.js');
 /**
  * Main HttpClient which is used by Api classes
  */
-client.HttpClient = function ({{if .Api.base_as_arg}}baseUrl, {{end}}auth, options) {
+client.HttpClient = function ({{if .Api.BaseAsArg}}baseUrl, {{end}}auth, options) {
   if (!options) {
     options = {};
   }
@@ -23,19 +23,19 @@ client.HttpClient = function ({{if .Api.base_as_arg}}baseUrl, {{end}}auth, optio
     auth = {};
   }
 
-{{if .Api.authorization.oauth}}
+{{if .Api.Authorization.Oauth}}
   if (typeof auth == 'string') {
     auth = { 'access_token': auth };
   }
-{{else}}{{if .Api.authorization.header}}
+{{else}}{{if .Api.Authorization.Header}}
   if (typeof auth == 'string') {
     auth = { 'http_header': auth };
   }
 {{end}}{{end}}
   this.options = {
-    'base': {{if .Api.base_as_arg}}baseUrl{{else}}'{{.Api.base}}'{{end}},{{with .Api.version}}
+    'base': {{if .Api.BaseAsArg}}baseUrl{{else}}'{{.Api.Base}}'{{end}},{{with .Api.Version}}
     'api_version': '{{.}}',{{end}}
-    'user_agent': 'alpaca/{{.Api.alpaca_version}} (https://github.com/pksunkara/alpaca)'
+    'user_agent': 'alpaca/{{.Version}} (https://github.com/pksunkara/alpaca)'
   };
 
   for (var key in options) {
@@ -131,7 +131,7 @@ client.HttpClient.prototype.request = function (path, body, method, options, cal
 
   delete options['base'];
   delete options['user_agent'];
-{{if .Api.no_verify_ssl}}
+{{if .Api.NoVerifySSL}}
   reqobj['strictSSL'] = false;
 {{end}}
   if (method != 'GET') {
@@ -172,9 +172,9 @@ client.HttpClient.prototype.request = function (path, body, method, options, cal
  */
 client.HttpClient.prototype.createRequest = function (reqobj, options, callback) {
   var version = (options['api_version'] ? '/' + options['api_version'] : '');
-{{if .Api.response.suffix}}
+{{if .Api.Response.Suffix}}
   // Adds a suffix (ex: ".html", ".json") to url
-  var suffix = (options['response_type'] ? options['response_type'] : '{{.Api.response.formats.default}}');
+  var suffix = (options['response_type'] ? options['response_type'] : '{{.Api.Response.Formats.Default}}');
   reqobj['url'] = reqobj['url'] + '.' + suffix;
 {{end}}
   reqobj['url'] = url.resolve(this.base, version + reqobj['url']);

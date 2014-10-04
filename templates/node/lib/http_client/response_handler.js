@@ -5,7 +5,7 @@ var response = module.exports;
  */
 response.getBody = function(res, body, callback) {
   var type = res.headers['content-type'], error = null;
-{{if .Api.response.formats.json}}
+{{if .Api.Response.Formats.Json}}
   // Response body is in JSON
   if (type.indexOf('json') != -1 && typeof(body) != 'object') {
     try {

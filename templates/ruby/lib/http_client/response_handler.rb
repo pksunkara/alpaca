@@ -8,7 +8,7 @@ module {{call .Fnc.camelize .Pkg.Name}}
       def self.get_body(response)
         type = response.headers["content-type"]
         body = response.body
-{{if .Api.response.formats.json}}
+{{if .Api.Response.Formats.Json}}
         # Response body is in JSON
         if type.include?("json")
           body = JSON.parse body

@@ -3,11 +3,11 @@
  */
 var Auth = function(auth) {
   this.auth = auth;
-{{if .Api.authorization.basic}}
+{{if .Api.Authorization.Basic}}
   this.HTTP_PASSWORD = 0;
-{{end}}{{if .Api.authorization.header}}
+{{end}}{{if .Api.Authorization.Header}}
   this.HTTP_HEADER = 1;
-{{end}}{{if .Api.authorization.oauth}}
+{{end}}{{if .Api.Authorization.Oauth}}
   this.URL_SECRET = 2;
   this.URL_TOKEN = 3;
 {{end}}
@@ -18,15 +18,15 @@ var Auth = function(auth) {
  * Calculating the type of authentication
  */
 Auth.prototype.getAuthType = function () {
-{{if .Api.authorization.basic}}
+{{if .Api.Authorization.Basic}}
   if (this.auth['username'] && this.auth['password']) {
     return this.HTTP_PASSWORD;
   }
-{{end}}{{if .Api.authorization.header}}
+{{end}}{{if .Api.Authorization.Header}}
   if (this.auth['http_header']) {
     return this.HTTP_HEADER;
   }
-{{end}}{{if .Api.authorization.oauth}}
+{{end}}{{if .Api.Authorization.Oauth}}
   if (this.auth['client_id'] && this.auth['client_secret']) {
     return this.URL_SECRET;
   }
@@ -45,22 +45,22 @@ Auth.prototype.getAuthType = function () {
  */
 Auth.prototype.set = function (request, callback) {
   if (Object.keys(this.auth).length == 0) {
-    return callback({{if .Api.authorization.need_auth}}new Error('Server requires authentication to proceed further. Please check'));
+    return callback({{if .Api.Authorization.NeedAuth}}new Error('Server requires authentication to proceed further. Please check'));
   {{else}}null, request);
   {{end}}}
 
   var auth = this.getAuthType(), flag = false;
-{{if .Api.authorization.basic}}
+{{if .Api.Authorization.Basic}}
   if (auth == this.HTTP_PASSWORD) {
     request = this.httpPassword(request);
     flag = true;
   }
-{{end}}{{if .Api.authorization.header}}
+{{end}}{{if .Api.Authorization.Header}}
   if (auth == this.HTTP_HEADER) {
     request = this.httpHeader(request);
     flag = true;
   }
-{{end}}{{if .Api.authorization.oauth}}
+{{end}}{{if .Api.Authorization.Oauth}}
   if (auth == this.URL_SECRET) {
     request = this.urlSecret(request);
     flag = true;
@@ -77,7 +77,7 @@ Auth.prototype.set = function (request, callback) {
 
   callback(null, request);
 };
-{{if .Api.authorization.basic}}
+{{if .Api.Authorization.Basic}}
 /**
  * Basic Authorization with username and password
  */
@@ -86,16 +86,16 @@ Auth.prototype.httpPassword = function(request) {
 
   return request;
 };
-{{end}}{{if .Api.authorization.header}}
+{{end}}{{if .Api.Authorization.Header}}
 /**
  * Authorization with HTTP header
  */
 Auth.prototype.httpHeader = function(request) {
-  request['headers']['Authorization'] = '{{or .Api.authorization.header_prefix "token"}} ' + this.auth['http_header'];
+  request['headers']['Authorization'] = '{{or .Api.Authorization.HeaderPrefix "token"}} ' + this.auth['http_header'];
 
   return request;
 };
-{{end}}{{if .Api.authorization.oauth}}
+{{end}}{{if .Api.Authorization.Oauth}}
 /**
  * OAUTH2 Authorization with client secret
  */

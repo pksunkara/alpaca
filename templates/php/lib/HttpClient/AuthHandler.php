@@ -10,11 +10,11 @@ use Guzzle\Common\Event;
 class AuthHandler
 {
     private $auth;
-{{if .Api.authorization.basic}}
+{{if .Api.Authorization.Basic}}
     const HTTP_PASSWORD = 0;
-{{end}}{{if .Api.authorization.header}}
+{{end}}{{if .Api.Authorization.Header}}
     const HTTP_HEADER = 1;
-{{end}}{{if .Api.authorization.oauth}}
+{{end}}{{if .Api.Authorization.Oauth}}
     const URL_SECRET = 2;
     const URL_TOKEN = 3;
 {{end}}
@@ -28,15 +28,15 @@ class AuthHandler
      */
     public function getAuthType()
     {
-{{if .Api.authorization.basic}}
+{{if .Api.Authorization.Basic}}
         if (isset($this->auth['username']) && isset($this->auth['password'])) {
             return self::HTTP_PASSWORD;
         }
-{{end}}{{if .Api.authorization.header}}
+{{end}}{{if .Api.Authorization.Header}}
         if (isset($this->auth['http_header'])) {
             return self::HTTP_HEADER;
         }
-{{end}}{{if .Api.authorization.oauth}}
+{{end}}{{if .Api.Authorization.Oauth}}
         if (isset($this->auth['client_id']) && isset($this->auth['client_secret'])) {
             return self::URL_SECRET;
         }
@@ -51,23 +51,23 @@ class AuthHandler
     public function onRequestBeforeSend(Event $event)
     {
         if (empty($this->auth)) {
-        {{if .Api.authorization.need_auth}}    throw new \ErrorException('Server requires authentication to proceed further. Please check');
+        {{if .Api.Authorization.NeedAuth}}    throw new \ErrorException('Server requires authentication to proceed further. Please check');
         {{else}}    return;
         {{end}}}
 
         $auth = $this->getAuthType();
         $flag = false;
-{{if .Api.authorization.basic}}
+{{if .Api.Authorization.Basic}}
         if ($auth == self::HTTP_PASSWORD) {
             $this->httpPassword($event);
             $flag = true;
         }
-{{end}}{{if .Api.authorization.header}}
+{{end}}{{if .Api.Authorization.Header}}
         if ($auth == self::HTTP_HEADER) {
             $this->httpHeader($event);
             $flag = true;
         }
-{{end}}{{if .Api.authorization.oauth}}
+{{end}}{{if .Api.Authorization.Oauth}}
         if ($auth == self::URL_SECRET) {
             $this->urlSecret($event);
             $flag = true;
@@ -82,7 +82,7 @@ class AuthHandler
             throw new \ErrorException('Unable to calculate authorization method. Please check.');
         }
     }
-{{if .Api.authorization.basic}}
+{{if .Api.Authorization.Basic}}
     /**
      * Basic Authorization with username and password
      */
@@ -90,15 +90,15 @@ class AuthHandler
     {
         $event['request']->setHeader('Authorization', sprintf('Basic %s', base64_encode($this->auth['username'] . ':' . $this->auth['password'])));
     }
-{{end}}{{if .Api.authorization.header}}
+{{end}}{{if .Api.Authorization.Header}}
     /**
      * Authorization with HTTP header
      */
     public function httpHeader(Event $event)
     {
-        $event['request']->setHeader('Authorization', sprintf('{{or .Api.authorization.header_prefix "token"}} %s', $this->auth['http_header']));
+        $event['request']->setHeader('Authorization', sprintf('{{or .Api.Authorization.HeaderPrefix "token"}} %s', $this->auth['http_header']));
     }
-{{end}}{{if .Api.authorization.oauth}}
+{{end}}{{if .Api.Authorization.Oauth}}
     /**
      * OAUTH2 Authorization with client secret
      */
