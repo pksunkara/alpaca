@@ -124,15 +124,15 @@ All the following fields are required unless mentioned.
   "request": { // Settings for requests to the api
     "formats": { // Format of the request body
       "default": "form", // Default format for the request body [optional] (default: raw)
-      "form": true // Support form-url-encoded? [optional] (default: false)
+      "form": true, // Support form-url-encoded? [optional] (default: false)
       "json": true // Support json? [optional] (default: false)
     }
   },
   "response": { // Settings for responses from the api
-    "suffix": true // Should the urls be suffixed with response format? [optional] (default: false)
+    "suffix": true, // Should the urls be suffixed with response format? [optional] (default: false)
     "formats": { // Format of the response body
       "default": "json", // Default response format. Used when 'suffix' is 'true'
-      "html": true // Support html? [optional] (default: false)
+      "html": true, // Support html? [optional] (default: false)
       "json": true // Support json? [optional] (default: false)
     }
   },
@@ -148,7 +148,7 @@ All the following fields are required unless mentioned.
         "params": [ // Parameters for the api method [optional]
           {
             "name": "type", // Name of the parameter
-            "required": true // The parameter will become an argument of api method [optional] (default: false)
+            "required": true, // The parameter will become an argument of api method [optional] (default: false)
             "url_use": true // This parameter is only used to build url [optional] (default: false)
           },
           {
