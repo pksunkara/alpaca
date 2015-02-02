@@ -6,7 +6,7 @@ module {{call .Fnc.camelize .Pkg.Name}}
     class ResponseHandler
 
       def self.get_body(response)
-        type = response.response_headers["content-type"]
+        type = response.response["content-type"]
         body = response.body
 {{if .Api.Response.Formats.Json}}
         # Response body is in JSON
