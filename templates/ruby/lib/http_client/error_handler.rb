@@ -27,7 +27,7 @@ module {{call .Fnc.camelize .Pkg.Name}}
             end
 {{if .Api.Response.Formats.Json}}
             # If JSON, a particular field is taken and used
-            if type.include?("json") and body.is_a?(Hash)
+            if type and type.include?("json") and body.is_a?(Hash)
               if body.has_key?("{{.Api.Error.Message}}")
                 message = body["{{.Api.Error.Message}}"]
               else
