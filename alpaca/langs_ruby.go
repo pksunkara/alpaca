@@ -19,7 +19,7 @@ func WriteRuby(data *Data) {
 	RunTemplate("lib/client.rb", "client.rb", data)
 	RunTemplate("lib/http_client.rb", "http_client.rb", data)
 	RunTemplate("lib/error.rb", "error.rb", data)
-  RunTemplate("lib/version.rb", "version.rb", data)
+	RunTemplate("lib/version.rb", "version.rb", data)
 
 	MakeDir("error")
 	RunTemplate("lib/error/client_error.rb", "client_error.rb", data)
