@@ -32,7 +32,7 @@ bintray:
 	$(GO_XC) bintray
 
 test:
-	go test github.com/pksunkara/alpaca/alpaca
+	go test -v ./...
 
 test-cover:
 	go test -coverprofile=coverage.out github.com/pksunkara/alpaca/alpaca

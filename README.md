@@ -215,17 +215,21 @@ Supported are `basic`, `header`, `oauth`
 
 Supported programming language versions are:
 
- * __node__: [ 0.8 / 0.9 / 0.10 / 0.11 ]
- * __php__: [ 5.4 / 5.5 ]
- * __python__: [ 2.6 / 2.7 / 3.2 / 3.3 ]
- * __ruby__: [ 1.8.7 / 1.9.1 / 1.9.2 / 1.9.3 / 2.0.0 / 2.1.0 / 2.1.1 ]
+| Language |   V   |   E   |   R   |   S   |   I   |   O   |   N   |
+|----------|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|
+| node     | 0.8   | 0.9   | 0.10  | 0.11  | 0.12  |       |       |
+| php      | 5.4   | 5.5   |       |       |       |       |       |
+| python   | 2.6   | 2.7   | 3.2   | 3.3   |       |       |       |
+| ruby     | 1.8.7 | 1.9.1 | 1.9.2 | 1.9.3 | 2.0.0 | 2.1.0 | 2.1.1 |
 
 ### Package Managers
 
- * __node__: [https://npmjs.org](https://npmjs.org)
- * __php__: [https://packagist.org](https://packagist.org)
- * __python__: [https://pypi.python.org](https://pypi.python.org)
- * __ruby__: [https://rubygems.org](https://rubygems.org)
+| Language | Package Manager                                    |
+|----------|----------------------------------------------------|
+| node     | [https://npmjs.org](https://npmjs.org)             |
+| php      | [https://packagist.org](https://packagist.org)     |
+| python   | [https://pypi.python.org](https://pypi.python.org) |
+| ruby     | [https://rubygems.org](https://rubygems.org)       |
 
 ## Testing
 
@@ -239,21 +243,19 @@ __I accept pull requests and guarantee a reply back within a day__
 
 ### TODO
 
-##### General
-
- * Support YAML configuration
+You get internet points for pull requesting the following features.
 
 ##### Responses
 
- * Add support for XML
- * Add support for CSV
+ * [Add support for XML](https://github.com/pksunkara/alpaca/issues/36)
+ * [Add support for CSV](https://github.com/pksunkara/alpaca/issues/36)
 
 ##### Requests
 
  * HTTP Method Overloading
  * What about file uploads?
 
-##### Api
+##### API
 
  * Check returned status code
  * Special case for 204:true and 404:false
@@ -268,7 +270,7 @@ __I accept pull requests and guarantee a reply back within a day__
 
 ##### Readme
 
- * Optional params available
+ * [Optional params available](https://github.com/pksunkara/alpaca/issues/57)
  * Return types of api calls
 
 ##### Comments
@@ -278,15 +280,29 @@ __I accept pull requests and guarantee a reply back within a day__
 
 ##### Formats
 
- * Support WADL
- * Support RAML
- * Support API blueprint
+ * [Support YAML](https://github.com/pksunkara/alpaca/issues/63)
+ * [Support API blueprint](https://github.com/pksunkara/alpaca/issues/56)
+ * [Support Swagger](https://github.com/pksunkara/alpaca/issues/61)
+ * [Support WADL](https://github.com/pksunkara/alpaca/issues/13)
+ * [Support JSON Schema](https://github.com/pksunkara/alpaca/issues/17)
+ * [Support RAML](https://github.com/pksunkara/alpaca/issues/54)
 
 ##### Languages
 
- * Support Java, Go, Perl, Clojure, Scala, Obj-C
- * Build API docs (Resulting in bloated definitions?)
+ * [Support Java](https://github.com/pksunkara/alpaca/issues/11)
+ * [Support Go](https://github.com/pksunkara/alpaca/issues/9)
+ * [Support Clojure](https://github.com/pksunkara/alpaca/issues/49)
+ * [Support Rust](https://github.com/pksunkara/alpaca/issues/62)
+ * [Support Swift](https://github.com/pksunkara/alpaca/issues/64)
+ * Support C, C++, Perl, Scala, C#, Erlang, Lua, Haskell, D, Julia, Groovy
  * Build cli tool for APIs (bash? python? go?)
+
+### Support Projects
+
+Alternatively, you can write your own converter from `alpaca.json` to the following
+
+* Convert into API Blueprint
+* Convert into Swagger
 
 ## License
 
