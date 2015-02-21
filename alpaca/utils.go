@@ -144,26 +144,20 @@ func PrntFunctionMaker(boolcap bool, tab, strbeg, strend, arrbeg, arrend, objbeg
 		str, typ := "", reflect.TypeOf(api).String()
 
 		if typ == "[]string" {
-			if len(api.([]string)) == 0 {
-				return str
-			}
-
 			for _, v := range api.([]string) {
 				str += vals(doc[v].Value) + sep
 			}
 		} else if typ == "[]alpaca.ApiParam" {
-			if len(api.([]ApiParam)) == 0 {
-				return str
-			}
-
 			for _, v := range api.([]ApiParam) {
-				str += vals(doc[v.Name].Value) + sep
+				if v.Required {
+					str += vals(doc[v.Name].Value) + sep
+				}
 			}
 		} else {
 			return str
 		}
 
-		if !notLast {
+		if str != "" && !notLast {
 			return str[0 : len(str)-len(sep)]
 		}
 

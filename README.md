@@ -1,4 +1,4 @@
-# alpaca [![Build Status](https://drone.io/github.com/pksunkara/alpaca/status.png)](https://drone.io/github.com/pksunkara/alpaca/latest) [![Gitter chat](https://badges.gitter.im/pksunkara/alpaca.png)](https://gitter.im/pksunkara/alpaca)
+# alpaca [![Build Status](https://travis-ci.org/pksunkara/alpaca.svg?branch=master)](https://travis-ci.org/pksunkara/alpaca) [![Gitter chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/pksunkara/alpaca)
 
 Api Libraries Powered And Created by Alpaca
 

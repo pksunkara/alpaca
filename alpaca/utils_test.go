@@ -58,7 +58,7 @@ func TestPrntFunctionMaker(t *testing.T) {
 	f := PrntFunctionMaker(true, "  ", "'", "'", "[", "]", "{", "}", ":", " => ").(func(interface{}, map[string]DocParam, string, bool) string)
 
 	apis := []string{"id"}
-	apip := make([]ApiParam, 1)
+	apip := make([]ApiParam, 2)
 	docs := make(map[string]DocParam)
 	vals := make(map[string]interface{})
 	orgs := make([]interface{}, 3)
@@ -69,6 +69,9 @@ func TestPrntFunctionMaker(t *testing.T) {
 	orgs[2] = 00
 
 	apip[0] = ApiParam{"id", true, false}
+	apip[1] = ApiParam{"flag", false, false}
+
+	docs["flag"] = DocParam{"", false}
 
 	terst.Is(f([]string{}, make(map[string]DocParam), ", ", true), "")
 	terst.Is(f([]ApiParam{}, make(map[string]DocParam), ", ", true), "")
