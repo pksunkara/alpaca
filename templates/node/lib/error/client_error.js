@@ -7,7 +7,7 @@ function ClientError(message, code) {
   var err = Error.call(this, message);
   err.code = code;
 
-  return err
+  return err;
 }
 
 util.inherits(ClientError, Error);

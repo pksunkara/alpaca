@@ -24,11 +24,11 @@ client.HttpClient = function ({{if .Api.BaseAsArg}}baseUrl, {{end}}auth, options
   }
 
 {{if .Api.Authorization.Oauth}}
-  if (typeof auth == 'string') {
+  if (typeof auth === 'string') {
     auth = { 'access_token': auth };
   }
 {{else}}{{if .Api.Authorization.Header}}
-  if (typeof auth == 'string') {
+  if (typeof auth === 'string') {
     auth = { 'http_header': auth };
   }
 {{end}}{{end}}
@@ -42,27 +42,27 @@ client.HttpClient = function ({{if .Api.BaseAsArg}}baseUrl, {{end}}auth, options
     this.options[key] = options[key];
   }
 
-  this.base = this.options['base'];
+  this.base = this.options.base;
 
   this.headers = {
-    'user-agent': this.options['user_agent']
+    'user-agent': this.options.user_agent
   };
 
-  if (this.options['headers']) {
-    for (var key in this.options['headers']) {
-      this.headers[key.toLowerCase()] = this.options['headers'][key];
+  if (this.options.headers) {
+    for (key in this.options.headers) {
+      this.headers[key.toLowerCase()] = this.options.headers[key];
     }
 
-    delete this.options['headers'];
+    delete this.options.headers;
   }
 
   this.auth = new client.AuthHandler(auth);
 
   return this;
-}
+};
 
 client.HttpClient.prototype.get = function (path, params, options, callback) {
-  options['query'] = params;
+  options.query = params;
 
   this.request(path, {}, 'GET', options, callback);
 };
@@ -99,21 +99,21 @@ client.HttpClient.prototype.request = function (path, body, method, options, cal
     }
   }
 
-  if (options['headers']) {
-    headers = options['headers'];
-    delete options['headers'];
+  if (options.headers) {
+    headers = options.headers;
+    delete options.headers;
   }
 
-  for (var key in headers) {
-    lowerKey = key.toLowerCase();
+  for (key in headers) {
+    var lowerKey = key.toLowerCase();
 
-    if (key != lowerKey) {
+    if (key !== lowerKey) {
       headers[lowerKey] = headers[key];
       delete headers[key];
     }
   }
 
-  for (var key in this.headers) {
+  for (key in this.headers) {
     if (!headers[key]) {
       headers[key] = this.headers[key];
     }
@@ -121,20 +121,20 @@ client.HttpClient.prototype.request = function (path, body, method, options, cal
 
   var reqobj = {
     'url': path,
-    'qs': options['query'] || {},
+    'qs': options.query || {},
     'method': method,
     'headers': headers
   };
 
-  delete options['query'];
-  delete options['body'];
+  delete options.query;
+  delete options.body;
 
-  delete options['base'];
-  delete options['user_agent'];
+  delete options.base;
+  delete options.user_agent;
 {{if .Api.NoVerifySSL}}
   reqobj['strictSSL'] = false;
 {{end}}
-  if (method != 'GET') {
+  if (method !== 'GET') {
     reqobj = this.setBody(reqobj, body, options);
   }
 
@@ -171,13 +171,13 @@ client.HttpClient.prototype.request = function (path, body, method, options, cal
  * If api_version is set, appends it immediately after host
  */
 client.HttpClient.prototype.createRequest = function (reqobj, options, callback) {
-  var version = (options['api_version'] ? '/' + options['api_version'] : '');
+  var version = (options.api_version ? '/' + options.api_version : '');
 {{if .Api.Response.Suffix}}
   // Adds a suffix (ex: ".html", ".json") to url
-  var suffix = (options['response_type'] ? options['response_type'] : '{{.Api.Response.Formats.Default}}');
-  reqobj['url'] = reqobj['url'] + '.' + suffix;
+  var suffix = (options.response_type ? options.response_type : '{{.Api.Response.Formats.Default}}');
+  reqobj.url = reqobj.url + '.' + suffix;
 {{end}}
-  reqobj['url'] = url.resolve(this.base, version + reqobj['url']);
+  reqobj.url = url.resolve(this.base, version + reqobj.url);
 
   request(reqobj, callback);
 };

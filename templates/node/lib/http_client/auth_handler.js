@@ -19,19 +19,19 @@ var Auth = function(auth) {
  */
 Auth.prototype.getAuthType = function () {
 {{if .Api.Authorization.Basic}}
-  if (this.auth['username'] && this.auth['password']) {
+  if (this.auth.username && this.auth.password) {
     return this.HTTP_PASSWORD;
   }
 {{end}}{{if .Api.Authorization.Header}}
-  if (this.auth['http_header']) {
+  if (this.auth.http_header) {
     return this.HTTP_HEADER;
   }
 {{end}}{{if .Api.Authorization.Oauth}}
-  if (this.auth['client_id'] && this.auth['client_secret']) {
+  if (this.auth.client_id && this.auth.client_secret) {
     return this.URL_SECRET;
   }
 
-  if (this.auth['access_token']) {
+  if (this.auth.access_token) {
     return this.URL_TOKEN;
   }
 {{end}}
@@ -44,14 +44,14 @@ Auth.prototype.getAuthType = function () {
  * This should throw error because this should be caught while in development
  */
 Auth.prototype.set = function (request, callback) {
-  if (Object.keys(this.auth).length == 0) {
+  if (Object.keys(this.auth).length === 0) {
     return callback({{if .Api.Authorization.NeedAuth}}new Error('Server requires authentication to proceed further. Please check'));
   {{else}}null, request);
   {{end}}}
 
   var auth = this.getAuthType(), flag = false;
 {{if .Api.Authorization.Basic}}
-  if (auth == this.HTTP_PASSWORD) {
+  if (auth === this.HTTP_PASSWORD) {
     request = this.httpPassword(request);
     flag = true;
   }
@@ -82,7 +82,7 @@ Auth.prototype.set = function (request, callback) {
  * Basic Authorization with username and password
  */
 Auth.prototype.httpPassword = function(request) {
-  request['auth'] = this.auth;
+  request.auth = this.auth;
 
   return request;
 };

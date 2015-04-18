@@ -18,12 +18,12 @@ var {{call .Fnc.camelize .Active.Name}} = function({{call .Fnc.args.node .Active
  * @param "{{.Name}}" {{(index ((index ((index $data.Doc $data.Active.Name).Functions) $method.Name).Params) .Name).Desc}}{{end}}{{end}}{{end}}
  */
 {{call $data.Fnc.camelize $data.Active.Name}}.prototype.{{call $data.Fnc.camelizeDownFirst .Name}} = function ({{call $data.Fnc.args.node .Params}}options, callback) {
-  if (typeof options == 'function') {
+  if (typeof options === 'function') {
     callback = options;
     options = {};
   }
 
-  var body = (options['{{template "boq" .}}'] ? options['{{template "boq" .}}'] : {});{{range .Params}}{{if .Required}}{{if (not .UrlUse)}}
+  var body = (options.{{template "boq" .}} ? options.{{template "boq" .}} : {});{{range .Params}}{{if .Required}}{{if (not .UrlUse)}}
   body['{{.Name}}'] = {{.Name}};{{end}}{{end}}{{end}}
 
   this.client.{{or .Method "get"}}('{{call $data.Fnc.path.node .Path $data.Active.Args .Params}}', body, options, function(err, response) {
@@ -36,4 +36,4 @@ var {{call .Fnc.camelize .Active.Name}} = function({{call .Fnc.args.node .Active
 };
 {{end}}{{end}}
 // Export module
-module.exports = {{call .Fnc.camelize .Active.Name}}
+module.exports = {{call .Fnc.camelize .Active.Name}};
