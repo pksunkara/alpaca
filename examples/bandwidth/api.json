@@ -1,0 +1,441 @@
+{
+  "base":"https://api.catapult.inetwork.com",
+  "version":"v1",
+  "authorization":{
+    "need_auth":true,
+    "basic" : true, 
+    "header": true
+  },
+  "request":{
+    "formats":{
+      "default":"json",
+      "form":true,
+      "json": true
+    }
+  },
+  "response":{
+    "formats":{
+      "default":"json",
+      "json":true
+    },
+    "suffix":false
+  },
+  "error":{
+    "message":"message"
+  },
+  "class":{
+    "account":{
+      "args": ["user_id"],
+      "show":{
+        "path":"/users/:user_id/account"
+      },
+      "transactions":{
+        "path":"/users/:user_id/account/transactions"
+      }
+    },
+    "availableNumbers":{
+      "searchLocal":{
+        "path":"/availableNumbers/local",
+        "params": [
+          {
+            "name": "city"
+          },
+          {
+            "name": "state"
+          },
+          {
+            "name": "zip"
+          },
+          {
+            "name": "areaCode"
+          },
+          {
+            "name": "localNumber"
+          },
+          {
+            "name": "inLocalCallingArea"
+          },
+          {
+            "name": "quantity"
+          },
+          {
+            "name": "pattern"
+          }
+        ]
+      },
+      "createLocal":{
+        "path":"/availableNumbers/local",
+        "method":"post",
+        "params": [
+          {
+            "name": "city"
+          },
+          {
+            "name": "state"
+          },
+          {
+            "name": "zip"
+          },
+          {
+            "name": "areaCode"
+          },
+          {
+            "name": "localNumber"
+          },
+          {
+            "name": "inLocalCallingArea"
+          },
+          {
+            "name": "quantity"
+          }
+        ]
+
+      },
+      "searchTollFree":{
+        "path":"/availableNumbers/tollFree"
+      },
+      "createTollFree":{
+        "path":"/availableNumbers/tollFree",
+        "method":"post"
+      }
+    },
+    "messages":{
+      "args": ["user_id"],
+      "fetch":{
+        "path":"/users/:user_id/messages"
+      },
+      "create":{
+        "path":"/users/:user_id/messages",
+        "method":"post"
+      },
+      "show":{
+        "path":"/users/:user_id/messages/:id",
+        "params":[
+          {
+            "name":"id",
+            "required":true,
+            "url_use":true
+          }
+        ]
+      }
+    },
+    "calls":{
+      "args": ["user_id"],
+      "fetch":{
+        "path":"/users/:user_id/calls"
+      },
+      "create":{
+        "path":"/users/:user_id/calls",
+        "method":"post",
+        "params":[
+          {
+            "name":"to",
+            "required":true
+          },
+          {
+            "name":"from",
+            "required":true
+          }
+        ]
+      },
+      "show":{
+        "path":"/users/:user_id/calls/:call_id",
+        "params":[
+          {
+            "name":"call_id",
+            "required":true,
+            "url_use":true
+          }
+        ]
+      },
+      "update":{
+        "path":"/users/:user_id/calls/:call_id",
+        "method":"post",
+        "params":[
+          {
+            "name":"call_id",
+            "required":true,
+            "url_use":true
+          }
+        ]
+      },
+      "audio":{
+        "path":"/users/:user_id/calls/:call_id/audio",
+        "method":"post",
+        "params":[
+          {
+            "name":"call_id",
+            "required":true,
+            "url_use":true
+          }
+        ]
+      },
+      "dtmf":{
+        "path":"/users/:user_id/calls/:call_id/dtmf",
+        "method":"post",
+        "params":[
+          {
+            "name":"call_id",
+            "required":true,
+            "url_use":true
+          }
+        ]
+      },
+      "recordings":{
+        "path":"/users/:user_id/calls/:call_id/recordings",
+        "params":[
+          {
+            "name":"call_id",
+            "required":true,
+            "url_use":true
+          }
+        ]
+      },
+      "createGather":{
+        "path":"/users/:user_id/calls/:call_id/gather",
+        "method":"post",
+        "params":[
+          {
+            "name":"call_id",
+            "required":true,
+            "url_use":true
+          }
+        ]
+      },
+      "gather":{
+        "path":"/users/:user_id/calls/:call_id/gather/:gather_id",
+        "params":[
+          {
+            "name":"call_id",
+            "required":true,
+            "url_use":true
+          },
+          {
+            "name":"gather_id",
+            "required":true,
+            "url_use":true
+          }
+        ]
+      },
+      "updateGather":{
+        "path":"/users/:user_id/calls/:call_id/gather/:gather_id",
+        "params":[
+          {
+            "name":"call_id",
+            "required":true,
+            "url_use":true
+          },
+          {
+            "name":"gather_id",
+            "required":true,
+            "url_use":true
+          }
+        ],
+        "method":"post"
+      }
+    },
+
+    "numberInfo": {
+      "args": ["number"],
+      "show": {
+        "path": "/phoneNumbers/numberInfo/:number" 
+      }
+    },
+
+    "phoneNumbers": {
+      "args": ["user_id"],
+      "fetch": {
+        "path": "/users/:user_id/phoneNumbers"
+      },
+
+      "create": {
+        "path": "/users/:user_id/phoneNumbers",
+        "method": "post",
+        "params": [
+          { 
+            "name": "number",
+            "required": true
+          },
+          {
+            "name": "applicationId"
+          },
+          {
+            "name": "name"
+          },
+          {
+            "name": "fallbackNumber"
+          }
+        ]
+      },
+      
+      "showById": {
+        "path": "/users/:user_id/phoneNumbers/:number_id",
+        "params": [
+          {
+            "name": "number_id",
+            "required": true,
+            "url_use": true
+          }
+        ]
+      },
+      
+      "showByNumber": {
+        "path": "/users/:user_id/phoneNumbers/:number",
+        "params": [
+          {
+            "name": "number",
+            "required": true,
+            "url_use": true
+          }
+        ]
+      },
+
+      "update": {
+        "path": "/users/:user_id/phoneNumbers/:number_id",
+        "method": "post",
+        "params": [
+          {
+            "name": "number_id",
+            "required": true,
+            "url_use": true
+          }
+        ]
+      },
+
+      "destroy": {
+        "path": "/users/:user_id/phoneNumbers/:number_id",
+        "method": "delete",
+        "params": [
+          {
+            "name": "number_id",
+            "required": true,
+            "url_use": true
+          }
+        ]
+      }
+    },
+
+    "conferences": {
+      "args": ["user_id"],
+      "create": {
+        "path": "/users/:user_id/conferences",
+        "method": "post",
+        "params": [
+          {
+            "name": "from",
+            "required": true
+          }
+        ]
+      },
+
+      "createMember" : {
+        "path": "/users/:user_id/conferences/:conference_id/members",
+        "method": "post",
+        "params": [
+          {
+            "name": "conference_id",
+            "required": true,
+            "url_use": true
+          },
+          {
+            "name": "callId",
+            "required": true
+          }
+        ]
+      },
+
+      "audio" : {
+        "path": "/users/:user_id/conferences/:conference_id/audio",
+        "method": "post",
+        "params": [
+          {
+            "name": "conference_id",
+            "required": true,
+            "url_use": true
+          }
+        ]
+      }
+    },
+
+    "bridges": {
+      "args": ["user_id"],
+      "create": {
+        "path": "/users/:user_id/bridges",
+        "method": "post",
+        "params": [
+          {
+            "name": "bridgeAudio"
+          },
+          {
+            "name": "callIds"
+          }
+        ]
+      },
+      "audio": {
+        "path": "/users/:user_id/bridges/:bridge_id/audio",
+        "method": "post",
+        "params": [
+          {
+            "name": "bridge_id",
+            "required": true,
+            "url_use": true
+          }
+        ]
+      },
+      "listCall": {
+        "path": "/users/:user_id/bridges/:bridge_id/calls",
+        "params": [
+          {
+            "name": "bridge_id",
+            "required": true,
+            "url_use": true
+          }
+        ]
+      },
+
+      "update": {
+        "path": "/users/:user_id/bridges/:bridge_id",
+        "method": "post",
+        "params": [
+          {
+            "name": "bridge_id",
+            "required": true,
+            "url_use": true
+          }
+        ]
+      }
+    },
+
+    "recordings": {
+      "show": {
+        "path": "/users/:user_id/recordings/:recording_id",
+        "params": [
+          {
+            "name": "recording_id",
+            "required": true,
+            "url_use": true
+          }
+        ]
+      },
+      "fetch": {
+        "path": "/users/:user_id/recordings"
+      }
+    },
+
+    "errors": {
+      "show": {
+        "path": "/users/:user_id/errors/:error_id",
+        "params": [
+          {
+            "name": "error_id",
+            "required": true,
+            "url_use": true
+          }
+        ]
+      },
+      "fetch": {
+        "path": "/users/:user_id/errors"
+      }
+    }
+  }
+}
