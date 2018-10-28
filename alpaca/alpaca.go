@@ -54,7 +54,8 @@ func ConvertFormat(format string) {
 	}
 
 	if !acceptable {
-		fmt.Println("The given format is not allowed. Please choose one from the following:\n")
+		fmt.Println("The given format is not allowed. Please choose one from the following:")
+		fmt.Println()
 		fmt.Println(strings.Join(FormatList, ", ") + "\n")
 		os.Exit(0)
 	}
